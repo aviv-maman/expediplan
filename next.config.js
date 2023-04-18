@@ -5,6 +5,7 @@ const nextConfig = {
     appDir: true,
     typedRoutes: true,
   },
+  transpilePackages: ['@douyinfe/semi-ui', '@douyinfe/semi-icons', '@douyinfe/semi-illustrations'],
   // compiler: {
   //   emotion: true,
   //   styledComponents: {
