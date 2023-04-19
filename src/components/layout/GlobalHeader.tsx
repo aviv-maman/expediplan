@@ -3,6 +3,7 @@
 import { IconSemiLogo } from '@douyinfe/semi-icons';
 import { Avatar, Button, Dropdown, Layout, Nav } from '@douyinfe/semi-ui';
 import { IconBell, IconHelp, IconHome, IconLivePhoto, IconSettings } from '@tabler/icons-react';
+import { HeaderColorSchemeToggle } from './HeaderColorSchemeToggle';
 
 const GlobalHeader: React.FC = () => {
   const { Header } = Layout;
@@ -39,12 +40,13 @@ const GlobalHeader: React.FC = () => {
         </Nav>
       </div>
 
-      <div>
+      <div className='hide-xs'>
         <Nav mode='horizontal' defaultSelectedKeys={['Home']}>
           <Nav.Header>
             <IconSemiLogo style={{ fontSize: 24 }} />
           </Nav.Header>
           <Nav.Footer>
+            <HeaderColorSchemeToggle />
             <Button
               theme='borderless'
               icon={<IconHelp />}

@@ -3,6 +3,7 @@ import GlobalLayout from '@/components/layout/GlobalLayout';
 import GlobalHeader from '@/components/layout/GlobalHeader';
 import GlobalContent from '@/components/layout/GlobalContent';
 import GlobalFooter from '@/components/layout/GlobalFooter';
+import { cookies } from 'next/headers';
 
 export const metadata = {
   title: 'Create Next App',
@@ -10,9 +11,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = cookies();
+  const themeColor = cookieStore.get('semi-color-scheme')?.value === 'dark' ? 'dark' : 'light';
+
   return (
     <html lang='en'>
-      <body theme-mode='light'>
+      <body theme-mode={themeColor}>
         <GlobalLayout>
           <GlobalHeader />
           <GlobalContent>{children}</GlobalContent>
