@@ -1,8 +1,7 @@
 'use client';
 
-import { IconSemiLogo } from '@douyinfe/semi-icons';
+import { IconHelpCircle, IconSemiLogo } from '@douyinfe/semi-icons';
 import { Avatar, Button, Dropdown, Layout, Nav } from '@douyinfe/semi-ui';
-import { IconBell, IconHelp, IconHome, IconLivePhoto, IconSettings } from '@tabler/icons-react';
 import { HeaderColorSchemeToggle } from './HeaderColorSchemeToggle';
 
 const GlobalHeader: React.FC = () => {
@@ -10,37 +9,7 @@ const GlobalHeader: React.FC = () => {
 
   return (
     <Header style={{ marginBottom: '20px' }}>
-      <div className='hide-sm'>
-        <Nav mode='horizontal' defaultSelectedKeys={['Home']}>
-          <Nav.Header>{/* <IconSemiLogo style={{ fontSize: 36 }} /> */}</Nav.Header>
-          <Nav.Item itemKey='Home' text='Home' icon={<IconHome />} />
-          <Nav.Item itemKey='Live' text='Live' icon={<IconLivePhoto />} />
-          <Nav.Item itemKey='Setting' text='Setting' icon={<IconSettings />} />
-          <Nav.Footer>
-            <Button
-              theme='borderless'
-              icon={<IconBell />}
-              style={{
-                color: 'var(--semi-color-text-2)',
-                marginRight: '12px',
-              }}
-            />
-            <Button
-              theme='borderless'
-              icon={<IconHelp />}
-              style={{
-                color: 'var(--semi-color-text-2)',
-                marginRight: '12px',
-              }}
-            />
-            <Avatar color='orange' size='small'>
-              YJ
-            </Avatar>
-          </Nav.Footer>
-        </Nav>
-      </div>
-
-      <div className='hide-xs'>
+      <div className='hide-md'>
         <Nav mode='horizontal' defaultSelectedKeys={['Home']}>
           <Nav.Header>
             <IconSemiLogo style={{ fontSize: 24 }} />
@@ -49,7 +18,7 @@ const GlobalHeader: React.FC = () => {
             <HeaderColorSchemeToggle />
             <Button
               theme='borderless'
-              icon={<IconHelp />}
+              icon={<IconHelpCircle />}
               style={{
                 color: 'var(--semi-color-text-2)',
                 marginRight: '12px',
