@@ -9,6 +9,7 @@ export default function Home() {
       <div className='grid'>
         <HelloBlock />
         <HelloBlock />
+        <HelloBlock />
       </div>
     </main>
   );

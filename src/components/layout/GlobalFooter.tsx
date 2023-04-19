@@ -16,7 +16,10 @@ const GlobalFooter: React.FC = () => {
           color: 'var(--semi-color-text-2)',
           backgroundColor: 'rgba(var(--semi-grey-0), 1)',
         }}>
-        <Nav mode='horizontal' defaultSelectedKeys={['Home']} style={{ borderBottom: 0, borderTop: '1px solid var(--semi-color-border)' }}>
+        <Nav
+          mode='horizontal'
+          defaultSelectedKeys={['Home']}
+          style={{ borderBottom: 0, borderTop: '1px solid var(--semi-color-border)', position: 'fixed', bottom: 0 }}>
           <Nav.Footer style={{ flex: 'auto', justifyContent: 'space-between', alignItems: 'center', padding: 0 }}>
             <Button
               theme='borderless'
