@@ -9,7 +9,7 @@ const GlobalHeader: React.FC = () => {
 
   return (
     <Header style={{ marginBottom: '20px' }}>
-      <div className='hide-md'>
+      <div className='hide-md' style={{ marginBottom: '60px' }}>
         <Nav mode='horizontal' defaultSelectedKeys={['Home']} style={{ position: 'fixed', top: 0 }}>
           <Nav.Header>
             <IconSemiLogo style={{ fontSize: 24 }} />

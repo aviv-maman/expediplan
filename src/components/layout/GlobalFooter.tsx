@@ -7,19 +7,19 @@ const GlobalFooter: React.FC = () => {
   const { Footer } = Layout;
 
   return (
-    <div className='hide-xs'>
+    <div className='hide-xs' style={{ marginBottom: '20px' }}>
       <Footer
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          marginTop: '20px',
+          marginTop: '60px',
           color: 'var(--semi-color-text-2)',
           backgroundColor: 'rgba(var(--semi-grey-0), 1)',
         }}>
         <Nav
           mode='horizontal'
           defaultSelectedKeys={['Home']}
-          style={{ borderBottom: 0, borderTop: '1px solid var(--semi-color-border)', position: 'fixed', bottom: 0 }}>
+          style={{ borderBottom: 0, borderTop: '1px solid var(--semi-color-border)', position: 'fixed', bottom: 0, overflow: 'hidden' }}>
           <Nav.Footer style={{ flex: 'auto', justifyContent: 'space-between', alignItems: 'center', padding: 0 }}>
             <Button
               theme='borderless'
