@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@douyinfe/semi-icons": "^2.33.0",
     "@douyinfe/semi-ui": "^2.33.0",
     "@tabler/icons-react": "^2.16.0",
     "cookies-next": "^2.1.1",
