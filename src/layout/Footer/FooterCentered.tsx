@@ -1,6 +1,6 @@
 'use client';
 
-import { createStyles, Anchor, Group, ActionIcon, Text, Tooltip, Footer } from '@mantine/core';
+import { createStyles, Anchor, Group, ActionIcon, Tooltip, Footer } from '@mantine/core';
 import { IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
 import Link from 'next/link';
 
@@ -47,15 +47,6 @@ export function FooterCentered({ links, text }: FooterCenteredProps) {
       <Link href='/' style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
         {/* <WebDevLogo className={classes.logo} size={50} /> */}
       </Link>
-      <Group className={classes.links} position='center'>
-        {items && items}
-        {text && (
-          <Text ta='center' fz='sm' sx={{ fontFamily: 'inherit' }}>
-            {text}
-          </Text>
-        )}
-      </Group>
-
       <Group spacing='xs' position='right' noWrap>
         <Tooltip label='GitHub'>
           <ActionIcon
