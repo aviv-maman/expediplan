@@ -1,17 +1,11 @@
 'use client';
 
-import { createStyles, Anchor, Group, ActionIcon, Tooltip, Footer } from '@mantine/core';
-import { IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
+import { createStyles, Group, ActionIcon, Footer } from '@mantine/core';
+import { IconHelpSquareRounded, IconHome2, IconList, IconSettings } from '@tabler/icons-react';
 import Link from 'next/link';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 const useStyles = createStyles((theme) => ({
-  inner: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: `${theme.spacing.md} ${theme.spacing.md}`,
-  },
-
   links: {
     [theme.fn.smallerThan('sm')]: {
       marginTop: theme.spacing.lg,
@@ -21,57 +15,61 @@ const useStyles = createStyles((theme) => ({
   logo: {
     fill: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.dark[7],
   },
+  linkActive: {
+    '&, &:hover': {
+      backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
+      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+    },
+  },
+  actionIcon: {
+    display: 'flex',
+    flexDirection: 'column',
+    fontSize: 12,
+  },
 }));
 
 interface FooterCenteredProps {
-  links?: { link: string; label: string }[];
+  links?: { link: string; label: string; targetSegment: string | null }[];
   text?: string;
 }
 
 export function FooterCentered({ links, text }: FooterCenteredProps) {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
+  const activeSegment = useSelectedLayoutSegment();
   const items = links?.map((link) => (
-    <Anchor<'a'>
-      color='dimmed'
-      key={link.label}
-      href={link.link}
-      sx={{ lineHeight: 1, fontFamily: 'inherit' }}
-      onClick={(event) => event.preventDefault()}
-      size='sm'>
+    <Link key={link.label} href={{ pathname: link.link }} className={cx({ [classes.linkActive]: activeSegment === link.targetSegment })}>
       {link.label}
-    </Anchor>
+    </Link>
   ));
 
   return (
-    <Footer height={60} p='md' className={classes.inner}>
-      <Link href='/' style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-        {/* <WebDevLogo className={classes.logo} size={50} /> */}
-      </Link>
-      <Group spacing='xs' position='right' noWrap>
-        <Tooltip label='GitHub'>
-          <ActionIcon
-            size='lg'
-            variant='default'
-            radius='xl'
-            component='a'
-            href='https://github.com/aviv-maman'
-            target='_blank'
-            rel='noopener noreferrer'>
-            <IconBrandGithub size='1.05rem' stroke={1.5} />
+    <Footer height={60} p='xs'>
+      <Link href='/'>{/* <WebDevLogo className={classes.logo} size={50} /> */}</Link>
+      <Group spacing='xs' position='left' sx={{ justifyContent: 'space-between' }}>
+        <Link href='/' className={cx({ [classes.linkActive]: activeSegment === null })}>
+          <ActionIcon size='xl' variant='subtle' title='Home' className={classes.actionIcon}>
+            <IconHome2 />
+            Home
           </ActionIcon>
-        </Tooltip>
-        <Tooltip label='LinkedIn'>
-          <ActionIcon
-            size='lg'
-            variant='default'
-            radius='xl'
-            component='a'
-            href='https://www.linkedin.com/in/aviv-maman-914a95223'
-            target='_blank'
-            rel='noopener noreferrer'>
-            <IconBrandLinkedin size='1.05rem' stroke={1.5} />
+        </Link>
+        <Link href='/plans' className={cx({ [classes.linkActive]: activeSegment === 'plans' })}>
+          <ActionIcon size='xl' variant='subtle' title='Plans' className={classes.actionIcon}>
+            <IconList />
+            Plans
           </ActionIcon>
-        </Tooltip>
+        </Link>
+        <Link href='/settings' className={cx({ [classes.linkActive]: activeSegment === 'settings' })}>
+          <ActionIcon size='xl' variant='subtle' title='Settings' className={classes.actionIcon}>
+            <IconSettings />
+            Settings
+          </ActionIcon>
+        </Link>
+        <Link href='/help' className={cx({ [classes.linkActive]: activeSegment === 'help' })}>
+          <ActionIcon size='xl' variant='subtle' title='Help' className={classes.actionIcon}>
+            <IconHelpSquareRounded />
+            Help
+          </ActionIcon>
+        </Link>
       </Group>
     </Footer>
   );

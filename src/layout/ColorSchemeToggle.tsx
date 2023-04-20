@@ -4,7 +4,7 @@ import { ActionIcon, useMantineColorScheme } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 
-export function HeaderColorSchemeToggle() {
+export function ColorSchemeToggle() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   const [hydrated, setHydrated] = useState(false);
@@ -20,9 +20,9 @@ export function HeaderColorSchemeToggle() {
 
   return (
     <ActionIcon
-      variant='default'
+      variant='subtle'
       onClick={() => toggleColorScheme()}
-      size='lg'
+      size='xl'
       sx={(theme) => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
         color: theme.colorScheme === 'dark' ? theme.colors.yellow[4] : theme.colors.blue[6],

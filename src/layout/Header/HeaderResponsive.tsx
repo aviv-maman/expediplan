@@ -2,8 +2,8 @@
 
 import { createStyles, Header, Container, Group, Burger, Paper, Transition } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { HeaderColorSchemeToggle } from './HeaderColorSchemeToggle';
 import Link from 'next/link';
+import { ColorSchemeToggle } from '../ColorSchemeToggle';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
 const HEADER_HEIGHT = 60;
@@ -113,7 +113,7 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
         </Group>
 
         <Group position='center'>
-          <HeaderColorSchemeToggle />
+          <ColorSchemeToggle />
           <Burger opened={opened} onClick={toggle} className={classes.burger} size='sm' />
           <Transition transition='pop-top-right' duration={200} mounted={opened}>
             {(styles) => (
