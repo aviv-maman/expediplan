@@ -9,10 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/server": "^11.10.0",
+    "@mantine/core": "^6.0.8",
+    "@mantine/hooks": "^6.0.8",
+    "@mantine/next": "^6.0.8",
+    "@mantine/notifications": "^6.0.8",
     "@tabler/icons-react": "^2.16.0",
     "cookies-next": "^2.1.1",
     "dayjs": "^1.11.7",
-    "next": "^13.3.0",
+    "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recoil": "^0.7.7"
