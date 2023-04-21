@@ -33,14 +33,13 @@ async function getCities(): Promise<any> {
 // };
 
 export default async function Home() {
-  const [cities] = await Promise.all([getCities()]);
+  // const [cities] = await Promise.all([getCities()]);
 
   return (
     <CustomStack>
       <Hero />
       <Features />
       <CarouselCities />
-      {JSON.stringify(cities)}
     </CustomStack>
   );
 }
