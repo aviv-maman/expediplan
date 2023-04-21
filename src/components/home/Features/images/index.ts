@@ -1,13 +1,11 @@
-// import accountants from './accountants.svg';
-// import auditors from './auditors.svg';
-// import lawyers from './lawyers.svg';
-// import others from './others.svg';
 import takeoff from './takeoff.png';
+import globe from './globe.png';
+import lightbulb from './lightbulb.png';
+import slideSettings from './slide_settings.png';
 
 export default {
-  // accountants: accountants.src,
-  // auditors: auditors.src,
-  // lawyers: lawyers.src,
-  // others: others.src,
+  globe: globe.src,
+  lightbulb: lightbulb.src,
+  slideSettings: slideSettings.src,
   takeoff: takeoff.src,
 } as Record<string, any>;

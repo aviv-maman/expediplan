@@ -29,7 +29,6 @@ const useStyles = createStyles((theme) => ({
   },
 
   content: {
-    paddingTop: `calc(${theme.spacing.xl} * 2)`,
     paddingBottom: `calc(${theme.spacing.xl} * 2)`,
     marginRight: `calc(${theme.spacing.xl} * 3)`,
 
@@ -84,16 +83,14 @@ const Hero: React.FC = () => {
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
-              A{' '}
               <Text component='span' inherit variant='gradient' gradient={{ from: 'pink', to: 'yellow' }}>
-                fully featured
-              </Text>{' '}
-              React components library
+                ExpediPlan
+              </Text>
+              <br />A simpler way to plan your travel
             </Title>
 
             <Text className={classes.description} mt={30}>
-              Build fully functional accessible web applications with ease – Mantine includes more than 100 customizable components and hooks to cover
-              you in any situation
+              ExpediPlan is a travel planning app that helps you plan your travel with ease.
             </Text>
 
             <Button variant='gradient' gradient={{ from: 'pink', to: 'yellow' }} size='xl' className={classes.control} mt={40}>

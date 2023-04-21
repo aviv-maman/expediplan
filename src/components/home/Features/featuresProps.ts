@@ -1,27 +1,26 @@
 const featuresProps = {
-  supTitle: 'Use cases',
-  description:
-    'Its lungs contain an organ that creates electricity. The crackling sound of electricity can be heard when it exhales. Azurill’s tail is large and bouncy. It is packed full of the nutrients this Pokémon needs to grow.',
+  supTitle: 'Benefits',
+  description: 'Our platform is designed to be intuitive and simple, so you can focus on what matters most: your trips.',
   data: [
     {
       image: 'takeoff',
-      title: 'Easy',
-      description: 'Easy to use',
+      title: 'Ease',
+      description: 'Simplified and easy to use, our platform is designed to be intuitive',
     },
     {
-      image: 'lawyers',
-      title: 'Lawyers',
-      description: 'Fans obsess over the particular length and angle of its arms',
+      image: 'globe',
+      title: 'Convenience',
+      description: 'Access your plans from anywhere in the world, at any time',
     },
     {
-      image: 'accountants',
-      title: 'Bank owners',
-      description: 'They divvy up their prey evenly among the members of their pack',
+      image: 'lightbulb',
+      title: 'Efficiency',
+      description: 'Save time and money with our easy-to-use platform',
     },
     {
-      image: 'others',
-      title: 'Others',
-      description: 'Phanpy uses its long nose to shower itself',
+      image: 'slideSettings',
+      title: 'Personalization',
+      description: 'Customize your plans to suit your needs',
     },
   ],
 };

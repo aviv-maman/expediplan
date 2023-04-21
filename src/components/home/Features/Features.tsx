@@ -17,6 +17,10 @@ const useStyles = createStyles((theme) => ({
   itemIcon: {
     padding: theme.spacing.xs,
     marginRight: theme.spacing.md,
+    background:
+      theme.colorScheme === 'dark'
+        ? theme.fn.gradient({ from: theme.colors.pink[2], to: theme.colors.red[6], deg: 30 })
+        : theme.fn.gradient({ from: theme.colors.pink[3], to: theme.colors.red[7], deg: 30 }),
   },
 
   itemTitle: {
@@ -35,7 +39,7 @@ const useStyles = createStyles((theme) => ({
   title: {
     lineHeight: 1,
     textAlign: 'center',
-    marginTop: theme.spacing.xl,
+    marginTop: theme.spacing.xs,
   },
 
   description: {
@@ -89,7 +93,7 @@ const Features: React.FC = () => {
       <Text className={classes.supTitle}>{supTitle}</Text>
 
       <Title className={classes.title} order={2}>
-        PharmLand is <span className={classes.highlight}>not</span> just for pharmacists
+        Experience the <span className={classes.highlight}>best</span> of travel planning
       </Title>
 
       <Container size={660} p={0}>
