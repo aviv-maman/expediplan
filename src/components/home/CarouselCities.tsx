@@ -2,7 +2,7 @@
 
 import { Carousel } from '@mantine/carousel';
 import useSWR from 'swr';
-import { City } from './home';
+import type { City } from '../../../types/general';
 import { Highlight, Paper, Stack, Title, createStyles, rem } from '@mantine/core';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City[]>);
@@ -32,13 +32,19 @@ const useStyles = createStyles((theme) => ({
     color: theme.white,
     lineHeight: 1.2,
     fontSize: rem(32),
-    marginTop: theme.spacing.xs,
   },
 
   category: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[6],
     fontWeight: 700,
     textTransform: 'uppercase',
+  },
+
+  carouselTitle: {
+    fontWeight: 900,
+    color: theme.colorScheme === 'dark' ? theme.colors.orange[3] : theme.colors.pink[7],
+    fontSize: rem(28),
+    // backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
   },
 }));
 
@@ -50,7 +56,9 @@ const CarouselCities: React.FC = () => {
 
   return (
     <Stack>
-      <Title>Popular Destinations</Title>
+      <Title align='center' className={classes.carouselTitle}>
+        Popular Destinations
+      </Title>
       <Carousel
         withIndicators
         slideSize='33.333%'

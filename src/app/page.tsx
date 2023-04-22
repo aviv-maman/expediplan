@@ -1,5 +1,5 @@
 import 'server-only';
-import CustomStack from '@/components/home/CustomStack';
+import CustomStack from '@/components/CustomStack';
 import Features from '@/components/home/Features/Features';
 import Hero from '@/components/home/Hero';
 import CarouselCities from '@/components/home/CarouselCities';

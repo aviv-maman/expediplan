@@ -6,8 +6,8 @@ export const metadata = {
   title: `${process.env.NEXT_PUBLIC_WEBSITE_NAME ?? mainMetadata.title} | Help`,
 };
 
-const About: NextPage = () => {
+const Help: NextPage = () => {
   return <div>Help</div>;
 };
 
-export default About;
+export default Help;
