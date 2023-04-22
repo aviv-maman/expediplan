@@ -1,6 +1,6 @@
 'use client';
 import { Box, Button, Group, Paper, Select, TextInput, Title } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { hasLength, isNotEmpty, useForm } from '@mantine/form';
 import { IconFlag } from '@tabler/icons-react';
 import DropdownWithIcon from '../DropdownWithIcon';
 import type { City, Country } from '../../../types/general';
@@ -30,7 +30,11 @@ const NewPlanForm: React.FC = () => {
       country: 0,
       city: 0,
     },
-    validate: {},
+    validate: {
+      name: isNotEmpty('Enter a name for your plan') && hasLength({ min: 3 }, 'Name must have 3 or more characters'),
+      country: isNotEmpty('Country is required'),
+      city: isNotEmpty('City is required'),
+    },
   });
 
   const countries = useSWR(getCountriesAPI(), countriesFetcher);
