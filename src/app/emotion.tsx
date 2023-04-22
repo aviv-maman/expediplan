@@ -1,5 +1,4 @@
 'use client';
-
 import { CacheProvider } from '@emotion/react';
 import { useEmotionCache, MantineProvider, ColorSchemeProvider, type ColorScheme } from '@mantine/core';
 import { useServerInsertedHTML } from 'next/navigation';

@@ -1,5 +1,4 @@
 'use client';
-
 import { createStyles, Group, ActionIcon, Footer } from '@mantine/core';
 import { IconHelpSquareRounded, IconHome2, IconList, IconSettings } from '@tabler/icons-react';
 import Link from 'next/link';

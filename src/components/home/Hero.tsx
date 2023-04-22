@@ -1,5 +1,4 @@
 'use client';
-
 import { createStyles, Container, Title, Text, Button, rem } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({

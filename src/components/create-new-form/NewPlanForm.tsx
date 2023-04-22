@@ -1,10 +1,8 @@
 'use client';
-
 import { Box, Button, Group, Paper, Select, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconFlag } from '@tabler/icons-react';
 import DropdownWithIcon from '../DropdownWithIcon';
-
 import type { City, Country } from '../../../types/general';
 import useSWR from 'swr';
 

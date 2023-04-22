@@ -1,5 +1,4 @@
 'use client';
-
 import { Carousel } from '@mantine/carousel';
 import useSWR from 'swr';
 import type { City } from '../../../types/general';
