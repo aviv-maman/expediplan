@@ -41,7 +41,8 @@
     "latitude": "52.50000000",
     "longitude": "5.75000000",
     "emoji": "🇳🇱",
-    "emojiU": "U+1F1F3 U+1F1F1"
+    "emojiU": "U+1F1F3 U+1F1F1",
+    "flag": "./assets/flags/flag-netherlands_1f1f3-1f1f1.png"
   },
   {
     "id": 177,
@@ -99,7 +100,8 @@
     "latitude": "39.50000000",
     "longitude": "-8.00000000",
     "emoji": "🇵🇹",
-    "emojiU": "U+1F1F5 U+1F1F9"
+    "emojiU": "U+1F1F5 U+1F1F9",
+    "flag": "./assets/flags/flag-portugal_1f1f5-1f1f9.png"
   },
   {
     "id": 107,
@@ -143,7 +145,8 @@
     "latitude": "42.83333333",
     "longitude": "12.83333333",
     "emoji": "🇮🇹",
-    "emojiU": "U+1F1EE U+1F1F9"
+    "emojiU": "U+1F1EE U+1F1F9",
+    "flag": "./assets/flags/flag-italy_1f1ee-1f1f9.png"
   },
   {
     "id": 75,
@@ -187,7 +190,8 @@
     "latitude": "46.00000000",
     "longitude": "2.00000000",
     "emoji": "🇫🇷",
-    "emojiU": "U+1F1EB U+1F1F7"
+    "emojiU": "U+1F1EB U+1F1F7",
+    "flag": "./assets/flags/flag-france_1f1eb-1f1f7.png"
   },
   {
     "id": 207,
@@ -245,7 +249,8 @@
     "latitude": "40.00000000",
     "longitude": "-4.00000000",
     "emoji": "🇪🇸",
-    "emojiU": "U+1F1EA U+1F1F8"
+    "emojiU": "U+1F1EA U+1F1F8",
+    "flag": "./assets/flags/flag-spain_1f1ea-1f1f8.png"
   },
   {
     "id": 232,
@@ -289,7 +294,8 @@
     "latitude": "54.00000000",
     "longitude": "-2.00000000",
     "emoji": "🇬🇧",
-    "emojiU": "U+1F1EC U+1F1E7"
+    "emojiU": "U+1F1EC U+1F1E7",
+    "flag": "./assets/flags/flag-united-kingdom_1f1ec-1f1e7.png"
   },
   {
     "id": 182,
@@ -508,6 +514,7 @@
     "latitude": "60.00000000",
     "longitude": "100.00000000",
     "emoji": "🇷🇺",
-    "emojiU": "U+1F1F7 U+1F1FA"
+    "emojiU": "U+1F1F7 U+1F1FA",
+    "flag": "./assets/flags/flag-russia_1f1f7-1f1fa.png"
   }
 ]

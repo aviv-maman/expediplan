@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import cities from '@/compactCities.json';
+import countries from '@/compactCountries.json';
 
 export async function GET(request: Request) {
   const { search } = new URL(request.url);
@@ -7,8 +7,8 @@ export async function GET(request: Request) {
   const searchValue = searchParams.get('id');
   const ids = searchValue?.split(',');
   if (!ids || ids.length === 0) {
-    return NextResponse.json(cities);
+    return NextResponse.json(countries);
   }
-  const filteredCities = cities.filter((city) => ids.some((id) => city.id === Number(id)));
-  return NextResponse.json(filteredCities);
+  const filteredCountries = countries.filter((country) => ids.some((id) => country.id === Number(id)));
+  return NextResponse.json(filteredCountries);
 }

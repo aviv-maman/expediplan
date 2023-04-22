@@ -4,12 +4,21 @@ import { Box, Button, Group, Paper, Select, TextInput, Title } from '@mantine/co
 import { useForm } from '@mantine/form';
 import { IconFlag } from '@tabler/icons-react';
 import DropdownWithIcon from '../DropdownWithIcon';
-import { COUNTRIES } from './dropdownCountriesData';
-import type { City } from '../../../types/general';
+
+import type { City, Country } from '../../../types/general';
 import useSWR from 'swr';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City[]>);
-const getAPI = (id: number) => {
+const countriesFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Country[]>);
+const getCountriesAPI = (ids?: string | string[]) => {
+  const env = process.env.NODE_ENV;
+  const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
+  const params = new URLSearchParams(ids ? { id: String(ids) } : undefined);
+  const API = `${hostname}/api/countries?${params}`;
+  return API;
+};
+
+const citiesFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City[]>);
+const getCityByCountryIdAPI = (id: number) => {
   const env = process.env.NODE_ENV;
   const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
   const API = `${hostname}/api/cities/country/${id}`;
@@ -26,9 +35,11 @@ const NewPlanForm: React.FC = () => {
     validate: {},
   });
 
-  const { data, error } = useSWR(getAPI(form.values.country), fetcher);
+  const countries = useSWR(getCountriesAPI(), countriesFetcher);
+  const cities = useSWR(getCityByCountryIdAPI(form.values.country), citiesFetcher);
 
-  if (error) return <div>Failed to load</div>;
+  if (countries.error) return <div>Failed to load</div>;
+  if (cities.error) return <div>Failed to load</div>;
 
   return (
     <Box maw={300} mx='auto'>
@@ -47,7 +58,11 @@ const NewPlanForm: React.FC = () => {
             required
             label='Country'
             placeholder='Choose country'
-            data={COUNTRIES.sort((a, b) => a.label.localeCompare(b.label)).map((item) => ({ ...item, value: String(item.value) }))}
+            data={
+              countries.data
+                ?.sort((a, b) => a.name.localeCompare(b.name))
+                .map((item) => ({ value: String(item.id), label: item.name, icon: item.flag })) || [{ value: '', label: 'Loading...', icon: '' }]
+            }
             searchable
             maxDropdownHeight={280}
             nothingFound='Nothing found'
@@ -55,13 +70,19 @@ const NewPlanForm: React.FC = () => {
             icon={<IconFlag size='1rem' />}
             {...form.getInputProps('country')}
             transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+            disabled={!countries.data || countries.isLoading}
           />
           <Select
             required
             label='City'
             placeholder='Choose city'
-            data={data?.map((item) => ({ value: String(item.id), label: item.name })) || ['Loading...']}
-            disabled={form.values.country === 0 || !data}
+            data={
+              cities.data?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: String(item.id), label: item.name })) || [
+                'Loading...',
+              ]
+            }
+            transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+            disabled={form.values.country === 0 || !cities.data || cities.isLoading}
             {...form.getInputProps('city')}
           />
           <Group position='right' mt='md'>
