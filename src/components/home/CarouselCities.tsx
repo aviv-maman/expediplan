@@ -3,7 +3,7 @@
 import { Carousel } from '@mantine/carousel';
 import useSWR from 'swr';
 import { City } from './home';
-import { Highlight, Paper, Text, Title, createStyles, rem } from '@mantine/core';
+import { Center, Highlight, Paper, Title, createStyles, rem } from '@mantine/core';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City[]>);
 const ids = ['77340', '143446', '59582', '44856', '50388', '99972'];
@@ -53,14 +53,15 @@ const CarouselCities: React.FC<CarouselCitiesProps> = ({}) => {
   return (
     <Carousel
       withIndicators
-      slideSize='33.33%'
+      slideSize='33.333%'
       slideGap='md'
       loop
       align='start'
       breakpoints={[
-        { maxWidth: 'md', slideSize: '50%' },
-        { maxWidth: 'sm', slideSize: '100%', slideGap: 0 },
-      ]}>
+        { maxWidth: 'sm', slideSize: '50%' },
+        { maxWidth: 'xs', slideSize: '100%', slideGap: 0 },
+      ]}
+      mx={{ xl: '20%' }}>
       {data.map((city) => (
         <Carousel.Slide key={city.id}>
           <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${city.cover_image})` }} className={classes.card}>
