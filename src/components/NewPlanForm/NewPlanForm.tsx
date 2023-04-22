@@ -16,9 +16,7 @@ const getAPI = (id: number) => {
   return API;
 };
 
-interface NewPlanFormProps {}
-
-const NewPlanForm: React.FC = ({}) => {
+const NewPlanForm: React.FC = () => {
   const form = useForm({
     initialValues: {
       name: '',
@@ -31,7 +29,6 @@ const NewPlanForm: React.FC = ({}) => {
   const { data, error } = useSWR(getAPI(form.values.country), fetcher);
 
   if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
 
   return (
     <Box maw={300} mx='auto'>
@@ -42,7 +39,8 @@ const NewPlanForm: React.FC = ({}) => {
         <form
           onSubmit={form.onSubmit((values) => {
             values.country = Number(values.country);
-            console.log(data.map((item) => ({ value: String(item.id), label: item.name })));
+            values.city = Number(values.city);
+            console.log(values);
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' {...form.getInputProps('name')} />
           <DropdownWithIcon
@@ -62,13 +60,7 @@ const NewPlanForm: React.FC = ({}) => {
             required
             label='City'
             placeholder='Choose city'
-            data={data.map((item) => ({ value: String(item.id), label: item.name }))}
-            // data={[
-            //   { value: '75', label: 'React' },
-            //   { value: 'ng', label: 'Angular' },
-            //   { value: 'svelte', label: 'Svelte' },
-            //   { value: 'vue', label: 'Vue' },
-            // ]}
+            data={data?.map((item) => ({ value: String(item.id), label: item.name })) || ['Loading...']}
             disabled={form.values.country === 0 || !data}
             {...form.getInputProps('city')}
           />
