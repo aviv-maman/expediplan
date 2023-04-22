@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Group, Paper, TextInput, Title } from '@mantine/core';
+import { Box, Button, Group, Paper, Select, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconFlag } from '@tabler/icons-react';
 import DropdownWithIcon from '../DropdownWithIcon';
@@ -23,7 +23,7 @@ const NewPlanForm: React.FC = ({}) => {
     initialValues: {
       name: '',
       country: 0,
-      city: '',
+      city: 0,
     },
     validate: {},
   });
@@ -39,7 +39,11 @@ const NewPlanForm: React.FC = ({}) => {
         Create New Plan
       </Title>
       <Paper withBorder shadow='md' p={30} mt={30} radius='md'>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <form
+          onSubmit={form.onSubmit((values) => {
+            values.country = Number(values.country);
+            console.log(data.map((item) => ({ value: String(item.id), label: item.name })));
+          })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' {...form.getInputProps('name')} />
           <DropdownWithIcon
             required
@@ -53,6 +57,20 @@ const NewPlanForm: React.FC = ({}) => {
             icon={<IconFlag size='1rem' />}
             {...form.getInputProps('country')}
             transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+          />
+          <Select
+            required
+            label='City'
+            placeholder='Choose city'
+            data={data.map((item) => ({ value: String(item.id), label: item.name }))}
+            // data={[
+            //   { value: '75', label: 'React' },
+            //   { value: 'ng', label: 'Angular' },
+            //   { value: 'svelte', label: 'Svelte' },
+            //   { value: 'vue', label: 'Vue' },
+            // ]}
+            disabled={form.values.country === 0 || !data}
+            {...form.getInputProps('city')}
           />
           <Group position='right' mt='md'>
             <Button type='submit'>Create</Button>

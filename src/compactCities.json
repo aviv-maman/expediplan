@@ -60,6 +60,19 @@
     "cover_image": "https://cdn.britannica.com/36/135436-050-ED1D0FCE/skyline-Eiffel-Tower-France-Paris.jpg"
   },
   {
+    "id": 43678,
+    "name": "Lyon",
+    "state_id": 4798,
+    "state_code": "ARA",
+    "state_name": "Auvergne-Rhône-Alpes",
+    "country_id": 75,
+    "country_code": "FR",
+    "country_name": "France",
+    "latitude": "45.74846000",
+    "longitude": "4.84671000",
+    "wikiDataId": "Q456"
+  },
+  {
     "id": 32653,
     "name": "Barcelona",
     "state_id": 5102,
