@@ -6,37 +6,21 @@ import DropdownWithIcon from '../DropdownWithIcon';
 import type { City, Country, Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
-import { atom, atomFamily, useRecoilCallback, useRecoilValue } from 'recoil';
+import { atom, useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 
 //=== [Recoil] ===
-const idsState = atom<number[]>({
-  key: 'ids',
+const planListState = atom<Plan[]>({
+  key: 'planList',
   default: [],
   effects: [
-    ({ onSet, setSelf, node }) => {
-      const savedValue = window.localStorage.getItem(node.key);
+    ({ onSet, setSelf }) => {
+      const savedValue = localStorage.getItem('planList');
       if (savedValue != null) {
         setSelf(JSON.parse(savedValue));
       }
       onSet((newValue, _, isReset) => {
-        isReset ? window.localStorage.removeItem(node.key) : window.localStorage.setItem(node.key, JSON.stringify(newValue));
-      });
-    },
-  ],
-});
-
-const itemState = atomFamily<Plan, number>({
-  key: 'item',
-  default: { name: '', country: 0, city: 0, startDate: '', endDate: '' },
-  effects: [
-    ({ onSet, setSelf, node }) => {
-      const savedValue = window.localStorage.getItem(node.key);
-      if (savedValue != null) {
-        setSelf(JSON.parse(savedValue));
-      }
-      onSet((newValue, _, isReset) => {
-        isReset ? window.localStorage.removeItem(node.key) : window.localStorage.setItem(node.key, JSON.stringify(newValue));
+        isReset ? localStorage.removeItem('planList') : localStorage.setItem('planList', JSON.stringify(newValue));
       });
     },
   ],
@@ -84,13 +68,11 @@ const getCityByCountryIdAPI = (id: number) => {
 
 const NewPlanForm: React.FC = () => {
   //=== [Recoil] ===
-  const ids = useRecoilValue(idsState);
-  const nextId = ids.length;
+  // const [items, setItems] = useRecoilState(planListState);
 
-  const insertItem = useRecoilCallback(({ set }) => (plan: Plan) => {
-    set(idsState, [...ids, nextId]);
-    set(itemState(nextId), { ...plan });
-  });
+  // const insertItem = (plan: Plan) => {
+  //   setItems([...items, plan]);
+  // };
   //=== [Recoil] ===
 
   const { classes } = useStyles();
@@ -135,7 +117,7 @@ const NewPlanForm: React.FC = () => {
         </Avatar>
         <form
           onSubmit={form.onSubmit((values) => {
-            insertItem(values);
+            // insertItem(values);
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' {...form.getInputProps('name')} icon={<IconId size='1rem' />} />
           <DropdownWithIcon
@@ -154,7 +136,7 @@ const NewPlanForm: React.FC = () => {
             icon={<IconFlag size='1rem' />}
             {...form.getInputProps('country.id')}
             transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
-            disabled={!countries.data || countries.isLoading}
+            disabled={countries.isLoading}
             onChange={(value) => {
               form.setFieldValue('country.id', value || undefined);
               form.setFieldValue('country.flag', countries.data?.find((item) => item.id === Number(value))?.flag || undefined);
@@ -171,7 +153,7 @@ const NewPlanForm: React.FC = () => {
               ]
             }
             transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
-            disabled={form.values.country.id === undefined || !cities.data || cities.isLoading}
+            disabled={form.values.country.id === undefined || !countries.data || cities.isLoading}
             {...form.getInputProps('city')}
             icon={<IconBuilding size='1rem' />}
           />
