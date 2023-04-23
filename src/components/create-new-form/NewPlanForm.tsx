@@ -1,5 +1,5 @@
 'use client';
-import { Avatar, Box, Button, Group, Paper, Select, TextInput, ThemeIcon, Title, createStyles, rem } from '@mantine/core';
+import { Avatar, Box, Button, Group, Paper, Select, TextInput, Title, createStyles, rem } from '@mantine/core';
 import { hasLength, isNotEmpty, useForm } from '@mantine/form';
 import { IconFlag, IconFlagFilled } from '@tabler/icons-react';
 import DropdownWithIcon from '../DropdownWithIcon';
@@ -52,21 +52,26 @@ const NewPlanForm: React.FC = () => {
   const form = useForm({
     initialValues: {
       name: '',
-      country: 0,
-      city: 0,
+      country: { id: '', flag: '' },
+      city: '',
       startDate: undefined,
       endDate: undefined,
-      flag: '',
     },
     validate: {
       name: isNotEmpty('Enter a name for your plan') && hasLength({ min: 3 }, 'Name must have 3 or more characters'),
       country: isNotEmpty('Country is required'),
       city: isNotEmpty('City is required'),
     },
+
+    transformValues: (values) => ({
+      ...values,
+      country: Number(values.country.id) || 0,
+      city: Number(values.city) || 0,
+    }),
   });
 
   const countries = useSWR(getCountriesAPI(), countriesFetcher);
-  const cities = useSWR(getCityByCountryIdAPI(form.values.country), citiesFetcher);
+  const cities = useSWR(getCityByCountryIdAPI(form.getTransformedValues().country), citiesFetcher);
 
   if (countries.error) return <div>Failed to load</div>;
   if (cities.error) return <div>Failed to load</div>;
@@ -77,16 +82,11 @@ const NewPlanForm: React.FC = () => {
         Create New Plan
       </Title>
       <Paper withBorder shadow='md' p={30} radius='md' className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
-        {/* <ThemeIcon className={classes.icon} size={ICON_SIZE} radius={ICON_SIZE}>
-          <IconFlagFilled size='2rem' stroke={1.5} />
-        </ThemeIcon> */}
-        <Avatar src={form.values.flag} alt='flag' className={classes.icon} size={ICON_SIZE} radius={ICON_SIZE} color='blue'>
+        <Avatar src={form.values.country.flag} alt='flag' className={classes.icon} size={ICON_SIZE} radius={ICON_SIZE} color='blue'>
           <IconFlagFilled size='2rem' stroke={1.5} />
         </Avatar>
         <form
           onSubmit={form.onSubmit((values) => {
-            values.country = Number(values.country);
-            values.city = Number(values.city);
             console.log(values);
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' {...form.getInputProps('name')} />
@@ -97,21 +97,21 @@ const NewPlanForm: React.FC = () => {
             data={
               countries.data
                 ?.sort((a, b) => a.name.localeCompare(b.name))
-                .map((item) => ({ value: String(item.id), label: item.name, icon: item.flag })) || [{ value: '', label: 'Loading...', icon: '' }]
+                .map((item) => ({ value: String(item.id), label: item.name, icon: item.flag })) ?? []
             }
             searchable
             maxDropdownHeight={280}
             nothingFound='Nothing found'
             filter={(value, item) => item?.label?.toLowerCase().includes(value.toLowerCase().trim()) || false}
             icon={<IconFlag size='1rem' />}
-            {...form.getInputProps('country')}
+            {...form.getInputProps('country.id')}
             transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
             disabled={!countries.data || countries.isLoading}
-            // onChange={(value) => {
-            //   form.setFieldValue('country', Number(value));
-            //   form.setFieldValue('flag', countries.data?.find((item) => item.id === Number(value))?.flag || '');
-            //   form.setFieldValue('city', 0);
-            // }}
+            onChange={(value) => {
+              form.setFieldValue('country.id', value || undefined);
+              form.setFieldValue('country.flag', countries.data?.find((item) => item.id === Number(value))?.flag || undefined);
+              form.setFieldValue('city', '');
+            }}
           />
           <Select
             required
@@ -123,7 +123,7 @@ const NewPlanForm: React.FC = () => {
               ]
             }
             transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
-            disabled={form.values.country === 0 || !cities.data || cities.isLoading}
+            disabled={form.values.country.id === undefined || !cities.data || cities.isLoading}
             {...form.getInputProps('city')}
           />
           <DatePickerInput label='Start Date' placeholder='Choose start date' mx='auto' maw={400} {...form.getInputProps('startDate')} />
