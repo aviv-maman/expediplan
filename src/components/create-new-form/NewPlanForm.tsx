@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
 import { atom, useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
+import { Suspense } from 'react';
 
 //=== [Recoil] ===
 const planListState = atom<Plan[]>({
@@ -68,11 +69,10 @@ const getCityByCountryIdAPI = (id: number) => {
 
 const NewPlanForm: React.FC = () => {
   //=== [Recoil] ===
-  // const [items, setItems] = useRecoilState(planListState);
-
-  // const insertItem = (plan: Plan) => {
-  //   setItems([...items, plan]);
-  // };
+  const [items, setItems] = useRecoilState(planListState);
+  const insertItem = (plan: Plan) => {
+    setItems([...items, plan]);
+  };
   //=== [Recoil] ===
 
   const { classes } = useStyles();
@@ -96,7 +96,7 @@ const NewPlanForm: React.FC = () => {
       country: Number(values.country.id) || 0,
       city: Number(values.city) || 0,
       startDate: dayjs(values.startDate).format('YYYY-MM-DD'),
-      endDate: dayjs(values.startDate).format('YYYY-MM-DD'), //values.endDate.toISOString().split('T')[0]
+      endDate: dayjs(values.endDate).format('YYYY-MM-DD'), //values.endDate.toISOString().split('T')[0]
     }),
   });
 
@@ -105,6 +105,9 @@ const NewPlanForm: React.FC = () => {
 
   if (countries.error) return <div>Failed to load</div>;
   if (cities.error) return <div>Failed to load</div>;
+
+  // if (countries.isLoading) return <div>Loading...</div>;
+  // if (cities.isLoading) return <div>Loading...</div>;
 
   return (
     <Box maw={300} mx='auto'>
@@ -117,46 +120,55 @@ const NewPlanForm: React.FC = () => {
         </Avatar>
         <form
           onSubmit={form.onSubmit((values) => {
-            // insertItem(values);
+            insertItem(values);
           })}>
-          <TextInput required minLength={3} label='Name' placeholder='Name of plan' {...form.getInputProps('name')} icon={<IconId size='1rem' />} />
-          <DropdownWithIcon
-            required
-            label='Country'
-            placeholder='Choose country'
-            data={
-              countries.data
-                ?.sort((a, b) => a.name.localeCompare(b.name))
-                .map((item) => ({ value: String(item.id), label: item.name, icon: item.flag })) ?? []
-            }
-            searchable
-            maxDropdownHeight={280}
-            nothingFound='Nothing found'
-            filter={(value, item) => item?.label?.toLowerCase().includes(value.toLowerCase().trim()) || false}
-            icon={<IconFlag size='1rem' />}
-            {...form.getInputProps('country.id')}
-            transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
-            disabled={countries.isLoading}
-            onChange={(value) => {
-              form.setFieldValue('country.id', value || undefined);
-              form.setFieldValue('country.flag', countries.data?.find((item) => item.id === Number(value))?.flag || undefined);
-              form.setFieldValue('city', '');
-            }}
-          />
-          <Select
-            required
-            label='City'
-            placeholder='Choose city'
-            data={
-              cities.data?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: String(item.id), label: item.name })) || [
-                'Loading...',
-              ]
-            }
-            transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
-            disabled={form.values.country.id === undefined || !countries.data || cities.isLoading}
-            {...form.getInputProps('city')}
-            icon={<IconBuilding size='1rem' />}
-          />
+          <TextInput required minLength={3} label='Name' placeholder='Name of plan' icon={<IconId size='1rem' />} {...form.getInputProps('name')} />
+
+          <Suspense
+            fallback={<Select required label='Country' placeholder='Loading countries...' icon={<IconFlag size='1rem' />} data={[]} disabled />}>
+            <DropdownWithIcon
+              required
+              label='Country'
+              placeholder='Choose country'
+              icon={<IconFlag size='1rem' />}
+              data={
+                countries.data
+                  ?.sort((a, b) => a.name.localeCompare(b.name))
+                  .map((item) => ({ value: String(item.id), label: item.name, icon: item.flag })) ?? []
+              }
+              searchable
+              maxDropdownHeight={280}
+              nothingFound='Nothing found'
+              filter={(value, item) => item?.label?.toLowerCase().includes(value.toLowerCase().trim()) || false}
+              {...form.getInputProps('country.id')}
+              transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+              disabled={!countries.data || countries.isLoading}
+              onChange={(value) => {
+                form.setFieldValue('country.id', value || undefined);
+                form.setFieldValue('country.flag', countries.data?.find((item) => item.id === Number(value))?.flag || undefined);
+                form.setFieldValue('city', '');
+              }}
+            />
+          </Suspense>
+
+          <Suspense
+            fallback={<Select required label='City' placeholder='Loading cities...' icon={<IconBuilding size='1rem' />} data={[]} disabled />}>
+            <Select
+              required
+              label='City'
+              placeholder='Choose city'
+              icon={<IconBuilding size='1rem' />}
+              data={
+                cities.data?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: String(item.id), label: item.name })) || [
+                  'Loading...',
+                ]
+              }
+              transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+              {...form.getInputProps('city')}
+              disabled={form.values.country.id === '' || form.values.country.id === undefined || !countries.data || cities.isLoading}
+            />
+          </Suspense>
+
           <DatePickerInput
             required
             label='Start Date'
