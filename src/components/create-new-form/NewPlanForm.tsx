@@ -178,6 +178,7 @@ const NewPlanForm: React.FC = () => {
             maw={400}
             {...form.getInputProps('startDate')}
             minDate={new Date()}
+            maxDate={new Date() && form.values.endDate}
           />
           <DatePickerInput
             required
@@ -187,7 +188,7 @@ const NewPlanForm: React.FC = () => {
             mx='auto'
             maw={400}
             {...form.getInputProps('endDate')}
-            minDate={new Date()}
+            minDate={form.values.startDate ? form.values.startDate : new Date()}
             maxDate={dayjs().add(1, 'year').toDate()}
           />
           <Group position='right' mt='md'>
