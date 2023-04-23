@@ -59,3 +59,11 @@ export type City = {
   about: string;
   cover_image: string;
 };
+
+export type Plan = {
+  name: string;
+  country: number;
+  city: number;
+  startDate: string;
+  endDate: string;
+};

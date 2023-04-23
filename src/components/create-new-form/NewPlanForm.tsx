@@ -3,9 +3,45 @@ import { Avatar, Box, Button, Group, Paper, Select, TextInput, Title, createStyl
 import { hasLength, isNotEmpty, useForm } from '@mantine/form';
 import { IconBuilding, IconCalendar, IconFlag, IconFlagFilled, IconId } from '@tabler/icons-react';
 import DropdownWithIcon from '../DropdownWithIcon';
-import type { City, Country } from '../../../types/general';
+import type { City, Country, Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
+import { atom, atomFamily, useRecoilCallback, useRecoilValue } from 'recoil';
+import dayjs from 'dayjs';
+
+//=== [Recoil] ===
+const idsState = atom<number[]>({
+  key: 'ids',
+  default: [],
+  effects: [
+    ({ onSet, setSelf, node }) => {
+      const savedValue = window.localStorage.getItem(node.key);
+      if (savedValue != null) {
+        setSelf(JSON.parse(savedValue));
+      }
+      onSet((newValue, _, isReset) => {
+        isReset ? window.localStorage.removeItem(node.key) : window.localStorage.setItem(node.key, JSON.stringify(newValue));
+      });
+    },
+  ],
+});
+
+const itemState = atomFamily<Plan, number>({
+  key: 'item',
+  default: { name: '', country: 0, city: 0, startDate: '', endDate: '' },
+  effects: [
+    ({ onSet, setSelf, node }) => {
+      const savedValue = window.localStorage.getItem(node.key);
+      if (savedValue != null) {
+        setSelf(JSON.parse(savedValue));
+      }
+      onSet((newValue, _, isReset) => {
+        isReset ? window.localStorage.removeItem(node.key) : window.localStorage.setItem(node.key, JSON.stringify(newValue));
+      });
+    },
+  ],
+});
+//=== [Recoil] ===
 
 const ICON_SIZE = rem(60);
 
@@ -47,6 +83,16 @@ const getCityByCountryIdAPI = (id: number) => {
 };
 
 const NewPlanForm: React.FC = () => {
+  //=== [Recoil] ===
+  const ids = useRecoilValue(idsState);
+  const nextId = ids.length;
+
+  const insertItem = useRecoilCallback(({ set }) => (plan: Plan) => {
+    set(idsState, [...ids, nextId]);
+    set(itemState(nextId), { ...plan });
+  });
+  //=== [Recoil] ===
+
   const { classes } = useStyles();
 
   const form = useForm({
@@ -67,6 +113,8 @@ const NewPlanForm: React.FC = () => {
       ...values,
       country: Number(values.country.id) || 0,
       city: Number(values.city) || 0,
+      startDate: dayjs(values.startDate).format('YYYY-MM-DD'),
+      endDate: dayjs(values.startDate).format('YYYY-MM-DD'), //values.endDate.toISOString().split('T')[0]
     }),
   });
 
@@ -78,7 +126,7 @@ const NewPlanForm: React.FC = () => {
 
   return (
     <Box maw={300} mx='auto'>
-      <Title align='center' sx={(theme) => ({ fontWeight: 900 })}>
+      <Title align='center' sx={(theme) => ({ fontWeight: 700, color: theme.colors.red[3] })}>
         Create New Plan
       </Title>
       <Paper withBorder shadow='md' p={30} radius='md' className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
@@ -87,8 +135,7 @@ const NewPlanForm: React.FC = () => {
         </Avatar>
         <form
           onSubmit={form.onSubmit((values) => {
-            console.log(values);
-            window.localStorage.setItem('new-form', JSON.stringify(form.values));
+            insertItem(values);
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' {...form.getInputProps('name')} icon={<IconId size='1rem' />} />
           <DropdownWithIcon

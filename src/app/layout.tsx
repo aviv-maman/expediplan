@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import RootStyleRegistry from './emotion';
 import GlobalAppShell from '@/layout/GlobalAppShell';
+import GlobalRecoilRoot from '@/layout/GlobalRecoilRoot';
 
 export const metadata = {
   title: 'ExpediPlan',
@@ -18,11 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body className={inter.className}>
-        {/* <GlobalRecoilProvider> */}
-        <RootStyleRegistry themeColor={colorScheme}>
-          <GlobalAppShell>{children}</GlobalAppShell>
-        </RootStyleRegistry>
-        {/* </GlobalRecoilProvider> */}
+        <GlobalRecoilRoot>
+          <RootStyleRegistry themeColor={colorScheme}>
+            <GlobalAppShell>{children}</GlobalAppShell>
+          </RootStyleRegistry>
+        </GlobalRecoilRoot>
       </body>
     </html>
   );
