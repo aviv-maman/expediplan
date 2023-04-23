@@ -173,19 +173,22 @@ const NewPlanForm: React.FC = () => {
             required
             label='Start Date'
             placeholder='Choose start date'
+            icon={<IconCalendar size='1rem' />}
             mx='auto'
             maw={400}
             {...form.getInputProps('startDate')}
-            icon={<IconCalendar size='1rem' />}
+            minDate={new Date()}
           />
           <DatePickerInput
             required
             label='End Date'
             placeholder='Choose end date'
+            icon={<IconCalendar size='1rem' />}
             mx='auto'
             maw={400}
             {...form.getInputProps('endDate')}
-            icon={<IconCalendar size='1rem' />}
+            minDate={new Date()}
+            maxDate={dayjs().add(1, 'year').toDate()}
           />
           <Group position='right' mt='md'>
             <Button type='submit'>Create</Button>
