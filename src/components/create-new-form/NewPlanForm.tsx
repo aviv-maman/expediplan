@@ -1,7 +1,7 @@
 'use client';
 import { Avatar, Box, Button, Group, Paper, Select, TextInput, Title, createStyles, rem } from '@mantine/core';
 import { hasLength, isNotEmpty, useForm } from '@mantine/form';
-import { IconFlag, IconFlagFilled } from '@tabler/icons-react';
+import { IconBuilding, IconCalendar, IconFlag, IconFlagFilled, IconId } from '@tabler/icons-react';
 import DropdownWithIcon from '../DropdownWithIcon';
 import type { City, Country } from '../../../types/general';
 import useSWR from 'swr';
@@ -88,8 +88,9 @@ const NewPlanForm: React.FC = () => {
         <form
           onSubmit={form.onSubmit((values) => {
             console.log(values);
+            window.localStorage.setItem('new-form', JSON.stringify(form.values));
           })}>
-          <TextInput required minLength={3} label='Name' placeholder='Name of plan' {...form.getInputProps('name')} />
+          <TextInput required minLength={3} label='Name' placeholder='Name of plan' {...form.getInputProps('name')} icon={<IconId size='1rem' />} />
           <DropdownWithIcon
             required
             label='Country'
@@ -125,9 +126,24 @@ const NewPlanForm: React.FC = () => {
             transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
             disabled={form.values.country.id === undefined || !cities.data || cities.isLoading}
             {...form.getInputProps('city')}
+            icon={<IconBuilding size='1rem' />}
           />
-          <DatePickerInput label='Start Date' placeholder='Choose start date' mx='auto' maw={400} {...form.getInputProps('startDate')} />
-          <DatePickerInput label='End Date' placeholder='Choose end date' mx='auto' maw={400} {...form.getInputProps('endDate')} />
+          <DatePickerInput
+            label='Start Date'
+            placeholder='Choose start date'
+            mx='auto'
+            maw={400}
+            {...form.getInputProps('startDate')}
+            icon={<IconCalendar size='1rem' />}
+          />
+          <DatePickerInput
+            label='End Date'
+            placeholder='Choose end date'
+            mx='auto'
+            maw={400}
+            {...form.getInputProps('endDate')}
+            icon={<IconCalendar size='1rem' />}
+          />
           <Group position='right' mt='md'>
             <Button type='submit'>Create</Button>
           </Group>
