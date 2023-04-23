@@ -16,12 +16,12 @@ const planListState = atom<Plan[]>({
   default: [],
   effects: [
     ({ onSet, setSelf }) => {
-      const savedValue = localStorage.getItem('planList');
+      const savedValue = window.localStorage.getItem('planList');
       if (savedValue != null) {
         setSelf(JSON.parse(savedValue));
       }
       onSet((newValue, _, isReset) => {
-        isReset ? localStorage.removeItem('planList') : localStorage.setItem('planList', JSON.stringify(newValue));
+        isReset ? window.localStorage.removeItem('planList') : window.localStorage.setItem('planList', JSON.stringify(newValue));
       });
     },
   ],
