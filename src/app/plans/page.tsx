@@ -1,7 +1,6 @@
 import 'server-only';
 import { metadata as mainMetadata } from '@/app/layout';
 import { TableSort } from '@/components/plans/TableSort';
-import data from '@/components/plans/data.json';
 import CustomStack from '@/components/CustomStack';
 import CustomContainer from '@/components/CustomContainer';
 
@@ -12,7 +11,7 @@ export const metadata = {
 const Plans: React.FC = () => {
   return (
     <CustomStack>
-      <TableSort data={data} />
+      <TableSort />
     </CustomStack>
   );
 };

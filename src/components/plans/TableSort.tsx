@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { createStyles, Table, ScrollArea, UnstyledButton, Group, Text, Center, TextInput, rem } from '@mantine/core';
 import { keys } from '@mantine/utils';
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
+import { useRecoilValue } from 'recoil';
+import { planListState } from '../create-new-form/NewPlanForm';
+import { Plan } from '../../../types/general';
 
 const useStyles = createStyles((theme) => ({
   th: {
@@ -24,16 +27,6 @@ const useStyles = createStyles((theme) => ({
     borderRadius: rem(21),
   },
 }));
-
-interface RowData {
-  name: string;
-  destination: string;
-  startDate: string;
-}
-
-interface TableSortProps {
-  data: RowData[];
-}
 
 interface ThProps {
   children: React.ReactNode;
@@ -61,12 +54,12 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
   );
 }
 
-function filterData(data: RowData[], search: string) {
+function filterData(data: Plan[], search: string) {
   const query = search.toLowerCase().trim();
-  return data.filter((item) => keys(data[0]).some((key) => item[key].toLowerCase().includes(query)));
+  return data.filter((item) => keys(data[0]).some((key) => item[key].toString().toLowerCase().includes(query)));
 }
 
-function sortData(data: RowData[], payload: { sortBy: keyof RowData | null; reversed: boolean; search: string }) {
+function sortData(data: Plan[], payload: { sortBy: keyof Plan | null; reversed: boolean; search: string }) {
   const { sortBy } = payload;
 
   if (!sortBy) {
@@ -76,38 +69,39 @@ function sortData(data: RowData[], payload: { sortBy: keyof RowData | null; reve
   return filterData(
     [...data].sort((a, b) => {
       if (payload.reversed) {
-        return b[sortBy].localeCompare(a[sortBy]);
+        return b[sortBy].toString().localeCompare(a[sortBy].toString());
       }
 
-      return a[sortBy].localeCompare(b[sortBy]);
+      return a[sortBy].toString().localeCompare(b[sortBy].toString());
     }),
     payload.search
   );
 }
 
-export function TableSort({ data }: TableSortProps) {
+export function TableSort() {
+  const planList = useRecoilValue(planListState);
   const [search, setSearch] = useState('');
-  const [sortedData, setSortedData] = useState(data);
-  const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
+  const [sortedData, setSortedData] = useState(planList);
+  const [sortBy, setSortBy] = useState<keyof Plan | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
-  const setSorting = (field: keyof RowData) => {
+  const setSorting = (field: keyof Plan) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
     setSortBy(field);
-    setSortedData(sortData(data, { sortBy: field, reversed, search }));
+    setSortedData(sortData(planList, { sortBy: field, reversed, search }));
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearch(value);
-    setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
+    setSortedData(sortData(planList, { sortBy, reversed: reverseSortDirection, search: value }));
   };
 
   const rows = sortedData.map((row) => (
     <tr key={row.name}>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.destination}</td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.country}</td>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.startDate}</td>
     </tr>
   ));
@@ -128,7 +122,7 @@ export function TableSort({ data }: TableSortProps) {
             <Th sorted={sortBy === 'name'} reversed={reverseSortDirection} onSort={() => setSorting('name')}>
               Name
             </Th>
-            <Th sorted={sortBy === 'destination'} reversed={reverseSortDirection} onSort={() => setSorting('destination')}>
+            <Th sorted={sortBy === 'country'} reversed={reverseSortDirection} onSort={() => setSorting('country')}>
               Destination
             </Th>
             <Th sorted={sortBy === 'startDate'} reversed={reverseSortDirection} onSort={() => setSorting('startDate')}>
@@ -141,7 +135,7 @@ export function TableSort({ data }: TableSortProps) {
             rows
           ) : (
             <tr>
-              <td colSpan={Object.keys(data[0]).length}>
+              <td colSpan={Object.keys(planList[0]).length}>
                 <Text weight={500} align='center'>
                   Nothing found
                 </Text>

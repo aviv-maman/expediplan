@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import { Suspense } from 'react';
 
 //=== [Recoil] ===
-const planListState = atom<Plan[]>({
+export const planListState = atom<Plan[]>({
   key: 'planList',
   default: [],
   effects: [
