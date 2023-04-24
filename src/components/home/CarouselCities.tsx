@@ -1,18 +1,10 @@
 'use client';
 import { Carousel } from '@mantine/carousel';
 import useSWR from 'swr';
-import type { City } from '../../../types/general';
 import { Highlight, Paper, Stack, Title, createStyles, rem } from '@mantine/core';
+import { citiesFetcher, getCitiesAPI } from '@/api/CitiesAPI';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City[]>);
 const ids = ['77340', '143446', '59582', '44856', '32653', '50388', '99972'];
-const getAPI = (ids: string | string[]) => {
-  const env = process.env.NODE_ENV;
-  const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
-  const params = new URLSearchParams({ id: String(ids) });
-  const API = `${hostname}/api/cities?${params}`;
-  return API;
-};
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -49,7 +41,7 @@ const useStyles = createStyles((theme) => ({
 
 const CarouselCities: React.FC = () => {
   const { classes } = useStyles();
-  const { data, error } = useSWR(getAPI(ids), fetcher);
+  const { data, error } = useSWR(getCitiesAPI(ids), citiesFetcher);
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
 

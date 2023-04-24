@@ -3,12 +3,14 @@ import { Avatar, Box, Button, Group, Paper, Select, TextInput, Title, createStyl
 import { hasLength, isNotEmpty, useForm } from '@mantine/form';
 import { IconBuilding, IconCalendar, IconFlag, IconFlagFilled, IconId } from '@tabler/icons-react';
 import DropdownWithIcon from '../DropdownWithIcon';
-import type { City, Country, Plan } from '../../../types/general';
+import type { Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
 import { atom, useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 import { Suspense } from 'react';
+import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
+import { citiesFetcher, getCityByCountryIdAPI } from '@/api/CitiesAPI';
 
 //=== [Recoil] ===
 export const planListState = atom<Plan[]>({
@@ -49,23 +51,6 @@ const useStyles = createStyles((theme) => ({
     lineHeight: 1,
   },
 }));
-
-const countriesFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Country[]>);
-const getCountriesAPI = (ids?: string | string[]) => {
-  const env = process.env.NODE_ENV;
-  const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
-  const params = new URLSearchParams(ids ? { id: String(ids) } : undefined);
-  const API = `${hostname}/api/countries?${params}`;
-  return API;
-};
-
-const citiesFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City[]>);
-const getCityByCountryIdAPI = (id: number) => {
-  const env = process.env.NODE_ENV;
-  const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
-  const API = `${hostname}/api/cities/country/${id}`;
-  return API;
-};
 
 const NewPlanForm: React.FC = () => {
   //=== [Recoil] ===

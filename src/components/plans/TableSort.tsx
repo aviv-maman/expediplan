@@ -6,6 +6,8 @@ import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@table
 import { useRecoilValue } from 'recoil';
 import { planListState } from '../create-new-form/NewPlanForm';
 import { Plan } from '../../../types/general';
+import useSWR from 'swr';
+import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 
 const useStyles = createStyles((theme) => ({
   th: {
@@ -85,6 +87,8 @@ export function TableSort() {
   const [sortBy, setSortBy] = useState<keyof Plan | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
+  const countries = useSWR(getCountriesAPI(), countriesFetcher);
+
   const setSorting = (field: keyof Plan) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
@@ -101,7 +105,9 @@ export function TableSort() {
   const rows = sortedData.map((row) => (
     <tr key={row.name}>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.country}</td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        {countries.data?.find((country) => country.id === row.country)?.name}
+      </td>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.startDate}</td>
     </tr>
   ));

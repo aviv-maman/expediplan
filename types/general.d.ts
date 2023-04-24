@@ -67,3 +67,7 @@ export type Plan = {
   startDate: string;
   endDate: string;
 };
+
+export type PlanWithCountryName = Plan & {
+  countryName: string;
+};
