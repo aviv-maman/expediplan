@@ -75,6 +75,8 @@ export function TableSort() {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value);
+    const filteredData = filterData(planList, event.currentTarget.value);
+    setSortedData(filteredData);
   };
 
   const rows = sortedData.map((row) => (
