@@ -6,8 +6,6 @@ import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@table
 import { useRecoilValue } from 'recoil';
 import { planListState } from '../create-new-form/NewPlanForm';
 import { Plan } from '../../../types/general';
-import useSWR from 'swr';
-import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { sortBy } from 'sort-by-typescript';
 
 const useStyles = createStyles((theme) => ({
@@ -69,8 +67,6 @@ export function TableSort() {
   const [sortByKey, setSortByKey] = useState<keyof Plan | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
-  const countries = useSWR(getCountriesAPI(), countriesFetcher);
-
   const setSorting = (field: keyof Plan) => {
     setReverseSortDirection((current) => !current);
     setSortByKey(field);
@@ -84,9 +80,7 @@ export function TableSort() {
   const rows = sortedData.map((row) => (
     <tr key={row.name}>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-        {countries.data?.find((country) => country.id === row.country)?.name}
-      </td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.countryName}</td>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.startDate}</td>
     </tr>
   ));
@@ -101,8 +95,8 @@ export function TableSort() {
             <Th sorted={sortByKey === 'name'} reversed={reverseSortDirection} onSort={() => setSorting('name')}>
               Name
             </Th>
-            <Th sorted={sortByKey === 'city'} reversed={reverseSortDirection} onSort={() => setSorting('city')}>
-              Destination
+            <Th sorted={sortByKey === 'countryName'} reversed={reverseSortDirection} onSort={() => setSorting('countryName')}>
+              Country
             </Th>
             <Th sorted={sortByKey === 'startDate'} reversed={reverseSortDirection} onSort={() => setSorting('startDate')}>
               Start Date

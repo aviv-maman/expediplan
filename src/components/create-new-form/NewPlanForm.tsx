@@ -69,6 +69,7 @@ const NewPlanForm: React.FC = () => {
       city: '',
       startDate: undefined,
       endDate: undefined,
+      countryName: '',
     },
     validate: {
       name: isNotEmpty('Enter a name for your plan') && hasLength({ min: 3 }, 'Name must have 3 or more characters'),
@@ -132,6 +133,7 @@ const NewPlanForm: React.FC = () => {
                 form.setFieldValue('country.id', value || undefined);
                 form.setFieldValue('country.flag', countries.data?.find((item) => item.id === Number(value))?.flag || undefined);
                 form.setFieldValue('city', '');
+                form.setFieldValue('countryName', countries.data?.find((item) => item.id === Number(value))?.name || '');
               }}
             />
           </Suspense>

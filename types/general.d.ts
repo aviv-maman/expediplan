@@ -66,8 +66,5 @@ export type Plan = {
   city: number;
   startDate: string;
   endDate: string;
-};
-
-export type PlanWithCountryName = Plan & {
   countryName: string;
 };
