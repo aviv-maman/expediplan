@@ -8,6 +8,7 @@ import { planListState } from '../create-new-form/NewPlanForm';
 import { Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
+import { sortBy } from 'sort-by-typescript';
 
 const useStyles = createStyles((theme) => ({
   th: {
@@ -56,62 +57,34 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
   );
 }
 
-interface RowData {
-  name: string;
-  destination: string;
-  startDate: string;
-}
-
-function filterData(data: RowData[], search: string) {
+function filterData(data: Plan[], search: string) {
   const query = search.toLowerCase().trim();
-  return data.filter((item) => keys(data[0]).some((key) => item[key].toLowerCase().includes(query)));
+  return data.filter((item) => keys(data[0]).some((key) => item[key].toString().toLowerCase().includes(query)));
 }
 
-function sortData(data: RowData[], payload: { sortBy: keyof RowData | null; reversed: boolean; search: string }) {
-  const { sortBy } = payload;
-
-  if (!sortBy) {
-    return filterData(data, payload.search);
-  }
-
-  return filterData(
-    [...data].sort((a, b) => {
-      if (payload.reversed) {
-        return b[sortBy].localeCompare(a[sortBy]);
-      }
-
-      return a[sortBy].localeCompare(b[sortBy]);
-    }),
-    payload.search
-  );
-}
-
-export function TableSort({ data }: { data: RowData[] }) {
+export function TableSort({ data }: { data: Plan[] }) {
   const planList = useRecoilValue(planListState);
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState(data);
-  const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
+  const [sortByKey, setSortByKey] = useState<keyof Plan | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const countries = useSWR(getCountriesAPI(), countriesFetcher);
 
-  const setSorting = (field: keyof RowData) => {
-    const reversed = field === sortBy ? !reverseSortDirection : false;
-    setReverseSortDirection(reversed);
-    setSortBy(field);
-    setSortedData(sortData(data, { sortBy: field, reversed, search }));
+  const setSorting = (field: keyof Plan) => {
+    setReverseSortDirection((current) => !current);
+    setSortByKey(field);
+    setSortedData((current) => current.sort(sortBy(!reverseSortDirection ? field : `-${field}`)));
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.currentTarget;
-    setSearch(value);
-    setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
+    setSearch(event.currentTarget.value);
   };
 
   const rows = sortedData.map((row) => (
     <tr key={row.name}>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.destination}</td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.city}</td>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.startDate}</td>
     </tr>
   ));
@@ -123,13 +96,13 @@ export function TableSort({ data }: { data: RowData[] }) {
         <caption>Some elements from periodic table</caption>
         <thead>
           <tr>
-            <Th sorted={sortBy === 'name'} reversed={reverseSortDirection} onSort={() => setSorting('name')}>
+            <Th sorted={sortByKey === 'name'} reversed={reverseSortDirection} onSort={() => setSorting('name')}>
               Name
             </Th>
-            <Th sorted={sortBy === 'destination'} reversed={reverseSortDirection} onSort={() => setSorting('destination')}>
+            <Th sorted={sortByKey === 'city'} reversed={reverseSortDirection} onSort={() => setSorting('city')}>
               Destination
             </Th>
-            <Th sorted={sortBy === 'startDate'} reversed={reverseSortDirection} onSort={() => setSorting('startDate')}>
+            <Th sorted={sortByKey === 'startDate'} reversed={reverseSortDirection} onSort={() => setSorting('startDate')}>
               Start Date
             </Th>
           </tr>
