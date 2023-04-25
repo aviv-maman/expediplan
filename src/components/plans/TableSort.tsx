@@ -62,10 +62,10 @@ function filterData(data: Plan[], search: string) {
   return data.filter((item) => keys(data[0]).some((key) => item[key].toString().toLowerCase().includes(query)));
 }
 
-export function TableSort({ data }: { data: Plan[] }) {
+export function TableSort() {
   const planList = useRecoilValue(planListState);
   const [search, setSearch] = useState('');
-  const [sortedData, setSortedData] = useState(data);
+  const [sortedData, setSortedData] = useState([...planList]);
   const [sortByKey, setSortByKey] = useState<keyof Plan | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
@@ -84,7 +84,9 @@ export function TableSort({ data }: { data: Plan[] }) {
   const rows = sortedData.map((row) => (
     <tr key={row.name}>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.city}</td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        {countries.data?.find((country) => country.id === row.country)?.name}
+      </td>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.startDate}</td>
     </tr>
   ));
