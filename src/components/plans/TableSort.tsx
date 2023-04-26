@@ -57,7 +57,11 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
 
 function filterData(data: Plan[], search: string) {
   const query = search.toLowerCase().trim();
-  return data.filter((item) => keys(data[0]).some((key) => item[key].toString().toLowerCase().includes(query)));
+  return data.filter((item) =>
+    keys(data[0]).some(
+      (key) => key !== 'id' && key !== 'country' && key !== 'city' && key !== 'days' && item[key].toString().toLowerCase().includes(query)
+    )
+  );
 }
 
 export function TableSort() {

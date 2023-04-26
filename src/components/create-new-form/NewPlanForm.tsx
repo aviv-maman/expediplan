@@ -106,7 +106,7 @@ const NewPlanForm: React.FC = () => {
         </Avatar>
         <form
           onSubmit={form.onSubmit((values) => {
-            insertItem(values);
+            insertItem({ ...values, id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) });
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' icon={<IconId size='1rem' />} {...form.getInputProps('name')} />
 

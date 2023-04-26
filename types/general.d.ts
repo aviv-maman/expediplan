@@ -61,10 +61,31 @@ export type City = {
 };
 
 export type Plan = {
+  id: string;
   name: string;
   country: number;
   city: number;
   startDate: string;
   endDate: string;
   countryName: string;
+  days?: { index: number; date: string; attractions?: Attraction[] }[];
+};
+
+export type Attraction = {
+  id: string;
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  category: string;
+  type: string;
+  rating: number;
+  cover_image: string;
+  images: string[];
+  tags: string[];
+  contact: { website: string; phone: string; email: string };
+  openingHoursPeriods: {
+    close: { day: number; time: string };
+    open: { day: number; time: string };
+  }[];
 };
