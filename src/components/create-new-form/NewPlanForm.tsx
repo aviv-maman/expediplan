@@ -10,7 +10,7 @@ import { atom, useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 import { Suspense } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
-import { citiesFetcher, getCityByCountryIdAPI } from '@/api/CitiesAPI';
+import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
 
 //=== [Recoil] ===
 export const planListState = atom<Plan[]>({
@@ -70,6 +70,7 @@ const NewPlanForm: React.FC = () => {
       startDate: undefined,
       endDate: undefined,
       countryName: '',
+      cityName: '',
     },
     validate: {
       name: isNotEmpty('Enter a name for your plan') && hasLength({ min: 3 }, 'Name must have 3 or more characters'),
@@ -81,13 +82,13 @@ const NewPlanForm: React.FC = () => {
       ...values,
       country: Number(values.country.id) || 0,
       city: Number(values.city) || 0,
-      startDate: dayjs(values.startDate).format('YYYY-MM-DD'),
-      endDate: dayjs(values.endDate).format('YYYY-MM-DD'), //values.endDate.toISOString().split('T')[0]
+      startDate: new Date(values.startDate || 0), //dayjs(values.startDate).format('YYYY-MM-DD')
+      endDate: new Date(values.endDate || 0), //values.endDate.toISOString().split('T')[0]
     }),
   });
 
   const countries = useSWR(getCountriesAPI(), countriesFetcher);
-  const cities = useSWR(getCityByCountryIdAPI(form.getTransformedValues().country), citiesFetcher);
+  const cities = useSWR(getCitiesByCountryIdAPI(form.getTransformedValues().country), citiesFetcher);
 
   if (countries.error) return <div>Failed to load</div>;
   if (cities.error) return <div>Failed to load</div>;
@@ -134,6 +135,7 @@ const NewPlanForm: React.FC = () => {
                 form.setFieldValue('country.flag', countries.data?.find((item) => item.id === Number(value))?.flag || undefined);
                 form.setFieldValue('city', '');
                 form.setFieldValue('countryName', countries.data?.find((item) => item.id === Number(value))?.name || '');
+                form.setFieldValue('cityName', cities.data?.find((item) => item.id === Number(value))?.name || '');
               }}
             />
           </Suspense>
@@ -153,6 +155,10 @@ const NewPlanForm: React.FC = () => {
               transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
               {...form.getInputProps('city')}
               disabled={form.values.country.id === '' || form.values.country.id === undefined || !countries.data || cities.isLoading}
+              onChange={(value) => {
+                form.setFieldValue('city', value || '');
+                form.setFieldValue('cityName', cities.data?.find((item) => item.id === Number(value))?.name || '');
+              }}
             />
           </Suspense>
 

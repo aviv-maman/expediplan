@@ -9,7 +9,8 @@ export async function GET(request: NextRequest, context: { params: { id: string 
     country: 107,
     city: 59582,
     countryName: 'Italy',
-    startDate: '2023-04-28',
-    endDate: '2023-05-21',
+    cityName: 'Rome',
+    startDate: new Date('2023-04-28'),
+    endDate: new Date('2023-05-21'),
   } as Plan);
 }
