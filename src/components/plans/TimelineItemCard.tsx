@@ -1,5 +1,6 @@
 'use client';
 import { createStyles, Card, Image, Text, Group } from '@mantine/core';
+import dayjs from 'dayjs';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -18,32 +19,43 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface TimelineItemCardProps {
-  image: string;
+  image: string | Date;
   category: string;
-  title: string;
-  date: string;
+  type: string;
+  date: Date;
   name: string;
 }
 
-export function TimelineItemCard({ image, category, title, date, name }: TimelineItemCardProps) {
+export function TimelineItemCard({ image, category, type, name }: TimelineItemCardProps) {
   const { classes } = useStyles();
 
   return (
-    <Card withBorder radius='md' p={0} className={classes.card}>
+    <Card withBorder radius='md' p={0} className={classes.card} mt={'xs'}>
       <Group noWrap spacing={0}>
-        <Image src={image} height={140} width={140} />
+        {typeof image === 'string' ? (
+          <Image src={image} height={140} width={140} alt={name} />
+        ) : (
+          <Image
+            src={null}
+            height={140}
+            width={140}
+            alt={name}
+            withPlaceholder
+            placeholder={<Text align='center'>{dayjs(image).format('MMM DD')}</Text>}
+          />
+        )}
         <div className={classes.body}>
           <Text transform='uppercase' color='dimmed' weight={700} size='xs'>
             {category}
           </Text>
           <Text className={classes.title} mt='xs' mb='md'>
-            {title}
+            {type}
           </Text>
-          <Group noWrap spacing='xs'>
+          <Group noWrap spacing={0}>
             <Text size='xs'>{name}</Text>
-            <Text size='xs' color='dimmed'>
-              {date}
-            </Text>
+            {/* <Text size='xs' color='dimmed'>
+              {dayjs(date).format('MMM DD')}
+            </Text> */}
           </Group>
         </div>
       </Group>

@@ -89,4 +89,5 @@ export type Attraction = {
     close: { day: number; time: string };
     open: { day: number; time: string };
   }[];
+  about: string;
 };

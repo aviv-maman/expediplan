@@ -6,6 +6,7 @@ import CustomStack from '@/components/CustomStack';
 import HeroBlock from '@/components/plans/HeroBlock';
 import DayTimeline from '@/components/plans/DayTimeline';
 import { Suspense } from 'react';
+import AttractionTimeline from '@/components/plans/AttractionTimeline';
 
 type Props = {
   params: { id: string };
@@ -21,16 +22,25 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 type PlanPageProps = { params: { id: string }; searchParams?: { [key: string]: string | string[] | undefined } };
 
 export default async function PlanPage({ params, searchParams }: PlanPageProps) {
-  const plan = await getPlanById(params.id);
+  const planFromServer = await getPlanById(params.id);
   const city = await getCityById(59582);
-  if (!plan || !city) return <div>Plan or city not found</div>;
+  if (!planFromServer || !city) return <div>Plan or city not found</div>;
 
   return (
     <CustomStack>
       <Suspense fallback={<div>Loading plan...</div>}>
-        <HeroBlock coverImage={city.cover_image} cityName={city.name} planName={plan.name} startDate={plan.startDate} endDate={plan.endDate} />
+        <HeroBlock
+          coverImage={city.cover_image}
+          cityName={city.name}
+          planName={planFromServer.name}
+          startDate={planFromServer.startDate}
+          endDate={planFromServer.endDate}
+        />
         <CustomStack>
-          <DayTimeline items={plan?.days} />
+          {JSON.stringify(planFromServer?.days)}
+          {planFromServer?.days?.length}
+          <DayTimeline items={planFromServer?.days} startDate={planFromServer?.startDate} endDate={planFromServer?.endDate} />
+          {/* <AttractionTimeline items={planFromServer?.days} /> */}
         </CustomStack>
       </Suspense>
     </CustomStack>
