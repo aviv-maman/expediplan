@@ -72,8 +72,7 @@ interface HeroBlock2Props {
 
 const HeroBlock2: React.FC<HeroBlock2Props> = ({ coverImage, cityName, id }) => {
   const { classes } = useStyles();
-  const planList = useRecoilValue(planListState);
-  const plan = planList.find((plan) => plan.id === id);
+  const plan = useRecoilValue(planListState).find((plan) => plan.id === id);
 
   // const duration = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
 

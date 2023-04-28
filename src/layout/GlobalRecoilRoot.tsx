@@ -1,6 +1,7 @@
 'use client';
 import { RecoilRoot, atom } from 'recoil';
-import { Plan } from '../../types/general';
+import type { Plan } from '../../types/general';
+import { useEffect, useState } from 'react';
 
 export const planListState = atom<Plan[]>({
   key: 'planList',
@@ -19,6 +20,16 @@ export const planListState = atom<Plan[]>({
 });
 
 const GlobalRecoilRoot: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [windowInitialized, setWindowInitialized] = useState(false);
+
+  useEffect(() => {
+    setWindowInitialized(true);
+  }, []);
+
+  if (!windowInitialized) {
+    return null;
+  }
+
   return <RecoilRoot>{children}</RecoilRoot>;
 };
 
