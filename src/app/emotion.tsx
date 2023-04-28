@@ -7,6 +7,7 @@ import { Notifications } from '@mantine/notifications';
 // import { GlobalActionKeys } from '@/core/context/action';
 // import { useGlobalContext } from '@/core/context/initialContextState';
 import { useState } from 'react';
+import { useColorScheme } from '@mantine/hooks';
 
 export default function RootStyleRegistry({ children, themeColor }: { children: React.ReactNode; themeColor: ColorScheme }) {
   const cache = useEmotionCache();
@@ -22,7 +23,9 @@ export default function RootStyleRegistry({ children, themeColor }: { children: 
       key={cache.key} //React needs a key to know when to re-render
     />
   ));
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(themeColor);
+
+  const preferredColorScheme = useColorScheme(themeColor);
+  const [colorScheme, setColorScheme] = useState<ColorScheme>(preferredColorScheme);
 
   const toggleColorScheme = (value?: ColorScheme) => {
     const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');

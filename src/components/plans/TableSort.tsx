@@ -4,9 +4,9 @@ import { createStyles, Table, ScrollArea, UnstyledButton, Group, Text, Center, T
 import { keys } from '@mantine/utils';
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
 import { useRecoilValue } from 'recoil';
-import { planListState } from '../create-new-form/NewPlanForm';
 import { Plan } from '../../../types/general';
 import { sortBy } from 'sort-by-typescript';
+import { planListState } from '@/layout/GlobalRecoilRoot';
 
 const useStyles = createStyles((theme) => ({
   th: {

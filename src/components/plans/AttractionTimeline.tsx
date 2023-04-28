@@ -41,6 +41,26 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ items }) => {
           name={'08:00 - 09:00'}
         />
       </Timeline.Item>
+
+      <Timeline.Item bullet={<IconGitBranch size={12} />} title={'La Piazza'} pt={5}>
+        <TimelineItemCard
+          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
+          category={'Food & Drinks'}
+          type={'Restaurant'}
+          date={new Date('2023-05-10')}
+          name={'08:00 - 09:00'}
+        />
+      </Timeline.Item>
+
+      <Timeline.Item bullet={<IconGitBranch size={12} />} title={'La Piazza'} pt={5}>
+        <TimelineItemCard
+          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
+          category={'Food & Drinks'}
+          type={'Restaurant'}
+          date={new Date('2023-05-10')}
+          name={'08:00 - 09:00'}
+        />
+      </Timeline.Item>
     </Timeline>
   );
 };

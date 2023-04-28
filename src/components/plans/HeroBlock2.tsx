@@ -1,16 +1,17 @@
 'use client';
-import Protected from '@/app/Protected';
-import { createStyles, Container, Title, Text, Button, rem } from '@mantine/core';
+import { useRecoilValue } from 'recoil';
+import { planListState } from '@/layout/GlobalRecoilRoot';
+import { createStyles, Container, Title, Text, rem } from '@mantine/core';
+import dayjs from 'dayjs';
 
 const useStyles = createStyles((theme) => ({
   root: {
-    backgroundColor: '#11284b',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    backgroundImage:
-      'linear-gradient(250deg, rgba(130, 201, 30, 0) 0%, #062343 70%), url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80)',
     paddingTop: `calc(${theme.spacing.xl} * 3)`,
     paddingBottom: `calc(${theme.spacing.xl} * 3)`,
+    backgroundAttachment: 'fixed',
+    backgroundRepeat: 'no-repeat',
   },
 
   inner: {
@@ -61,42 +62,36 @@ const useStyles = createStyles((theme) => ({
       maxWidth: '100%',
     },
   },
-
-  control: {
-    paddingLeft: rem(50),
-    paddingRight: rem(50),
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: rem(22),
-
-    [theme.fn.smallerThan('md')]: {
-      width: '100%',
-    },
-  },
 }));
 
-const Hero: React.FC = () => {
+interface HeroBlock2Props {
+  coverImage: string;
+  cityName: string;
+  id: string;
+}
+
+const HeroBlock2: React.FC<HeroBlock2Props> = ({ coverImage, cityName, id }) => {
   const { classes } = useStyles();
+  const planList = useRecoilValue(planListState);
+  const plan = planList.find((plan) => plan.id === id);
+
+  // const duration = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{ backgroundImage: `url(${coverImage})` }}>
       <Container size='lg'>
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
               <Text component='span' inherit variant='gradient' gradient={{ from: 'pink', to: 'yellow' }}>
-                ExpediPlan
+                {plan?.name}
               </Text>
-              <br />A simpler way to plan your travel
+              <br />
+              {/* {duration} days in {cityName} */}
             </Title>
-
             <Text className={classes.description} mt={30}>
-              ExpediPlan is a travel planning app that helps you plan your travel with ease.
+              {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
             </Text>
-
-            <Button variant='gradient' gradient={{ from: 'pink', to: 'yellow' }} size='xl' className={classes.control} mt={40}>
-              Get started
-            </Button>
-            <Protected />
           </div>
         </div>
       </Container>
@@ -104,4 +99,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default HeroBlock2;

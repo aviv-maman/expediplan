@@ -6,29 +6,12 @@ import DropdownWithIcon from '../DropdownWithIcon';
 import type { Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
-import { atom, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 import { Suspense } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
-
-//=== [Recoil] ===
-export const planListState = atom<Plan[]>({
-  key: 'planList',
-  default: [],
-  effects: [
-    ({ onSet, setSelf }) => {
-      const savedValue = window.localStorage.getItem('planList');
-      if (savedValue != null) {
-        setSelf(JSON.parse(savedValue));
-      }
-      onSet((newValue, _, isReset) => {
-        isReset ? window.localStorage.removeItem('planList') : window.localStorage.setItem('planList', JSON.stringify(newValue));
-      });
-    },
-  ],
-});
-//=== [Recoil] ===
+import { planListState } from '@/layout/GlobalRecoilRoot';
 
 const ICON_SIZE = rem(60);
 

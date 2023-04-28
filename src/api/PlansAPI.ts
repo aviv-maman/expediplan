@@ -1,6 +1,6 @@
 import type { Plan } from '../../types/general';
 
-export async function getPlanById(id: string): Promise<Plan> {
+export async function getPlanByIdFromServer(id: string): Promise<Plan> {
   const env = process.env.NODE_ENV;
   const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
   // const TOKEN = 'token';
