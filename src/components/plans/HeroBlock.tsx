@@ -1,4 +1,5 @@
 'use client';
+import Protected from '@/app/Protected';
 import { createStyles, Container, Title, Text, rem } from '@mantine/core';
 import dayjs from 'dayjs';
 
@@ -92,6 +93,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ coverImage, cityName, planName, s
             </Text>
           </div>
         </div>
+        <Protected />
       </Container>
     </div>
   );

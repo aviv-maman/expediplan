@@ -4,6 +4,8 @@ import { cookies } from 'next/headers';
 import RootStyleRegistry from './emotion';
 import GlobalAppShell from '@/layout/GlobalAppShell';
 import GlobalRecoilRoot from '@/layout/GlobalRecoilRoot';
+import GlobalSessionProvider from '@/layout/GlobalSessionProvider';
+import { getServerSession } from 'next-auth/next';
 
 export const metadata = {
   title: 'ExpediPlan',
@@ -12,17 +14,20 @@ export const metadata = {
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = cookies();
   const colorScheme = cookieStore.get('color-scheme')?.value === 'dark' ? 'dark' : 'light';
+  const session = await getServerSession();
 
   return (
     <html lang='en'>
       <body className={inter.className}>
         <GlobalRecoilRoot>
-          <RootStyleRegistry themeColor={colorScheme}>
-            <GlobalAppShell>{children}</GlobalAppShell>
-          </RootStyleRegistry>
+          <GlobalSessionProvider session={session}>
+            <RootStyleRegistry themeColor={colorScheme}>
+              <GlobalAppShell>{children}</GlobalAppShell>
+            </RootStyleRegistry>
+          </GlobalSessionProvider>
         </GlobalRecoilRoot>
       </body>
     </html>

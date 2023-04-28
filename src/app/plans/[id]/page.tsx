@@ -37,7 +37,6 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
           endDate={planFromServer.endDate}
         />
         <CustomStack>
-          {JSON.stringify(planFromServer?.days)}
           {planFromServer?.days?.length}
           <DayTimeline items={planFromServer?.days} startDate={planFromServer?.startDate} endDate={planFromServer?.endDate} />
           {/* <AttractionTimeline items={planFromServer?.days} /> */}
