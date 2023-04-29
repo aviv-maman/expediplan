@@ -56,7 +56,7 @@ export function TimelineItemCard({ image, category, type, name, firstInterestNam
               {type}
             </Text>
           )}
-          <Group spacing={0}>
+          <Group spacing={0} sx={{ flexDirection: 'column' }}>
             {name && <Text size='xs'>{name}</Text>}
             {typeof image !== 'string' && (
               <Text transform='uppercase' color='dimmed' weight={700} size='xs'>
@@ -68,7 +68,7 @@ export function TimelineItemCard({ image, category, type, name, firstInterestNam
             ) : (
               typeof image !== 'string' && !firstInterestName && <Text size='xs'>No interests yet</Text>
             )}
-
+            <br />
             {typeof image !== 'string' && (
               <Text transform='uppercase' color='dimmed' weight={700} size='xs'>
                 End of Day

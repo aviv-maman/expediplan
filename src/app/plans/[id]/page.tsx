@@ -47,7 +47,6 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
       ) : (
         <Suspense fallback={<div>Loading plan...</div>}>
           <HeroBlock2 id={params.id} />
-          <div>Guest</div>
           <CustomStack>
             <DayTimeline idFromLocalStorage={params.id} />
           </CustomStack>

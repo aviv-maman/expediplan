@@ -37,7 +37,7 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
 
     //Date is after end date
     if (days?.length && index > 0 && index >= days?.length) {
-      setActiveItem(days?.length);
+      setActiveItem(days?.length - 1);
       return;
     }
 
