@@ -8,23 +8,21 @@ import { planSelectorFamily } from '@/recoil/plan_state';
 import { useEffect, useState } from 'react';
 
 interface DayTimelineProps {
-  startDate_Server?: Plan['startDate'];
-  endDate_Server?: Plan['endDate'];
-  items_Server?: Plan['days'];
-  id_localStorage?: string;
+  idFromLocalStorage?: string;
+  planFromServer?: Plan;
 }
 
-const DayTimeline: React.FC<DayTimelineProps> = ({ startDate_Server, endDate_Server, items_Server, id_localStorage }) => {
-  const planFromLocalStorage = useRecoilValue(planSelectorFamily(String(id_localStorage)));
-  const days = planFromLocalStorage?.days ?? items_Server;
+const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromServer }) => {
+  const planFromLocalStorage = useRecoilValue(planSelectorFamily(String(idFromLocalStorage)));
+  const days = planFromLocalStorage?.days ?? planFromServer?.days;
   const [activeItem, setActiveItem] = useState(0);
 
   useEffect(() => {
     let startDate = new Date();
     if (planFromLocalStorage?.startDate) {
       startDate = new Date(planFromLocalStorage?.startDate);
-    } else if (startDate_Server) {
-      startDate = new Date(startDate_Server);
+    } else if (planFromServer?.startDate) {
+      startDate = new Date(planFromServer?.startDate);
     }
     const today = new Date();
     const diffTime = today.getTime() - startDate.getTime();
