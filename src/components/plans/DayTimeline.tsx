@@ -15,13 +15,13 @@ interface DayTimelineProps {
 
 const DayTimeline: React.FC<DayTimelineProps> = ({ startDate_Server, endDate_Server, items_Server, id_localStorage }) => {
   const planFromLocalStorage = useRecoilValue(planSelectorFamily(String(id_localStorage)));
-  const items = planFromLocalStorage?.days ?? items_Server;
+  const days = planFromLocalStorage?.days ?? items_Server;
 
   return (
     <Timeline active={1} bulletSize={30}>
-      {items?.map((item, index) => (
+      {days?.map((item, index) => (
         <Timeline.Item key={index} bullet={<IconGitBranch size={12} />} title={`Day ${index + 1}`} pt={5}>
-          <TimelineItemCard image={new Date(item.date)} startDate={items[0].date} endDate={items[items.length - 1].date} />
+          <TimelineItemCard image={new Date(item.date)} firstInterestName={item.interests?.[0].attraction.name} />
         </Timeline.Item>
       ))}
     </Timeline>

@@ -23,11 +23,11 @@ interface TimelineItemCardProps {
   category?: string;
   type?: string;
   name?: string;
-  startDate?: Date;
-  endDate?: Date;
+  firstInterestName?: string;
+  lastInterestName?: string;
 }
 
-export function TimelineItemCard({ image, category, type, name }: TimelineItemCardProps) {
+export function TimelineItemCard({ image, category, type, name, firstInterestName, lastInterestName }: TimelineItemCardProps) {
   const { classes } = useStyles();
 
   return (
@@ -46,17 +46,39 @@ export function TimelineItemCard({ image, category, type, name }: TimelineItemCa
           />
         )}
         <div className={classes.body}>
-          <Text transform='uppercase' color='dimmed' weight={700} size='xs'>
-            {category}
-          </Text>
-          <Text className={classes.title} mt='xs' mb='md'>
-            {type}
-          </Text>
-          <Group noWrap spacing={0}>
-            <Text size='xs'>{name}</Text>
-            {/* <Text size='xs' color='dimmed'>
-              {dayjs(date).format('MMM DD')}
-            </Text> */}
+          {category && (
+            <Text transform='uppercase' color='dimmed' weight={700} size='xs'>
+              {category}
+            </Text>
+          )}
+          {type && (
+            <Text className={classes.title} mt='xs' mb='md'>
+              {type}
+            </Text>
+          )}
+          <Group spacing={0}>
+            {name && <Text size='xs'>{name}</Text>}
+            {typeof image !== 'string' && (
+              <Text transform='uppercase' color='dimmed' weight={700} size='xs'>
+                Start of Day
+              </Text>
+            )}
+            {typeof image !== 'string' && firstInterestName ? (
+              <Text size='xs'>{firstInterestName}</Text>
+            ) : (
+              typeof image !== 'string' && !firstInterestName && <Text size='xs'>No interests yet</Text>
+            )}
+
+            {typeof image !== 'string' && (
+              <Text transform='uppercase' color='dimmed' weight={700} size='xs'>
+                End of Day
+              </Text>
+            )}
+            {typeof image !== 'string' && lastInterestName ? (
+              <Text size='xs'>{lastInterestName}</Text>
+            ) : (
+              typeof image !== 'string' && !lastInterestName && <Text size='xs'>No interests yet</Text>
+            )}
           </Group>
         </div>
       </Group>

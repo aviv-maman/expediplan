@@ -2,34 +2,14 @@
 import { Timeline } from '@mantine/core';
 import { IconGitBranch } from '@tabler/icons-react';
 import { TimelineItemCard } from './TimelineItemCard';
-import type { Plan } from '../../../types/general';
+import type { Interest } from '../../../types/general';
 
 interface AttractionTimelineProps {
-  items: Plan['days'];
+  interests?: Interest[];
+  id_localStorage?: string;
 }
 
-const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ items }) => {
-  if (!items)
-    items = [
-      {
-        index: 0,
-        date: new Date('2023-05-10'),
-        interests: [
-          {
-            startTime: '08:00',
-            endTime: '09:00',
-            attraction: {
-              id: '1',
-              name: 'La Piazza',
-              cover_image: '../../../assets/attractions/food-and-drinks/rome/0.jpg',
-              category: 'Food & Drinks',
-              type: 'Restaurant',
-            },
-          },
-        ],
-      },
-    ] as Plan['days'];
-
+const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ id_localStorage, interests }) => {
   return (
     <Timeline active={1} bulletSize={30}>
       <Timeline.Item bullet={<IconGitBranch size={12} />} title={'La Piazza'} pt={5}>
@@ -37,7 +17,6 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ items }) => {
           image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
           category={'Food & Drinks'}
           type={'Restaurant'}
-          date={new Date('2023-05-10')}
           name={'08:00 - 09:00'}
         />
       </Timeline.Item>
@@ -47,7 +26,6 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ items }) => {
           image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
           category={'Food & Drinks'}
           type={'Restaurant'}
-          date={new Date('2023-05-10')}
           name={'08:00 - 09:00'}
         />
       </Timeline.Item>
@@ -57,7 +35,6 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ items }) => {
           image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
           category={'Food & Drinks'}
           type={'Restaurant'}
-          date={new Date('2023-05-10')}
           name={'08:00 - 09:00'}
         />
       </Timeline.Item>
