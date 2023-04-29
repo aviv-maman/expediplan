@@ -68,12 +68,11 @@ interface HeroBlockProps {
   planName: string;
   startDate: Date;
   endDate: Date;
+  duration: number;
 }
 
-const HeroBlock: React.FC<HeroBlockProps> = ({ coverImage, cityName, planName, startDate, endDate }) => {
+const HeroBlock: React.FC<HeroBlockProps> = ({ coverImage, cityName, planName, startDate, endDate, duration }) => {
   const { classes } = useStyles();
-
-  // const duration = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
 
   return (
     <div className={classes.root} style={{ backgroundImage: `url(${coverImage})` }}>
@@ -85,7 +84,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ coverImage, cityName, planName, s
                 {planName}
               </Text>
               <br />
-              {/* {duration} days in {cityName} */}
+              {duration} days in {cityName}
             </Title>
             <Text className={classes.description} mt={30}>
               {dayjs(startDate).format('YYYY-MM-DD')} - {dayjs(endDate).format('YYYY-MM-DD')}

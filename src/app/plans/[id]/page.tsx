@@ -8,6 +8,8 @@ import DayTimeline from '@/components/plans/DayTimeline';
 import { Suspense } from 'react';
 import { getServerSession } from 'next-auth';
 import HeroBlock2 from '@/components/plans/HeroBlock2';
+import { useRecoilValue } from 'recoil';
+import { planListState } from '@/layout/GlobalRecoilRoot';
 
 type Props = {
   params: { id: string };
@@ -25,7 +27,7 @@ type PlanPageProps = { params: { id: string }; searchParams?: { [key: string]: s
 export default async function PlanPage({ params, searchParams }: PlanPageProps) {
   const session = await getServerSession();
   const planFromServer = await getPlanByIdFromServer(params.id);
-  const city = await getCityById(59582);
+  const city = await getCityById(Number(planFromServer?.city));
   if (!planFromServer || !city) return <div>Plan or city not found</div>;
 
   return (
@@ -38,6 +40,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
             planName={planFromServer.name}
             startDate={planFromServer.startDate}
             endDate={planFromServer.endDate}
+            duration={planFromServer.duration}
           />
           <CustomStack>
             <DayTimeline items={planFromServer?.days} startDate={planFromServer?.startDate} endDate={planFromServer?.endDate} />
@@ -45,7 +48,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
         </Suspense>
       ) : (
         <Suspense fallback={<div>Loading plan...</div>}>
-          <HeroBlock2 id={params.id} coverImage={city.cover_image} cityName={city.name} />
+          <HeroBlock2 id={params.id} />
           <div>Guest</div>
           <CustomStack>
             <DayTimeline items={planFromServer?.days} startDate={planFromServer?.startDate} endDate={planFromServer?.endDate} />

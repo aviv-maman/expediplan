@@ -3,6 +3,9 @@ import { useRecoilValue } from 'recoil';
 import { createStyles, Container, Title, Text, rem } from '@mantine/core';
 import dayjs from 'dayjs';
 import { planListState } from '@/layout/GlobalRecoilRoot';
+import { useEffect, useState } from 'react';
+import { getCityById } from '@/api/CitiesAPI';
+import type { City } from '../../../types/general';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -65,20 +68,24 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeroBlock2Props {
-  coverImage: string;
-  cityName: string;
   id: string;
 }
 
-const HeroBlock2: React.FC<HeroBlock2Props> = ({ coverImage, cityName, id }) => {
+const HeroBlock2: React.FC<HeroBlock2Props> = ({ id }) => {
   const { classes } = useStyles();
   const plan = useRecoilValue(planListState).find((plan) => plan.id === id);
+  const [city, setCity] = useState({} as City);
 
-  // const duration = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
-  const duration = dayjs(plan?.endDate).diff(dayjs(plan?.startDate), 'day');
+  useEffect(() => {
+    const fetchCity = async () => {
+      const fetchedCity = await getCityById(Number(plan?.city));
+      setCity(fetchedCity);
+    };
+    fetchCity();
+  }, [plan?.city]);
 
   return (
-    <div className={classes.root} style={{ backgroundImage: `url(${coverImage})` }}>
+    <div className={classes.root} style={{ backgroundImage: `url(${city?.cover_image})` }}>
       <Container size='lg'>
         <div className={classes.inner}>
           <div className={classes.content}>
@@ -87,7 +94,7 @@ const HeroBlock2: React.FC<HeroBlock2Props> = ({ coverImage, cityName, id }) => 
                 {plan?.name}
               </Text>
               <br />
-              {duration} days in {cityName}
+              {plan?.duration} days in {plan?.cityName}
             </Title>
             <Text className={classes.description} mt={30}>
               {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
