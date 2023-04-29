@@ -6,12 +6,13 @@ import DropdownWithIcon from '../DropdownWithIcon';
 import type { Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
-import { useRecoilState } from 'recoil';
+import { useRecoilCallback, useRecoilState, useRecoilValue } from 'recoil';
 import dayjs from 'dayjs';
 import { Suspense } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
 import { planListState } from '@/layout/GlobalRecoilRoot';
+// import { planState, planIds } from '@/layout/GlobalRecoilRoot';
 
 const ICON_SIZE = rem(60);
 
@@ -37,6 +38,11 @@ const useStyles = createStyles((theme) => ({
 
 const NewPlanForm: React.FC = () => {
   //=== [Recoil] ===
+  // const ids = useRecoilValue(planIds);
+  // const insertItem = useRecoilCallback(({ set }) => (plan: Plan) => {
+  //   set(planIds, [...ids, plan.id]);
+  //   set(planState(ids.length), plan);
+  // });
   const [items, setItems] = useRecoilState(planListState);
   const insertItem = (plan: Plan) => {
     setItems([...items, plan]);
@@ -65,8 +71,8 @@ const NewPlanForm: React.FC = () => {
       ...values,
       country: Number(values.country.id) || 0,
       city: Number(values.city) || 0,
-      startDate: new Date(values.startDate || 0), //dayjs(values.startDate).format('YYYY-MM-DD')
-      endDate: new Date(values.endDate || 0), //values.endDate.toISOString().split('T')[0]
+      startDate: new Date(dayjs(values.startDate).format('YYYY-MM-DD') || 0), //dayjs(values.startDate).format('YYYY-MM-DD')
+      endDate: new Date(dayjs(values.endDate).format('YYYY-MM-DD') || 0), //values.endDate.toISOString().split('T')[0]
     }),
   });
 

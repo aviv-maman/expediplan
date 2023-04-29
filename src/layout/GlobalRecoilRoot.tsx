@@ -1,5 +1,5 @@
 'use client';
-import { RecoilRoot, atom, atomFamily } from 'recoil';
+import { RecoilRoot, atom, atomFamily, selectorFamily } from 'recoil';
 import type { Plan } from '../../types/general';
 import { useEffect, useState } from 'react';
 
@@ -19,54 +19,62 @@ export const planListState = atom<Plan[]>({
   ],
 });
 
-// const idsState = atom<string[]>({
-//   key: 'itemsIds',
+export const planSelectorFamily = selectorFamily({
+  key: 'plan',
+  get:
+    (id: string) =>
+    async ({ get }) => {
+      const planList = get(planListState);
+      const plan = planList.find((plan) => plan.id === id);
+      return plan;
+    },
+});
+
+// const planSelectorFamily = selectorFamily({
+//   key: 'plan',
+//   get: (id: number) => async () => {
+//     const res = await fetch(`https://jsonplaceholder.typicode.com/plans/${id}`);
+//     if (!res.ok) {
+//       throw new Error('Failed to fetch plan');
+//     }
+//     return (await res.json()) as Plan;
+//   },
+// });
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// export const planIds = atom<string[]>({
+//   key: 'ids',
 //   default: [],
 //   effects: [
-//     ({ setSelf }) => {
-//       const savedValue = window.localStorage.getItem('planList');
+//     ({ onSet, setSelf, node }) => {
+//       const savedValue = localStorage.getItem(node.key);
 //       if (savedValue != null) {
 //         const itemsIds = JSON.parse(savedValue).map((item: Plan) => item.id) as string[];
-//         setSelf(itemsIds); //set initial value of the atom to the promise
+//         setSelf(itemsIds);
 //       }
+//       onSet((newValue, _, isReset) => {
+//         isReset ? localStorage.removeItem(node.key) : localStorage.setItem(node.key, JSON.stringify(newValue));
+//       });
 //     },
 //   ],
 // });
 
-const itemsIds = atom<string[]>({
-  key: 'ids',
-  default: [],
-  effects: [
-    ({ onSet, setSelf, node }) => {
-      const savedValue = localStorage.getItem(node.key);
-      if (savedValue != null) {
-        const itemsIds = JSON.parse(savedValue).map((item: Plan) => item.id) as string[];
-        setSelf(itemsIds);
-      }
-      onSet((newValue, _, isReset) => {
-        isReset ? localStorage.removeItem(node.key) : localStorage.setItem(node.key, JSON.stringify(newValue));
-      });
-    },
-  ],
-});
-
-const itemState = atomFamily<Plan, string>({
-  key: 'item',
-  default: {} as Plan,
-  effects: [
-    ({ onSet, setSelf, node }) => {
-      const savedValue = localStorage.getItem(node.key);
-      if (savedValue != null) {
-        setSelf(JSON.parse(savedValue));
-      }
-      onSet((newValue, _, isReset) => {
-        isReset ? localStorage.removeItem(node.key) : localStorage.setItem(node.key, JSON.stringify(newValue));
-      });
-    },
-  ],
-});
-
-// const itemWithId = memoize((id: string) => atom<Plan | undefined>({ key: `plan-${id}`, default: undefined }));
+// export const planState = atomFamily<Plan, number>({
+//   key: 'plan',
+//   default: {} as Plan,
+//   effects: [
+//     ({ onSet, setSelf, node }) => {
+//       const savedValue = localStorage.getItem(node.key);
+//       if (savedValue != null) {
+//         setSelf(JSON.parse(savedValue));
+//       }
+//       onSet((newValue, _, isReset) => {
+//         isReset ? localStorage.removeItem(node.key) : localStorage.setItem(node.key, JSON.stringify(newValue));
+//       });
+//     },
+//   ],
+// });
 
 const GlobalRecoilRoot: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [windowInitialized, setWindowInitialized] = useState(false);

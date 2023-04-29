@@ -2,10 +2,11 @@
 import { useRecoilValue } from 'recoil';
 import { createStyles, Container, Title, Text, rem } from '@mantine/core';
 import dayjs from 'dayjs';
-import { planListState } from '@/layout/GlobalRecoilRoot';
 import { useEffect, useState } from 'react';
 import { getCityById } from '@/api/CitiesAPI';
 import type { City } from '../../../types/general';
+import { planListState, planSelectorFamily } from '@/layout/GlobalRecoilRoot';
+// import { planState } from '@/layout/GlobalRecoilRoot';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -73,7 +74,11 @@ interface HeroBlock2Props {
 
 const HeroBlock2: React.FC<HeroBlock2Props> = ({ id }) => {
   const { classes } = useStyles();
-  const plan = useRecoilValue(planListState).find((plan) => plan.id === id);
+  // const plan = useRecoilValue(planState(id));
+
+  // const plan = useRecoilValue(planListState).find((plan) => plan.id === id);
+
+  const plan = useRecoilValue(planSelectorFamily(id));
   const [city, setCity] = useState({} as City);
 
   useEffect(() => {

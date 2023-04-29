@@ -8,8 +8,6 @@ import DayTimeline from '@/components/plans/DayTimeline';
 import { Suspense } from 'react';
 import { getServerSession } from 'next-auth';
 import HeroBlock2 from '@/components/plans/HeroBlock2';
-import { useRecoilValue } from 'recoil';
-import { planListState } from '@/layout/GlobalRecoilRoot';
 
 type Props = {
   params: { id: string };
