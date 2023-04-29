@@ -6,7 +6,7 @@ import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@table
 import { useRecoilValue } from 'recoil';
 import { Plan } from '../../../types/general';
 import { sortBy } from 'sort-by-typescript';
-import { planListState } from '@/layout/GlobalRecoilRoot';
+import { planListState } from '@/recoil/plan_state';
 import dayjs from 'dayjs';
 
 const useStyles = createStyles((theme) => ({
