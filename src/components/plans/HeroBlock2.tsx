@@ -1,8 +1,8 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { planListState } from '@/layout/GlobalRecoilRoot';
 import { createStyles, Container, Title, Text, rem } from '@mantine/core';
 import dayjs from 'dayjs';
+import { planListState } from '@/layout/GlobalRecoilRoot';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -75,6 +75,7 @@ const HeroBlock2: React.FC<HeroBlock2Props> = ({ coverImage, cityName, id }) => 
   const plan = useRecoilValue(planListState).find((plan) => plan.id === id);
 
   // const duration = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+  const duration = dayjs(plan?.endDate).diff(dayjs(plan?.startDate), 'day');
 
   return (
     <div className={classes.root} style={{ backgroundImage: `url(${coverImage})` }}>
@@ -86,7 +87,7 @@ const HeroBlock2: React.FC<HeroBlock2Props> = ({ coverImage, cityName, id }) => 
                 {plan?.name}
               </Text>
               <br />
-              {/* {duration} days in {cityName} */}
+              {duration} days in {cityName}
             </Title>
             <Text className={classes.description} mt={30}>
               {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}

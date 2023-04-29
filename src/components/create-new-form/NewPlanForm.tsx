@@ -73,6 +73,8 @@ const NewPlanForm: React.FC = () => {
   const countries = useSWR(getCountriesAPI(), countriesFetcher);
   const cities = useSWR(getCitiesByCountryIdAPI(form.getTransformedValues().country), citiesFetcher);
 
+  const duration = dayjs(form.values.endDate).diff(dayjs(form.values.startDate), 'day') + 1;
+
   if (countries.error) return <div>Failed to load</div>;
   if (cities.error) return <div>Failed to load</div>;
 
@@ -90,7 +92,15 @@ const NewPlanForm: React.FC = () => {
         </Avatar>
         <form
           onSubmit={form.onSubmit((values) => {
-            insertItem({ ...values, id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) });
+            insertItem({
+              ...values,
+              id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+              days: Array.from({ length: duration }).map((_, i) => ({
+                index: i,
+                date: new Date(dayjs(values.startDate).add(i, 'day').format('YYYY-MM-DD')),
+              })),
+              duration: duration,
+            });
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' icon={<IconId size='1rem' />} {...form.getInputProps('name')} />
 

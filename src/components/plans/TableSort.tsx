@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { Plan } from '../../../types/general';
 import { sortBy } from 'sort-by-typescript';
 import { planListState } from '@/layout/GlobalRecoilRoot';
+import dayjs from 'dayjs';
 
 const useStyles = createStyles((theme) => ({
   th: {
@@ -87,7 +88,9 @@ export function TableSort() {
     <tr key={row.name}>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.countryName}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.startDate}</td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        {dayjs(row.startDate).format('YYYY-MM-DD')}
+      </td>
     </tr>
   ));
 
