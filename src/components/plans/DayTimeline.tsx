@@ -14,7 +14,7 @@ interface DayTimelineProps {
 
 const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromServer }) => {
   const planFromLocalStorage = useRecoilValue(planSelectorFamily(String(idFromLocalStorage)));
-  const days = planFromLocalStorage?.days ?? planFromServer?.days;
+  const days = planFromLocalStorage?.days || planFromServer?.days;
   const [activeItem, setActiveItem] = useState(0);
 
   useEffect(() => {
