@@ -5,8 +5,7 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { getCityById } from '@/api/CitiesAPI';
 import type { City } from '../../../types/general';
-import { planListState, planSelectorFamily } from '@/layout/GlobalRecoilRoot';
-// import { planState } from '@/layout/GlobalRecoilRoot';
+import { planSelectorFamily } from '@/recoil/recoil_plan_state';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -74,10 +73,6 @@ interface HeroBlock2Props {
 
 const HeroBlock2: React.FC<HeroBlock2Props> = ({ id }) => {
   const { classes } = useStyles();
-  // const plan = useRecoilValue(planState(id));
-
-  // const plan = useRecoilValue(planListState).find((plan) => plan.id === id);
-
   const plan = useRecoilValue(planSelectorFamily(id));
   const [city, setCity] = useState({} as City);
 

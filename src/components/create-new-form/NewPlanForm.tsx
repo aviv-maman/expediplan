@@ -6,13 +6,12 @@ import DropdownWithIcon from '../DropdownWithIcon';
 import type { Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
-import { useRecoilCallback, useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 import { Suspense } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
-import { planListState } from '@/layout/GlobalRecoilRoot';
-// import { planState, planIds } from '@/layout/GlobalRecoilRoot';
+import { planListState } from '@/recoil/recoil_plan_state';
 
 const ICON_SIZE = rem(60);
 
@@ -37,19 +36,11 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const NewPlanForm: React.FC = () => {
-  //=== [Recoil] ===
-  // const ids = useRecoilValue(planIds);
-  // const insertItem = useRecoilCallback(({ set }) => (plan: Plan) => {
-  //   set(planIds, [...ids, plan.id]);
-  //   set(planState(ids.length), plan);
-  // });
+  const { classes } = useStyles();
   const [items, setItems] = useRecoilState(planListState);
   const insertItem = (plan: Plan) => {
     setItems([...items, plan]);
   };
-  //=== [Recoil] ===
-
-  const { classes } = useStyles();
 
   const form = useForm({
     initialValues: {
