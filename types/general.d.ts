@@ -69,7 +69,7 @@ export type Plan = {
   endDate: Date;
   countryName: string;
   cityName: string;
-  days: { index: number; date: Date; interests?: { startTime: string; endTime: string; attraction: Attraction }[] }[];
+  days: { index: number; date: Date; interests?: { startTime: Date; endTime: Date; attraction: Attraction }[] }[];
   duration: number;
 };
 

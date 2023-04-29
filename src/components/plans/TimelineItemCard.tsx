@@ -20,10 +20,11 @@ const useStyles = createStyles((theme) => ({
 
 interface TimelineItemCardProps {
   image: string | Date;
-  category: string;
-  type: string;
-  date: Date;
-  name: string;
+  category?: string;
+  type?: string;
+  name?: string;
+  startDate?: Date;
+  endDate?: Date;
 }
 
 export function TimelineItemCard({ image, category, type, name }: TimelineItemCardProps) {

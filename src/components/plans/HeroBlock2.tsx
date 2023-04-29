@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { getCityById } from '@/api/CitiesAPI';
 import type { City } from '../../../types/general';
-import { planSelectorFamily } from '@/recoil/recoil_plan_state';
+import { planSelectorFamily } from '@/recoil/plan_state';
 
 const useStyles = createStyles((theme) => ({
   root: {

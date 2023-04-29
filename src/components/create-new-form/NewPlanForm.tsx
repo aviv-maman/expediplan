@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import { Suspense } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
-import { planListState } from '@/recoil/recoil_plan_state';
+import { planListState } from '@/recoil/plan_state';
 
 const ICON_SIZE = rem(60);
 

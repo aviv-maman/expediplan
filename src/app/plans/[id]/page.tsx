@@ -41,7 +41,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
             duration={planFromServer.duration}
           />
           <CustomStack>
-            <DayTimeline items={planFromServer?.days} startDate={planFromServer?.startDate} endDate={planFromServer?.endDate} />
+            <DayTimeline items_Server={planFromServer?.days} startDate_Server={planFromServer?.startDate} endDate_Server={planFromServer?.endDate} />
           </CustomStack>
         </Suspense>
       ) : (
@@ -49,7 +49,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
           <HeroBlock2 id={params.id} />
           <div>Guest</div>
           <CustomStack>
-            <DayTimeline items={planFromServer?.days} startDate={planFromServer?.startDate} endDate={planFromServer?.endDate} />
+            <DayTimeline id_localStorage={params.id} />
           </CustomStack>
         </Suspense>
       )}

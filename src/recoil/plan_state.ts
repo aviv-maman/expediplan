@@ -18,10 +18,10 @@ export const planListState = atom<Plan[]>({
   ],
 });
 
-export const planSelectorFamily = selectorFamily({
+export const planSelectorFamily = selectorFamily<Plan | undefined, string>({
   key: 'plan',
   get:
-    (id: string) =>
+    (id) =>
     async ({ get }) => {
       const planList = get(planListState);
       const plan = planList.find((plan) => plan.id === id);
