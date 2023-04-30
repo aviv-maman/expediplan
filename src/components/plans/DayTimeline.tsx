@@ -1,11 +1,11 @@
 'use client';
 import { Timeline } from '@mantine/core';
-import { IconGitBranch } from '@tabler/icons-react';
 import { DayTimelineItemCard } from './DayTimelineItemCard';
 import type { Plan } from '../../../types/general';
 import { useRecoilValue } from 'recoil';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { useEffect, useState } from 'react';
+import { Icon3dCubeSphere } from '@tabler/icons-react';
 
 interface DayTimelineProps {
   idFromLocalStorage?: string;
@@ -48,7 +48,7 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
   return (
     <Timeline active={activeItem} bulletSize={30}>
       {days?.map((item) => (
-        <Timeline.Item key={item.index} bullet={<IconGitBranch size={12} />} title={`Day ${item.index + 1}`} pt={5}>
+        <Timeline.Item key={item.index} bullet={<Icon3dCubeSphere size={16} />} title={`Day ${item.index + 1}`} pt={5}>
           <DayTimelineItemCard
             image={new Date(item.date)}
             firstInterestName={item.interests?.[0].attraction.name}

@@ -1,11 +1,6 @@
 'use client';
-import { useRecoilValue } from 'recoil';
 import { createStyles, Container, Title, Text, rem } from '@mantine/core';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
-import { getCityById } from '@/api/CitiesAPI';
-import type { City } from '../../../types/general';
-import { planSelectorFamily } from '@/recoil/plan_state';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -67,37 +62,32 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface HeroBlock2Props {
-  id: string;
+interface HeroBlockAuthorisedProps {
+  coverImage: string;
+  cityName: string;
+  planName: string;
+  startDate: Date;
+  endDate: Date;
+  duration: number;
 }
 
-const HeroBlock2: React.FC<HeroBlock2Props> = ({ id }) => {
+const HeroBlockAuthorised: React.FC<HeroBlockAuthorisedProps> = ({ coverImage, cityName, planName, startDate, endDate, duration }) => {
   const { classes } = useStyles();
-  const plan = useRecoilValue(planSelectorFamily(id));
-  const [city, setCity] = useState({} as City);
-
-  useEffect(() => {
-    const fetchCity = async () => {
-      const fetchedCity = await getCityById(Number(plan?.city));
-      setCity(fetchedCity);
-    };
-    fetchCity();
-  }, [plan?.city]);
 
   return (
-    <div className={classes.root} style={{ backgroundImage: `url(${city?.cover_image})` }}>
+    <div className={classes.root} style={{ backgroundImage: `url(${coverImage})` }}>
       <Container size='lg'>
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
               <Text component='span' inherit variant='gradient' gradient={{ from: 'pink', to: 'yellow' }}>
-                {plan?.name}
+                {planName}
               </Text>
               <br />
-              {plan?.duration} days in {plan?.cityName}
+              {duration} days in {cityName}
             </Title>
             <Text className={classes.description} mt={30}>
-              {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
+              {dayjs(startDate).format('YYYY-MM-DD')} - {dayjs(endDate).format('YYYY-MM-DD')}
             </Text>
           </div>
         </div>
@@ -106,4 +96,4 @@ const HeroBlock2: React.FC<HeroBlock2Props> = ({ id }) => {
   );
 };
 
-export default HeroBlock2;
+export default HeroBlockAuthorised;

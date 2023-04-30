@@ -1,6 +1,11 @@
 'use client';
+import { useRecoilValue } from 'recoil';
 import { createStyles, Container, Title, Text, rem } from '@mantine/core';
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
+import { getCityById } from '@/api/CitiesAPI';
+import type { City } from '../../../types/general';
+import { planSelectorFamily } from '@/recoil/plan_state';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -62,32 +67,37 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface HeroBlockProps {
-  coverImage: string;
-  cityName: string;
-  planName: string;
-  startDate: Date;
-  endDate: Date;
-  duration: number;
+interface HeroBlockGuestProps {
+  idFromLocalStorage: string;
 }
 
-const HeroBlock: React.FC<HeroBlockProps> = ({ coverImage, cityName, planName, startDate, endDate, duration }) => {
+const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) => {
   const { classes } = useStyles();
+  const plan = useRecoilValue(planSelectorFamily(idFromLocalStorage));
+  const [city, setCity] = useState({} as City);
+
+  useEffect(() => {
+    const fetchCity = async () => {
+      const fetchedCity = await getCityById(Number(plan?.city));
+      setCity(fetchedCity);
+    };
+    fetchCity();
+  }, [plan?.city]);
 
   return (
-    <div className={classes.root} style={{ backgroundImage: `url(${coverImage})` }}>
+    <div className={classes.root} style={{ backgroundImage: `url(${city?.cover_image})` }}>
       <Container size='lg'>
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
               <Text component='span' inherit variant='gradient' gradient={{ from: 'pink', to: 'yellow' }}>
-                {planName}
+                {plan?.name}
               </Text>
               <br />
-              {duration} days in {cityName}
+              {plan?.duration} days in {plan?.cityName}
             </Title>
             <Text className={classes.description} mt={30}>
-              {dayjs(startDate).format('YYYY-MM-DD')} - {dayjs(endDate).format('YYYY-MM-DD')}
+              {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
             </Text>
           </div>
         </div>
@@ -96,4 +106,4 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ coverImage, cityName, planName, s
   );
 };
 
-export default HeroBlock;
+export default HeroBlockGuest;

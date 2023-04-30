@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import { getPlanByIdFromServer } from '@/api/PlansAPI';
 import { getCityById } from '@/api/CitiesAPI';
 import CustomStack from '@/components/CustomStack';
-import HeroBlock from '@/components/plans/HeroBlock';
+import HeroBlockAuthorised from '@/components/plans/HeroBlockAuthorised';
 import DayTimeline from '@/components/plans/DayTimeline';
 import { Suspense } from 'react';
 import { getServerSession } from 'next-auth';
-import HeroBlock2 from '@/components/plans/HeroBlock2';
+import HeroBlockGuest from '@/components/plans/HeroBlockGuest';
 
 type Props = {
   params: { id: string };
@@ -32,7 +32,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
     <CustomStack>
       {session?.user?.email ? (
         <Suspense fallback={<div>Loading plan...</div>}>
-          <HeroBlock
+          <HeroBlockAuthorised
             coverImage={city.cover_image}
             cityName={city.name}
             planName={planFromServer.name}
@@ -46,7 +46,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
         </Suspense>
       ) : (
         <Suspense fallback={<div>Loading plan...</div>}>
-          <HeroBlock2 id={params.id} />
+          <HeroBlockGuest idFromLocalStorage={params.id} />
           <CustomStack>
             <DayTimeline idFromLocalStorage={params.id} />
           </CustomStack>

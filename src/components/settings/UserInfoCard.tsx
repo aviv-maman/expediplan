@@ -10,7 +10,7 @@ export const UserInfoCard = () => {
 
   const fakeDelay = () => {
     return new Promise<void>((resolve) => {
-      setTimeout(resolve, 1000);
+      setTimeout(resolve, 500);
     });
   };
 
