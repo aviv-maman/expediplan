@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import { createStyles, Table, ScrollArea, UnstyledButton, Group, Text, Center, TextInput, rem } from '@mantine/core';
+import { createStyles, Table, ScrollArea, UnstyledButton, Group, Text, Center, TextInput, rem, Button } from '@mantine/core';
 import { keys } from '@mantine/utils';
-import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
+import { IconSelector, IconChevronDown, IconChevronUp, IconSearch, IconPlaneTilt } from '@tabler/icons-react';
 import { useRecoilValue } from 'recoil';
 import { Plan } from '../../../types/general';
 import { sortBy } from 'sort-by-typescript';
@@ -69,39 +69,43 @@ function filterData(data: Plan[], search: string) {
 export function TableSort() {
   const planList = useRecoilValue(planListState);
   const [search, setSearch] = useState('');
-  const [sortedData, setSortedData] = useState([...planList]);
+  const [sortedData, setSortedData] = useState(planList);
   const [sortByKey, setSortByKey] = useState<keyof Plan | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const setSorting = (field: keyof Plan) => {
     setReverseSortDirection((current) => !current);
     setSortByKey(field);
-    setSortedData((current) => current.sort(sortBy(!reverseSortDirection ? field : `-${field}`)));
+    setSortedData((current) => current?.sort(sortBy(!reverseSortDirection ? field : `-${field}`)));
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value);
-    const filteredData = filterData(planList, event.currentTarget.value);
+    const filteredData = filterData(planList || [], event.currentTarget.value);
     setSortedData(filteredData);
   };
 
-  const rows = sortedData.map((row) => (
-    <Link key={row.id} href={{ pathname: `/plans/${row.id}` }}>
-      <tr style={{ cursor: 'pointer' }}>
-        <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
-        <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.countryName}</td>
-        <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-          {dayjs(row.startDate).format('YYYY-MM-DD')}
-        </td>
-      </tr>
-    </Link>
+  const rows = sortedData?.map((row) => (
+    // <Link key={row.id} href={{ pathname: `/plans/${row.id}` }}>
+    <tr key={row.id} style={{ cursor: 'pointer' }}>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.countryName}</td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        {dayjs(row.startDate).format('YYYY-MM-DD')}
+      </td>
+    </tr>
+    // </Link>
   ));
 
   return (
     <ScrollArea>
       <TextInput placeholder='Search by any field' mb='md' icon={<IconSearch size='0.9rem' />} value={search} onChange={handleSearchChange} />
       <Table striped highlightOnHover withBorder withColumnBorders horizontalSpacing='xs' verticalSpacing='xs' sx={{ tableLayout: 'fixed' }}>
-        <caption>Some elements from periodic table</caption>
+        <caption>
+          <Link href='/create-new-plan'>
+            <Button leftIcon={<IconPlaneTilt size='1rem' />}>Create Plan</Button>
+          </Link>
+        </caption>
         <thead>
           <tr>
             <Th sorted={sortByKey === 'name'} reversed={reverseSortDirection} onSort={() => setSorting('name')}>
@@ -116,11 +120,11 @@ export function TableSort() {
           </tr>
         </thead>
         <tbody>
-          {rows.length > 0 ? (
+          {rows && rows.length > 0 ? (
             rows
           ) : (
             <tr>
-              <td colSpan={Object.keys(planList[0]).length}>
+              <td colSpan={3}>
                 <Text weight={500} align='center'>
                   Nothing found
                 </Text>

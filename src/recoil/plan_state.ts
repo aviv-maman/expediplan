@@ -2,7 +2,7 @@
 import { atom, selectorFamily } from 'recoil';
 import type { Plan } from '../../types/general';
 
-export const planListState = atom<Plan[]>({
+export const planListState = atom<Plan[] | undefined>({
   key: 'planList',
   default: [],
   effects: [
@@ -24,7 +24,7 @@ export const planSelectorFamily = selectorFamily<Plan | undefined, string>({
     (id) =>
     async ({ get }) => {
       const planList = get(planListState);
-      const plan = planList.find((plan) => plan.id === id);
+      const plan = planList?.find((plan) => plan.id === id);
       return plan;
     },
 });

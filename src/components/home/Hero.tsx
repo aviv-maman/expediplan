@@ -1,6 +1,6 @@
 'use client';
-import Protected from '@/app/Protected';
 import { createStyles, Container, Title, Text, Button, rem } from '@mantine/core';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -88,15 +88,14 @@ const Hero: React.FC = () => {
               </Text>
               <br />A simpler way to plan your travel
             </Title>
-
             <Text className={classes.description} mt={30}>
               ExpediPlan is a travel planning app that helps you plan your travel with ease.
             </Text>
-
-            <Button variant='gradient' gradient={{ from: 'pink', to: 'yellow' }} size='xl' className={classes.control} mt={40}>
-              Get started
-            </Button>
-            <Protected />
+            <Link href='/plans'>
+              <Button variant='gradient' gradient={{ from: 'pink', to: 'yellow' }} size='xl' className={classes.control} mt={40}>
+                Get started
+              </Button>
+            </Link>
           </div>
         </div>
       </Container>
