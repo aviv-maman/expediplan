@@ -40,6 +40,7 @@ interface ThProps {
 
 function Th({ children, reversed, sorted, onSort }: ThProps) {
   const { classes } = useStyles();
+
   const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector;
   return (
     <th className={classes.th}>
@@ -86,15 +87,23 @@ export function TableSort() {
   };
 
   const rows = sortedData?.map((row) => (
-    // <Link key={row.id} href={{ pathname: `/plans/${row.id}` }}>
-    <tr key={row.id} style={{ cursor: 'pointer' }}>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.countryName}</td>
+    <tr key={row.id}>
       <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-        {dayjs(row.startDate).format('YYYY-MM-DD')}
+        <Link key={row.id} href={{ pathname: `/plans/${row.id}` }} style={{ display: 'block' }}>
+          {row.name}
+        </Link>
+      </td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        <Link key={row.id} href={{ pathname: `/plans/${row.id}` }} tabIndex={-1} style={{ display: 'block' }}>
+          {row.countryName}
+        </Link>
+      </td>
+      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        <Link key={row.id} href={{ pathname: `/plans/${row.id}` }} tabIndex={-1} style={{ display: 'block' }}>
+          {dayjs(row.startDate).format('YYYY-MM-DD')}
+        </Link>
       </td>
     </tr>
-    // </Link>
   ));
 
   return (

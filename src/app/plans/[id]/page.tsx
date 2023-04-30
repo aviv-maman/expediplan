@@ -16,7 +16,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   return {
-    title: `${process.env.NEXT_PUBLIC_WEBSITE_NAME ?? 'WebDev'} | Repository: ${params.id}`,
+    title: `${process.env.NEXT_PUBLIC_WEBSITE_NAME ?? 'WebDev'} | Plan: ${params.id}`,
   };
 }
 
