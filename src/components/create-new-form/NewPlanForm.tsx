@@ -39,7 +39,11 @@ const NewPlanForm: React.FC = () => {
   const { classes } = useStyles();
   const [items, setItems] = useRecoilState(planListState);
   const insertItem = (plan: Plan) => {
-    setItems([...items, plan]);
+    if (!items) {
+      setItems([plan]);
+    } else {
+      setItems([...items, plan]);
+    }
   };
 
   const form = useForm({
