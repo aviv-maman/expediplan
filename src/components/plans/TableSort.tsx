@@ -8,6 +8,7 @@ import { Plan } from '../../../types/general';
 import { sortBy } from 'sort-by-typescript';
 import { planListState } from '@/recoil/plan_state';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
   th: {
@@ -85,13 +86,15 @@ export function TableSort() {
   };
 
   const rows = sortedData.map((row) => (
-    <tr key={row.name}>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.countryName}</td>
-      <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-        {dayjs(row.startDate).format('YYYY-MM-DD')}
-      </td>
-    </tr>
+    <Link key={row.id} href={{ pathname: `/plans/${row.id}` }}>
+      <tr style={{ cursor: 'pointer' }}>
+        <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.name}</td>
+        <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{row.countryName}</td>
+        <td style={{ lineClamp: 2, WebkitLineClamp: 2, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+          {dayjs(row.startDate).format('YYYY-MM-DD')}
+        </td>
+      </tr>
+    </Link>
   ));
 
   return (

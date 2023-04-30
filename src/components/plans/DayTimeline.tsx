@@ -53,6 +53,7 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
             image={new Date(item.date)}
             firstInterestName={item.interests?.[0].attraction.name}
             lastInterestName={item.interests?.[days.length - 1].attraction.name}
+            title={`Day ${item.index + 1}`}
           />
         </Timeline.Item>
       ))}

@@ -1,0 +1,77 @@
+'use client';
+import { Avatar, Text, Button, Paper, Skeleton } from '@mantine/core';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+
+export const UserInfoCard = () => {
+  const { data: session, status } = useSession();
+
+  const [loading, setLoading] = useState(true);
+
+  const fakeDelay = () => {
+    return new Promise<void>((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+  };
+
+  useEffect(() => {
+    const delay = async () => {
+      await fakeDelay();
+      setLoading(false);
+    };
+    delay();
+  }, []);
+
+  if (session?.user) {
+    return (
+      <Paper
+        radius='md'
+        withBorder
+        p='lg'
+        mb='xl'
+        sx={(theme) => ({ backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white })}>
+        <Avatar src={session.user?.image} size={120} radius={120} mx='auto' />
+        <Text ta='center' fz='lg' weight={500} mt='md'>
+          {session?.user?.name}
+        </Text>
+        <Text ta='center' c='dimmed' fz='sm'>
+          {session?.user?.email}
+        </Text>
+        <Button variant='default' fullWidth mt='md' onClick={() => signOut()}>
+          Sign out
+        </Button>
+      </Paper>
+    );
+  }
+
+  return (
+    <Paper
+      radius='md'
+      withBorder
+      p='lg'
+      mb='xl'
+      sx={(theme) => ({ backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white })}>
+      {status === 'loading' || loading ? (
+        <>
+          <Skeleton height={120} circle mb='lg' radius={120} mx='auto' />
+          <Skeleton height={20} width={'80%'} mt='md' mx='auto' />
+          <Skeleton height={16} fz='sm' width={'70%'} mt='xs' mx='auto' />
+          <Skeleton height={36} mt='md' />
+        </>
+      ) : (
+        <>
+          <Avatar src={null} size={120} radius={120} mx='auto' />
+          <Text ta='center' fz='lg' weight={500} mt='md'>
+            Guest
+          </Text>
+          <Text ta='center' c='dimmed' fz='sm'>
+            Email
+          </Text>
+          <Button variant='default' fullWidth mt='md' onClick={() => signIn()}>
+            Sign in
+          </Button>
+        </>
+      )}
+    </Paper>
+  );
+};
