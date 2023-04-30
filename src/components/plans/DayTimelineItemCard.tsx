@@ -1,6 +1,7 @@
 'use client';
 import { createStyles, Card, Image, Text, Group, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { IconCalendar } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 
 const useStyles = createStyles((theme) => ({
@@ -38,7 +39,12 @@ export function DayTimelineItemCard({ image, firstInterestName, lastInterestName
             width={140}
             alt={dayjs(image).format('MMM DD')}
             withPlaceholder
-            placeholder={<Text align='center'>{dayjs(image).format('MMM DD')}</Text>}
+            placeholder={
+              <Text display='flex' align='justify'>
+                <IconCalendar size='1.5rem' />
+                &nbsp;{dayjs(image).format('MMM DD')}
+              </Text>
+            }
           />
           <div className={classes.body}>
             <Group spacing={0} sx={{ flexDirection: 'column' }}>
