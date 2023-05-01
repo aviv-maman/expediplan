@@ -3,6 +3,7 @@ import { createStyles, Card, Image, Text, Group, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCalendar } from '@tabler/icons-react';
 import dayjs from 'dayjs';
+import NewInterestForm from './NewInterestForm';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -28,7 +29,7 @@ export function DayTimelineItemCard({ image, firstInterestName, lastInterestName
   return (
     <>
       <Modal opened={opened} onClose={close} title={title} centered>
-        <Text>Modal content</Text>
+        <NewInterestForm />
       </Modal>
 
       <Card onClick={open} withBorder radius='md' p={0} className={classes.card} mt={'xs'}>

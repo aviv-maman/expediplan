@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "name": "La Piadina",
+    "address": "Netherlands",
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "category": "country",
+    "type": "country",
+    "rating": 0,
+    "cover_image": "https://www.countryflags.io/nl/flat/64.png",
+    "images": ["https://www.countryflags.io/nl/flat/64.png"],
+    "tags": ["country"],
+    "contact": {
+      "website": "https://www.netherlands.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": {
+      "close": {
+        "day": 0,
+        "time": "18:00"
+      },
+      "open": {
+        "day": 0,
+        "time": "09:00"
+      }
+    },
+    "about": "Netherlands is a country in Europe."
+  }
+]
