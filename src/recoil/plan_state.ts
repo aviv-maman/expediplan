@@ -1,5 +1,5 @@
 'use client';
-import { atom, selectorFamily } from 'recoil';
+import { atom, DefaultValue, selectorFamily } from 'recoil';
 import type { Plan } from '../../types/general';
 
 export const planListState = atom<Plan[] | undefined>({
@@ -18,6 +18,10 @@ export const planListState = atom<Plan[] | undefined>({
   ],
 });
 
+const replaceItemAtIndex = (array: Plan[], index: number, newValue: Plan) => {
+  return [...array.slice(0, index), newValue, ...array.slice(index + 1)];
+};
+
 export const planSelectorFamily = selectorFamily<Plan | undefined, string>({
   key: 'plan',
   get:
@@ -26,5 +30,19 @@ export const planSelectorFamily = selectorFamily<Plan | undefined, string>({
       const planList = get(planListState);
       const plan = planList?.find((plan) => plan.id === id);
       return plan;
+    },
+  set:
+    (id) =>
+    ({ set }, newValue) => {
+      set(planListState, (oldValue) => {
+        if (oldValue && newValue) {
+          const index = oldValue.findIndex((plan) => plan.id === id);
+          if (index !== -1) {
+            if (newValue instanceof DefaultValue) return;
+            return replaceItemAtIndex(oldValue, index, newValue);
+          }
+        }
+        return oldValue;
+      });
     },
 });

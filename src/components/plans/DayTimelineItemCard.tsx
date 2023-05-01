@@ -19,17 +19,17 @@ interface DayTimelineItemCardProps {
   image: Date;
   firstInterestName?: string;
   lastInterestName?: string;
-  title: string;
+  dayIndex: number;
 }
 
-export function DayTimelineItemCard({ image, firstInterestName, lastInterestName, title }: DayTimelineItemCardProps) {
+export function DayTimelineItemCard({ image, firstInterestName, lastInterestName, dayIndex }: DayTimelineItemCardProps) {
   const { classes } = useStyles();
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title={'New Interest'} centered id={title}>
-        <NewInterestForm subtitle={`${title}: ${dayjs(image).format('DD/MM/YYYY')}`} />
+      <Modal opened={opened} onClose={close} title={'New Interest'} centered id={String(dayIndex)}>
+        <NewInterestForm dayIndex={dayIndex} subtitle={`${`Day ${dayIndex + 1}`}: ${dayjs(image).format('DD/MM/YYYY')}`} />
       </Modal>
 
       <Card onClick={open} withBorder radius='md' p={0} className={classes.card} mt={'xs'}>

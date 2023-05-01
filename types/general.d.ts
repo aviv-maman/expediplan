@@ -94,7 +94,7 @@ export type Attraction = {
 };
 
 export type Interest = {
-  startTime: Date;
-  endTime: Date;
   attraction: Attraction;
+  startTime: string;
+  endTime: string;
 };

@@ -1,9 +1,13 @@
 'use client';
+import { planSelectorFamily } from '@/recoil/plan_state';
 import { ActionIcon, Button, Group, Paper, Text, TextInput, createStyles, rem } from '@mantine/core';
 import { TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconBrowserPlus, IconClock, IconIdBadge } from '@tabler/icons-react';
+import { useParams } from 'next/navigation';
 import { useRef } from 'react';
+import { useRecoilState } from 'recoil';
+import { Plan } from '../../../types/general';
 
 const ICON_SIZE = rem(60);
 
@@ -28,10 +32,11 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface NewInterestFormProps {
-  subtitle?: string;
+  dayIndex: number;
+  subtitle: string;
 }
 
-const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle = '' }) => {
+const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex }) => {
   const { classes } = useStyles();
   const ref = useRef<HTMLInputElement>();
 
@@ -43,13 +48,27 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle = '' }) => {
     },
   });
 
+  const params = useParams();
+  const [plan, setPlan] = useRecoilState(planSelectorFamily(params.id));
+  const currentDay = plan?.days?.[dayIndex];
+
+  const replaceItemAtIndex = (array: (typeof currentDay)[], index: number, newValue: typeof currentDay) => {
+    return [...array.slice(0, index), newValue, ...array.slice(index + 1)];
+  };
+
   return (
     <>
       <Text>{subtitle}</Text>
       <Paper withBorder shadow='md' p={30} radius='md' className={classes.card} mt={`calc(${ICON_SIZE} / 5)`}>
         <form
           onSubmit={form.onSubmit((values) => {
-            console.log(values);
+            if (!plan) return;
+            const currentInterests = plan?.days[dayIndex]?.interests;
+            const newDays = replaceItemAtIndex(plan.days, dayIndex, {
+              ...plan.days[dayIndex],
+              interests: currentInterests ? [...currentInterests, values] : [values],
+            }) as Plan['days'];
+            setPlan({ ...plan, days: newDays });
           })}>
           <TextInput
             required
