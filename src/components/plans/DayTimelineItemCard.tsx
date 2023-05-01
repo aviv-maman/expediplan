@@ -28,8 +28,8 @@ export function DayTimelineItemCard({ image, firstInterestName, lastInterestName
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title={title} centered>
-        <NewInterestForm />
+      <Modal opened={opened} onClose={close} title={'New Interest'} centered id={title}>
+        <NewInterestForm subtitle={`${title}: ${dayjs(image).format('DD/MM/YYYY')}`} />
       </Modal>
 
       <Card onClick={open} withBorder radius='md' p={0} className={classes.card} mt={'xs'}>
