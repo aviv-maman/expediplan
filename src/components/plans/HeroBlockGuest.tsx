@@ -1,6 +1,6 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { createStyles, Container, Title, Text, rem } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Center } from '@mantine/core';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { getCityById } from '@/api/CitiesAPI';
@@ -8,27 +8,12 @@ import type { City } from '../../../types/general';
 import { planSelectorFamily } from '@/recoil/plan_state';
 
 const useStyles = createStyles((theme) => ({
-  root: {
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    paddingTop: `calc(${theme.spacing.xl} * 3)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 3)`,
-    backgroundAttachment: 'fixed',
-    backgroundRepeat: 'no-repeat',
-  },
-
   inner: {
     display: 'flex',
     justifyContent: 'space-between',
 
     [theme.fn.smallerThan('md')]: {
       flexDirection: 'column',
-    },
-  },
-
-  image: {
-    [theme.fn.smallerThan('md')]: {
-      display: 'none',
     },
   },
 
@@ -43,15 +28,14 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     color: theme.white,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 900,
     lineHeight: 1.05,
     maxWidth: rem(500),
-    fontSize: rem(48),
+    fontSize: rem(30),
 
     [theme.fn.smallerThan('md')]: {
       maxWidth: '100%',
-      fontSize: rem(34),
+      fontSize: rem(24),
       lineHeight: 1.15,
     },
   },
@@ -85,7 +69,13 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
   }, [plan?.city]);
 
   return (
-    <div className={classes.root} style={{ backgroundImage: `url(${city?.cover_image})` }}>
+    <BackgroundImage
+      src={city?.cover_image}
+      radius='sm'
+      mih={265}
+      sx={{
+        backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${city?.cover_image})`,
+      }}>
       <Container size='lg'>
         <div className={classes.inner}>
           <div className={classes.content}>
@@ -102,7 +92,10 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
           </div>
         </div>
       </Container>
-    </div>
+      <Center p='md'>
+        <Text color='#fff'>Background can be used to add any content on image. It is useful for hero headers and other similar sections</Text>
+      </Center>
+    </BackgroundImage>
   );
 };
 
