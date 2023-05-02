@@ -1,6 +1,6 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Center } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Center, Group } from '@mantine/core';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { getCityById } from '@/api/CitiesAPI';
@@ -8,13 +8,12 @@ import type { City } from '../../../types/general';
 import { planSelectorFamily } from '@/recoil/plan_state';
 
 const useStyles = createStyles((theme) => ({
-  inner: {
+  wrapper: {
+    paddingTop: theme.spacing.sm,
     display: 'flex',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
-
-    [theme.fn.smallerThan('md')]: {
-      flexDirection: 'column',
-    },
+    flexDirection: 'column',
   },
 
   content: {
@@ -76,25 +75,22 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
       sx={{
         backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${city?.cover_image})`,
       }}>
-      <Container size='lg'>
-        <div className={classes.inner}>
-          <div className={classes.content}>
-            <Title className={classes.title}>
-              <Text component='span' inherit variant='gradient' gradient={{ from: 'pink', to: 'yellow' }}>
-                {plan?.name}
-              </Text>
-              <br />
-              {plan?.duration} days in {plan?.cityName}
-            </Title>
-            <Text className={classes.description} mt={30}>
-              {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
-            </Text>
-          </div>
-        </div>
+      <Container size='lg' className={classes.wrapper}>
+        <Title className={classes.title}>
+          <Text component='span' variant='gradient' gradient={{ from: 'teal', to: 'lime' }}>
+            {plan?.name}
+          </Text>
+        </Title>
+        <Text component='span' variant='gradient' fz='xl' fw={500}>
+          {plan?.duration} days in {plan?.cityName}
+        </Text>
+        <Text className={classes.description}>
+          {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
+        </Text>
+        <Group p='sm'>
+          <Text color='#fff'>About</Text>
+        </Group>
       </Container>
-      <Center p='md'>
-        <Text color='#fff'>Background can be used to add any content on image. It is useful for hero headers and other similar sections</Text>
-      </Center>
     </BackgroundImage>
   );
 };
