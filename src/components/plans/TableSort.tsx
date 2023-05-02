@@ -4,7 +4,7 @@ import { createStyles, Table, ScrollArea, UnstyledButton, Group, Text, Center, T
 import { keys } from '@mantine/utils';
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch, IconPlaneTilt } from '@tabler/icons-react';
 import { useRecoilValue } from 'recoil';
-import { Plan } from '../../../types/general';
+import type { Plan } from '../../../types/general';
 import { sortBy } from 'sort-by-typescript';
 import { planListState } from '@/recoil/plan_state';
 import dayjs from 'dayjs';

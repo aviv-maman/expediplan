@@ -2,17 +2,12 @@
 import { Avatar, Text, Button, Paper, Skeleton } from '@mantine/core';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { fakeDelay } from '@/helpers/network';
 
 export const UserInfoCard = () => {
   const { data: session, status } = useSession();
 
   const [loading, setLoading] = useState(true);
-
-  const fakeDelay = () => {
-    return new Promise<void>((resolve) => {
-      setTimeout(resolve, 500);
-    });
-  };
 
   useEffect(() => {
     const delay = async () => {

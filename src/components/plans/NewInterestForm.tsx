@@ -5,9 +5,10 @@ import { TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconBrowserPlus, IconClock, IconIdBadge } from '@tabler/icons-react';
 import { useParams } from 'next/navigation';
-import { useRef } from 'react';
+import { useRef, useState, MutableRefObject } from 'react';
 import { useRecoilState } from 'recoil';
-import { Plan } from '../../../types/general';
+import type { Plan } from '../../../types/general';
+import { fakeDelay } from '@/helpers/network';
 
 const ICON_SIZE = rem(60);
 
@@ -34,11 +35,12 @@ const useStyles = createStyles((theme) => ({
 interface NewInterestFormProps {
   dayIndex: number;
   subtitle: string;
+  closeModal: () => void;
 }
 
-const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex }) => {
+const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, closeModal }) => {
   const { classes } = useStyles();
-  const ref = useRef<HTMLInputElement>();
+  const ref = useRef<HTMLInputElement>(null);
 
   const form = useForm({
     initialValues: {
@@ -56,19 +58,25 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex })
     return [...array.slice(0, index), newValue, ...array.slice(index + 1)];
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <>
       <Text>{subtitle}</Text>
       <Paper withBorder shadow='md' p={30} radius='md' className={classes.card} mt={`calc(${ICON_SIZE} / 5)`}>
         <form
-          onSubmit={form.onSubmit((values) => {
-            if (!plan) return;
-            const currentInterests = plan?.days[dayIndex]?.interests;
-            const newDays = replaceItemAtIndex(plan.days, dayIndex, {
-              ...plan.days[dayIndex],
-              interests: currentInterests ? [...currentInterests, values] : [values],
-            }) as Plan['days'];
-            setPlan({ ...plan, days: newDays });
+          onSubmit={form.onSubmit(async (values) => {
+            // if (!plan) return;
+            // const currentInterests = plan?.days[dayIndex]?.interests;
+            // const newDays = replaceItemAtIndex(plan.days, dayIndex, {
+            //   ...plan.days[dayIndex],
+            //   interests: currentInterests ? [...currentInterests, values] : [values],
+            // }) as Plan['days'];
+            // setPlan({ ...plan, days: newDays });
+            setIsLoading(true);
+            const res = await fakeDelay(2);
+            setIsLoading(false);
+            res && closeModal();
           })}>
           <TextInput
             required
@@ -114,7 +122,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex })
           />
 
           <Group position='right' mt='md'>
-            <Button type='submit' leftIcon={<IconBrowserPlus />}>
+            <Button type='submit' leftIcon={<IconBrowserPlus />} loading={isLoading}>
               Add
             </Button>
           </Group>
