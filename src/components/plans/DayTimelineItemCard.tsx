@@ -4,6 +4,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconCalendar, IconDots, IconEye, IconPlus } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import NewInterestForm from './NewInterestForm';
+import AttractionTimeline from './AttractionTimeline';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -32,12 +33,21 @@ interface DayTimelineItemCardProps {
 
 export function DayTimelineItemCard({ image, firstInterestName, lastInterestName, dayIndex }: DayTimelineItemCardProps) {
   const { classes } = useStyles();
-  const [opened, { open, close }] = useDisclosure(false);
+  const [openedNewInterest, newInterestModal] = useDisclosure(false);
+  const [openedFullDay, fullDayModal] = useDisclosure(false);
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title={'New Interest'} centered id={String(dayIndex)}>
-        <NewInterestForm dayIndex={dayIndex} subtitle={`${`Day ${dayIndex + 1}`}: ${dayjs(image).format('DD/MM/YYYY')}`} closeModal={close} />
+      <Modal opened={openedNewInterest} onClose={newInterestModal.close} title={'New Interest'} centered id={'new-interest'}>
+        <NewInterestForm
+          dayIndex={dayIndex}
+          subtitle={`${`Day ${dayIndex + 1}`}: ${dayjs(image).format('DD/MM/YYYY')}`}
+          closeModal={newInterestModal.close}
+        />
+      </Modal>
+
+      <Modal opened={openedFullDay} onClose={fullDayModal.close} title={'Quick View'} centered id={'quick-view'}>
+        <AttractionTimeline dayIndex={dayIndex} />
       </Modal>
 
       <Card withBorder radius='md' p={0} className={classes.card} mt={'xs'}>
@@ -79,10 +89,12 @@ export function DayTimelineItemCard({ image, firstInterestName, lastInterestName
 
             <Menu.Dropdown>
               <Menu.Label>General</Menu.Label>
-              <Menu.Item icon={<IconEye size={14} />}>Quick View</Menu.Item>
+              <Menu.Item onClick={fullDayModal.open} icon={<IconEye size={14} />}>
+                Quick View
+              </Menu.Item>
               <Menu.Divider />
               <Menu.Label>Actions</Menu.Label>
-              <Menu.Item onClick={open} icon={<IconPlus size={14} />}>
+              <Menu.Item onClick={newInterestModal.open} icon={<IconPlus size={14} />}>
                 Add New Interest
               </Menu.Item>
             </Menu.Dropdown>

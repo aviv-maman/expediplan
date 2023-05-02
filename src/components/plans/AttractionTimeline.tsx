@@ -1,18 +1,27 @@
 'use client';
 import { Timeline } from '@mantine/core';
-import { IconGitBranch } from '@tabler/icons-react';
+import { IconAB2 } from '@tabler/icons-react';
+import type { Plan } from '../../../types/general';
+import { useParams } from 'next/navigation';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { planSelectorFamily } from '@/recoil/plan_state';
 import { AttractionTimelineItemCard } from './AttractionTimelineItemCard';
-import type { Interest } from '../../../types/general';
 
 interface AttractionTimelineProps {
-  idFromLocalStorage?: string;
-  interests?: Interest[];
+  dayIndex: number;
+  planFromServer?: Plan;
 }
 
-const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ idFromLocalStorage, interests }) => {
+const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planFromServer }) => {
+  const params = useParams();
+  const planFromLocalStorage = useRecoilValue(planSelectorFamily(params.id));
+  const interests = planFromLocalStorage?.days[dayIndex]?.interests || planFromServer?.days[dayIndex]?.interests;
+  const [activeItem, setActiveItem] = useState(0);
+
   return (
-    <Timeline active={1} bulletSize={30}>
-      <Timeline.Item bullet={<IconGitBranch size={12} />} title={'La Piazza'} pt={5}>
+    <Timeline active={1} bulletSize={30} color='indigo'>
+      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} title={'La Piazza'} pt={5}>
         <AttractionTimelineItemCard
           image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
           category={'Food & Drinks'}
@@ -21,7 +30,7 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ idFromLocalStor
         />
       </Timeline.Item>
 
-      <Timeline.Item bullet={<IconGitBranch size={12} />} title={'La Piazza'} pt={5}>
+      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} title={'La Piazza'} pt={5}>
         <AttractionTimelineItemCard
           image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
           category={'Food & Drinks'}
@@ -30,7 +39,7 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ idFromLocalStor
         />
       </Timeline.Item>
 
-      <Timeline.Item bullet={<IconGitBranch size={12} />} title={'La Piazza'} pt={5}>
+      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} title={'La Piazza'} pt={5}>
         <AttractionTimelineItemCard
           image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
           category={'Food & Drinks'}

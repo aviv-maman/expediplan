@@ -5,7 +5,7 @@ import { TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconBrowserPlus, IconClock, IconIdBadge } from '@tabler/icons-react';
 import { useParams } from 'next/navigation';
-import { useRef, useState, MutableRefObject } from 'react';
+import { useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import type { Plan } from '../../../types/general';
 import { fakeDelay } from '@/helpers/network';

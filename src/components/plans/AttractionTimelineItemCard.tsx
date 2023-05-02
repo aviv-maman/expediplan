@@ -1,17 +1,26 @@
 'use client';
-import { createStyles, Card, Image, Text, Group } from '@mantine/core';
+import { ActionIcon, Card, createStyles, Image, Group, Stack, Text } from '@mantine/core';
+import { IconArrowGuide, IconDots, IconEye } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+  value: {
+    fontWeight: 700,
+    lineHeight: 1,
   },
+
+  diff: {
+    lineHeight: 1,
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  icon: {
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
+  },
+
   title: {
     fontWeight: 700,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    lineHeight: 1.2,
-  },
-  body: {
-    padding: theme.spacing.md,
+    textTransform: 'uppercase',
   },
 }));
 
@@ -22,25 +31,34 @@ interface AttractionTimelineItemCardProps {
   name: string;
 }
 
-export function AttractionTimelineItemCard({ image, category, type, name }: AttractionTimelineItemCardProps) {
+export const AttractionTimelineItemCard = ({ image, category, type, name }: AttractionTimelineItemCardProps) => {
   const { classes } = useStyles();
 
   return (
-    <Card withBorder radius='md' p={0} className={classes.card} mt={'xs'}>
-      <Group noWrap spacing={0}>
-        <Image src={image} height={140} width={140} alt={name} />
-        <div className={classes.body}>
-          <Text transform='uppercase' color='dimmed' weight={700} size='xs'>
-            {category}
+    <Card withBorder radius='md' mt='xs' p={0}>
+      <Group position='apart' align='flex-start'>
+        <Stack align='flex-start' spacing='xs' pl='xs' pt='xs'>
+          <Text size='xs' color='dimmed' className={classes.title}>
+            Restaurant
           </Text>
-          <Text className={classes.title} mt='xs' mb='md'>
-            {type}
+          <Text className={classes.value}>La Piazza</Text>
+          <Text color={'teal'} fz='sm' fw={500} className={classes.diff}>
+            <span>08:00 - 09:00</span>
           </Text>
-          <Group spacing={0} sx={{ flexDirection: 'column' }}>
-            <Text size='xs'>{name}</Text>
+          <Group className={classes.icon} spacing='sm'>
+            <ActionIcon variant='outline'>
+              <IconArrowGuide size='1rem' />
+            </ActionIcon>
+            <ActionIcon variant='outline'>
+              <IconEye size='1rem' />
+            </ActionIcon>
+            <ActionIcon variant='outline'>
+              <IconDots size='1rem' />
+            </ActionIcon>
           </Group>
-        </div>
+        </Stack>
+        <Image src={'../../../assets/attractions/food-and-drinks/rome/0.jpg'} height={125} width={125} alt='cover' />
       </Group>
     </Card>
   );
-}
+};
