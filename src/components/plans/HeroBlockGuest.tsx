@@ -1,6 +1,6 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Center, Group } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Group } from '@mantine/core';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { getCityById } from '@/api/CitiesAPI';

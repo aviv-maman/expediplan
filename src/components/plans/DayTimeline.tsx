@@ -27,21 +27,22 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
     const today = new Date();
     const diffTime = today.getTime() - startDate.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const index = diffDays - 1;
 
     //Date is before start date
-    if (diffDays < 0) {
+    if (index < 0) {
       setActiveItem(0);
       return;
     }
 
     //Date is after end date
-    if (days?.length && diffDays > 0 && diffDays >= days?.length) {
+    if (days?.length && index > 0 && index >= days?.length) {
       setActiveItem(days?.length - 1);
       return;
     }
 
     //Date is between start and end date
-    setActiveItem(diffDays);
+    setActiveItem(index);
   }, []);
 
   return (
