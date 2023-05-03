@@ -5,8 +5,11 @@
  */
 export const fakeDelay = (seconds?: number) => {
   return new Promise<boolean>((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, 2000);
+    setTimeout(
+      () => {
+        resolve(true);
+      },
+      seconds ? seconds * 1000 : 500
+    );
   });
 };

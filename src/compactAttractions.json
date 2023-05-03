@@ -2,30 +2,29 @@
   {
     "id": 1,
     "name": "La Piadina",
-    "address": "Netherlands",
+    "country": 182,
+    "city": 99972,
+    "address": "Babuhska 215, Moscow",
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "country",
     "type": "country",
-    "rating": 0,
+    "rating": 1,
     "cover_image": "https://www.countryflags.io/nl/flat/64.png",
     "images": ["https://www.countryflags.io/nl/flat/64.png"],
     "tags": ["country"],
     "contact": {
-      "website": "https://www.netherlands.com",
+      "website": "https://www.moscow.com",
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": {
-      "close": {
+    "openingHoursPeriods": [
+      {
         "day": 0,
-        "time": "18:00"
-      },
-      "open": {
-        "day": 0,
-        "time": "09:00"
+        "open_time": "09:00",
+        "close_time": "18:00"
       }
-    },
-    "about": "Netherlands is a country in Europe."
+    ],
+    "about": "Moscow is a country in Europe."
   }
 ]

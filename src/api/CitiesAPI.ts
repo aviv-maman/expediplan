@@ -1,8 +1,9 @@
 import type { City } from '../../types/general';
 
 export const citiesFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City[]>);
+export const cityFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City>);
 
-export const getCitiesAPI = (ids?: string | string[]) => {
+export const getCitiesAPI = (ids?: number | number[]) => {
   const env = process.env.NODE_ENV;
   const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
   const params = new URLSearchParams({ id: String(ids) });

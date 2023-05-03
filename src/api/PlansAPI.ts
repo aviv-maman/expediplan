@@ -1,6 +1,6 @@
 import type { Plan } from '../../types/general';
 
-export async function getPlanByIdFromServer(id: string): Promise<Plan> {
+export const getPlanByIdFromServer = async (id: string): Promise<Plan> => {
   const env = process.env.NODE_ENV;
   const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
   // const TOKEN = 'token';
@@ -18,4 +18,11 @@ export async function getPlanByIdFromServer(id: string): Promise<Plan> {
     throw new Error(data.message);
   }
   return data as Plan;
-}
+};
+
+//In use by getAttractionsByPlanIdFromLocalStorage
+export const getPlanByIdFromLocalStorage = (id: string) => {
+  const plans = JSON.parse(localStorage.getItem('planList') || '[]') as Plan[];
+  const plan = plans.find((plan) => plan.id === id);
+  return plan;
+};

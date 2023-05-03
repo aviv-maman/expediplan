@@ -44,10 +44,15 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
 
   const form = useForm({
     initialValues: {
-      attraction: '',
+      attraction_id: '',
       startTime: '',
       endTime: '',
     },
+
+    transformValues: (values) => ({
+      ...values,
+      attraction_id: Number(values.attraction_id) || 0,
+    }),
   });
 
   const params = useParams();
@@ -66,13 +71,13 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
       <Paper withBorder shadow='md' p={30} radius='md' className={classes.card} mt={`calc(${ICON_SIZE} / 5)`}>
         <form
           onSubmit={form.onSubmit(async (values) => {
-            // if (!plan) return;
-            // const currentInterests = plan?.days[dayIndex]?.interests;
-            // const newDays = replaceItemAtIndex(plan.days, dayIndex, {
-            //   ...plan.days[dayIndex],
-            //   interests: currentInterests ? [...currentInterests, values] : [values],
-            // }) as Plan['days'];
-            // setPlan({ ...plan, days: newDays });
+            if (!plan) return;
+            const currentInterests = plan?.days[dayIndex]?.interests;
+            const newDays = replaceItemAtIndex(plan.days, dayIndex, {
+              ...plan.days[dayIndex],
+              interests: currentInterests ? [...currentInterests, values] : [values],
+            }) as Plan['days'];
+            setPlan({ ...plan, days: newDays });
             setIsLoading(true);
             const res = await fakeDelay(2);
             setIsLoading(false);
@@ -80,11 +85,10 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
           })}>
           <TextInput
             required
-            minLength={3}
             label='Attraction'
             placeholder='Choose attraction'
             icon={<IconIdBadge size='1rem' />}
-            {...form.getInputProps('attraction')}
+            {...form.getInputProps('attraction_id')}
           />
 
           <TimeInput

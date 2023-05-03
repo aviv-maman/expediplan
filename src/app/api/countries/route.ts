@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import countries from '@/compactCountries.json';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const { search } = new URL(request.url);
   const searchParams = new URLSearchParams(search);
   const searchValue = searchParams.get('id');

@@ -74,7 +74,7 @@ export type Plan = {
 };
 
 export type Attraction = {
-  id: string;
+  id: number;
   name: string;
   address: string;
   latitude: number;
@@ -87,14 +87,15 @@ export type Attraction = {
   tags: string[];
   contact: { website: string; phone: string; email: string };
   openingHoursPeriods: {
-    close: { day: number; time: string };
-    open: { day: number; time: string };
+    day: number;
+    open_time: string;
+    close_time: string;
   }[];
   about: string;
 };
 
 export type Interest = {
-  attraction: Attraction;
+  attraction_id: number;
   startTime: string;
   endTime: string;
 };

@@ -6,6 +6,8 @@ import { useRecoilValue } from 'recoil';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { useEffect, useState } from 'react';
 import { Icon3dCubeSphere } from '@tabler/icons-react';
+import { attractionsFetcher, getAttractionsAPI, getAttractionsByPlanIdFromLocalStorage } from '@/api/AttractionsAPI';
+import useSWR from 'swr';
 
 interface DayTimelineProps {
   idFromLocalStorage?: string;
@@ -45,14 +47,20 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
     setActiveItem(index);
   }, []);
 
+  const attractionIds = getAttractionsByPlanIdFromLocalStorage(String(idFromLocalStorage));
+  const attractions = useSWR(getAttractionsAPI(attractionIds), attractionsFetcher);
+  const findAttractionById = (id: number) => {
+    return attractions?.data?.find((attraction) => attraction.id === id);
+  };
+
   return (
     <Timeline active={activeItem} bulletSize={30}>
       {days?.map((item) => (
         <Timeline.Item key={item.index} bullet={<Icon3dCubeSphere size={20} />} title={`Day ${item.index + 1}`} pt={5}>
           <DayTimelineItemCard
             image={new Date(item.date)}
-            firstInterestName={item.interests?.[0].attraction?.name}
-            lastInterestName={item.interests?.[days.length - 1]?.attraction?.name}
+            firstInterestName={findAttractionById(Number(item.interests?.[0].attraction_id))?.name}
+            lastInterestName={findAttractionById(Number(item.interests?.[item.interests.length - 1]?.attraction_id))?.name}
             dayIndex={item.index}
           />
         </Timeline.Item>

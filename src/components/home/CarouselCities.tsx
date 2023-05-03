@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import { Highlight, Paper, Stack, Title, createStyles, rem } from '@mantine/core';
 import { citiesFetcher, getCitiesAPI } from '@/api/CitiesAPI';
 
-const ids = ['77340', '143446', '59582', '44856', '32653', '50388', '99972'];
+const ids = [77340, 143446, 59582, 44856, 32653, 50388, 99972];
 
 const useStyles = createStyles((theme) => ({
   card: {

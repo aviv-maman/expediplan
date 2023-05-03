@@ -2,9 +2,8 @@
 import { useRecoilValue } from 'recoil';
 import { createStyles, Container, Title, Text, rem, BackgroundImage, Group } from '@mantine/core';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
-import { getCityById } from '@/api/CitiesAPI';
-import type { City } from '../../../types/general';
+import useSWR from 'swr';
+import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
 
 const useStyles = createStyles((theme) => ({
@@ -57,23 +56,19 @@ interface HeroBlockGuestProps {
 const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) => {
   const { classes } = useStyles();
   const plan = useRecoilValue(planSelectorFamily(idFromLocalStorage));
-  const [city, setCity] = useState({} as City);
 
-  useEffect(() => {
-    const fetchCity = async () => {
-      const fetchedCity = await getCityById(Number(plan?.city));
-      setCity(fetchedCity);
-    };
-    fetchCity();
-  }, [plan?.city]);
+  const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher);
+
+  if (city.error) return <div>Failed to load</div>;
+  if (!city.data) return <div>Loading...</div>;
 
   return (
     <BackgroundImage
-      src={city?.cover_image}
+      src={city?.data?.cover_image}
       radius='sm'
       mih={265}
       sx={{
-        backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${city?.cover_image})`,
+        backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${city?.data?.cover_image})`,
       }}>
       <Container size='lg' className={classes.wrapper}>
         <Title className={classes.title}>
