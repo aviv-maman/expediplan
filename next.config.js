@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // reactStrictMode: true,
   experimental: {
-    appDir: true,
+    // appDir: true,
     typedRoutes: true,
   },
   transpilePackages: ['@mantine/core'],

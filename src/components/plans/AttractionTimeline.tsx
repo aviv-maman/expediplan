@@ -3,7 +3,7 @@ import { Timeline } from '@mantine/core';
 import { IconAB2 } from '@tabler/icons-react';
 import type { Plan } from '../../../types/general';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { AttractionTimelineItemCard } from './AttractionTimelineItemCard';
@@ -29,6 +29,17 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
   });
 
   const [activeItem, setActiveItem] = useState(0);
+
+  const arrayOfStartTimes = interestsWithAttractions?.map((item) => item.startTime);
+  const arrayOfEndTimes = interestsWithAttractions?.map((item) => item.endTime);
+
+  useEffect(() => {
+    const today = new Date();
+    const todayString = today.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const currentStartTime = arrayOfStartTimes?.find((time) => Number(time.replace(':', '')) <= Number(todayString.replace(':', '')));
+    const index = arrayOfStartTimes?.indexOf(String(currentStartTime));
+    setActiveItem(Number(index));
+  }, []);
 
   if (!interestsWithAttractions) return null;
 
