@@ -89,7 +89,7 @@ export function DayTimelineItemCard({ image, firstInterestName, lastInterestName
 
             <Menu.Dropdown>
               <Menu.Label>General</Menu.Label>
-              <Menu.Item onClick={fullDayModal.open} icon={<IconEye size={14} />}>
+              <Menu.Item onClick={fullDayModal.open} icon={<IconEye size={14} />} disabled={!firstInterestName}>
                 Quick View
               </Menu.Item>
               <Menu.Divider />

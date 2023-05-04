@@ -31,7 +31,6 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
   const [activeItem, setActiveItem] = useState(0);
 
   const arrayOfStartTimes = interestsWithAttractions?.map((item) => item.startTime);
-  const arrayOfEndTimes = interestsWithAttractions?.map((item) => item.endTime);
 
   useEffect(() => {
     const today = new Date();

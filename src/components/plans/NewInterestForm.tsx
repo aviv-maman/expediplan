@@ -67,11 +67,10 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
         <form
           onSubmit={form.onSubmit(async (interest) => {
             if (!plan) return;
-            const planWithInterest = addInterestToDayInsidePlan(interest, dayIndex, plan);
-            setPlan(planWithInterest);
-
             setIsLoading(true);
             const res = await fakeDelay(2);
+            const planWithInterest = addInterestToDayInsidePlan(interest, dayIndex, plan);
+            setPlan(planWithInterest);
             setIsLoading(false);
             res && closeModal();
           })}>
