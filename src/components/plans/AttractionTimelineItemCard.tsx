@@ -8,11 +8,9 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
-
   card: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
   },
-
   footer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -36,11 +34,9 @@ export const AttractionTimelineItemCard = ({ type, name, time, image }: Attracti
       <Card.Section>
         <Image src={image} alt='cover' height={100} />
       </Card.Section>
-
       <Text mt='xs' fz='sm' fw={700}>
         {name}
       </Text>
-
       <Group position='apart'>
         <Text mt='sm' mb='md' fz='xs' fw={500} color={'teal'} className={classes.diff}>
           {time}
