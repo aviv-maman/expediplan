@@ -27,7 +27,7 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
       startDate = new Date(planFromServer?.startDate);
     }
     const today = new Date();
-    const diffTime = today.getTime() - startDate.getTime();
+    const diffTime = today.getTime() - today.getTimezoneOffset() * (1000 * 60) - startDate.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     const index = diffDays - 1;
 
