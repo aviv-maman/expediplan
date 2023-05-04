@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { AttractionTimelineItemCard } from './AttractionTimelineItemCard';
+import { attractionsFetcher, getAttractionsAPI, getAttractionsByPlanIdFromLocalStorage } from '@/api/AttractionsAPI';
+import useSWR from 'swr';
 
 interface AttractionTimelineProps {
   dayIndex: number;
@@ -17,34 +19,43 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
   const params = useParams();
   const planFromLocalStorage = useRecoilValue(planSelectorFamily(params.id));
   const interests = planFromLocalStorage?.days[dayIndex]?.interests || planFromServer?.days[dayIndex]?.interests;
+
+  const attractionIds = getAttractionsByPlanIdFromLocalStorage(params.id);
+  const attractions = useSWR(getAttractionsAPI(attractionIds), attractionsFetcher);
+
+  const interestsWithAttractions = interests?.map((interest) => {
+    const attraction = attractions?.data?.find((attraction) => attraction.id === interest.attraction_id);
+    return { ...interest, details: attraction };
+  });
+
   const [activeItem, setActiveItem] = useState(0);
 
   return (
     <Timeline active={1} bulletSize={30} color='indigo'>
-      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} title={'La Piazza'} pt={5}>
+      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} pt={5}>
         <AttractionTimelineItemCard
-          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
-          category={'Food & Drinks'}
           type={'Restaurant'}
-          name={'08:00 - 09:00'}
+          name={'Babushka Grandmothers Kitchen'}
+          time={'08:00 - 09:00'}
+          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
         />
       </Timeline.Item>
 
-      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} title={'La Piazza'} pt={5}>
+      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} pt={5}>
         <AttractionTimelineItemCard
-          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
-          category={'Food & Drinks'}
           type={'Restaurant'}
-          name={'08:00 - 09:00'}
+          name={'La Piazza'}
+          time={'08:00 - 09:00'}
+          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
         />
       </Timeline.Item>
 
-      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} title={'La Piazza'} pt={5}>
+      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} pt={5}>
         <AttractionTimelineItemCard
-          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
-          category={'Food & Drinks'}
           type={'Restaurant'}
-          name={'08:00 - 09:00'}
+          name={'La Piazza'}
+          time={'08:00 - 09:00'}
+          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
         />
       </Timeline.Item>
     </Timeline>
