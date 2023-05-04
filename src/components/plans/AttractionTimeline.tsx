@@ -30,34 +30,20 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
 
   const [activeItem, setActiveItem] = useState(0);
 
+  if (!interestsWithAttractions) return null;
+
   return (
-    <Timeline active={1} bulletSize={30} color='indigo'>
-      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} pt={5}>
-        <AttractionTimelineItemCard
-          type={'Restaurant'}
-          name={'Babushka Grandmothers Kitchen'}
-          time={'08:00 - 09:00'}
-          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
-        />
-      </Timeline.Item>
-
-      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} pt={5}>
-        <AttractionTimelineItemCard
-          type={'Restaurant'}
-          name={'La Piazza'}
-          time={'08:00 - 09:00'}
-          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
-        />
-      </Timeline.Item>
-
-      <Timeline.Item lineVariant='dashed' bullet={<IconAB2 size={20} />} pt={5}>
-        <AttractionTimelineItemCard
-          type={'Restaurant'}
-          name={'La Piazza'}
-          time={'08:00 - 09:00'}
-          image={'../../../assets/attractions/food-and-drinks/rome/0.jpg'}
-        />
-      </Timeline.Item>
+    <Timeline active={activeItem} bulletSize={30} color='indigo'>
+      {interestsWithAttractions?.map((item, index) => (
+        <Timeline.Item key={index} lineVariant='dashed' bullet={<IconAB2 size={20} />} pt={5}>
+          <AttractionTimelineItemCard
+            type={item.details?.type}
+            name={item.details?.name}
+            time={item.startTime + ' - ' + item.endTime}
+            image={item.details?.cover_image}
+          />
+        </Timeline.Item>
+      ))}
     </Timeline>
   );
 };

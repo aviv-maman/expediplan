@@ -20,9 +20,9 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface AttractionTimelineItemCardProps {
-  type: string;
-  name: string;
-  time: string;
+  type?: string;
+  name?: string;
+  time?: string;
   image?: string;
 }
 
