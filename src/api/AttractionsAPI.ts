@@ -1,5 +1,5 @@
 import { getPlanByIdFromLocalStorage } from './PlansAPI';
-import type { Attraction } from '../../types/general';
+import type { Attraction, Interest, Plan } from '../../types/general';
 
 export const attractionsFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Attraction[]>);
 export const attractionFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Attraction>);
@@ -46,4 +46,23 @@ export const getAttractionsByPlanIdFromLocalStorage = (id: string) => {
     });
   });
   return attractionIds;
+};
+
+const replaceItemAtIndex = (array: Plan['days'], index: number, newValue: Plan['days'][number]): Plan['days'] => {
+  return [...array.slice(0, index), newValue, ...array.slice(index + 1)];
+};
+
+export const addInterestToDayInsidePlan = (interest: Interest, dayIndex: number, plan: Plan): Plan => {
+  const currentInterests = plan?.days[dayIndex]?.interests;
+  const daysWithNewInterest = replaceItemAtIndex(plan.days, dayIndex, {
+    ...plan.days[dayIndex],
+    interests: currentInterests ? [...currentInterests, interest] : [interest],
+  });
+  const sortedInterests = daysWithNewInterest?.[dayIndex].interests?.sort((a, b) => {
+    const aStart = Number(a.startTime.replace(':', '')) || 0;
+    const bStart = Number(b.startTime.replace(':', '')) || 0;
+    return aStart - bStart;
+  });
+  daysWithNewInterest[dayIndex].interests = sortedInterests;
+  return { ...plan, days: daysWithNewInterest };
 };

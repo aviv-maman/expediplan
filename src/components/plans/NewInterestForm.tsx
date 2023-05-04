@@ -7,8 +7,9 @@ import { IconBrowserPlus, IconClock, IconIdBadge } from '@tabler/icons-react';
 import { useParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import type { Plan } from '../../../types/general';
+import type { Interest, Plan } from '../../../types/general';
 import { fakeDelay } from '@/helpers/network';
+import { addInterestToDayInsidePlan } from '@/api/AttractionsAPI';
 
 const ICON_SIZE = rem(60);
 
@@ -57,12 +58,6 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
 
   const params = useParams();
   const [plan, setPlan] = useRecoilState(planSelectorFamily(params.id));
-  const currentDay = plan?.days?.[dayIndex];
-
-  const replaceItemAtIndex = (array: (typeof currentDay)[], index: number, newValue: typeof currentDay) => {
-    return [...array.slice(0, index), newValue, ...array.slice(index + 1)];
-  };
-
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -70,14 +65,11 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
       <Text>{subtitle}</Text>
       <Paper withBorder shadow='md' p={30} radius='md' className={classes.card} mt={`calc(${ICON_SIZE} / 5)`}>
         <form
-          onSubmit={form.onSubmit(async (values) => {
+          onSubmit={form.onSubmit(async (interest) => {
             if (!plan) return;
-            const currentInterests = plan?.days[dayIndex]?.interests;
-            const newDays = replaceItemAtIndex(plan.days, dayIndex, {
-              ...plan.days[dayIndex],
-              interests: currentInterests ? [...currentInterests, values] : [values],
-            }) as Plan['days'];
-            setPlan({ ...plan, days: newDays });
+            const planWithInterest = addInterestToDayInsidePlan(interest, dayIndex, plan);
+            setPlan(planWithInterest);
+
             setIsLoading(true);
             const res = await fakeDelay(2);
             setIsLoading(false);
