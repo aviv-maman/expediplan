@@ -56,7 +56,7 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
   return (
     <Timeline active={activeItem} bulletSize={30}>
       {days?.map((item) => (
-        <Timeline.Item key={item.index} bullet={<Icon3dCubeSphere size={20} />} title={`Day ${item.index + 1}`} pt={5}>
+        <Timeline.Item key={item.index} bullet={<Icon3dCubeSphere size={20} />} pt={5}>
           <DayTimelineItemCard
             image={new Date(item.date)}
             firstInterestName={findAttractionById(Number(item.interests?.[0].attraction_id))?.name}
