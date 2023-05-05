@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation';
 import { Suspense, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { fakeDelay } from '@/helpers/network';
-import { addInterestToDayInsidePlan } from '@/api/AttractionsAPI';
+import { addInterestToDayInsidePlan, attractionsFetcher, getAttractionsAPI } from '@/api/AttractionsAPI';
 import useSWR from 'swr';
 import { categoriesFetcher, getCategoriesAPI } from '@/api/CategoriesAPI';
 
@@ -54,6 +54,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
     },
 
     transformValues: (values) => ({
+      ...values,
       attraction_id: Number(values.attraction_id) || 0,
       startTime: values.startTime ? values.startTime : '00:00',
       endTime: values.endTime ? values.endTime : '00:00',
@@ -65,7 +66,10 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
   const [isLoading, setIsLoading] = useState(false);
 
   const categories = useSWR(getCategoriesAPI(), categoriesFetcher);
-  const types = categories.data?.find((item) => item.id === Number(form.values.category))?.types;
+  const types = categories.data?.find((item) => item.name === form.values.category)?.types;
+  const attractions = useSWR(getAttractionsAPI(), attractionsFetcher).data?.filter(
+    (item) => item.category === form.values.category && item.type === form.values.type && item.city === plan?.city
+  );
 
   return (
     <>
@@ -75,9 +79,10 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
           onSubmit={form.onSubmit(async (interest) => {
             if (!plan) return;
             setIsLoading(true);
+            console.log(interest);
             const res = await fakeDelay(2);
             const planWithInterest = addInterestToDayInsidePlan(interest, dayIndex, plan);
-            setPlan(planWithInterest);
+            // setPlan(planWithInterest);
             setIsLoading(false);
             res && closeModal();
           })}>
@@ -90,7 +95,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
               label='Category'
               placeholder='Choose category'
               icon={<IconCategory size='1rem' />}
-              data={categories.data?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: String(item.id), label: item.name })) ?? []}
+              data={categories.data?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: item.name, label: item.name })) ?? []}
               searchable
               maxDropdownHeight={280}
               nothingFound='Nothing found'
@@ -114,20 +119,35 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
               label='Type'
               placeholder='Choose type'
               icon={<IconBuildingSkyscraper size='1rem' />}
-              data={types?.sort((a, b) => a.localeCompare(b)).map((item) => ({ value: item, label: item })) || ['Loading...']}
+              data={types?.sort((a, b) => a.localeCompare(b)).map((item) => ({ value: item, label: item })) || []}
               transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
               {...form.getInputProps('type')}
               disabled={form.values.category === '' || !form.values.category || !categories.data || categories.isLoading}
             />
           </Suspense>
 
-          <TextInput
-            required
-            label='Attraction'
-            placeholder='Choose attraction'
-            icon={<IconIdBadge size='1rem' />}
-            {...form.getInputProps('attraction_id')}
-          />
+          <Suspense
+            fallback={
+              <Select required label='Attraction' placeholder='Loading attractions...' icon={<IconIdBadge size='1rem' />} data={[]} disabled />
+            }>
+            <Select
+              required
+              label='Attraction'
+              placeholder='Choose attraction'
+              icon={<IconIdBadge size='1rem' />}
+              data={attractions?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: item.name, label: item.name })) || []}
+              transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+              {...form.getInputProps('attraction_id')}
+              disabled={
+                form.values.category === '' ||
+                form.values.category === undefined ||
+                form.values.type === '' ||
+                form.values.type === undefined ||
+                !categories.data ||
+                categories.isLoading
+              }
+            />
+          </Suspense>
 
           <TimeInput
             required

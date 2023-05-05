@@ -76,6 +76,8 @@ export type Plan = {
 export type Attraction = {
   id: number;
   name: string;
+  country: number;
+  city: number;
   address: string;
   latitude: number;
   longitude: number;

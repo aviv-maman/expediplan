@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "name": "Babuhska's Kitchen",
+    "name": "Babushka's Kitchen",
     "country": 182,
     "city": 99972,
-    "address": "Babuhska 215, Moscow",
+    "address": "Babushka 215, Moscow",
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "Food & Drinks",
@@ -26,5 +26,33 @@
       }
     ],
     "about": "Moscow is a country in Europe."
+  },
+  {
+    "id": 2,
+    "name": "Baba Milia Restaurant",
+    "country": 182,
+    "city": 99972,
+    "address": "Baba 158, Moscow",
+    "latitude": 522.5,
+    "longitude": 53.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 2,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.moscow.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Baba Milia Restaurant is the best hamburger restaurant in Moscow."
   }
 ]
