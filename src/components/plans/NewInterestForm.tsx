@@ -1,14 +1,16 @@
 'use client';
 import { planSelectorFamily } from '@/recoil/plan_state';
-import { ActionIcon, Button, Group, Paper, Text, TextInput, createStyles, rem } from '@mantine/core';
+import { ActionIcon, Button, Group, Paper, Select, Text, TextInput, createStyles, rem } from '@mantine/core';
 import { TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import { IconBrowserPlus, IconClock, IconIdBadge } from '@tabler/icons-react';
+import { IconBrowserPlus, IconBuildingSkyscraper, IconCategory, IconClock, IconIdBadge } from '@tabler/icons-react';
 import { useParams } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { fakeDelay } from '@/helpers/network';
 import { addInterestToDayInsidePlan } from '@/api/AttractionsAPI';
+import useSWR from 'swr';
+import { categoriesFetcher, getCategoriesAPI } from '@/api/CategoriesAPI';
 
 const ICON_SIZE = rem(60);
 
@@ -44,20 +46,26 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
 
   const form = useForm({
     initialValues: {
+      category: '',
+      type: '',
       attraction_id: '',
       startTime: '',
       endTime: '',
     },
 
     transformValues: (values) => ({
-      ...values,
       attraction_id: Number(values.attraction_id) || 0,
+      startTime: values.startTime ? values.startTime : '00:00',
+      endTime: values.endTime ? values.endTime : '00:00',
     }),
   });
 
   const params = useParams();
   const [plan, setPlan] = useRecoilState(planSelectorFamily(params.id));
   const [isLoading, setIsLoading] = useState(false);
+
+  const categories = useSWR(getCategoriesAPI(), categoriesFetcher);
+  const types = categories.data?.find((item) => item.id === Number(form.values.category))?.types;
 
   return (
     <>
@@ -73,6 +81,46 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
             setIsLoading(false);
             res && closeModal();
           })}>
+          <Suspense
+            fallback={
+              <Select required label='Category' placeholder='Loading categories...' icon={<IconCategory size='1rem' />} data={[]} disabled />
+            }>
+            <Select
+              required
+              label='Category'
+              placeholder='Choose category'
+              icon={<IconCategory size='1rem' />}
+              data={categories.data?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: String(item.id), label: item.name })) ?? []}
+              searchable
+              maxDropdownHeight={280}
+              nothingFound='Nothing found'
+              filter={(value, item) => item?.label?.toLowerCase().includes(value.toLowerCase().trim()) || false}
+              {...form.getInputProps('category')}
+              transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+              disabled={!plan || !categories.data || categories.isLoading}
+              onChange={(value) => {
+                form.setFieldValue('category', value || '');
+                form.setFieldValue('type', '');
+              }}
+            />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <Select required label='Type' placeholder='Loading types...' icon={<IconBuildingSkyscraper size='1rem' />} data={[]} disabled />
+            }>
+            <Select
+              required
+              label='Type'
+              placeholder='Choose type'
+              icon={<IconBuildingSkyscraper size='1rem' />}
+              data={types?.sort((a, b) => a.localeCompare(b)).map((item) => ({ value: item, label: item })) || ['Loading...']}
+              transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+              {...form.getInputProps('type')}
+              disabled={form.values.category === '' || !form.values.category || !categories.data || categories.isLoading}
+            />
+          </Suspense>
+
           <TextInput
             required
             label='Attraction'

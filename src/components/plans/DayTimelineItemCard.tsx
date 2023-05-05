@@ -1,5 +1,5 @@
 'use client';
-import { ActionIcon, Card, createStyles, Group, Menu, Modal, Progress, Text } from '@mantine/core';
+import { ActionIcon, Card, createStyles, Group, Menu, Modal, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCalendar, IconDots, IconEye, IconPlus } from '@tabler/icons-react';
 import dayjs from 'dayjs';

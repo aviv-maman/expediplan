@@ -99,3 +99,9 @@ export type Interest = {
   startTime: string;
   endTime: string;
 };
+
+export type Category = {
+  id: number;
+  name: string;
+  types: string[];
+};
