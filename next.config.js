@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // reactStrictMode: true,
+  reactStrictMode: true,
   experimental: {
-    // appDir: true,
+    appDir: true,
     typedRoutes: true,
   },
   transpilePackages: ['@mantine/core'],
@@ -12,13 +12,6 @@ const nextConfig = {
   //     ssr: true,
   //   },
   // },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
 };
 
 module.exports = {
