@@ -1,17 +1,17 @@
 import type { Category } from '../../types/general';
-import { hostname } from '@/constants';
+import { HOSTNAME } from '@/constants';
 
 export const categoriesFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Category[]>);
 export const categoryFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Category>);
 
 export const getCategoriesAPI = (ids?: number | number[]) => {
   const params = new URLSearchParams(ids ? { id: String(ids) } : undefined);
-  const API = `${hostname}/api/attractions/categories?${params}`;
+  const API = `${HOSTNAME}/api/attractions/categories?${params}`;
   return API;
 };
 
 export const getCategoryByIdAPI = (id: number) => {
-  const API = `${hostname}/api/attractions/categories/${id}`;
+  const API = `${HOSTNAME}/api/attractions/categories/${id}`;
   return API;
 };
 

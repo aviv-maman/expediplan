@@ -1,9 +1,9 @@
 import type { Plan } from '../../types/general';
-import { hostname } from '@/constants';
+import { HOSTNAME } from '@/constants';
 
 export const getPlanByIdFromServer = async (id: string): Promise<Plan> => {
   // const TOKEN = 'token';
-  const API = `${hostname}/api/plans/${id}`;
+  const API = `${HOSTNAME}/api/plans/${id}`;
   const res = await fetch(API, {
     // headers: { Authorization: `token ${TOKEN}` },
     cache: 'no-cache',
