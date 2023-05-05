@@ -1,6 +1,6 @@
 'use client';
 import { planSelectorFamily } from '@/recoil/plan_state';
-import { ActionIcon, Button, Group, Paper, Select, Text, TextInput, createStyles, rem } from '@mantine/core';
+import { ActionIcon, Button, Group, Paper, Select, Text, createStyles, rem } from '@mantine/core';
 import { TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconBrowserPlus, IconBuildingSkyscraper, IconCategory, IconClock, IconIdBadge } from '@tabler/icons-react';
@@ -79,7 +79,6 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
           onSubmit={form.onSubmit(async (interest) => {
             if (!plan) return;
             setIsLoading(true);
-            console.log(interest);
             const res = await fakeDelay(2);
             const planWithInterest = addInterestToDayInsidePlan(interest, dayIndex, plan);
             setPlan(planWithInterest);
