@@ -13,9 +13,10 @@ import useSWR from 'swr';
 interface AttractionTimelineProps {
   dayIndex: number;
   planFromServer?: Plan;
+  activeDayIndex: number;
 }
 
-const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planFromServer }) => {
+const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planFromServer, activeDayIndex }) => {
   const params = useParams();
   const planFromLocalStorage = useRecoilValue(planSelectorFamily(params.id));
   const interests = planFromLocalStorage?.days[dayIndex]?.interests || planFromServer?.days[dayIndex]?.interests;
@@ -33,6 +34,14 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
   const arrayOfStartTimes = interestsWithAttractions?.map((item) => item.startTime);
 
   useEffect(() => {
+    if (activeDayIndex > dayIndex) {
+      setActiveItem(attractionIds?.length - 1);
+      return;
+    }
+    if (activeDayIndex < dayIndex) {
+      setActiveItem(-1);
+      return;
+    }
     const today = new Date();
     const todayString = today.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
     const currentStartTime = arrayOfStartTimes?.find((time) => Number(time.replace(':', '')) <= Number(todayString.replace(':', '')));

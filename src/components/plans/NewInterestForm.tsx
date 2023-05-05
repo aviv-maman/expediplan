@@ -7,7 +7,6 @@ import { IconBrowserPlus, IconClock, IconIdBadge } from '@tabler/icons-react';
 import { useParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import type { Interest, Plan } from '../../../types/general';
 import { fakeDelay } from '@/helpers/network';
 import { addInterestToDayInsidePlan } from '@/api/AttractionsAPI';
 

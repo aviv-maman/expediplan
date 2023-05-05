@@ -29,9 +29,10 @@ interface DayTimelineItemCardProps {
   firstInterestName?: string;
   lastInterestName?: string;
   dayIndex: number;
+  activeDayIndex: number;
 }
 
-export function DayTimelineItemCard({ image, firstInterestName, lastInterestName, dayIndex }: DayTimelineItemCardProps) {
+export function DayTimelineItemCard({ image, firstInterestName, lastInterestName, dayIndex, activeDayIndex }: DayTimelineItemCardProps) {
   const { classes } = useStyles();
   const [openedNewInterest, newInterestModal] = useDisclosure(false);
   const [openedFullDay, fullDayModal] = useDisclosure(false);
@@ -47,7 +48,7 @@ export function DayTimelineItemCard({ image, firstInterestName, lastInterestName
       </Modal>
 
       <Modal opened={openedFullDay} onClose={fullDayModal.close} title={'Quick View'} centered id={'quick-view'}>
-        <AttractionTimeline dayIndex={dayIndex} />
+        <AttractionTimeline dayIndex={dayIndex} activeDayIndex={activeDayIndex} />
       </Modal>
 
       <Card withBorder radius='md' p={0} className={classes.card} mt={'xs'}>

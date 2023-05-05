@@ -62,6 +62,7 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
             firstInterestName={findAttractionById(Number(item.interests?.[0].attraction_id))?.name}
             lastInterestName={findAttractionById(Number(item.interests?.[item.interests.length - 1]?.attraction_id))?.name}
             dayIndex={item.index}
+            activeDayIndex={activeItem}
           />
         </Timeline.Item>
       ))}
