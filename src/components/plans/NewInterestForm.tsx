@@ -82,7 +82,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
             console.log(interest);
             const res = await fakeDelay(2);
             const planWithInterest = addInterestToDayInsidePlan(interest, dayIndex, plan);
-            // setPlan(planWithInterest);
+            setPlan(planWithInterest);
             setIsLoading(false);
             res && closeModal();
           })}>
