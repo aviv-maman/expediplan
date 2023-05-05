@@ -1,8 +1,7 @@
 import type { Plan } from '../../types/general';
+import { hostname } from '@/constants';
 
 export const getPlanByIdFromServer = async (id: string): Promise<Plan> => {
-  const env = process.env.NODE_ENV;
-  const hostname = env === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_HOSTNAME;
   // const TOKEN = 'token';
   const API = `${hostname}/api/plans/${id}`;
   const res = await fetch(API, {
