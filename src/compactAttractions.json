@@ -54,5 +54,145 @@
       }
     ],
     "about": "Baba Milia Restaurant is the best hamburger restaurant in Moscow."
+  },
+  {
+    "id": 3,
+    "name": "El Gaucho Restaurant",
+    "country": 156,
+    "city": 77340,
+    "address": "Baba 158, Netherlands",
+    "latitude": 522.5,
+    "longitude": 53.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 2,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.netherlands.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Baba Milia Restaurant is the best hamburger restaurant in Netherlands."
+  },
+  {
+    "id": 4,
+    "name": "Cheesy Cheese",
+    "country": 156,
+    "city": 77340,
+    "address": "Cheese Way 158, Netherlands",
+    "latitude": 522.5,
+    "longitude": 53.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 4,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.netherlands.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Baba Milia Restaurant is the best hamburger restaurant in Netherlands."
+  },
+  {
+    "id": 5,
+    "name": "Cheesy Cheese",
+    "country": 156,
+    "city": 77340,
+    "address": "Cheese Way 158, Netherlands",
+    "latitude": 522.5,
+    "longitude": 53.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 4,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.netherlands.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Baba Milia Restaurant is the best hamburger restaurant in Netherlands."
+  },
+  {
+    "id": 6,
+    "name": "Amsterdam Castle Muiderslot",
+    "country": 156,
+    "city": 77340,
+    "address": "Cheese Way 158, Netherlands",
+    "latitude": 522.5,
+    "longitude": 53.75,
+    "category": "Historic Sites",
+    "type": "Castle",
+    "rating": 4,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["castle", "historic", "ancient"],
+    "contact": {
+      "website": "https://www.muiderslot.nl",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Baba Milia Restaurant is the best hamburger restaurant in Netherlands."
+  },
+  {
+    "id": 7,
+    "name": "Main Church of Amsterdam",
+    "country": 156,
+    "city": 77340,
+    "address": "Chuchu 97, Netherlands",
+    "latitude": 522.5,
+    "longitude": 53.75,
+    "category": "Historic Sites",
+    "type": "Church",
+    "rating": 4,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["church", "historic", "ancient"],
+    "contact": {
+      "website": "https://www.netherlands.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Main Church of Amsterdam is the best church in Netherlands."
   }
 ]
