@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import countries from '@/compactCountries.json';
+import countries from '@/countries.json';
 
 export async function GET(request: NextRequest) {
   const { search } = new URL(request.url);

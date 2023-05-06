@@ -127,5 +127,5 @@ dist
 .pnp.*
 
 # large json files
-countries.json
-cities.json
+full_countries.json
+full_cities.json

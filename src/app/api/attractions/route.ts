@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import attractions from '@/compactAttractions.json';
+import attractions from '@/attractions.json';
 import type { Attraction } from '../../../../types/general';
 
 export async function GET(request: NextRequest) {

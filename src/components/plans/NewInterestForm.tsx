@@ -134,7 +134,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
               label='Attraction'
               placeholder='Choose attraction'
               icon={<IconIdBadge size='1rem' />}
-              data={attractions?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: item.name, label: item.name })) || []}
+              data={attractions?.sort((a, b) => a.name.localeCompare(b.name)).map((item) => ({ value: String(item.id), label: item.name })) || []}
               transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
               {...form.getInputProps('attraction_id')}
               disabled={
