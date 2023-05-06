@@ -12,6 +12,7 @@ import { Suspense } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
 import { planListState } from '@/recoil/plan_state';
+import { useRouter } from 'next/navigation';
 
 const ICON_SIZE = rem(60);
 
@@ -71,6 +72,8 @@ const NewPlanForm: React.FC = () => {
     }),
   });
 
+  const router = useRouter();
+
   const countries = useSWR(getCountriesAPI(), countriesFetcher);
   const cities = useSWR(getCitiesByCountryIdAPI(form.getTransformedValues().country), citiesFetcher);
 
@@ -102,6 +105,7 @@ const NewPlanForm: React.FC = () => {
               })),
               duration: duration,
             });
+            router.push('/plans');
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' icon={<IconId size='1rem' />} {...form.getInputProps('name')} />
 

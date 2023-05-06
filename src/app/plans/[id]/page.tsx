@@ -26,7 +26,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
   const session = await getServerSession();
   const planFromServer = await getPlanByIdFromServer(params.id);
   const city = await getCityById(Number(planFromServer?.city));
-  if (!planFromServer || !city) return <div>Plan or city not found</div>;
+  if ((session?.user && !planFromServer) || !city) return <div>Plan or city not found</div>;
 
   return (
     <CustomStack>
