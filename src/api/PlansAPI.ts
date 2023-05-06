@@ -1,7 +1,7 @@
 import type { Plan } from '../../types/general';
 import { HOSTNAME } from '@/constants';
 
-export const getPlanByIdFromServer = async (id: string): Promise<Plan> => {
+export const getPlanByIdFromServer = async (id: string): Promise<Plan | undefined> => {
   // const TOKEN = 'token';
   const API = `${HOSTNAME}/api/plans/${id}`;
   const res = await fetch(API, {

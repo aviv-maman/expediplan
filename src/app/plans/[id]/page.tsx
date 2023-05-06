@@ -24,21 +24,21 @@ type PlanPageProps = { params: { id: string }; searchParams?: { [key: string]: s
 
 export default async function PlanPage({ params, searchParams }: PlanPageProps) {
   const session = await getServerSession();
-  const planFromServer = await getPlanByIdFromServer(params.id);
-  const city = await getCityById(Number(planFromServer?.city));
-  if ((session?.user && !planFromServer) || !city) return <div>Plan or city not found</div>;
+  const planFromServer = session?.user && (await getPlanByIdFromServer(params.id));
+  const cityFromServer = session?.user && (await getCityById(Number(planFromServer?.city)));
+  if (session?.user && !cityFromServer) return <div>Plan or city not found</div>;
 
   return (
     <CustomStack>
-      {session?.user?.email ? (
+      {session?.user?.email && planFromServer && cityFromServer ? (
         <Suspense fallback={<div>Loading plan...</div>}>
           <HeroBlockAuthorised
-            coverImage={city.cover_image}
-            cityName={city.name}
-            planName={planFromServer.name}
-            startDate={planFromServer.startDate}
-            endDate={planFromServer.endDate}
-            duration={planFromServer.duration}
+            coverImage={cityFromServer?.cover_image}
+            cityName={cityFromServer?.name}
+            planName={planFromServer?.name}
+            startDate={planFromServer?.startDate}
+            endDate={planFromServer?.endDate}
+            duration={planFromServer?.duration}
           />
           <CustomStack>
             <DayTimeline planFromServer={planFromServer} />

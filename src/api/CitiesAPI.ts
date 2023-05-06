@@ -20,7 +20,7 @@ export const getCityByIdAPI = (id: number) => {
   return API;
 };
 
-export const getCityById = async (id: number): Promise<City> => {
+export const getCityById = async (id: number): Promise<City | undefined> => {
   const API = getCityByIdAPI(id);
   const res = await fetch(API, {
     // headers: { Authorization: `token ${TOKEN}` },
