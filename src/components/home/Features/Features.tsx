@@ -93,7 +93,14 @@ const Features: React.FC = () => {
       <Text className={classes.supTitle}>{supTitle}</Text>
 
       <Title className={classes.title} order={2}>
-        Experience the <span className={classes.highlight}>best</span> of travel planning
+        Experience the{' '}
+        <Text
+          component='span'
+          className={classes.highlight}
+          sx={(theme) => ({ backgroundImage: theme.fn.gradient({ from: 'lime.3', to: 'green.3', deg: 45 }) })}>
+          best
+        </Text>{' '}
+        of travel planning
       </Title>
 
       <Container size={660} p={0}>

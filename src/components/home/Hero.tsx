@@ -83,7 +83,7 @@ const Hero: React.FC = () => {
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
-              <Text component='span' inherit variant='gradient' gradient={{ from: 'pink', to: 'yellow' }}>
+              <Text component='span' inherit variant='gradient' gradient={{ from: 'teal', to: 'lime' }}>
                 ExpediPlan
               </Text>
               <br />A simpler way to plan your travel
@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
               ExpediPlan is a travel planning app that helps you plan your travel with ease.
             </Text>
             <Link href='/plans'>
-              <Button variant='gradient' gradient={{ from: 'pink', to: 'yellow' }} size='xl' className={classes.control} mt={40}>
+              <Button variant='gradient' gradient={{ from: 'green', to: 'lime' }} size='xl' className={classes.control} mt={40}>
                 Get started
               </Button>
             </Link>

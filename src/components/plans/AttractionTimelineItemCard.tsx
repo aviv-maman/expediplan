@@ -1,6 +1,6 @@
 'use client';
-import { ActionIcon, Card, createStyles, Image, Group, Text, rem } from '@mantine/core';
-import { IconArrowGuide, IconDots, IconEye } from '@tabler/icons-react';
+import { ActionIcon, Card, createStyles, Image, Group, Text, rem, Menu, Button } from '@mantine/core';
+import { IconArrowGuide, IconCloud, IconDots, IconEdit, IconInfoSquareFilled, IconTrash } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   diff: {
@@ -14,8 +14,11 @@ const useStyles = createStyles((theme) => ({
   footer: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
+    padding: `${theme.spacing.sm}`,
     borderTop: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]}`,
+  },
+  menu: {
+    alignSelf: 'flex-start',
   },
 }));
 
@@ -46,15 +49,31 @@ export const AttractionTimelineItemCard = ({ type, name, time, image }: Attracti
         </Text>
       </Group>
       <Card.Section className={classes.footer}>
-        <ActionIcon variant='outline'>
-          <IconArrowGuide size='1rem' />
-        </ActionIcon>
-        <ActionIcon variant='outline'>
-          <IconEye size='1rem' />
-        </ActionIcon>
-        <ActionIcon variant='outline'>
-          <IconDots size='1rem' />
-        </ActionIcon>
+        <Button variant='light' leftIcon={<IconArrowGuide size='1rem' />}>
+          Navigate
+        </Button>
+        <Button variant='light' leftIcon={<IconInfoSquareFilled size='1.1rem' />}>
+          Info
+        </Button>
+
+        <Menu shadow='md' width={200} withinPortal position='bottom-end'>
+          <div className={classes.menu}>
+            <Menu.Target>
+              <ActionIcon variant='light' size={36} color='blue'>
+                <IconDots size='1rem' />
+              </ActionIcon>
+            </Menu.Target>
+          </div>
+
+          <Menu.Dropdown>
+            <Menu.Label>General</Menu.Label>
+            <Menu.Item icon={<IconCloud size={14} />}>See Weather</Menu.Item>
+            <Menu.Divider />
+            <Menu.Label>Actions</Menu.Label>
+            <Menu.Item icon={<IconEdit size={14} />}>Edit Interest</Menu.Item>
+            <Menu.Item icon={<IconTrash size={14} />}>Delete Interest</Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
       </Card.Section>
     </Card>
   );

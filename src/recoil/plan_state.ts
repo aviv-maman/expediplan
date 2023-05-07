@@ -33,7 +33,7 @@ export const planSelectorFamily = selectorFamily<Plan | undefined, string>({
     },
   set:
     (id) =>
-    ({ set }, newValue) => {
+    ({ get, set, reset }, newValue) => {
       set(planListState, (oldValue) => {
         if (oldValue && newValue) {
           const index = oldValue.findIndex((plan) => plan.id === id);
@@ -46,3 +46,7 @@ export const planSelectorFamily = selectorFamily<Plan | undefined, string>({
       });
     },
 });
+
+const removeItemAtIndex = (array: Plan[], index: number) => {
+  return [...array.slice(0, index), ...array.slice(index + 1)];
+};
