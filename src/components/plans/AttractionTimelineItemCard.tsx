@@ -1,6 +1,9 @@
 'use client';
+import { removeInterestFromDayInsidePlan } from '@/api/AttractionsAPI';
+import { planSelectorFamily } from '@/recoil/plan_state';
 import { ActionIcon, Card, createStyles, Image, Group, Text, rem, Menu, Button } from '@mantine/core';
 import { IconArrowGuide, IconCloud, IconDots, IconEdit, IconInfoSquareFilled, IconTrash } from '@tabler/icons-react';
+import { useRecoilState } from 'recoil';
 
 const useStyles = createStyles((theme) => ({
   diff: {
@@ -27,10 +30,20 @@ interface AttractionTimelineItemCardProps {
   name?: string;
   time?: string;
   image?: string;
+  dayIndex: number;
+  attractionId: string;
+  attractionIndex: number;
 }
 
-export const AttractionTimelineItemCard = ({ type, name, time, image }: AttractionTimelineItemCardProps) => {
+export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, attractionId, attractionIndex }: AttractionTimelineItemCardProps) => {
   const { classes } = useStyles();
+  const [plan, setPlan] = useRecoilState(planSelectorFamily(attractionId));
+
+  const handleDeleteInterest = () => {
+    if (!plan) return;
+    const planWithoutInterest = removeInterestFromDayInsidePlan(attractionIndex, dayIndex, plan);
+    setPlan(planWithoutInterest);
+  };
 
   return (
     <Card withBorder padding='lg' className={classes.card}>
@@ -67,11 +80,13 @@ export const AttractionTimelineItemCard = ({ type, name, time, image }: Attracti
 
           <Menu.Dropdown>
             <Menu.Label>General</Menu.Label>
-            <Menu.Item icon={<IconCloud size={14} />}>See Weather</Menu.Item>
+            <Menu.Item icon={<IconCloud size={14} />}>Check Weather</Menu.Item>
             <Menu.Divider />
             <Menu.Label>Actions</Menu.Label>
             <Menu.Item icon={<IconEdit size={14} />}>Edit Interest</Menu.Item>
-            <Menu.Item icon={<IconTrash size={14} />}>Delete Interest</Menu.Item>
+            <Menu.Item icon={<IconTrash size={14} />} onClick={handleDeleteInterest}>
+              Delete Interest
+            </Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </Card.Section>

@@ -60,6 +60,9 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
             name={item.details?.name}
             time={item.startTime + ' - ' + item.endTime}
             image={item.details?.cover_image}
+            dayIndex={dayIndex}
+            attractionId={params?.id}
+            attractionIndex={index}
           />
         </Timeline.Item>
       ))}
