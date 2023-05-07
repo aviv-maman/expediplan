@@ -10,7 +10,8 @@ export const getPlanByIdFromServer = async (id: string): Promise<Plan | undefine
   });
   if (!res.ok) {
     // This will activate the closest `error.tsx` Error Boundary
-    throw new Error('Failed to fetch data');
+    // throw new Error('Failed to fetch data');
+    return undefined;
   }
   const data = await res.json();
   if (data.message) {
