@@ -45,7 +45,7 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
 
     //Date is between start and end date
     setActiveItem(index);
-  }, []);
+  }, [days]);
 
   const attractionIds = getAttractionsByPlanIdFromLocalStorage(String(idFromLocalStorage));
   const attractions = useSWR(getAttractionsAPI(attractionIds), attractionsFetcher);

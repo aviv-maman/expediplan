@@ -1,6 +1,6 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Group } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Group, Skeleton } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
@@ -60,7 +60,7 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher);
 
   if (city.error) return <div>Failed to load</div>;
-  if (!city.data) return <div>Loading...</div>;
+  if (!city.data) return <Skeleton height={265} />;
 
   return (
     <BackgroundImage

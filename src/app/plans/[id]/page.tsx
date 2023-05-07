@@ -3,11 +3,13 @@ import type { Metadata } from 'next';
 import { getPlanByIdFromServer } from '@/api/PlansAPI';
 import { getCityById } from '@/api/CitiesAPI';
 import CustomStack from '@/components/CustomStack';
-import HeroBlockAuthorised from '@/components/plans/HeroBlockAuthorised';
+import HeroBlockAuthorised from '@/components/plans/hero/HeroBlockAuthorised';
 import DayTimeline from '@/components/plans/DayTimeline';
 import { Suspense } from 'react';
 import { getServerSession } from 'next-auth';
-import HeroBlockGuest from '@/components/plans/HeroBlockGuest';
+import HeroBlockGuest from '@/components/plans/hero/HeroBlockGuest';
+import PageLoader from '@/components/PageLoader';
+import HeroLoading from '@/components/plans/hero/loading';
 
 type Props = {
   params: { id: string };
@@ -30,28 +32,32 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
 
   return (
     <CustomStack>
-      {session?.user?.email && planFromServer && cityFromServer ? (
-        <Suspense fallback={<div>Loading plan...</div>}>
-          <HeroBlockAuthorised
-            coverImage={cityFromServer?.cover_image}
-            cityName={cityFromServer?.name}
-            planName={planFromServer?.name}
-            startDate={planFromServer?.startDate}
-            endDate={planFromServer?.endDate}
-            duration={planFromServer?.duration}
-          />
-          <CustomStack>
-            <DayTimeline planFromServer={planFromServer} />
-          </CustomStack>
-        </Suspense>
-      ) : (
-        <Suspense fallback={<div>Loading plan...</div>}>
-          <HeroBlockGuest idFromLocalStorage={params.id} />
-          <CustomStack>
-            <DayTimeline idFromLocalStorage={params.id} />
-          </CustomStack>
-        </Suspense>
-      )}
+      <Suspense fallback={<PageLoader size='xl' text='Loading plan...' />}>
+        {session?.user?.email && planFromServer && cityFromServer ? (
+          <>
+            <Suspense fallback={<HeroLoading />}>
+              <HeroBlockAuthorised
+                coverImage={cityFromServer?.cover_image}
+                cityName={cityFromServer?.name}
+                planName={planFromServer?.name}
+                startDate={planFromServer?.startDate}
+                endDate={planFromServer?.endDate}
+                duration={planFromServer?.duration}
+              />
+            </Suspense>
+            <CustomStack>
+              <DayTimeline planFromServer={planFromServer} />
+            </CustomStack>
+          </>
+        ) : (
+          <>
+            <HeroBlockGuest idFromLocalStorage={params.id} />
+            <CustomStack>
+              <DayTimeline idFromLocalStorage={params.id} />
+            </CustomStack>
+          </>
+        )}
+      </Suspense>
     </CustomStack>
   );
 }
