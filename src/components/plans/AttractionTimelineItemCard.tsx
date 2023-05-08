@@ -79,17 +79,17 @@ export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, 
           </Text>
         </Group>
         <Card.Section className={classes.footer}>
-          <Button variant='light' leftIcon={<IconArrowGuide size='1rem' />}>
+          <Button variant='default' leftIcon={<IconArrowGuide size='1rem' />}>
             Navigate
           </Button>
-          <Button variant='light' leftIcon={<IconInfoSquareFilled size='1.1rem' />}>
+          <Button variant='default' leftIcon={<IconInfoSquareFilled size='1.1rem' />}>
             Info
           </Button>
 
           <Menu shadow='md' width={200} withinPortal position='bottom-end'>
             <div className={classes.menu}>
               <Menu.Target>
-                <ActionIcon variant='light' size={36} color='blue'>
+                <ActionIcon variant='default' size={36}>
                   <IconDots size='1rem' />
                 </ActionIcon>
               </Menu.Target>

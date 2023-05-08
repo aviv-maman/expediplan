@@ -53,7 +53,7 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
   if (!interestsWithAttractions) return null;
 
   return (
-    <Timeline active={activeItem} bulletSize={30} color='indigo'>
+    <Timeline active={activeItem} bulletSize={30} color='cyan'>
       {interestsWithAttractions?.map((item, index) => (
         <Timeline.Item key={index} lineVariant='dashed' bullet={<IconAB2 size={20} />} pt={5}>
           <AttractionTimelineItemCard

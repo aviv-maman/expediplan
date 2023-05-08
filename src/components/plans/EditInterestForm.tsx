@@ -201,7 +201,7 @@ const EditInterestForm: React.FC<EditInterestFormProps> = ({ subtitle, dayIndex,
 
           <Group position='right' mt='md'>
             <Button type='submit' leftIcon={<IconBrowserPlus />} loading={isLoading}>
-              Add
+              Edit
             </Button>
           </Group>
         </form>
