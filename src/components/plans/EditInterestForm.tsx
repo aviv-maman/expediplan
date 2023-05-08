@@ -1,11 +1,11 @@
 'use client';
 import { planSelectorFamily } from '@/recoil/plan_state';
-import { ActionIcon, Button, Group, Loader, Paper, Select, Text, createStyles, rem } from '@mantine/core';
+import { ActionIcon, Button, Group, Paper, Select, Text, createStyles, rem } from '@mantine/core';
 import { TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconBrowserPlus, IconBuildingSkyscraper, IconCategory, IconClock, IconIdBadge } from '@tabler/icons-react';
 import { useParams } from 'next/navigation';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { fakeDelay } from '@/helpers/network';
 import { attractionsFetcher, editInterestInsidePlan, getAttractionsAPI } from '@/api/AttractionsAPI';

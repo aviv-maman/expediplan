@@ -28,14 +28,13 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface DayTimelineItemCardProps {
-  image: Date;
+  date: Date;
   firstInterestName?: string;
   lastInterestName?: string;
   dayIndex: number;
-  activeDayIndex: number;
 }
 
-export function DayTimelineItemCard({ image, firstInterestName, lastInterestName, dayIndex, activeDayIndex }: DayTimelineItemCardProps) {
+export function DayTimelineItemCard({ date, firstInterestName, lastInterestName, dayIndex }: DayTimelineItemCardProps) {
   const { classes } = useStyles();
   const [openedNewInterest, newInterestModal] = useDisclosure(false);
   const [openedFullDay, fullDayModal] = useDisclosure(false);
@@ -45,13 +44,13 @@ export function DayTimelineItemCard({ image, firstInterestName, lastInterestName
       <Modal opened={openedNewInterest} onClose={newInterestModal.close} title={'New Interest'} centered id={'new-interest'}>
         <NewInterestForm
           dayIndex={dayIndex}
-          subtitle={`${`Day ${dayIndex + 1}`}: ${dayjs(image).format('DD/MM/YYYY')}`}
+          subtitle={`${`Day ${dayIndex + 1}`}: ${dayjs(date).format('DD/MM/YYYY')}`}
           closeModal={newInterestModal.close}
         />
       </Modal>
 
       <Modal opened={openedFullDay} onClose={fullDayModal.close} title={'Quick View'} centered id={'quick-view'}>
-        <AttractionTimeline dayIndex={dayIndex} activeDayIndex={activeDayIndex} />
+        <AttractionTimeline dayIndex={dayIndex} date={date} />
       </Modal>
 
       <Card withBorder p='sm' radius='md' className={classes.card}>
@@ -60,7 +59,7 @@ export function DayTimelineItemCard({ image, firstInterestName, lastInterestName
             <IconCalendar size='1.5rem' />
             &nbsp;{`${`Day ${dayIndex + 1}`}`}
             <Text display='flex' align='justify'>
-              : {dayjs(image).format('MMM DD')}
+              : {dayjs(date).format('MMM DD')}
             </Text>
           </Text>
 

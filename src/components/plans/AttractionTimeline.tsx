@@ -13,10 +13,10 @@ import useSWR from 'swr';
 interface AttractionTimelineProps {
   dayIndex: number;
   planFromServer?: Plan;
-  activeDayIndex: number;
+  date: Date;
 }
 
-const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planFromServer, activeDayIndex }) => {
+const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planFromServer, date }) => {
   const params = useParams();
   const planFromLocalStorage = useRecoilValue(planSelectorFamily(params.id));
   const interests = planFromLocalStorage?.days[dayIndex]?.interests || planFromServer?.days[dayIndex]?.interests;
@@ -34,18 +34,19 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
   const arrayOfStartTimes = interestsWithAttractions?.map((item) => item.startTime);
 
   useEffect(() => {
-    if (activeDayIndex > dayIndex) {
+    const today = new Date();
+    if (today > date) {
       setActiveItem(attractionIds?.length - 1);
       return;
     }
-    if (activeDayIndex < dayIndex) {
+    if (date < today) {
       setActiveItem(-1);
       return;
     }
-    const today = new Date();
-    const todayString = today.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    const currentStartTime = arrayOfStartTimes?.find((time) => Number(time.replace(':', '')) <= Number(todayString.replace(':', '')));
-    const index = arrayOfStartTimes?.indexOf(String(currentStartTime));
+    const currentTimeString = today.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const currentTimeNumber = Number(currentTimeString.replace(':', ''));
+    const arrayOfStartTimesAsNumbers = arrayOfStartTimes?.map((time) => Number(time.replace(':', '')));
+    const index = arrayOfStartTimesAsNumbers?.findIndex((num) => num > currentTimeNumber);
     setActiveItem(Number(index));
   }, []);
 
