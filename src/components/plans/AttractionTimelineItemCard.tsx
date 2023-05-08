@@ -1,5 +1,5 @@
 'use client';
-import { removeInterestFromDayInsidePlan } from '@/api/AttractionsAPI';
+import { editInterestInsidePlan, removeInterestFromDayInsidePlan } from '@/api/AttractionsAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { ActionIcon, Card, createStyles, Image, Group, Text, rem, Menu, Button } from '@mantine/core';
 import { IconArrowGuide, IconCloud, IconDots, IconEdit, IconInfoSquareFilled, IconTrash } from '@tabler/icons-react';
@@ -45,6 +45,15 @@ export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, 
     setPlan(planWithoutInterest);
   };
 
+  const handleEditInterest = () => {
+    if (!plan) return;
+    const interests = plan?.days[dayIndex]?.interests;
+    if (!interests) return;
+    const interest = interests[attractionIndex];
+    const planWithEditedInterest = editInterestInsidePlan(interest, attractionIndex, dayIndex, plan);
+    setPlan(planWithEditedInterest);
+  };
+
   return (
     <Card withBorder padding='lg' className={classes.card}>
       <Card.Section>
@@ -83,7 +92,9 @@ export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, 
             <Menu.Item icon={<IconCloud size={14} />}>Check Weather</Menu.Item>
             <Menu.Divider />
             <Menu.Label>Actions</Menu.Label>
-            <Menu.Item icon={<IconEdit size={14} />}>Edit Interest</Menu.Item>
+            <Menu.Item icon={<IconEdit size={14} />} onClick={handleEditInterest}>
+              Edit Interest
+            </Menu.Item>
             <Menu.Item icon={<IconTrash size={14} />} onClick={handleDeleteInterest}>
               Delete Interest
             </Menu.Item>

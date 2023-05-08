@@ -77,6 +77,22 @@ export const removeInterestFromDayInsidePlan = (attractionIndex: number, dayInde
   return { ...plan, days: daysWithoutInterest };
 };
 
+const replaceInterestAtIndex = (array: Interest[], index: number, newValue: Interest) => {
+  return [...array.slice(0, index), newValue, ...array.slice(index + 1)];
+};
+
+export const editInterestInsidePlan = (interest: Interest, attractionIndex: number, dayIndex: number, plan: Plan): Plan => {
+  const currentInterests = plan?.days[dayIndex]?.interests;
+  if (!currentInterests) return plan;
+  const interestsWithEditedItem = replaceInterestAtIndex(currentInterests, attractionIndex, interest);
+  const daysWithEditedInterest = replaceItemAtIndex(plan.days, dayIndex, {
+    ...plan.days[dayIndex],
+    interests: interestsWithEditedItem,
+  });
+
+  return { ...plan, days: daysWithEditedInterest };
+};
+
 // const removeDayAtIndex = (array: Plan['days'], index: number) => {
 //   return [...array.slice(0, index), ...array.slice(index + 1)];
 // };
