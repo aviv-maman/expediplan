@@ -89,6 +89,12 @@ export const editInterestInsidePlan = (interest: Interest, attractionIndex: numb
     ...plan.days[dayIndex],
     interests: interestsWithEditedItem,
   });
+  const sortedInterests = daysWithEditedInterest?.[dayIndex].interests?.sort((a, b) => {
+    const aStart = Number(a.startTime.replace(':', '')) || 0;
+    const bStart = Number(b.startTime.replace(':', '')) || 0;
+    return aStart - bStart;
+  });
+  daysWithEditedInterest[dayIndex].interests = sortedInterests;
 
   return { ...plan, days: daysWithEditedInterest };
 };
