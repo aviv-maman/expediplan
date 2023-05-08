@@ -46,20 +46,20 @@ const EditInterestForm: React.FC<EditInterestFormProps> = ({ subtitle, dayIndex,
 
   const params = useParams();
   const [plan, setPlan] = useRecoilState(planSelectorFamily(params.id));
-  const categories = useSWR(getCategoriesAPI(), categoriesFetcher);
+  const categories = useSWR(getCategoriesAPI(), categoriesFetcher, { suspense: true });
 
   const currentAttraction = plan?.days[dayIndex]?.interests?.[attractionIndex];
-  const attractions = useSWR(getAttractionsAPI(), attractionsFetcher).data?.filter((item) => item.city === plan?.city);
+  const attractions = useSWR(getAttractionsAPI(), attractionsFetcher, { suspense: true }).data?.filter((item) => item.city === plan?.city);
   const currentCategory: string = attractions?.find((item) => item.id === currentAttraction?.attraction_id)?.category || '';
   const currentType: string = attractions?.find((item) => item.id === currentAttraction?.attraction_id)?.type || '';
 
   const form = useForm({
     initialValues: {
-      category: '',
-      type: '',
-      attraction_id: '',
-      startTime: '',
-      endTime: '',
+      category: currentCategory || '',
+      type: currentType || '',
+      attraction_id: String(currentAttraction?.attraction_id),
+      startTime: currentAttraction?.startTime || '',
+      endTime: currentAttraction?.endTime || '',
     },
 
     transformValues: (values) => ({
@@ -69,25 +69,6 @@ const EditInterestForm: React.FC<EditInterestFormProps> = ({ subtitle, dayIndex,
       endTime: values.endTime ? values.endTime : '00:00',
     }),
   });
-
-  function loadInitialValues(): Promise<typeof form.values> {
-    return new Promise((resolve) => {
-      resolve({
-        category: currentCategory || '',
-        type: currentType || '',
-        attraction_id: String(currentAttraction?.attraction_id),
-        startTime: currentAttraction?.startTime || '',
-        endTime: currentAttraction?.endTime || '',
-      });
-    });
-  }
-
-  useEffect(() => {
-    loadInitialValues().then((values) => {
-      form.setValues(values);
-      form.resetDirty(values);
-    });
-  }, []);
 
   const types = categories.data?.find((item) => item.name === form.values.category)?.types;
 

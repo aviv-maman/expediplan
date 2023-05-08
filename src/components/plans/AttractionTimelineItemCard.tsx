@@ -1,5 +1,5 @@
 'use client';
-import { editInterestInsidePlan, removeInterestFromDayInsidePlan } from '@/api/AttractionsAPI';
+import { removeInterestFromDayInsidePlan } from '@/api/AttractionsAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { ActionIcon, Card, createStyles, Image, Group, Text, rem, Menu, Button, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -7,6 +7,7 @@ import { IconArrowGuide, IconCloud, IconDots, IconEdit, IconInfoSquareFilled, Ic
 import { useRecoilState } from 'recoil';
 import EditInterestForm from './EditInterestForm';
 import dayjs from 'dayjs';
+import { Suspense } from 'react';
 
 const useStyles = createStyles((theme) => ({
   diff: {
@@ -51,14 +52,16 @@ export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, 
 
   return (
     <>
-      <Modal opened={openedEditInterest} onClose={editInterestModal.close} title={'Edit Interest'} centered id={'edit-interest'}>
-        <EditInterestForm
-          dayIndex={dayIndex}
-          subtitle={`${`Day ${dayIndex + 1}`}: ${dayjs(image).format('DD/MM/YYYY')}`}
-          closeModal={editInterestModal.close}
-          attractionIndex={attractionIndex}
-        />
-      </Modal>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Modal opened={openedEditInterest} onClose={editInterestModal.close} title={'Edit Interest'} centered id={'edit-interest'}>
+          <EditInterestForm
+            dayIndex={dayIndex}
+            subtitle={`${`Day ${dayIndex + 1}`}: ${dayjs(image).format('DD/MM/YYYY')}`}
+            closeModal={editInterestModal.close}
+            attractionIndex={attractionIndex}
+          />
+        </Modal>
+      </Suspense>
 
       <Card withBorder padding='lg' className={classes.card}>
         <Card.Section>
