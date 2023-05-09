@@ -1,7 +1,7 @@
 'use client';
 import { ActionIcon, Card, createStyles, Group, Menu, Modal, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconCalendar, IconDots, IconEye, IconPlus } from '@tabler/icons-react';
+import { IconCalendar, IconCloud, IconDots, IconEye, IconPlus } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import NewInterestForm from './NewInterestForm';
 import AttractionTimeline from './AttractionTimeline';
@@ -78,6 +78,7 @@ export function DayTimelineItemCard({ date, firstInterestName, lastInterestName,
                 <Menu.Item onClick={fullDayModal.open} icon={<IconEye size={14} />} disabled={!firstInterestName}>
                   Quick View
                 </Menu.Item>
+                <Menu.Item icon={<IconCloud size={14} />}>Check Weather</Menu.Item>
                 <Menu.Divider />
                 <Menu.Label>Actions</Menu.Label>
                 <Menu.Item onClick={newInterestModal.open} icon={<IconPlus size={14} />}>

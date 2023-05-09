@@ -3,7 +3,7 @@ import { removeInterestFromDayInsidePlan } from '@/api/AttractionsAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { ActionIcon, Card, createStyles, Image, Group, Text, rem, Menu, Button, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconArrowGuide, IconCloud, IconDots, IconEdit, IconInfoSquareFilled, IconTrash } from '@tabler/icons-react';
+import { IconArrowGuide, IconDots, IconEdit, IconInfoSquareFilled, IconMessage2, IconTrash } from '@tabler/icons-react';
 import { useRecoilState } from 'recoil';
 import EditInterestForm from './EditInterestForm';
 import dayjs from 'dayjs';
@@ -97,7 +97,7 @@ export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, 
 
             <Menu.Dropdown>
               <Menu.Label>General</Menu.Label>
-              <Menu.Item icon={<IconCloud size={14} />}>Check Weather</Menu.Item>
+              <Menu.Item icon={<IconMessage2 size={14} />}>Add Comment</Menu.Item>
               <Menu.Divider />
               <Menu.Label>Actions</Menu.Label>
               <Menu.Item icon={<IconEdit size={14} />} onClick={editInterestModal.open}>
