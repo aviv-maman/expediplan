@@ -1,10 +1,11 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Group, Skeleton } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Group, Skeleton, Button } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
+import { IconInfoSquare } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -70,7 +71,7 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
       sx={{
         backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${city?.data?.cover_image})`,
       }}>
-      <Container size='lg' className={classes.wrapper}>
+      <Container size='2xl' className={classes.wrapper}>
         <Title className={classes.title}>
           <Text component='span' variant='gradient' gradient={{ from: 'teal', to: 'lime' }}>
             {plan?.name}
@@ -82,9 +83,12 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
         <Text className={classes.description}>
           {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
         </Text>
-        <Group p='sm'>
-          <Text color='#fff'>About</Text>
-        </Group>
+
+        <div style={{ alignSelf: 'flex-end', display: 'flex', flexDirection: 'row', height: '8.5rem' }}>
+          <Button sx={{ alignSelf: 'end' }} variant='light' leftIcon={<IconInfoSquare />}>
+            Info
+          </Button>
+        </div>
       </Container>
     </BackgroundImage>
   );
