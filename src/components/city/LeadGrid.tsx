@@ -12,7 +12,6 @@ interface LeadGridProps {
 const LeadGrid: React.FC<LeadGridProps> = ({ city, skeleton }) => {
   const theme = useMantineTheme();
   const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`;
-  const SECONDARY_COL_HEIGHT_2 = `calc(${PRIMARY_COL_HEIGHT} / 1.3 - ${theme.spacing.xs} / 2)`;
 
   return (
     <Container size='lg' id='details-city' px={0}>
@@ -24,8 +23,8 @@ const LeadGrid: React.FC<LeadGridProps> = ({ city, skeleton }) => {
         <Image src={city?.images?.[0]} alt={city?.name} height={PRIMARY_COL_HEIGHT} radius='md' />
         <Grid gutter='md'>
           <Grid.Col>
-            {skeleton && <Skeleton height={SECONDARY_COL_HEIGHT_2} radius='md' />}
-            <Image src={city?.images?.[1]} alt={city?.name} height={SECONDARY_COL_HEIGHT_2} radius='md' />
+            {skeleton && <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' />}
+            <Image src={city?.images?.[1]} alt={city?.name} height={SECONDARY_COL_HEIGHT} radius='md' />
           </Grid.Col>
           <Grid.Col span={6}>
             {skeleton && <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' />}
