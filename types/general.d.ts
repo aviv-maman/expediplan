@@ -1,3 +1,5 @@
+import { CategoryName } from '@/constants';
+
 export type Country = {
   id: number;
   name: string;
@@ -58,6 +60,7 @@ export type City = {
   wikiDataId: string;
   about: string;
   cover_image: string;
+  images: string[];
 };
 
 export type Plan = {
@@ -81,7 +84,7 @@ export type Attraction = {
   address: string;
   latitude: number;
   longitude: number;
-  category: string;
+  category: CategoryName;
   type: string;
   rating: number;
   cover_image: string;
@@ -104,6 +107,6 @@ export type Interest = {
 
 export type Category = {
   id: number;
-  name: string;
+  name: CategoryName;
   types: string[];
 };

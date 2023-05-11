@@ -115,6 +115,12 @@
     "longitude": "37.61556000",
     "wikiDataId": "Q649",
     "about": "Moscow, Russian Moskva, city, capital of Russia, located in the far western part of the country. Since it was first mentioned in the chronicles of 1147, Moscow has played a vital role in Russian history. It became the capital of Muscovy (the Grand Principality of Moscow) in the late 13th century; hence, the people of Moscow are known as Muscovites. Today Moscow is not only the political centre of Russia but also the country’s most populous city and its industrial, cultural, scientific, and educational capital. For more than 600 years Moscow also has been the spiritual centre of the Russian Orthodox Church. The capital of the Union of Soviet Socialist Republics (U.S.S.R.) until the union dissolved in 1991, Moscow attracted world attention as a centre of communist power; indeed, the name of the seat of the former Soviet government and the successor Russian government, the Kremlin (Russian: Kreml), was a synonym for Soviet authority. The dissolution of the U.S.S.R. brought tremendous economic and political change, along with a significant concentration of Russia’s wealth, into Moscow. Area 414 square miles (1,035 square km). Pop. (2010) city, 11,738,547; (2020 est.) city, 12,678,079.",
-    "cover_image": "https://cdn.britannica.com/83/84883-050-053834E9/Red-Square-Moscow.jpg"
+    "cover_image": "https://cdn.britannica.com/83/84883-050-053834E9/Red-Square-Moscow.jpg",
+    "images": [
+      "https://cdn.britannica.com/57/144557-050-00422BA6/Moscow.jpg",
+      "https://cdn.britannica.com/31/141331-050-437B6696/Kremlin-Moscow-River.jpg",
+      "https://cdn.britannica.com/34/95134-050-1E31ADBB/Russian-government-building-Moscow.jpg",
+      "https://cdn.britannica.com/11/141111-050-9D76A405/Bolshoi-Theatre-Moscow.jpg"
+    ]
   }
 ]

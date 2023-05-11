@@ -1,6 +1,6 @@
 import { getPlanByIdFromLocalStorage } from './PlansAPI';
 import type { Attraction, Interest, Plan } from '../../types/general';
-import { HOSTNAME } from '@/constants';
+import { CategoryName, HOSTNAME } from '@/constants';
 
 export const attractionsFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Attraction[]>);
 export const attractionFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Attraction>);
@@ -11,9 +11,10 @@ export const getAttractionsAPI = (ids?: number | number[]) => {
   return API;
 };
 
-//Client: To use in form
-export const getAttractionsByCityIdAPI = (id: number) => {
-  const API = `${HOSTNAME}/api/attractions/city/${id}`;
+//Client: To use in city page
+export const getAttractionsByCityIdAPI = (id: number, categories?: CategoryName | CategoryName[]) => {
+  const params = new URLSearchParams(categories ? { category: String(categories) } : undefined);
+  const API = `${HOSTNAME}/api/attractions/city/${id}?${params}}`;
   return API;
 };
 

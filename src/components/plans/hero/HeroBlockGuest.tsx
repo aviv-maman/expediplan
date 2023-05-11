@@ -1,11 +1,12 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Group, Skeleton, Button } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { IconInfoSquare } from '@tabler/icons-react';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -14,15 +15,6 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     flexDirection: 'column',
-  },
-
-  content: {
-    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
-    marginRight: `calc(${theme.spacing.xl} * 3)`,
-
-    [theme.fn.smallerThan('md')]: {
-      marginRight: 0,
-    },
   },
 
   title: {
@@ -85,9 +77,11 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
         </Text>
 
         <div style={{ alignSelf: 'flex-end', display: 'flex', flexDirection: 'row', height: '8.5rem' }}>
-          <Button sx={{ alignSelf: 'end' }} variant='light' leftIcon={<IconInfoSquare />}>
-            Info
-          </Button>
+          <Link href={{ pathname: `/cities/${city.data.id}` }} style={{ alignSelf: 'end' }}>
+            <Button variant='light' leftIcon={<IconInfoSquare />}>
+              {city.data.name}
+            </Button>
+          </Link>
         </div>
       </Container>
     </BackgroundImage>

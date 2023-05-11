@@ -21,7 +21,7 @@
   },
   {
     "id": 5,
-    "name": "Travel & Transport",
+    "name": "Travel & Transportation",
     "types": ["Hotel", "Hostel", "Airport", "Bus Station", "Train Station", "Other"]
   },
   {
@@ -77,5 +77,10 @@
     "id": 13,
     "name": "Nature",
     "types": ["Beach", "Mountain", "Lake", "River", "Waterfall", "Forest", "Other"]
+  },
+  {
+    "id": 14,
+    "name": "Accommodation",
+    "types": ["Hotel", "Hostel", "Other"]
   }
 ]
