@@ -13,6 +13,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'flex-start',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    border: '1px solid #dee2e6',
   },
 
   title: {
@@ -59,6 +60,7 @@ const CardsCarousel: React.FC<CardsCarouselProps> = ({ data }) => {
         { maxWidth: 'sm', slideSize: '100%', slideGap: 'sm' },
         { maxWidth: 'md', slideSize: '100%', slideGap: 'sm' },
       ]}
+      h={mobile ? rem(220) : rem(300)}
       slideGap='sm'
       align='start'
       loop

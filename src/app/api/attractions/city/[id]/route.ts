@@ -8,14 +8,22 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   const { search } = new URL(request.url);
   const searchParams = new URLSearchParams(search);
   const searchValue = searchParams.get('category');
+  const limit = searchParams.get('limit');
   const categories = searchValue?.split(',') as CategoryName[] | undefined;
 
   if (!categories || categories.length === 0) {
     const filteredAttractions = attractions.filter((attraction) => attraction.city === cityId) as Attraction[];
+    if (limit) {
+      return NextResponse.json(filteredAttractions.slice(0, Number(limit)));
+    }
+    return NextResponse.json(filteredAttractions);
+  } else {
+    const filteredAttractions = attractions.filter((attraction) =>
+      categories?.some((category) => decodeURIComponent(attraction.category) === category && attraction.city === cityId)
+    ) as Attraction[];
+    if (limit) {
+      return NextResponse.json(filteredAttractions.slice(0, Number(limit)));
+    }
     return NextResponse.json(filteredAttractions);
   }
-  const filteredAttractions = attractions.filter((attraction) =>
-    categories?.some((category) => decodeURIComponent(attraction.category) === category && attraction.city === cityId)
-  ) as Attraction[];
-  return NextResponse.json(filteredAttractions);
 }
