@@ -3,6 +3,7 @@ import { Carousel } from '@mantine/carousel';
 import useSWR from 'swr';
 import { Highlight, Paper, Stack, Title, createStyles, rem } from '@mantine/core';
 import { citiesFetcher, getCitiesAPI } from '@/api/CitiesAPI';
+import Link from 'next/link';
 
 const ids = [77340, 143446, 59582, 44856, 32653, 50388, 99972];
 
@@ -63,16 +64,18 @@ const CarouselCities: React.FC = () => {
         mx={{ xl: '20%' }}>
         {data.map((city) => (
           <Carousel.Slide key={city.id}>
-            <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${city.cover_image})` }} className={classes.card}>
-              <div>
-                <Highlight highlightColor='indigo' highlight={city.country_name} className={classes.category} size='xs'>
-                  {city.country_name}
-                </Highlight>
-                <Title order={3} className={classes.title}>
-                  {city.name}
-                </Title>
-              </div>
-            </Paper>
+            <Link href={{ pathname: `cities/${city?.id}` }}>
+              <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${city.cover_image})` }} className={classes.card}>
+                <div>
+                  <Highlight highlightColor='indigo' highlight={city.country_name} className={classes.category} size='xs'>
+                    {city.country_name}
+                  </Highlight>
+                  <Title order={3} className={classes.title}>
+                    {city.name}
+                  </Title>
+                </div>
+              </Paper>
+            </Link>
           </Carousel.Slide>
         ))}
       </Carousel>
