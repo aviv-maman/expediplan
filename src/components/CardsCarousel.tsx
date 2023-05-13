@@ -1,6 +1,6 @@
 'use client';
 import { Carousel } from '@mantine/carousel';
-import { Image, Paper, createStyles, rem, useMantineTheme } from '@mantine/core';
+import { Image, Paper, createStyles, getStylesRef, rem, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import type { Attraction } from '../../types/general';
 
@@ -14,6 +14,13 @@ const useStyles = createStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     border: '1px solid #dee2e6',
+  },
+
+  image: {
+    ...theme.fn.cover(),
+    ref: getStylesRef('image'),
+    backgroundSize: 'cover',
+    transition: 'transform 500ms ease',
   },
 
   title: {
@@ -44,17 +51,17 @@ interface CardsCarouselProps {
 const CardsCarousel: React.FC<CardsCarouselProps> = ({ data }) => {
   const { classes } = useStyles();
   const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`);
 
   return (
     <Carousel
-      slideSize='50%'
+      slideSize='33.33%'
       breakpoints={[
-        { maxWidth: 'sm', slideSize: '100%', slideGap: 'sm' },
-        { maxWidth: 'md', slideSize: '100%', slideGap: 'sm' },
+        { maxWidth: 'sm', slideSize: '50%' },
+        { maxWidth: 'xs', slideSize: '100%', slideGap: 0 },
       ]}
       h={mobile ? rem(220) : rem(300)}
-      slideGap='sm'
+      slideGap='md'
       align='start'
       loop
       withControls={!!data?.length}
@@ -66,6 +73,9 @@ const CardsCarousel: React.FC<CardsCarouselProps> = ({ data }) => {
       ))}
       {!data?.length && (
         <>
+          <Carousel.Slide>
+            <Image p='xl' radius='md' className={classes.placeholder} src={null} withPlaceholder alt='placeholder' />
+          </Carousel.Slide>
           <Carousel.Slide>
             <Image p='xl' radius='md' className={classes.placeholder} src={null} withPlaceholder alt='placeholder' />
           </Carousel.Slide>
