@@ -18,12 +18,18 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     }
     return NextResponse.json(filteredAttractions);
   } else {
-    const filteredAttractions = attractions.filter((attraction) =>
-      categories?.some((category) => decodeURIComponent(attraction.category) === category && attraction.city === cityId)
-    ) as Attraction[];
-    if (limit) {
-      return NextResponse.json(filteredAttractions.slice(0, Number(limit)));
-    }
-    return NextResponse.json(filteredAttractions);
+    const data = attractions.reduce((result, obj) => {
+      categories.forEach((value) => {
+        if (decodeURIComponent(obj.category) === value && obj.city === cityId) {
+          if (limit && result.length === Number(limit)) {
+            return;
+          }
+          result.push({ ...obj, category: value });
+        }
+      });
+      return result;
+    }, [] as Attraction[]);
+
+    return NextResponse.json(data);
   }
 }

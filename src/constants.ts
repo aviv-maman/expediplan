@@ -13,8 +13,8 @@ export enum CategoryName {
   Finance = 'Finance',
   Government = 'Government',
   Services = 'Services',
-  HistoricSites = 'Historic Sites',
+  HistoricalSites = 'Historical Sites',
   Nature = 'Nature',
   Accommodation = 'Accommodation',
 }
-export const CATEGORIES_IN_CITY_PAGE = [CategoryName.HistoricSites, CategoryName.FoodAndDrinks, CategoryName.Shopping];
+export const CATEGORIES_IN_CITY_PAGE = [CategoryName.HistoricalSites, CategoryName.FoodAndDrinks, CategoryName.Shopping];

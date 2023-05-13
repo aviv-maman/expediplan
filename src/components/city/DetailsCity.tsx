@@ -4,8 +4,9 @@ import type { City } from '../../../types/general';
 import Link from 'next/link';
 import useSWR from 'swr';
 import { attractionsFetcher, getAttractionsByCityIdAPI } from '@/api/AttractionsAPI';
-import { CATEGORIES_IN_CITY_PAGE } from '@/constants';
+import { CATEGORIES_IN_CITY_PAGE, CategoryName } from '@/constants';
 import CardsCarousel from '../CardsCarousel';
+import { filterAttractionsByCategory } from '@/helpers/proccessInfoFromServer';
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -91,19 +92,19 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
       </Text>
 
       <Text my='xs' className={classes.subtitle} variant='gradient'>
-        Historical Sites
+        {CategoryName.HistoricalSites}
       </Text>
-      <CardsCarousel data={attractions?.data} />
+      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.HistoricalSites)} />
 
       <Text my='xs' className={classes.subtitle} variant='gradient'>
-        Restaurants
+        {CategoryName.FoodAndDrinks}
       </Text>
-      <CardsCarousel data={attractions?.data} />
+      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.FoodAndDrinks)} />
 
       <Text my='xs' className={classes.subtitle} variant='gradient'>
-        Shopping
+        {CategoryName.Shopping}
       </Text>
-      <CardsCarousel data={attractions?.data} />
+      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.Shopping)} />
     </Container>
   );
 };
