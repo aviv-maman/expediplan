@@ -65,7 +65,6 @@ const CardsCarousel: React.FC<CardsCarouselProps> = ({ data, title }) => {
           { maxWidth: 'sm', slideSize: '50%' },
           { maxWidth: 'xs', slideSize: '100%', slideGap: 0 },
         ]}
-        h={mobile ? rem(220) : rem(300)}
         slideGap='md'
         align='start'
         loop
