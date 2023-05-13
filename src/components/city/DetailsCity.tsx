@@ -91,20 +91,9 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
         Explore the best places to visit in {city?.name}
       </Text>
 
-      <Text my='xs' className={classes.subtitle} variant='gradient'>
-        {CategoryName.HistoricalSites}
-      </Text>
-      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.HistoricalSites)} />
-
-      <Text my='xs' className={classes.subtitle} variant='gradient'>
-        {CategoryName.FoodAndDrinks}
-      </Text>
-      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.FoodAndDrinks)} />
-
-      <Text my='xs' className={classes.subtitle} variant='gradient'>
-        {CategoryName.Shopping}
-      </Text>
-      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.Shopping)} />
+      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.HistoricalSites)} title={CategoryName.HistoricalSites} />
+      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.FoodAndDrinks)} title={CategoryName.FoodAndDrinks} />
+      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.Shopping)} title={CategoryName.Shopping} />
     </Container>
   );
 };
