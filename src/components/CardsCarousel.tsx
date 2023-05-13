@@ -24,13 +24,6 @@ const useStyles = createStyles((theme) => ({
     marginTop: theme.spacing.xs,
   },
 
-  category: {
-    color: theme.white,
-    opacity: 0.7,
-    fontWeight: 700,
-    textTransform: 'uppercase',
-  },
-
   placeholder: {
     height: rem(220),
     display: 'flex',

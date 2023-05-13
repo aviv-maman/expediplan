@@ -194,5 +194,145 @@
       }
     ],
     "about": "Main Church of Amsterdam is the best church in Netherlands."
+  },
+  {
+    "id": 8,
+    "name": "Historical Site in Moscow",
+    "country": 182,
+    "city": 99972,
+    "address": "Babushka 215, Moscow",
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "category": "Historical Sites",
+    "type": "Monument",
+    "rating": 3,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.moscow.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Moscow is a country in Europe."
+  },
+  {
+    "id": 9,
+    "name": "Babushka's Kitchen",
+    "country": 182,
+    "city": 99972,
+    "address": "Babushka 215, Moscow",
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 1,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.moscow.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Moscow is a country in Europe."
+  },
+  {
+    "id": 10,
+    "name": "Babushka's Kitchen",
+    "country": 182,
+    "city": 99972,
+    "address": "Babushka 215, Moscow",
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 1,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.moscow.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Moscow is a country in Europe."
+  },
+  {
+    "id": 11,
+    "name": "Babushka's Kitchen",
+    "country": 182,
+    "city": 99972,
+    "address": "Babushka 215, Moscow",
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 1,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.moscow.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Moscow is a country in Europe."
+  },
+  {
+    "id": 12,
+    "name": "Babushka's Kitchen",
+    "country": 182,
+    "city": 99972,
+    "address": "Babushka 215, Moscow",
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 1,
+    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
+    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "tags": ["food", "drinks", "restaurant"],
+    "contact": {
+      "website": "https://www.moscow.com",
+      "phone": "1234567890",
+      "email": "a@a"
+    },
+    "openingHoursPeriods": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "Moscow is a country in Europe."
   }
 ]
