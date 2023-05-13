@@ -24,7 +24,11 @@ const useStyles = createStyles((theme) => ({
 
   subtitle: {
     borderRadius: '2px',
-    backgroundImage: 'linear-gradient(180deg, rgba(48, 46, 46, 0.85) 90%, rgba(38, 207, 52, 0.85) 10%)',
+    backgroundImage:
+      theme.colorScheme === 'dark'
+        ? 'linear-gradient(180deg, rgba(66, 100, 97, 0.85) 90%, rgba(38, 207, 52, 0.85) 10%)'
+        : 'linear-gradient(180deg, rgba(98, 131, 129, 0.85) 90%, rgba(38, 207, 52, 0.85) 10%)',
+    // color: theme.colorScheme === 'dark' ? theme.colors.gray[1] : theme.colors.gray[4],
   },
 
   cover: {
