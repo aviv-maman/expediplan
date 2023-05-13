@@ -60,7 +60,7 @@ const CardsCarousel: React.FC<CardsCarouselProps> = ({ data, title }) => {
         {title}
       </Text>
       <Carousel
-        slideSize='33.33%'
+        slideSize='33.333%'
         breakpoints={[
           { maxWidth: 'sm', slideSize: '50%' },
           { maxWidth: 'xs', slideSize: '100%', slideGap: 0 },
