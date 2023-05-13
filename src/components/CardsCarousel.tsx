@@ -1,6 +1,6 @@
 'use client';
 import { Carousel } from '@mantine/carousel';
-import { Image, Paper, createStyles, getStylesRef, rem, useMantineTheme } from '@mantine/core';
+import { Image, Paper, createStyles, rem, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import type { Attraction } from '../../types/general';
 
@@ -16,19 +16,12 @@ const useStyles = createStyles((theme) => ({
     border: '1px solid #dee2e6',
   },
 
-  image: {
-    ...theme.fn.cover(),
-    ref: getStylesRef('image'),
-    backgroundSize: 'cover',
-    transition: 'transform 500ms ease',
+  title: {
+    backgroundImage: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .85) 90%)',
   },
 
-  title: {
-    fontWeight: 900,
-    color: theme.white,
-    lineHeight: 1.2,
-    fontSize: rem(32),
-    marginTop: theme.spacing.xs,
+  cover: {
+    ...theme.fn.cover(),
   },
 
   placeholder: {
@@ -68,7 +61,9 @@ const CardsCarousel: React.FC<CardsCarouselProps> = ({ data }) => {
       draggable={!!data?.length}>
       {data?.map((item) => (
         <Carousel.Slide key={item.id}>
-          <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card} />
+          <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card}>
+            <span className={classes.title}>{item.name}</span>
+          </Paper>
         </Carousel.Slide>
       ))}
       {!data?.length && (
