@@ -17,7 +17,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   title: {
-    backgroundImage: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .85) 90%)',
+    borderRadius: '2px',
+    backgroundImage: 'linear-gradient(180deg, rgba(48, 46, 46, 0.85) 90%, rgba(38, 207, 52, 0.85) 10%)',
   },
 
   cover: {
