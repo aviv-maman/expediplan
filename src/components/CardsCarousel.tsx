@@ -56,7 +56,7 @@ const CardsCarousel: React.FC<CardsCarouselProps> = ({ data, title }) => {
 
   return (
     <>
-      <Text my='xs' className={classes.title} variant='gradient'>
+      <Text my='xs' className={classes.title} variant='gradient' mx={{ xl: '20%' }}>
         {title}
       </Text>
       <Carousel
@@ -70,7 +70,8 @@ const CardsCarousel: React.FC<CardsCarouselProps> = ({ data, title }) => {
         align='start'
         loop
         withControls={!!data?.length}
-        draggable={!!data?.length}>
+        draggable={!!data?.length}
+        mx={{ xl: '20%' }}>
         {data?.map((item) => (
           <Carousel.Slide key={item.id}>
             <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card}>

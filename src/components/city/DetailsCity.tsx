@@ -65,7 +65,7 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
   if (attractions?.isLoading) return <div>Loading...</div>;
 
   return (
-    <Container size='lg' id='details-city' px={0}>
+    <Stack id='details-city'>
       <Stack align='center'>
         <Title className={classes.title}>About {city?.name}</Title>
         <Text c='dimmed' className={classes.description} ta='center'>
@@ -94,7 +94,7 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
       <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.HistoricalSites)} title={CategoryName.HistoricalSites} />
       <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.FoodAndDrinks)} title={CategoryName.FoodAndDrinks} />
       <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.Shopping)} title={CategoryName.Shopping} />
-    </Container>
+    </Stack>
   );
 };
 
