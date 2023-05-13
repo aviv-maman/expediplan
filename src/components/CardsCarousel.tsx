@@ -13,7 +13,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'flex-start',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    border: '1px solid #dee2e6',
+    border: theme.colorScheme === 'dark' ? '1px solid #dee2e6' : '1px solid #7c7d80',
   },
 
   title: {
@@ -41,7 +41,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    border: '1px solid #dee2e6',
+    border: theme.colorScheme === 'dark' ? '1px solid #dee2e6' : '1px solid #7c7d80',
     borderRadius: '6px',
   },
 }));
