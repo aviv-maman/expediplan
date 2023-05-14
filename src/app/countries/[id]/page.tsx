@@ -4,6 +4,8 @@ import CustomStack from '@/components/CustomStack';
 import { Suspense } from 'react';
 import PageLoader from '@/components/PageLoader';
 import { getCountryById } from '@/api/CountriesAPI';
+import HeroCountry from '@/components/country/HeroCountry';
+import InfoCountry from '@/components/country/InfoCountry';
 
 type Props = {
   params: { id: string };
@@ -22,11 +24,11 @@ export default async function CountryPage({ params, searchParams }: CountryPageP
   const countryFromServer = await getCountryById(Number(params.id));
 
   return (
-    <CustomStack>
+    <CustomStack mx={{ xl: '20%' }}>
       <Suspense fallback={<PageLoader size='xl' text='Loading country...' />}>
         <Suspense fallback={<div>Loading...</div>}>
-          <div>Country</div>
-          <div>{countryFromServer?.name}</div>
+          <HeroCountry countryFromServer={countryFromServer} />
+          <InfoCountry countryFromServer={countryFromServer} />
         </Suspense>
       </Suspense>
     </CustomStack>

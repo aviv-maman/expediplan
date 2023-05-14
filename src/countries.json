@@ -27,7 +27,8 @@
     "longitude": "5.75000000",
     "emoji": "🇳🇱",
     "emojiU": "U+1F1F3 U+1F1F1",
-    "flag": "./assets/flags/flag-netherlands_1f1f3-1f1f1.png"
+    "flag": "./assets/flags/flag-netherlands_1f1f3-1f1f1.png",
+    "about": ""
   },
   {
     "id": 177,
@@ -71,7 +72,8 @@
     "longitude": "-8.00000000",
     "emoji": "🇵🇹",
     "emojiU": "U+1F1F5 U+1F1F9",
-    "flag": "./assets/flags/flag-portugal_1f1f5-1f1f9.png"
+    "flag": "./assets/flags/flag-portugal_1f1f5-1f1f9.png",
+    "about": ""
   },
   {
     "id": 107,
@@ -101,7 +103,11 @@
     "longitude": "12.83333333",
     "emoji": "🇮🇹",
     "emojiU": "U+1F1EE U+1F1F9",
-    "flag": "./assets/flags/flag-italy_1f1ee-1f1f9.png"
+    "flag": "./assets/flags/flag-italy_1f1ee-1f1f9.png",
+    "languages": ["Italian"],
+    "cover_image": "https://cdn.britannica.com/82/195482-050-2373E635/Amalfi-Italy.jpg",
+    "map": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/EU-Italy.svg/1920px-EU-Italy.svg.png",
+    "about": "Italy (Italian: Italia), officially the Italian Republic or the Republic of Italy, is a country in Southern and Western Europe. Located in the middle of the Mediterranean Sea, it consists of a peninsula delimited by the Alps and surrounded by several islands; its territory largely coincides with the homonymous geographical region. Italy shares land borders with France, Switzerland, Austria, Slovenia and the enclaved microstates of Vatican City and San Marino. It has a territorial exclave in Switzerland, Campione, and some islands in the African Plate. Italy covers an area of 301,230 km2 (116,310 sq mi), with a population of about 60 million. It is the third-most populous member state of the European Union, the sixth-most populous country in Europe, and the tenth-largest country in the continent by land area. Italy's capital and largest city is Rome. Italy was the native place of civilizations such as the Italic peoples and the Etruscans, while due to its central geographic location in Southern Europe and the Mediterranean, the country has also historically been home to myriad peoples and cultures, who immigrated to the peninsula throughout history. The Latins, native of central Italy, formed the Roman Kingdom in the 8th century BC, which eventually became a republic with a government of the Senate and the People. The Roman Republic initially conquered and assimilated its neighbours on the Italian peninsula, eventually expanding and conquering a large part of Europe, North Africa and Western Asia. By the first century BC, the Roman Empire emerged as the dominant power in the Mediterranean Basin and became a leading cultural, political and religious centre, inaugurating the Pax Romana, a period of more than 200 years during which Italy's law, technology, economy, art, and literature developed. During the Early Middle Ages, Italy endured the fall of the Western Roman Empire and the Barbarian Invasions, but by the 11th century, numerous city-states and maritime republics, mostly in the North, became prosperous through trade, commerce, and banking, laying the groundwork for modern capitalism. The Renaissance began in Italy and spread to the rest of Europe, bringing a renewed interest in humanism, science, exploration, and art. During the Middle Ages, Italian explorers discovered new routes to the Far East and the New World, helping to usher in the European Age of Discovery. However, centuries of rivalry and infighting between the Italian city-states, and the invasions of other European powers during the Italian Wars of the 15th and 16th centuries, left Italy politically fragmented. Italy's commercial and political power significantly waned during the 17th and 18th centuries with the decline of the Catholic Church and the increasing importance of trade routes that bypassed the Mediterranean. By the mid-19th century, rising Italian nationalism, along with other social, economic, and military events, led to a period of revolutionary political upheaval. After centuries of political and territorial divisions, Italy was almost entirely unified in 1861 following a war of independence, establishing the Kingdom of Italy. From the late 19th century to the early 20th century, Italy rapidly industrialised, mainly in the north, and acquired a colonial empire, while the south remained largely impoverished and excluded from industrialisation, fuelling a large and influential diaspora. Despite being one of the victorious allied powers in World War I, Italy entered a period of economic crisis and social turmoil, leading to the rise of the Italian fascist dictatorship in 1922. The participation of Italy in World War II on the Axis led to the Italian surrender to Allied powers and its occupation by Nazi Germany helped by Fascists, followed by the rise of the Italian Resistance and the subsequent Italian Civil War and liberation of Italy. After the war, the country abolished its monarchy, established a democratic unitary parliamentary republic, and enjoyed a prolonged economic boom, becoming a major advanced economy. Italy has the eighth-largest nominal GDP (third in the European Union) in the world, the ninth-largest national wealth and the third-largest central bank gold reserve. The country has been described as the ''least of the great powers'', and it has a significant role in regional and global economic, military, cultural, and diplomatic affairs. Italy is a founding and leading member of the European Union and a member of numerous international institutions, including the United Nations, NATO, the OECD, the G7, the Latin Union, the Schengen Area, and many more. The source of many inventions and discoveries, the country is considered a cultural superpower and has long been a global centre of art, music, literature, philosophy, science and technology, tourism and fashion, as well as having greatly influenced and contributed to diverse fields including cinema, cuisine, sports, jurisprudence, banking, and business. It has the world's largest number of World Heritage Sites (58), and is the world's fifth-most visited country."
   },
   {
     "id": 75,
@@ -131,7 +137,8 @@
     "longitude": "2.00000000",
     "emoji": "🇫🇷",
     "emojiU": "U+1F1EB U+1F1F7",
-    "flag": "./assets/flags/flag-france_1f1eb-1f1f7.png"
+    "flag": "./assets/flags/flag-france_1f1eb-1f1f7.png",
+    "about": ""
   },
   {
     "id": 207,
@@ -175,7 +182,8 @@
     "longitude": "-4.00000000",
     "emoji": "🇪🇸",
     "emojiU": "U+1F1EA U+1F1F8",
-    "flag": "./assets/flags/flag-spain_1f1ea-1f1f8.png"
+    "flag": "./assets/flags/flag-spain_1f1ea-1f1f8.png",
+    "about": ""
   },
   {
     "id": 232,
@@ -205,7 +213,8 @@
     "longitude": "-2.00000000",
     "emoji": "🇬🇧",
     "emojiU": "U+1F1EC U+1F1E7",
-    "flag": "./assets/flags/flag-united-kingdom_1f1ec-1f1e7.png"
+    "flag": "./assets/flags/flag-united-kingdom_1f1ec-1f1e7.png",
+    "about": ""
   },
   {
     "id": 182,
@@ -410,6 +419,7 @@
     "longitude": "100.00000000",
     "emoji": "🇷🇺",
     "emojiU": "U+1F1F7 U+1F1FA",
-    "flag": "./assets/flags/flag-russia_1f1f7-1f1fa.png"
+    "flag": "./assets/flags/flag-russia_1f1f7-1f1fa.png",
+    "about": ""
   }
 ]

@@ -27,8 +27,12 @@ export type Country = {
   emoji: string;
   emojiU: string;
   flag: string;
+  languages: string[];
+  population: number;
   about: string;
   cover_image: string;
+  images: string[];
+  map: string;
 };
 
 export type City = {

@@ -19,8 +19,8 @@ export const getCountryById = async (id: number): Promise<Country | undefined> =
   const API = getCountryByIdAPI(id);
   const res = await fetch(API, {
     // headers: { Authorization: `token ${TOKEN}` },
-    // next: { revalidate: 3600 },
-    // cache: 'no-cache',
+    // next: { revalidate: 86_400  },
+    cache: 'no-cache',
   });
   if (!res.ok) {
     // This will activate the closest `error.tsx` Error Boundary
