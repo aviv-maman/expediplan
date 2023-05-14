@@ -52,7 +52,8 @@ const CarouselCities: React.FC = () => {
         Popular Destinations
       </Title>
       <Carousel
-        withIndicators
+        withControls={!!data?.length}
+        draggable={!!data?.length}
         slideSize='33.333%'
         slideGap='md'
         loop
@@ -78,6 +79,20 @@ const CarouselCities: React.FC = () => {
             </Link>
           </Carousel.Slide>
         ))}
+
+        {!data?.length && (
+          <>
+            <Carousel.Slide>
+              <Skeleton p='xl' radius='md' className={classes.card} />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Skeleton p='xl' radius='md' className={classes.card} />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Skeleton p='xl' radius='md' className={classes.card} />
+            </Carousel.Slide>
+          </>
+        )}
       </Carousel>
     </Stack>
   );
