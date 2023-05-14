@@ -23,21 +23,6 @@
         "tzName": "Central European Time"
       }
     ],
-    "translations": {
-      "kr": "네덜란드 ",
-      "pt-BR": "Holanda",
-      "pt": "Países Baixos",
-      "nl": "Nederland",
-      "hr": "Nizozemska",
-      "fa": "پادشاهی هلند",
-      "de": "Niederlande",
-      "es": "Países Bajos",
-      "fr": "Pays-Bas",
-      "ja": "オランダ",
-      "it": "Paesi Bassi",
-      "cn": "荷兰",
-      "tr": "Hollanda"
-    },
     "latitude": "52.50000000",
     "longitude": "5.75000000",
     "emoji": "🇳🇱",
@@ -82,21 +67,6 @@
         "tzName": "Western European Time"
       }
     ],
-    "translations": {
-      "kr": "포르투갈",
-      "pt-BR": "Portugal",
-      "pt": "Portugal",
-      "nl": "Portugal",
-      "hr": "Portugal",
-      "fa": "پرتغال",
-      "de": "Portugal",
-      "es": "Portugal",
-      "fr": "Portugal",
-      "ja": "ポルトガル",
-      "it": "Portogallo",
-      "cn": "葡萄牙",
-      "tr": "Portekiz"
-    },
     "latitude": "39.50000000",
     "longitude": "-8.00000000",
     "emoji": "🇵🇹",
@@ -127,21 +97,6 @@
         "tzName": "Central European Time"
       }
     ],
-    "translations": {
-      "kr": "이탈리아",
-      "pt-BR": "Itália",
-      "pt": "Itália",
-      "nl": "Italië",
-      "hr": "Italija",
-      "fa": "ایتالیا",
-      "de": "Italien",
-      "es": "Italia",
-      "fr": "Italie",
-      "ja": "イタリア",
-      "it": "Italia",
-      "cn": "意大利",
-      "tr": "İtalya"
-    },
     "latitude": "42.83333333",
     "longitude": "12.83333333",
     "emoji": "🇮🇹",
@@ -172,21 +127,6 @@
         "tzName": "Central European Time"
       }
     ],
-    "translations": {
-      "kr": "프랑스",
-      "pt-BR": "França",
-      "pt": "França",
-      "nl": "Frankrijk",
-      "hr": "Francuska",
-      "fa": "فرانسه",
-      "de": "Frankreich",
-      "es": "Francia",
-      "fr": "France",
-      "ja": "フランス",
-      "it": "Francia",
-      "cn": "法国",
-      "tr": "Fransa"
-    },
     "latitude": "46.00000000",
     "longitude": "2.00000000",
     "emoji": "🇫🇷",
@@ -231,21 +171,6 @@
         "tzName": "Central European Time"
       }
     ],
-    "translations": {
-      "kr": "스페인",
-      "pt-BR": "Espanha",
-      "pt": "Espanha",
-      "nl": "Spanje",
-      "hr": "Španjolska",
-      "fa": "اسپانیا",
-      "de": "Spanien",
-      "es": "España",
-      "fr": "Espagne",
-      "ja": "スペイン",
-      "it": "Spagna",
-      "cn": "西班牙",
-      "tr": "İspanya"
-    },
     "latitude": "40.00000000",
     "longitude": "-4.00000000",
     "emoji": "🇪🇸",
@@ -276,21 +201,6 @@
         "tzName": "Greenwich Mean Time"
       }
     ],
-    "translations": {
-      "kr": "영국",
-      "pt-BR": "Reino Unido",
-      "pt": "Reino Unido",
-      "nl": "Verenigd Koninkrijk",
-      "hr": "Ujedinjeno Kraljevstvo",
-      "fa": "بریتانیای کبیر و ایرلند شمالی",
-      "de": "Vereinigtes Königreich",
-      "es": "Reino Unido",
-      "fr": "Royaume-Uni",
-      "ja": "イギリス",
-      "it": "Regno Unito",
-      "cn": "英国",
-      "tr": "Birleşik Krallik"
-    },
     "latitude": "54.00000000",
     "longitude": "-2.00000000",
     "emoji": "🇬🇧",
@@ -496,21 +406,6 @@
         "tzName": "Moscow Standard Time"
       }
     ],
-    "translations": {
-      "kr": "러시아",
-      "pt-BR": "Rússia",
-      "pt": "Rússia",
-      "nl": "Rusland",
-      "hr": "Rusija",
-      "fa": "روسیه",
-      "de": "Russland",
-      "es": "Rusia",
-      "fr": "Russie",
-      "ja": "ロシア連邦",
-      "it": "Russia",
-      "cn": "俄罗斯联邦",
-      "tr": "Rusya"
-    },
     "latitude": "60.00000000",
     "longitude": "100.00000000",
     "emoji": "🇷🇺",

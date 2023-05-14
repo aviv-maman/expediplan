@@ -74,9 +74,11 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
       </Stack>
 
       <Group position='center'>
-        <Button variant='light' size='sm'>
-          Explore {city?.country_name}
-        </Button>
+        <Link href={{ pathname: `/countries/${city?.country_id}` }}>
+          <Button variant='light' size='sm'>
+            Explore {city?.country_name}
+          </Button>
+        </Link>
         <Link href={{ pathname: `https://www.wikidata.org/wiki/${city?.wikiDataId}` }} target='_blank' rel='noopener noreferrer'>
           <Button variant='light' size='sm'>
             Wiki

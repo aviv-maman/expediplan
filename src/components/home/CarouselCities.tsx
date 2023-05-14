@@ -1,9 +1,10 @@
 'use client';
 import { Carousel } from '@mantine/carousel';
 import useSWR from 'swr';
-import { Highlight, Paper, Stack, Title, createStyles, rem } from '@mantine/core';
+import { Highlight, Paper, Skeleton, Stack, Title, createStyles, rem } from '@mantine/core';
 import { citiesFetcher, getCitiesAPI } from '@/api/CitiesAPI';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 const ids = [77340, 143446, 59582, 44856, 32653, 50388, 99972];
 
@@ -36,7 +37,6 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 900,
     color: theme.colorScheme === 'dark' ? theme.colors.orange[3] : theme.colors.pink[7],
     fontSize: rem(28),
-    // backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
   },
 }));
 
@@ -44,7 +44,7 @@ const CarouselCities: React.FC = () => {
   const { classes } = useStyles();
   const { data, error } = useSWR(getCitiesAPI(ids), citiesFetcher);
   if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  // if (!data) return <div>Loading...</div>;
 
   return (
     <Stack>
@@ -62,7 +62,7 @@ const CarouselCities: React.FC = () => {
           { maxWidth: 'xs', slideSize: '100%', slideGap: 0 },
         ]}
         mx={{ xl: '20%' }}>
-        {data.map((city) => (
+        {data?.map((city) => (
           <Carousel.Slide key={city.id}>
             <Link href={{ pathname: `cities/${city?.id}` }}>
               <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${city.cover_image})` }} className={classes.card}>

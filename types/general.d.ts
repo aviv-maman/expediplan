@@ -22,21 +22,6 @@ export type Country = {
     abbreviation: string;
     tzName: string;
   }[];
-  translations: {
-    kr: string;
-    ptBR: string;
-    pt: string;
-    nl: string;
-    hr: string;
-    fa: string;
-    de: string;
-    es: string;
-    fr: string;
-    ja: string;
-    it: string;
-    cn: string;
-    tr: string;
-  };
   latitude: string;
   longitude: string;
   emoji: string;
