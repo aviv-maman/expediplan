@@ -1,5 +1,5 @@
 'use client';
-import { createStyles, Container, Title, Text, rem, BackgroundImage } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, useMantineTheme } from '@mantine/core';
 import type { Country } from '../../../types/general';
 
 const useStyles = createStyles((theme) => ({
@@ -43,6 +43,7 @@ interface HeroCountryProps {
 
 const HeroCountry: React.FC<HeroCountryProps> = ({ countryFromServer }) => {
   const { classes } = useStyles();
+  const theme = useMantineTheme();
 
   return (
     <BackgroundImage
@@ -54,7 +55,9 @@ const HeroCountry: React.FC<HeroCountryProps> = ({ countryFromServer }) => {
       }}>
       <Container className={classes.wrapper}>
         <Title className={classes.title}>
-          <Text color='#00796B'>{countryFromServer?.name}</Text>
+          <Text variant='gradient' gradient={{ from: theme.colors.cyan[5], to: theme.colors.indigo[5], deg: 45 }}>
+            {countryFromServer?.name}
+          </Text>
         </Title>
       </Container>
     </BackgroundImage>

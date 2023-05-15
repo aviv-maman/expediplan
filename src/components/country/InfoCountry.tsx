@@ -1,7 +1,7 @@
 'use client';
-import { createStyles, Text, Title, SimpleGrid, Paper, Stack, Box, Image, useMantineTheme } from '@mantine/core';
+import { createStyles, Text, Title, SimpleGrid, Paper, Stack, Box, Highlight, Group, Button, Image } from '@mantine/core';
 import type { Country } from '../../../types/general';
-import { useMediaQuery } from '@mantine/hooks';
+import { useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -37,6 +37,17 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2],
     padding: theme.spacing.sm,
   },
+
+  placeholder: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    borderRadius: '6px',
+    border: theme.colorScheme === 'dark' ? `1px solid ${theme.colors.dark[6]}` : `1px solid ${theme.colors.gray[2]}`,
+  },
 }));
 
 interface InfoCountryProps {
@@ -45,8 +56,11 @@ interface InfoCountryProps {
 
 const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
   const { classes } = useStyles();
-  const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`);
+  const [showMore, setShowMore] = useState(false);
+
+  const toggleShowMore = () => {
+    setShowMore((prevState) => !prevState);
+  };
 
   const prepareLanguages = (languages?: string[]) => {
     if (!languages) return 'Unknown';
@@ -68,7 +82,7 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
 
   return (
     <Stack>
-      <SimpleGrid cols={2} spacing={'xs'} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+      <SimpleGrid cols={2} spacing={'md'} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <Box>
           <Title className={classes.title}>Information</Title>
           <Paper className={classes.info} withBorder>
@@ -81,19 +95,31 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
         </Box>
         <Box>
           <Title className={classes.title}>Map</Title>
-          <Image
-            src={countryFromServer?.map}
-            alt={countryFromServer?.name}
-            radius='md'
-            withPlaceholder
-            sx={{ border: '1px solid #dee2e6', borderRadius: '6px' }}
-          />
+          <Paper className={classes.info} withBorder id='paper-map'>
+            <Image id='map' src={countryFromServer?.map || ''} alt={countryFromServer?.name || ''} className={classes.placeholder} />
+          </Paper>
         </Box>
       </SimpleGrid>
       <Box>
-        <Title className={classes.title}>About</Title>
+        <Group position='apart' spacing='xs'>
+          <Title className={classes.title}>About</Title>
+          <Button size='xs' color='lime' onClick={toggleShowMore}>
+            {showMore ? 'Show Less' : 'Show More'}
+          </Button>
+        </Group>
         <Paper withBorder sx={(theme) => ({ padding: theme.spacing.sm })}>
-          <Text className={classes.description}>{countryFromServer?.about}</Text>
+          <Highlight
+            highlight={countryFromServer?.name || ''}
+            className={classes.description}
+            lineClamp={showMore ? 0 : 10}
+            highlightStyles={(theme) => ({
+              backgroundImage: theme.fn.linearGradient(45, theme.colors.cyan[5], theme.colors.indigo[5]),
+              fontWeight: 700,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            })}>
+            {countryFromServer?.about || 'Data is unavailable'}
+          </Highlight>
         </Paper>
       </Box>
     </Stack>

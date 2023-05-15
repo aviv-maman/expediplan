@@ -38,3 +38,12 @@ export const getCityById = async (id: number): Promise<City | undefined> => {
   }
   return data as City;
 };
+
+export const getCitiesByCountryId = async (id: number): Promise<City[] | undefined> => {
+  const API = getCitiesByCountryIdAPI(id);
+  const res = await fetch(API, {});
+  if (!res.ok) return undefined;
+  const data = await res.json();
+  if (data.message) throw new Error(data.message);
+  return data as City[];
+};
