@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'flex-start',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    border: theme.colorScheme === 'dark' ? '1px solid #dee2e6' : '1px solid #7c7d80',
+    border: theme.colorScheme === 'dark' ? '1px solid #787878' : '1px solid #dee2e6',
   },
 
   title: {
@@ -40,7 +40,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    border: theme.colorScheme === 'dark' ? '1px solid #dee2e6' : '1px solid #7c7d80',
+    border: theme.colorScheme === 'dark' ? '1px solid #787878' : '1px solid #dee2e6',
     borderRadius: '6px',
   },
 }));
