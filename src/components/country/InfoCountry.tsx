@@ -52,10 +52,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface InfoCountryProps {
-  countryFromServer?: Country;
+  country?: Country;
 }
 
-const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
+const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
   const { classes } = useStyles();
   const [showMore, setShowMore] = useState(false);
 
@@ -69,16 +69,16 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
   };
 
   const PAPER_ITEMS = [
-    { title: 'Name', value: countryFromServer?.name },
-    { title: 'Native Name', value: countryFromServer?.native },
-    { title: 'Capital', value: countryFromServer?.capital },
-    { title: 'Population', value: countryFromServer?.population },
-    { title: 'Languages', value: prepareLanguages(countryFromServer?.languages) },
-    { title: 'Currency', value: `${countryFromServer?.currency_name} (${countryFromServer?.currency_symbol})` },
-    { title: 'Phone Code', value: countryFromServer?.phone_code },
-    { title: 'Region', value: countryFromServer?.region },
-    { title: 'Sub Region', value: countryFromServer?.subregion },
-    { title: 'Internet TLD', value: countryFromServer?.tld },
+    { title: 'Name', value: country?.name },
+    { title: 'Native Name', value: country?.native },
+    { title: 'Capital', value: country?.capital },
+    { title: 'Population', value: country?.population },
+    { title: 'Languages', value: prepareLanguages(country?.languages) },
+    { title: 'Currency', value: `${country?.currency_name} (${country?.currency_symbol})` },
+    { title: 'Phone Code', value: country?.phone_code },
+    { title: 'Region', value: country?.region },
+    { title: 'Sub Region', value: country?.subregion },
+    { title: 'Internet TLD', value: country?.tld },
   ];
 
   return (
@@ -99,8 +99,8 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
           <Paper className={classes.info} withBorder id='paper-map'>
             <Image
               id='map'
-              src={countryFromServer?.map || ''}
-              alt={countryFromServer?.name || ''}
+              src={country?.map || ''}
+              alt={country?.name || ''}
               className={classes.placeholder}
               withPlaceholder
               placeholder={<IconMap />}
@@ -111,13 +111,13 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
       <Box>
         <Group position='apart' spacing='xs'>
           <Title className={classes.title}>About</Title>
-          <Button size='xs' color='lime' onClick={toggleShowMore} disabled={!countryFromServer?.about}>
+          <Button size='xs' color='lime' onClick={toggleShowMore} disabled={!country?.about}>
             {showMore ? 'Show Less' : 'Show More'}
           </Button>
         </Group>
         <Paper withBorder sx={(theme) => ({ padding: theme.spacing.sm })}>
           <Highlight
-            highlight={countryFromServer?.name || ''}
+            highlight={country?.name || ''}
             className={classes.description}
             lineClamp={showMore ? 0 : 10}
             highlightStyles={(theme) => ({
@@ -126,7 +126,7 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             })}>
-            {countryFromServer?.about || 'Data is unavailable'}
+            {country?.about || 'Data is unavailable'}
           </Highlight>
         </Paper>
       </Box>

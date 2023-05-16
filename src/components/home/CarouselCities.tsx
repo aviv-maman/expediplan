@@ -35,7 +35,7 @@ const useStyles = createStyles((theme) => ({
 
   carouselTitle: {
     fontWeight: 900,
-    color: theme.colorScheme === 'dark' ? theme.colors.orange[3] : theme.colors.pink[7],
+    color: theme.colorScheme === 'dark' ? theme.colors.green[3] : theme.colors.green[7],
     fontSize: rem(28),
   },
 }));

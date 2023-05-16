@@ -38,25 +38,25 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeroCountryProps {
-  countryFromServer?: Country;
+  country?: Country;
 }
 
-const HeroCountry: React.FC<HeroCountryProps> = ({ countryFromServer }) => {
+const HeroCountry: React.FC<HeroCountryProps> = ({ country }) => {
   const { classes } = useStyles();
   const theme = useMantineTheme();
 
   return (
     <BackgroundImage
-      src={countryFromServer?.cover_image || ''}
+      src={country?.cover_image || ''}
       radius='sm'
       mih={265}
       sx={{
-        backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${countryFromServer?.cover_image})`,
+        backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${country?.cover_image})`,
       }}>
       <Container className={classes.wrapper}>
         <Title className={classes.title}>
           <Text variant='gradient' gradient={{ from: theme.colors.cyan[5], to: theme.colors.indigo[5], deg: 45 }}>
-            {countryFromServer?.name}
+            {country?.name}
           </Text>
         </Title>
       </Container>

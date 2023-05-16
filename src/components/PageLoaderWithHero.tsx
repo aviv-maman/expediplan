@@ -1,14 +1,14 @@
 'use client';
 import { Container, Loader, type MantineColor, Title } from '@mantine/core';
 
-interface PageLoaderProps {
+interface PageLoaderWithHeroProps {
   color?: MantineColor;
   size?: number | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'bars' | 'oval' | 'dots';
   text?: string;
 }
 
-const PageLoader: React.FC<PageLoaderProps> = ({ color = 'lime', size, variant = 'bars', text }) => {
+const PageLoaderWithHero: React.FC<PageLoaderWithHeroProps> = ({ color = 'lime', size, variant = 'bars', text }) => {
   return (
     <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '50vh' }}>
       <Loader size={size} variant={variant} color={color} />
@@ -20,4 +20,4 @@ const PageLoader: React.FC<PageLoaderProps> = ({ color = 'lime', size, variant =
   );
 };
 
-export default PageLoader;
+export default PageLoaderWithHero;

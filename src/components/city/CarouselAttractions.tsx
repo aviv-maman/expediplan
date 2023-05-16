@@ -1,9 +1,7 @@
 'use client';
 import { Carousel } from '@mantine/carousel';
-import { Image, Paper, Text, createStyles, rem, useMantineTheme } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
-import type { City } from '../../../types/general';
-import Link from 'next/link';
+import { Image, Paper, Stack, Text, createStyles, rem } from '@mantine/core';
+import type { Attraction } from '../../../types/general';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -26,8 +24,8 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '2px',
     backgroundImage:
       theme.colorScheme === 'dark'
-        ? 'linear-gradient(180deg, rgba(40, 58, 73, 0.85) 90%, rgba(25, 176, 214, 0.85) 10%)'
-        : 'linear-gradient(180deg, rgba(193, 210, 238, 0.85) 86%, rgba(14, 40, 88, 0.85) 10%)',
+        ? 'linear-gradient(180deg, rgba(66, 100, 97, 0.85) 90%, rgba(38, 207, 52, 0.85) 10%)'
+        : 'linear-gradient(180deg, rgba(98, 131, 129, 0.85) 90%, rgba(38, 207, 52, 0.85) 10%)',
   },
 
   cover: {
@@ -47,18 +45,16 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface CarouselXLProps {
-  data: City[] | undefined;
+interface CarouselAttractionsProps {
+  data: Attraction[];
   title: string;
 }
 
-const CarouselXL: React.FC<CarouselXLProps> = ({ data, title }) => {
+const CarouselAttractions: React.FC<CarouselAttractionsProps> = ({ data, title }) => {
   const { classes } = useStyles();
-  const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`);
 
   return (
-    <>
+    <Stack>
       <Text my='xs' className={classes.title} variant='gradient'>
         {title}
       </Text>
@@ -75,11 +71,9 @@ const CarouselXL: React.FC<CarouselXLProps> = ({ data, title }) => {
         draggable={!!data?.length}>
         {data?.map((item) => (
           <Carousel.Slide key={item.id}>
-            <Link href={{ pathname: `/cities/${item.id}` }}>
-              <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card}>
-                <span className={classes.subtitle}>{item.name}</span>
-              </Paper>
-            </Link>
+            <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card}>
+              <span className={classes.subtitle}>{item.name}</span>
+            </Paper>
           </Carousel.Slide>
         ))}
         {!data?.length && (
@@ -96,8 +90,8 @@ const CarouselXL: React.FC<CarouselXLProps> = ({ data, title }) => {
           </>
         )}
       </Carousel>
-    </>
+    </Stack>
   );
 };
 
-export default CarouselXL;
+export default CarouselAttractions;

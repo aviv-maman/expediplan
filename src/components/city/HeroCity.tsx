@@ -1,8 +1,6 @@
 'use client';
 import { createStyles, Container, Title, Text, rem, BackgroundImage } from '@mantine/core';
-import useSWR from 'swr';
-import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
-import { useParams } from 'next/navigation';
+import type { City } from '../../../types/general';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -38,25 +36,25 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface HeroCityProps {}
+interface HeroCityProps {
+  city: City | undefined;
+}
 
-const HeroCity: React.FC<HeroCityProps> = ({}) => {
+const HeroCity: React.FC<HeroCityProps> = ({ city }) => {
   const { classes } = useStyles();
-  const params = useParams();
-  const city = useSWR(getCityByIdAPI(Number(params?.id)), cityFetcher, { suspense: true });
 
   return (
     <BackgroundImage
-      src={city?.data?.cover_image}
+      src={city?.cover_image || ''}
       radius='sm'
       mih={265}
       sx={{
-        backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${city?.data?.cover_image})`,
+        backgroundImage: `linear-gradient(0deg, rgba(130, 201, 30, 0) 0%, #0a0f14 100%), url(${city?.cover_image})`,
       }}>
       <Container className={classes.wrapper}>
         <Title className={classes.title}>
           <Text component='span' variant='gradient' gradient={{ from: 'grape', to: 'indigo' }}>
-            {city?.data?.name}
+            {city?.name}
           </Text>
         </Title>
       </Container>

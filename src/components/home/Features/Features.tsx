@@ -19,8 +19,8 @@ const useStyles = createStyles((theme) => ({
     marginRight: theme.spacing.md,
     background:
       theme.colorScheme === 'dark'
-        ? theme.fn.gradient({ from: theme.colors.pink[2], to: theme.colors.red[6], deg: 30 })
-        : theme.fn.gradient({ from: theme.colors.pink[3], to: theme.colors.red[7], deg: 30 }),
+        ? theme.fn.gradient({ from: theme.colors.green[7], to: theme.colors.cyan[5], deg: 30 })
+        : theme.fn.gradient({ from: theme.colors.green[3], to: theme.colors.cyan[7], deg: 30 }),
   },
 
   itemTitle: {
@@ -97,7 +97,7 @@ const Features: React.FC = () => {
         <Text
           component='span'
           className={classes.highlight}
-          sx={(theme) => ({ backgroundImage: theme.fn.gradient({ from: 'lime.3', to: 'green.3', deg: 45 }) })}>
+          sx={(theme) => ({ backgroundImage: theme.fn.gradient({ from: 'lime.4', to: 'green.5', deg: 45 }) })}>
           best
         </Text>{' '}
         of travel planning

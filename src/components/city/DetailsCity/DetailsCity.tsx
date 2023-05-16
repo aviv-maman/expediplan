@@ -1,12 +1,12 @@
 'use client';
-import { createStyles, Title, Text, Container, rem, Stack, Group, Button } from '@mantine/core';
-import type { City } from '../../../types/general';
+import { createStyles, Title, Text, rem, Stack, Group, Button } from '@mantine/core';
+import type { City } from '../../../../types/general';
 import Link from 'next/link';
 import useSWR from 'swr';
 import { attractionsFetcher, getAttractionsByCityIdAPI } from '@/api/AttractionsAPI';
 import { CATEGORIES_IN_CITY_PAGE, CategoryName } from '@/constants';
-import CardsCarousel from '../CardsCarousel';
 import { filterAttractionsByCategory } from '@/helpers/processInfoFromServer';
+import CarouselAttractions from '../CarouselAttractions';
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -62,7 +62,11 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
   const { classes } = useStyles();
   const attractions = useSWR(getAttractionsByCityIdAPI(Number(city?.id), CATEGORIES_IN_CITY_PAGE), attractionsFetcher, { suspense: true });
 
-  if (attractions?.isLoading) return <div>Loading...</div>;
+  const items = [
+    { id: 1, category: CategoryName.HistoricalSites },
+    { id: 2, category: CategoryName.FoodAndDrinks },
+    { id: 3, category: CategoryName.Shopping },
+  ];
 
   return (
     <Stack id='details-city'>
@@ -93,9 +97,9 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
         Explore the best places to visit in {city?.name}
       </Text>
 
-      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.HistoricalSites)} title={CategoryName.HistoricalSites} />
-      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.FoodAndDrinks)} title={CategoryName.FoodAndDrinks} />
-      <CardsCarousel data={filterAttractionsByCategory(attractions?.data, CategoryName.Shopping)} title={CategoryName.Shopping} />
+      {items.map((item) => (
+        <CarouselAttractions key={item.id} data={filterAttractionsByCategory(attractions?.data, item.category)} title={item.category} />
+      ))}
     </Stack>
   );
 };
