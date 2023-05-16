@@ -257,17 +257,17 @@
     "wikiDataId": "Q1761"
   },
   {
-    "id": 131031,
+    "id": 48458,
     "name": "Belfast",
-    "state_id": 937,
-    "state_code": "MP",
-    "state_name": "Mpumalanga",
-    "country_id": 204,
-    "country_code": "ZA",
-    "country_name": "South Africa",
-    "latitude": "-25.68991000",
-    "longitude": "30.03504000",
-    "wikiDataId": "Q301107"
+    "state_id": 2337,
+    "state_code": "NYK",
+    "state_name": "Northern Ireland",
+    "country_id": 232,
+    "country_code": "GB",
+    "country_name": "United Kingdom",
+    "latitude": "54.59682000",
+    "longitude": "-5.92541000",
+    "wikiDataId": "Q10686"
   },
   {
     "id": 57256,

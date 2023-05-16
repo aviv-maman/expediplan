@@ -1,10 +1,9 @@
 'use client';
 import { Carousel } from '@mantine/carousel';
 import useSWR from 'swr';
-import { Highlight, Paper, Skeleton, Stack, Title, createStyles, rem } from '@mantine/core';
+import { Highlight, Paper, Stack, Title, createStyles, rem } from '@mantine/core';
 import { citiesFetcher, getCitiesAPI } from '@/api/CitiesAPI';
 import Link from 'next/link';
-import { POPULAR_DESTINATIONS } from '@/constants';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -38,16 +37,21 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const CarouselCities: React.FC = () => {
+interface CarouselCitiesProps {
+  title: string;
+  idsToFetch?: number | number[];
+}
+
+const CarouselCities: React.FC<CarouselCitiesProps> = ({ title, idsToFetch }) => {
   const { classes } = useStyles();
-  const { data, error } = useSWR(getCitiesAPI(POPULAR_DESTINATIONS), citiesFetcher);
+  const { data, error } = useSWR(getCitiesAPI(idsToFetch), citiesFetcher, { suspense: true });
   if (error) return <div>Failed to load</div>;
   // if (!data) return <div>Loading...</div>;
 
   return (
     <Stack>
       <Title align='center' className={classes.carouselTitle}>
-        Popular Destinations
+        {title}
       </Title>
       <Carousel
         withControls={!!data?.length}
@@ -77,20 +81,6 @@ const CarouselCities: React.FC = () => {
             </Link>
           </Carousel.Slide>
         ))}
-
-        {!data?.length && (
-          <>
-            <Carousel.Slide>
-              <Skeleton p='xl' radius='md' className={classes.card} />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Skeleton p='xl' radius='md' className={classes.card} />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Skeleton p='xl' radius='md' className={classes.card} />
-            </Carousel.Slide>
-          </>
-        )}
       </Carousel>
     </Stack>
   );

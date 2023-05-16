@@ -10,6 +10,7 @@ export const citiesFetcher = (url: string) =>
 export const cityFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City>);
 
 export const getCitiesAPI = (ids?: number | number[]) => {
+  if (!ids) return `${HOSTNAME}/api/cities`;
   const params = new URLSearchParams({ id: String(ids) });
   const API = `${HOSTNAME}/api/cities?${params}`;
   return API;

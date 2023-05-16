@@ -31,7 +31,7 @@ export default async function CountryPage({ params, searchParams }: CountryPageP
         <InfoCountry country={countryFromServer} />
       </Suspense>
       <Suspense fallback={<Loading />}>
-        <CarouselCountry />
+        <CarouselCountry title={`Popular Destinations in ${countryFromServer?.name}`} />
       </Suspense>
     </CustomStack>
   );

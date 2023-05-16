@@ -48,7 +48,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const CarouselCountry: React.FC = () => {
+interface CarouselCountryProps {
+  title: string;
+}
+
+const CarouselCountry: React.FC<CarouselCountryProps> = ({ title }) => {
   const { classes } = useStyles();
   const params = useParams();
   const citiesFromServer = useSWR(getCitiesByCountryIdAPI(Number(params?.id)), citiesFetcher, { suspense: true });
@@ -56,7 +60,7 @@ const CarouselCountry: React.FC = () => {
   return (
     <>
       <Text my='xs' className={classes.title} variant='gradient'>
-        {`Popular Destinations in ${citiesFromServer?.data?.[0].country_name}`}
+        {title}
       </Text>
       <Carousel
         slideSize='33.333%'
