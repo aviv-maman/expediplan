@@ -2,7 +2,8 @@
 import { Carousel } from '@mantine/carousel';
 import { Image, Paper, Text, createStyles, rem, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import type { Attraction, City, Country } from '../../../types/general';
+import type { City } from '../../../types/general';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -47,7 +48,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface CarouselXLProps {
-  data: Attraction[] | Country[] | City[] | undefined;
+  data: City[] | undefined;
   title: string;
 }
 
@@ -74,9 +75,11 @@ const CarouselXL: React.FC<CarouselXLProps> = ({ data, title }) => {
         draggable={!!data?.length}>
         {data?.map((item) => (
           <Carousel.Slide key={item.id}>
-            <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card}>
-              <span className={classes.subtitle}>{item.name}</span>
-            </Paper>
+            <Link href={{ pathname: `/cities/${item.id}` }}>
+              <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card}>
+                <span className={classes.subtitle}>{item.name}</span>
+              </Paper>
+            </Link>
           </Carousel.Slide>
         ))}
         {!data?.length && (

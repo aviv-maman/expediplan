@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import CustomStack from '@/components/CustomStack';
 import { Suspense } from 'react';
 import PageLoader from '@/components/PageLoader';
-import HeroLoading from '@/components/plans/hero/loading';
 import { getCityById } from '@/api/CitiesAPI';
 import LeadGrid from '@/components/city/LeadGrid';
 import HeroCity from '@/components/city/HeroCity';
@@ -27,7 +26,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
   const cityFromServer = await getCityById(Number(params.id));
 
   return (
-    <CustomStack>
+    <CustomStack mx={{ xl: '20%' }}>
       <Suspense fallback={<PageLoader size='xl' text='Loading city...' />}>
         <Suspense fallback={<HeroSkeleton />}>
           <HeroCity />

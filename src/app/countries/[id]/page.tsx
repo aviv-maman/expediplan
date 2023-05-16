@@ -8,6 +8,7 @@ import HeroCountry from '@/components/country/HeroCountry';
 import InfoCountry from '@/components/country/InfoCountry';
 import { getCitiesByCountryId } from '@/api/CitiesAPI';
 import CarouselXL from '@/components/city/CarouselXL';
+import HeroSkeleton from '@/components/city/HeroSkeleton';
 
 type Props = {
   params: { id: string };
@@ -16,7 +17,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   return {
-    title: `${process.env.NEXT_PUBLIC_WEBSITE_NAME ?? 'WebDev'} | Country: ${params.id}`,
+    title: `${process.env.NEXT_PUBLIC_WEBSITE_NAME ?? ''} | Country: ${params.id}`,
   };
 }
 
@@ -29,7 +30,7 @@ export default async function CountryPage({ params, searchParams }: CountryPageP
   return (
     <CustomStack mx={{ xl: '20%' }}>
       <Suspense fallback={<PageLoader size='xl' text='Loading country...' />}>
-        <Suspense fallback={<div>Loading hero...</div>}>
+        <Suspense fallback={<HeroSkeleton />}>
           <HeroCountry countryFromServer={countryFromServer} />
         </Suspense>
         <Suspense fallback={<div>Loading info...</div>}>

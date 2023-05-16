@@ -1,7 +1,8 @@
 'use client';
-import { createStyles, Text, Title, SimpleGrid, Paper, Stack, Box, Highlight, Group, Button, Image } from '@mantine/core';
+import { Box, Button, createStyles, Group, Highlight, Image, Paper, SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import type { Country } from '../../../types/general';
 import { useState } from 'react';
+import { IconMap } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -25,7 +26,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   title: {
-    color: theme.colorScheme === 'dark' ? theme.colors.cyan[1] : theme.colors.cyan[7],
+    color: theme.colorScheme === 'dark' ? theme.colors.cyan[5] : theme.colors.cyan[7],
     fontSize: '2rem',
     paddingBottom: theme.spacing.xs,
     [theme.fn.smallerThan('xs')]: {
@@ -96,14 +97,21 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ countryFromServer }) => {
         <Box>
           <Title className={classes.title}>Map</Title>
           <Paper className={classes.info} withBorder id='paper-map'>
-            <Image id='map' src={countryFromServer?.map || ''} alt={countryFromServer?.name || ''} className={classes.placeholder} />
+            <Image
+              id='map'
+              src={countryFromServer?.map || ''}
+              alt={countryFromServer?.name || ''}
+              className={classes.placeholder}
+              withPlaceholder
+              placeholder={<IconMap />}
+            />
           </Paper>
         </Box>
       </SimpleGrid>
       <Box>
         <Group position='apart' spacing='xs'>
           <Title className={classes.title}>About</Title>
-          <Button size='xs' color='lime' onClick={toggleShowMore}>
+          <Button size='xs' color='lime' onClick={toggleShowMore} disabled={!countryFromServer?.about}>
             {showMore ? 'Show Less' : 'Show More'}
           </Button>
         </Group>

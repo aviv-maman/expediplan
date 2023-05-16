@@ -28,6 +28,9 @@
     "emoji": "🇳🇱",
     "emojiU": "U+1F1F3 U+1F1F1",
     "flag": "./assets/flags/flag-netherlands_1f1f3-1f1f1.png",
+    "languages": ["Dutch", "Frisian", "Papiamento"],
+    "cover_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Den_Haag_-_panoramio_-_Nikolai_Karaneschev.jpg/1280px-Den_Haag_-_panoramio_-_Nikolai_Karaneschev.jpg",
+    "map": "",
     "about": ""
   },
   {
@@ -73,6 +76,9 @@
     "emoji": "🇵🇹",
     "emojiU": "U+1F1F5 U+1F1F9",
     "flag": "./assets/flags/flag-portugal_1f1f5-1f1f9.png",
+    "languages": ["Portuguese"],
+    "cover_image": "https://cdn.britannica.com/98/178098-050-9E076C05/dwellings-district-Ribeira-Portugal-Porto.jpg",
+    "map": "",
     "about": ""
   },
   {
@@ -138,6 +144,9 @@
     "emoji": "🇫🇷",
     "emojiU": "U+1F1EB U+1F1F7",
     "flag": "./assets/flags/flag-france_1f1eb-1f1f7.png",
+    "languages": ["French"],
+    "cover_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Louvre_Museum_Wikimedia_Commons.jpg/2560px-Louvre_Museum_Wikimedia_Commons.jpg",
+    "map": "",
     "about": ""
   },
   {

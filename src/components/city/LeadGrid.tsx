@@ -17,7 +17,7 @@ const LeadGrid: React.FC<LeadGridProps> = ({ city, skeleton }) => {
   const tablet = useMediaQuery(`(max-width: ${theme.breakpoints.md})`);
 
   return (
-    <Container size='lg' id='details-city' px={0}>
+    <Container size='xl' id='details-city' px={0} mx={0}>
       <Text my='xs' fw={'800'} sx={{ display: 'flex', justifyContent: 'center', fontSize: '1.5rem' }}>
         Gallery
       </Text>
@@ -32,7 +32,7 @@ const LeadGrid: React.FC<LeadGridProps> = ({ city, skeleton }) => {
           withPlaceholder
           sx={{ border: '1px solid #dee2e6', borderRadius: '6px' }}
         />
-        <Grid gutter='md'>
+        <Grid>
           <Grid.Col>
             {skeleton && <Skeleton height={SECONDARY_COL_HEIGHT} radius='md' />}
             <Image
