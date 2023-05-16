@@ -5,7 +5,7 @@ import { fakeDelay } from '@/helpers/network';
 
 export const attractionsFetcher = (url: string) =>
   fetch(url).then(async (res) => {
-    await fakeDelay(2);
+    await fakeDelay(1);
     return res.json() as Promise<Attraction[]>;
   });
 export const attractionFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Attraction>);

@@ -79,7 +79,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
           onSubmit={form.onSubmit(async (interest) => {
             if (!plan) return;
             setIsLoading(true);
-            const res = await fakeDelay(2);
+            const res = await fakeDelay(1);
             const planWithInterest = addInterestToDayInsidePlan(interest, dayIndex, plan);
             setPlan(planWithInterest);
             setIsLoading(false);

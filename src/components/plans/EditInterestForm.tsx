@@ -83,7 +83,7 @@ const EditInterestForm: React.FC<EditInterestFormProps> = ({ subtitle, dayIndex,
       const interests = plan?.days[dayIndex]?.interests;
       if (!plan || !interests) return;
       setIsLoading(true);
-      const res = await fakeDelay(2);
+      const res = await fakeDelay(1);
       const planWithEditedInterest = editInterestInsidePlan(interest, attractionIndex, dayIndex, plan);
       setPlan(planWithEditedInterest);
       setIsLoading(false);
