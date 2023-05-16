@@ -4,9 +4,7 @@ import useSWR from 'swr';
 import { Highlight, Paper, Skeleton, Stack, Title, createStyles, rem } from '@mantine/core';
 import { citiesFetcher, getCitiesAPI } from '@/api/CitiesAPI';
 import Link from 'next/link';
-import { Suspense } from 'react';
-
-const ids = [77340, 143446, 59582, 44856, 32653, 50388, 99972];
+import { POPULAR_DESTINATIONS } from '@/constants';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -42,7 +40,7 @@ const useStyles = createStyles((theme) => ({
 
 const CarouselCities: React.FC = () => {
   const { classes } = useStyles();
-  const { data, error } = useSWR(getCitiesAPI(ids), citiesFetcher);
+  const { data, error } = useSWR(getCitiesAPI(POPULAR_DESTINATIONS), citiesFetcher);
   if (error) return <div>Failed to load</div>;
   // if (!data) return <div>Loading...</div>;
 

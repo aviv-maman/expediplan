@@ -18,3 +18,5 @@ export enum CategoryName {
   Accommodation = 'Accommodation',
 }
 export const CATEGORIES_IN_CITY_PAGE = [CategoryName.HistoricalSites, CategoryName.FoodAndDrinks, CategoryName.Shopping];
+
+export const POPULAR_DESTINATIONS = [77340, 143446, 59582, 44856, 32653, 50388, 99972, 24053];

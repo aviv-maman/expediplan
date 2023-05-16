@@ -4,7 +4,7 @@ import { HOSTNAME } from '@/constants';
 
 export const citiesFetcher = (url: string) =>
   fetch(url).then(async (res) => {
-    await fakeDelay(1);
+    await fakeDelay(2);
     return res.json() as Promise<City[]>;
   });
 export const cityFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City>);
@@ -37,7 +37,6 @@ export const getCityById = async (id: number): Promise<City | undefined> => {
     // throw new Error('Failed to fetch data');
     return undefined;
   }
-  await fakeDelay(1);
   const data = await res.json();
   if (data.message) {
     throw new Error(data.message);

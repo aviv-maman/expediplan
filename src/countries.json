@@ -430,5 +430,470 @@
     "emojiU": "U+1F1F7 U+1F1FA",
     "flag": "./assets/flags/flag-russia_1f1f7-1f1fa.png",
     "about": ""
+  },
+  {
+    "id": 82,
+    "name": "Germany",
+    "iso3": "DEU",
+    "iso2": "DE",
+    "numeric_code": "276",
+    "phone_code": "49",
+    "capital": "Berlin",
+    "currency": "EUR",
+    "currency_name": "Euro",
+    "currency_symbol": "€",
+    "tld": ".de",
+    "native": "Deutschland",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Berlin",
+        "gmtOffset": 3600,
+        "gmtOffsetName": "UTC+01:00",
+        "abbreviation": "CET",
+        "tzName": "Central European Time"
+      },
+      {
+        "zoneName": "Europe/Busingen",
+        "gmtOffset": 3600,
+        "gmtOffsetName": "UTC+01:00",
+        "abbreviation": "CET",
+        "tzName": "Central European Time"
+      }
+    ],
+    "latitude": "51.00000000",
+    "longitude": "9.00000000",
+    "emoji": "🇩🇪",
+    "emojiU": "U+1F1E9 U+1F1EA",
+    "flag": "./assets/flags/flag-germany_1f1e9-1f1ea.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 59,
+    "name": "Denmark",
+    "iso3": "DNK",
+    "iso2": "DK",
+    "numeric_code": "208",
+    "phone_code": "45",
+    "capital": "Copenhagen",
+    "currency": "DKK",
+    "currency_name": "Danish krone",
+    "currency_symbol": "Kr.",
+    "tld": ".dk",
+    "native": "Danmark",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Copenhagen",
+        "gmtOffset": 3600,
+        "gmtOffsetName": "UTC+01:00",
+        "abbreviation": "CET",
+        "tzName": "Central European Time"
+      }
+    ],
+    "latitude": "56.00000000",
+    "longitude": "10.00000000",
+    "emoji": "🇩🇰",
+    "emojiU": "U+1F1E9 U+1F1F0",
+    "flag": "./assets/flags/flag-denmark_1f1e9-1f1f0.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 213,
+    "name": "Sweden",
+    "iso3": "SWE",
+    "iso2": "SE",
+    "numeric_code": "752",
+    "phone_code": "46",
+    "capital": "Stockholm",
+    "currency": "SEK",
+    "currency_name": "Swedish krona",
+    "currency_symbol": "kr",
+    "tld": ".se",
+    "native": "Sverige",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Stockholm",
+        "gmtOffset": 3600,
+        "gmtOffsetName": "UTC+01:00",
+        "abbreviation": "CET",
+        "tzName": "Central European Time"
+      }
+    ],
+    "latitude": "62.00000000",
+    "longitude": "15.00000000",
+    "emoji": "🇸🇪",
+    "emojiU": "U+1F1F8 U+1F1EA",
+    "flag": "./assets/flags/flag-sweden_1f1f8-1f1ea.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 214,
+    "name": "Switzerland",
+    "iso3": "CHE",
+    "iso2": "CH",
+    "numeric_code": "756",
+    "phone_code": "41",
+    "capital": "Bern",
+    "currency": "CHF",
+    "currency_name": "Swiss franc",
+    "currency_symbol": "CHf",
+    "tld": ".ch",
+    "native": "Schweiz",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Zurich",
+        "gmtOffset": 3600,
+        "gmtOffsetName": "UTC+01:00",
+        "abbreviation": "CET",
+        "tzName": "Central European Time"
+      }
+    ],
+    "latitude": "47.00000000",
+    "longitude": "8.00000000",
+    "emoji": "🇨🇭",
+    "emojiU": "U+1F1E8 U+1F1ED",
+    "flag": "./assets/flags/flag-switzerland_1f1e8-1f1ed.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 74,
+    "name": "Finland",
+    "iso3": "FIN",
+    "iso2": "FI",
+    "numeric_code": "246",
+    "phone_code": "358",
+    "capital": "Helsinki",
+    "currency": "EUR",
+    "currency_name": "Euro",
+    "currency_symbol": "€",
+    "tld": ".fi",
+    "native": "Suomi",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Helsinki",
+        "gmtOffset": 7200,
+        "gmtOffsetName": "UTC+02:00",
+        "abbreviation": "EET",
+        "tzName": "Eastern European Time"
+      }
+    ],
+    "latitude": "64.00000000",
+    "longitude": "26.00000000",
+    "emoji": "🇫🇮",
+    "emojiU": "U+1F1EB U+1F1EE",
+    "flag": "./assets/flags/flag-finland_1f1eb-1f1ee.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 105,
+    "name": "Ireland",
+    "iso3": "IRL",
+    "iso2": "IE",
+    "numeric_code": "372",
+    "phone_code": "353",
+    "capital": "Dublin",
+    "currency": "EUR",
+    "currency_name": "Euro",
+    "currency_symbol": "€",
+    "tld": ".ie",
+    "native": "Éire",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Dublin",
+        "gmtOffset": 0,
+        "gmtOffsetName": "UTC±00",
+        "abbreviation": "GMT",
+        "tzName": "Greenwich Mean Time"
+      }
+    ],
+    "latitude": "53.00000000",
+    "longitude": "-8.00000000",
+    "emoji": "🇮🇪",
+    "emojiU": "U+1F1EE U+1F1EA",
+    "flag": "./assets/flags/flag-ireland_1f1ee-1f1ea.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 106,
+    "name": "Israel",
+    "iso3": "ISR",
+    "iso2": "IL",
+    "numeric_code": "376",
+    "phone_code": "972",
+    "capital": "Jerusalem",
+    "currency": "ILS",
+    "currency_name": "Israeli new shekel",
+    "currency_symbol": "₪",
+    "tld": ".il",
+    "native": "יִשְׂרָאֵל",
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "timezones": [
+      {
+        "zoneName": "Asia/Jerusalem",
+        "gmtOffset": 7200,
+        "gmtOffsetName": "UTC+02:00",
+        "abbreviation": "IST",
+        "tzName": "Israel Standard Time"
+      }
+    ],
+    "latitude": "31.50000000",
+    "longitude": "34.75000000",
+    "emoji": "🇮🇱",
+    "emojiU": "U+1F1EE U+1F1F1",
+    "flag": "./assets/flags/flag-israel_1f1ee-1f1f1.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 14,
+    "name": "Australia",
+    "iso3": "AUS",
+    "iso2": "AU",
+    "numeric_code": "036",
+    "phone_code": "61",
+    "capital": "Canberra",
+    "currency": "AUD",
+    "currency_name": "Australian dollar",
+    "currency_symbol": "$",
+    "tld": ".au",
+    "native": "Australia",
+    "region": "Oceania",
+    "subregion": "Australia and New Zealand",
+    "timezones": [
+      {
+        "zoneName": "Antarctica/Macquarie",
+        "gmtOffset": 39600,
+        "gmtOffsetName": "UTC+11:00",
+        "abbreviation": "MIST",
+        "tzName": "Macquarie Island Station Time"
+      },
+      {
+        "zoneName": "Australia/Adelaide",
+        "gmtOffset": 37800,
+        "gmtOffsetName": "UTC+10:30",
+        "abbreviation": "ACDT",
+        "tzName": "Australian Central Daylight Saving Time"
+      },
+      {
+        "zoneName": "Australia/Brisbane",
+        "gmtOffset": 36000,
+        "gmtOffsetName": "UTC+10:00",
+        "abbreviation": "AEST",
+        "tzName": "Australian Eastern Standard Time"
+      },
+      {
+        "zoneName": "Australia/Broken_Hill",
+        "gmtOffset": 37800,
+        "gmtOffsetName": "UTC+10:30",
+        "abbreviation": "ACDT",
+        "tzName": "Australian Central Daylight Saving Time"
+      },
+      {
+        "zoneName": "Australia/Currie",
+        "gmtOffset": 39600,
+        "gmtOffsetName": "UTC+11:00",
+        "abbreviation": "AEDT",
+        "tzName": "Australian Eastern Daylight Saving Time"
+      },
+      {
+        "zoneName": "Australia/Darwin",
+        "gmtOffset": 34200,
+        "gmtOffsetName": "UTC+09:30",
+        "abbreviation": "ACST",
+        "tzName": "Australian Central Standard Time"
+      },
+      {
+        "zoneName": "Australia/Eucla",
+        "gmtOffset": 31500,
+        "gmtOffsetName": "UTC+08:45",
+        "abbreviation": "ACWST",
+        "tzName": "Australian Central Western Standard Time (Unofficial)"
+      },
+      {
+        "zoneName": "Australia/Hobart",
+        "gmtOffset": 39600,
+        "gmtOffsetName": "UTC+11:00",
+        "abbreviation": "AEDT",
+        "tzName": "Australian Eastern Daylight Saving Time"
+      },
+      {
+        "zoneName": "Australia/Lindeman",
+        "gmtOffset": 36000,
+        "gmtOffsetName": "UTC+10:00",
+        "abbreviation": "AEST",
+        "tzName": "Australian Eastern Standard Time"
+      },
+      {
+        "zoneName": "Australia/Lord_Howe",
+        "gmtOffset": 39600,
+        "gmtOffsetName": "UTC+11:00",
+        "abbreviation": "LHST",
+        "tzName": "Lord Howe Summer Time"
+      },
+      {
+        "zoneName": "Australia/Melbourne",
+        "gmtOffset": 39600,
+        "gmtOffsetName": "UTC+11:00",
+        "abbreviation": "AEDT",
+        "tzName": "Australian Eastern Daylight Saving Time"
+      },
+      {
+        "zoneName": "Australia/Perth",
+        "gmtOffset": 28800,
+        "gmtOffsetName": "UTC+08:00",
+        "abbreviation": "AWST",
+        "tzName": "Australian Western Standard Time"
+      },
+      {
+        "zoneName": "Australia/Sydney",
+        "gmtOffset": 39600,
+        "gmtOffsetName": "UTC+11:00",
+        "abbreviation": "AEDT",
+        "tzName": "Australian Eastern Daylight Saving Time"
+      }
+    ],
+    "latitude": "-27.00000000",
+    "longitude": "133.00000000",
+    "emoji": "🇦🇺",
+    "emojiU": "U+1F1E6 U+1F1FA",
+    "flag": "./assets/flags/flag-australia_1f1e6-1f1fa.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 15,
+    "name": "Austria",
+    "iso3": "AUT",
+    "iso2": "AT",
+    "numeric_code": "040",
+    "phone_code": "43",
+    "capital": "Vienna",
+    "currency": "EUR",
+    "currency_name": "Euro",
+    "currency_symbol": "€",
+    "tld": ".at",
+    "native": "Österreich",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Vienna",
+        "gmtOffset": 3600,
+        "gmtOffsetName": "UTC+01:00",
+        "abbreviation": "CET",
+        "tzName": "Central European Time"
+      }
+    ],
+    "latitude": "47.33333333",
+    "longitude": "13.33333333",
+    "emoji": "🇦🇹",
+    "emojiU": "U+1F1E6 U+1F1F9",
+    "flag": "./assets/flags/flag-austria_1f1e6-1f1f9.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 58,
+    "name": "Czech Republic",
+    "iso3": "CZE",
+    "iso2": "CZ",
+    "numeric_code": "203",
+    "phone_code": "420",
+    "capital": "Prague",
+    "currency": "CZK",
+    "currency_name": "Czech koruna",
+    "currency_symbol": "Kč",
+    "tld": ".cz",
+    "native": "Česká republika",
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Prague",
+        "gmtOffset": 3600,
+        "gmtOffsetName": "UTC+01:00",
+        "abbreviation": "CET",
+        "tzName": "Central European Time"
+      }
+    ],
+    "latitude": "49.75000000",
+    "longitude": "15.50000000",
+    "emoji": "🇨🇿",
+    "emojiU": "U+1F1E8 U+1F1FF",
+    "flag": "./assets/flags/flag-czechia_1f1e8-1f1ff.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
+  },
+  {
+    "id": 176,
+    "name": "Poland",
+    "iso3": "POL",
+    "iso2": "PL",
+    "numeric_code": "616",
+    "phone_code": "48",
+    "capital": "Warsaw",
+    "currency": "PLN",
+    "currency_name": "Polish złoty",
+    "currency_symbol": "zł",
+    "tld": ".pl",
+    "native": "Polska",
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "timezones": [
+      {
+        "zoneName": "Europe/Warsaw",
+        "gmtOffset": 3600,
+        "gmtOffsetName": "UTC+01:00",
+        "abbreviation": "CET",
+        "tzName": "Central European Time"
+      }
+    ],
+    "latitude": "52.00000000",
+    "longitude": "20.00000000",
+    "emoji": "🇵🇱",
+    "emojiU": "U+1F1F5 U+1F1F1",
+    "flag": "./assets/flags/flag-poland_1f1f5-1f1f1.png",
+    "languages": [""],
+    "cover_image": "",
+    "map": "",
+    "about": ""
   }
 ]
