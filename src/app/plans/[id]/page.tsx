@@ -31,7 +31,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
   if (session?.user && !cityFromServer) return <div>Plan or city not found</div>;
 
   return (
-    <CustomStack>
+    <CustomStack mx={{ xl: '20%' }}>
       <Suspense fallback={<PageLoader size='xl' text='Loading plan...' />}>
         {session?.user?.email && planFromServer && cityFromServer ? (
           <>
@@ -45,7 +45,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
                 duration={planFromServer?.duration}
               />
             </Suspense>
-            <CustomStack>
+            <CustomStack mx={{ xl: '30%', lg: '30%' }}>
               <DayTimeline planFromServer={planFromServer} />
             </CustomStack>
           </>
@@ -54,7 +54,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
             <Suspense fallback={<HeroLoading />}>
               <HeroBlockGuest idFromLocalStorage={params.id} />
             </Suspense>
-            <CustomStack>
+            <CustomStack mx={{ xl: '30%', lg: '30%' }}>
               <DayTimeline idFromLocalStorage={params.id} />
             </CustomStack>
           </>

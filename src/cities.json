@@ -70,7 +70,9 @@
     "country_name": "France",
     "latitude": "45.74846000",
     "longitude": "4.84671000",
-    "wikiDataId": "Q456"
+    "wikiDataId": "Q456",
+    "about": "Lyon, also spelled Lyons, capital of both the Rhône département and the Auvergne-Rhône-Alpes région, east-central France, set on a hilly site at the confluence of the Rhône and Saône rivers. It is the third largest city in France, after Paris and Marseille. A Roman military colony called Lugdunum was founded there in 43 BCE, and it subsequently became the capital of the Gauls. Lyon reached its peak of classical development in the 2nd century CE, during which time Christianity was introduced. In 177 the Christian community was persecuted by the Roman emperor Marcus Aurelius, and in 197 Lucius Septimius Severus decimated Lyon. In 1032 Lyon was incorporated into the Holy Roman Empire, but the real power lay with the city’s archbishops, whose influence caused important ecumenical councils to be held there in 1245 and again in 1274. Lyon was annexed to the kingdom of France in 1312.",
+    "cover_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Lyon_05_-_%C3%89glise_Saint-Paul_-_PA00117802.JPG/1920px-Lyon_05_-_%C3%89glise_Saint-Paul_-_PA00117802.JPG"
   },
   {
     "id": 32653,

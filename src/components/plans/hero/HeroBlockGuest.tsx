@@ -50,7 +50,7 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
   const { classes } = useStyles();
   const plan = useRecoilValue(planSelectorFamily(idFromLocalStorage));
 
-  const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher);
+  const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
 
   if (city.error) return <div>Failed to load</div>;
   if (!city.data) return <Skeleton height={265} />;

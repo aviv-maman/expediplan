@@ -25,7 +25,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   category: {
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[6],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.dark[6],
     fontWeight: 700,
     textTransform: 'uppercase',
   },
@@ -68,9 +68,14 @@ const CarouselCities: React.FC<CarouselCitiesProps> = ({ title, idsToFetch }) =>
         {data?.map((city) => (
           <Carousel.Slide key={city.id}>
             <Link href={{ pathname: `cities/${city?.id}` }}>
-              <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${city.cover_image})` }} className={classes.card}>
+              <Paper
+                shadow='md'
+                p='xl'
+                radius='md'
+                sx={{ backgroundImage: `url(${city.cover_image || './assets/background-pebble.jpg'})` }}
+                className={classes.card}>
                 <div>
-                  <Highlight highlightColor='indigo' highlight={city.country_name} className={classes.category} size='xs'>
+                  <Highlight highlightColor='indigo.6' highlight={city.country_name} className={classes.category} size='xs'>
                     {city.country_name}
                   </Highlight>
                   <Title order={3} className={classes.title}>
