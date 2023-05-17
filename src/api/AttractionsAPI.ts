@@ -33,6 +33,24 @@ export const getAttractionsByPlanIdAPI = (id: string) => {
   return API;
 };
 
+export const getAttractionById = async (id: number): Promise<Attraction> => {
+  const API = getAttractionByIdAPI(id);
+  const res = await fetch(API, {
+    // headers: { Authorization: `token ${TOKEN}` },
+    // next: { revalidate: 3600 },
+    // cache: 'no-cache',
+  });
+  if (!res.ok) {
+    // This will activate the closest `error.tsx` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
+  const data = await res.json();
+  if (data.message) {
+    throw new Error(data.message);
+  }
+  return data as Attraction;
+};
+
 //Client
 export const getAttractionsByPlanIdFromLocalStorage = (id: string) => {
   const plan = getPlanByIdFromLocalStorage(id);
