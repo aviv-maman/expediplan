@@ -70,7 +70,11 @@ export type Attraction = {
   name: string;
   country: number;
   city: number;
-  address: string;
+  address: {
+    street: string;
+    city: string;
+    country: string;
+  };
   latitude: number;
   longitude: number;
   category: CategoryName;

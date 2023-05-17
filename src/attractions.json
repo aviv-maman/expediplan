@@ -4,7 +4,11 @@
     "name": "Babushka's Kitchen",
     "country": 182,
     "city": 99972,
-    "address": "Babushka 215, Moscow",
+    "address": {
+      "street": "Babushka 215",
+      "city": "Moscow",
+      "country": "Russia"
+    },
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "Food & Drinks",
@@ -32,7 +36,11 @@
     "name": "Baba Milia Restaurant",
     "country": 182,
     "city": 99972,
-    "address": "Baba 158, Moscow",
+    "address": {
+      "street": "Baba 158",
+      "city": "Moscow",
+      "country": "Russia"
+    },
     "latitude": 522.5,
     "longitude": 53.75,
     "category": "Food & Drinks",
@@ -60,7 +68,11 @@
     "name": "El Gaucho Restaurant",
     "country": 182,
     "city": 99972,
-    "address": "Baba 158, Netherlands",
+    "address": {
+      "street": "Baba 158",
+      "city": "Moscow",
+      "country": "Russia"
+    },
     "latitude": 522.5,
     "longitude": 53.75,
     "category": "Food & Drinks",
@@ -88,7 +100,11 @@
     "name": "Cheesy Cheese",
     "country": 156,
     "city": 77340,
-    "address": "Cheese Way 158, Netherlands",
+    "address": {
+      "street": "Cheese Way 158",
+      "city": "Amsterdam",
+      "country": "Netherlands"
+    },
     "latitude": 522.5,
     "longitude": 53.75,
     "category": "Food & Drinks",
@@ -116,7 +132,11 @@
     "name": "Vegan Restaurant",
     "country": 156,
     "city": 77340,
-    "address": "Cheese Way 158, Netherlands",
+    "address": {
+      "street": "Vegan Way 98",
+      "city": "Amsterdam",
+      "country": "Netherlands"
+    },
     "latitude": 522.5,
     "longitude": 53.75,
     "category": "Food & Drinks",
@@ -144,7 +164,11 @@
     "name": "Amsterdam Castle Muiderslot",
     "country": 156,
     "city": 77340,
-    "address": "Cheese Way 158, Netherlands",
+    "address": {
+      "street": "Chuchu 97",
+      "city": "Amsterdam",
+      "country": "Netherlands"
+    },
     "latitude": 522.5,
     "longitude": 53.75,
     "category": "Historical Sites",
@@ -172,7 +196,11 @@
     "name": "Main Church of Amsterdam",
     "country": 156,
     "city": 77340,
-    "address": "Chuchu 97, Netherlands",
+    "address": {
+      "street": "St. George 274",
+      "city": "Amsterdam",
+      "country": "Netherlands"
+    },
     "latitude": 522.5,
     "longitude": 53.75,
     "category": "Historical Sites",
@@ -200,7 +228,11 @@
     "name": "Red Square",
     "country": 182,
     "city": 99972,
-    "address": "Babushka 215, Moscow",
+    "address": {
+      "street": "Babushka 215",
+      "city": "Moscow",
+      "country": "Russia"
+    },
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "Historical Sites",
@@ -228,7 +260,11 @@
     "name": "Moscow Kremlin",
     "country": 182,
     "city": 99972,
-    "address": "Babushka 215, Moscow",
+    "address": {
+      "street": "Kremlinsky 456",
+      "city": "Moscow",
+      "country": "Russia"
+    },
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "Historical Sites",
@@ -256,7 +292,11 @@
     "name": "Saint Basil's Cathedral",
     "country": 182,
     "city": 99972,
-    "address": "Babushka 215, Moscow",
+    "address": {
+      "street": "Basil 974",
+      "city": "Moscow",
+      "country": "Russia"
+    },
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "Historical Sites",
@@ -284,7 +324,11 @@
     "name": "Kremlin Walls and Towers",
     "country": 182,
     "city": 99972,
-    "address": "Babushka 215, Moscow",
+    "address": {
+      "street": "Big Wall 73",
+      "city": "Moscow",
+      "country": "Russia"
+    },
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "Historical Sites",
@@ -312,7 +356,11 @@
     "name": "Babushka's Kitchen",
     "country": 182,
     "city": 99972,
-    "address": "Babushka 215, Moscow",
+    "address": {
+      "street": "Petrovka 45",
+      "city": "Moscow",
+      "country": "Russia"
+    },
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "Food & Drinks",

@@ -2,8 +2,9 @@ import 'server-only';
 import type { Metadata } from 'next';
 import CustomStack from '@/components/CustomStack';
 import { Suspense } from 'react';
-import Subgrid from '@/components/attraction/Subgrid';
+import { Subgrid } from '@/components/attraction/Subgrid/Subgrid';
 import { getAttractionById } from '@/api/AttractionsAPI';
+import Loading from '@/components/attraction/Subgrid/loading';
 
 type Props = {
   params: { id: string };
@@ -20,11 +21,13 @@ type AttractionPageProps = { params: { id: string }; searchParams?: { [key: stri
 
 export default async function AttractionPage({ params, searchParams }: AttractionPageProps) {
   const attraction = await getAttractionById(Number(params.id));
+  const serializedAttraction = JSON.stringify(attraction);
 
   return (
     <CustomStack align='center'>
-      <Suspense>{attraction.name}</Suspense>
-      <Subgrid />
+      <Suspense fallback={<Loading />}>
+        <Subgrid attraction={serializedAttraction} />
+      </Suspense>
     </CustomStack>
   );
 }
