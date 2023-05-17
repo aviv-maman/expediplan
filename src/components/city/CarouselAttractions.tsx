@@ -2,6 +2,7 @@
 import { Carousel } from '@mantine/carousel';
 import { Image, Paper, Stack, Text, createStyles, rem } from '@mantine/core';
 import type { Attraction } from '../../../types/general';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -46,7 +47,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface CarouselAttractionsProps {
-  data: Attraction[];
+  data?: Attraction[];
   title: string;
 }
 
@@ -71,9 +72,11 @@ const CarouselAttractions: React.FC<CarouselAttractionsProps> = ({ data, title }
         draggable={!!data?.length}>
         {data?.map((item) => (
           <Carousel.Slide key={item.id}>
-            <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card}>
-              <span className={classes.subtitle}>{item.name}</span>
-            </Paper>
+            <Link href={{ pathname: `/attractions/${item.id}` }}>
+              <Paper shadow='md' p='xl' radius='md' sx={{ backgroundImage: `url(${item.cover_image})` }} className={classes.card}>
+                <span className={classes.subtitle}>{item.name}</span>
+              </Paper>
+            </Link>
           </Carousel.Slide>
         ))}
         {!data?.length && (
