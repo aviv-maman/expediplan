@@ -22,9 +22,9 @@ export default async function AttractionPage({ params, searchParams }: Attractio
   const attraction = await getAttractionById(Number(params.id));
 
   return (
-    <CustomStack mx={{ xl: '20%' }}>
-      <Subgrid />
+    <CustomStack align='center'>
       <Suspense>{attraction.name}</Suspense>
+      <Subgrid />
     </CustomStack>
   );
 }
