@@ -1,8 +1,9 @@
 'use client';
 import { Box, Button, createStyles, Group, Highlight, Image, Paper, SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import type { Country } from '../../../types/general';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IconMap } from '@tabler/icons-react';
+import { getNumberOfLinesByRef } from '@/helpers/processInfo';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -63,6 +64,14 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
     setShowMore((prevState) => !prevState);
   };
 
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [numberOfLinesInAbout, setNumberOfLinesInAbout] = useState(0);
+
+  useEffect(() => {
+    const lines = getNumberOfLinesByRef(elementRef);
+    setNumberOfLinesInAbout(lines);
+  }, [country?.about]);
+
   const prepareLanguages = (languages?: string[]) => {
     if (!languages) return 'Unknown';
     return languages?.map((item) => item).join(', ');
@@ -111,12 +120,14 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
       <Box>
         <Group position='apart' spacing='xs'>
           <Title className={classes.title}>About</Title>
-          <Button size='xs' color='lime' onClick={toggleShowMore} disabled={!country?.about}>
+          <Button size='xs' color='lime' onClick={toggleShowMore} disabled={!country?.about || numberOfLinesInAbout <= 10}>
             {showMore ? 'Show Less' : 'Show More'}
           </Button>
         </Group>
         <Paper withBorder sx={(theme) => ({ padding: theme.spacing.sm })}>
           <Highlight
+            ref={elementRef}
+            id={`about-${country?.id}`}
             highlight={country?.name || ''}
             className={classes.description}
             lineClamp={showMore ? 0 : 10}

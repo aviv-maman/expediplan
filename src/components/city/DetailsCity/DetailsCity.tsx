@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useSWR from 'swr';
 import { attractionsFetcher, getAttractionsByCityIdAPI } from '@/api/AttractionsAPI';
 import { CATEGORIES_IN_CITY_PAGE, CategoryName } from '@/constants';
-import { debounceAction, filterAttractionsByCategory, getNumberOfLinesByRef } from '@/helpers/processInfo';
+import { filterAttractionsByCategory, getNumberOfLinesByRef } from '@/helpers/processInfo';
 import CarouselAttractions from '../CarouselAttractions';
 import { useEffect, useRef, useState } from 'react';
 
@@ -71,28 +71,10 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const [numberOfLinesInAbout, setNumberOfLinesInAbout] = useState(0);
 
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
-
   useEffect(() => {
     const lines = getNumberOfLinesByRef(elementRef);
     setNumberOfLinesInAbout(lines);
-    function handleResize() {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth,
-      });
-    }
-    const debouncedHandleResize = debounceAction(handleResize, 1000);
-
-    window.addEventListener('resize', debouncedHandleResize);
-
-    return () => {
-      window.removeEventListener('resize', debouncedHandleResize);
-    };
-  }, [dimensions]);
+  }, [city?.about]);
 
   const items = [
     { id: 1, category: CategoryName.HistoricalSites },
@@ -108,7 +90,7 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
             Create plan in {city?.name}
           </Button>
           <Title className={classes.title}>About {city?.name}</Title>
-          <Button variant='light' size='sm' onClick={toggleShowMore} disabled={!city?.about || numberOfLinesInAbout < 10}>
+          <Button variant='light' size='sm' onClick={toggleShowMore} disabled={!city?.about || numberOfLinesInAbout <= 10}>
             {showMore ? 'Show Less' : 'Show More'}
           </Button>
         </Group>
