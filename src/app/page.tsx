@@ -16,7 +16,7 @@ export default async function Home() {
         <CarouselCities title='Popular Destinations' idsToFetch={POPULAR_DESTINATIONS} />
       </Suspense>
       <Suspense fallback={<Loading />}>
-        <CarouselCities title='All Destinations' />
+        <CarouselCities title='All Destinations' sortByName />
       </Suspense>
     </CustomStack>
   );

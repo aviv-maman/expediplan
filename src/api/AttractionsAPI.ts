@@ -33,7 +33,7 @@ export const getAttractionsByPlanIdAPI = (id: string) => {
   return API;
 };
 
-export const getAttractionById = async (id: number): Promise<Attraction> => {
+export const getAttractionById = async (id: number): Promise<Attraction | undefined> => {
   const API = getAttractionByIdAPI(id);
   const res = await fetch(API, {
     // headers: { Authorization: `token ${TOKEN}` },

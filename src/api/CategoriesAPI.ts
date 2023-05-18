@@ -15,7 +15,7 @@ export const getCategoryByIdAPI = (id: number) => {
   return API;
 };
 
-export const getCategoryById = async (id: number): Promise<Category> => {
+export const getCategoryById = async (id: number): Promise<Category | undefined> => {
   const API = getCategoryByIdAPI(id);
   const res = await fetch(API, {
     // headers: { Authorization: `token ${TOKEN}` },

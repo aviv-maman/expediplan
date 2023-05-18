@@ -12,10 +12,19 @@
 //   return result;
 // }, {});
 
-import type { Attraction } from '../../types/general';
+import type { Attraction, Category, City, Country } from '../../types/general';
 import { CategoryName } from '@/constants';
 
 export const filterAttractionsByCategory = (attractions: Attraction[], category: CategoryName) => {
   const filteredArray = attractions.filter((attraction) => attraction.category === category);
   return filteredArray;
+};
+
+export const sortArrayOfObjectsByName = (array: Attraction[] | City[] | Country[] | Category[]) => {
+  const sortedArray = array.sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+    return nameA > nameB ? 1 : -1;
+  });
+  return sortedArray;
 };

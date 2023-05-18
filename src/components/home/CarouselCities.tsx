@@ -4,6 +4,8 @@ import useSWR from 'swr';
 import { Highlight, Paper, Stack, Title, createStyles, rem } from '@mantine/core';
 import { citiesFetcher, getCitiesAPI } from '@/api/CitiesAPI';
 import Link from 'next/link';
+import { sortArrayOfObjectsByName } from '@/helpers/processInfo';
+import { City } from '../../../types/general';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -40,13 +42,15 @@ const useStyles = createStyles((theme) => ({
 interface CarouselCitiesProps {
   title: string;
   idsToFetch?: number | number[];
+  sortByName?: boolean;
 }
 
-const CarouselCities: React.FC<CarouselCitiesProps> = ({ title, idsToFetch }) => {
+const CarouselCities: React.FC<CarouselCitiesProps> = ({ title, idsToFetch, sortByName }) => {
   const { classes } = useStyles();
   const { data, error } = useSWR(getCitiesAPI(idsToFetch), citiesFetcher, { suspense: true });
   if (error) return <div>Failed to load</div>;
   // if (!data) return <div>Loading...</div>;
+  const sortedData = (sortByName ? sortArrayOfObjectsByName(data || []) : data) as City[];
 
   return (
     <Stack>
@@ -65,21 +69,21 @@ const CarouselCities: React.FC<CarouselCitiesProps> = ({ title, idsToFetch }) =>
           { maxWidth: 'xs', slideSize: '100%', slideGap: 0 },
         ]}
         mx={{ xl: '20%' }}>
-        {data?.map((city) => (
-          <Carousel.Slide key={city.id}>
+        {sortedData?.map((city) => (
+          <Carousel.Slide key={city?.id}>
             <Link href={{ pathname: `cities/${city?.id}` }}>
               <Paper
                 shadow='md'
                 p='xl'
                 radius='md'
-                sx={{ backgroundImage: `url(${city.cover_image || './assets/background-pebble.jpg'})` }}
+                sx={{ backgroundImage: `url(${city?.cover_image || './assets/background-pebble.jpg'})` }}
                 className={classes.card}>
                 <div>
-                  <Highlight highlightColor='indigo.6' highlight={city.country_name} className={classes.category} size='xs'>
-                    {city.country_name}
+                  <Highlight highlightColor='indigo.6' highlight={city?.country_name} className={classes.category} size='xs'>
+                    {city?.country_name}
                   </Highlight>
                   <Title order={3} className={classes.title}>
-                    {city.name}
+                    {city?.name}
                   </Title>
                 </div>
               </Paper>

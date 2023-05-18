@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useSWR from 'swr';
 import { attractionsFetcher, getAttractionsByCityIdAPI } from '@/api/AttractionsAPI';
 import { CATEGORIES_IN_CITY_PAGE, CategoryName } from '@/constants';
-import { filterAttractionsByCategory } from '@/helpers/processInfoFromServer';
+import { filterAttractionsByCategory } from '@/helpers/processInfo';
 import CarouselAttractions from '../CarouselAttractions';
 
 const useStyles = createStyles((theme) => ({
