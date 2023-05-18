@@ -121,7 +121,7 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
           <Title className={classes.title}>Information</Title>
           <Paper className={classes.info} withBorder>
             {PAPER_ITEMS.map((item, index) => (
-              <Text key={index} className={classes.description}>
+              <Text key={index} className={classes.description} ff='inherit'>
                 {item.title}: {item.value}
               </Text>
             ))}

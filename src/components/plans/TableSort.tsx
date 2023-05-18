@@ -112,7 +112,9 @@ export function TableSort() {
       <Table striped highlightOnHover withBorder withColumnBorders horizontalSpacing='xs' verticalSpacing='xs' sx={{ tableLayout: 'fixed' }}>
         <caption>
           <Link href='/create-new-plan'>
-            <Button leftIcon={<IconPlaneTilt size='1rem' />}>Create Plan</Button>
+            <Button leftIcon={<IconPlaneTilt size='1rem' />} color='teal'>
+              Create Plan
+            </Button>
           </Link>
         </caption>
         <thead>

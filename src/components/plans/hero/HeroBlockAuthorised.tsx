@@ -86,7 +86,7 @@ const HeroBlockAuthorised: React.FC<HeroBlockAuthorisedProps> = ({ coverImage, c
               <br />
               {duration} days in {cityName}
             </Title>
-            <Text className={classes.description} mt={30}>
+            <Text className={classes.description} ff='inherit'>
               {dayjs(startDate).format('YYYY-MM-DD')} - {dayjs(endDate).format('YYYY-MM-DD')}
             </Text>
           </div>

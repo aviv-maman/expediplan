@@ -72,7 +72,7 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
         <Text component='span' variant='gradient' fz='xl' fw={500}>
           {plan?.duration} days in {plan?.cityName}
         </Text>
-        <Text className={classes.description}>
+        <Text className={classes.description} ff='inherit'>
           {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
         </Text>
 
