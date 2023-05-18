@@ -5,8 +5,9 @@ import Link from 'next/link';
 import useSWR from 'swr';
 import { attractionsFetcher, getAttractionsByCityIdAPI } from '@/api/AttractionsAPI';
 import { CATEGORIES_IN_CITY_PAGE, CategoryName } from '@/constants';
-import { filterAttractionsByCategory } from '@/helpers/processInfo';
+import { debounceAction, filterAttractionsByCategory, getNumberOfLinesByRef } from '@/helpers/processInfo';
 import CarouselAttractions from '../CarouselAttractions';
+import { useEffect, useRef, useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -61,6 +62,37 @@ interface DetailsCityProps {
 const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
   const { classes } = useStyles();
   const attractions = useSWR(getAttractionsByCityIdAPI(Number(city?.id), CATEGORIES_IN_CITY_PAGE), attractionsFetcher, { suspense: true });
+  const [showMore, setShowMore] = useState(false);
+
+  const toggleShowMore = () => {
+    setShowMore((prevState) => !prevState);
+  };
+
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [numberOfLinesInAbout, setNumberOfLinesInAbout] = useState(0);
+
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const lines = getNumberOfLinesByRef(elementRef);
+    setNumberOfLinesInAbout(lines);
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    }
+    const debouncedHandleResize = debounceAction(handleResize, 1000);
+
+    window.addEventListener('resize', debouncedHandleResize);
+
+    return () => {
+      window.removeEventListener('resize', debouncedHandleResize);
+    };
+  }, [dimensions]);
 
   const items = [
     { id: 1, category: CategoryName.HistoricalSites },
@@ -70,9 +102,17 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
 
   return (
     <Stack id='details-city'>
-      <Stack align='center'>
-        <Title className={classes.title}>About {city?.name}</Title>
-        <Text c='dimmed' className={classes.description} ta='center'>
+      <Stack>
+        <Group position='apart'>
+          <Button variant='light' size='sm'>
+            Create plan in {city?.name}
+          </Button>
+          <Title className={classes.title}>About {city?.name}</Title>
+          <Button variant='light' size='sm' onClick={toggleShowMore} disabled={!city?.about || numberOfLinesInAbout < 10}>
+            {showMore ? 'Show Less' : 'Show More'}
+          </Button>
+        </Group>
+        <Text ref={elementRef} id={`about-${city?.id}`} ff='inherit' lineClamp={showMore ? 0 : 10}>
           {city?.about}
         </Text>
       </Stack>

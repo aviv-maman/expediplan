@@ -12,6 +12,7 @@
 //   return result;
 // }, {});
 
+import { RefObject } from 'react';
 import type { Attraction, Category, City, Country } from '../../types/general';
 import { CategoryName } from '@/constants';
 
@@ -27,4 +28,24 @@ export const sortArrayOfObjectsByName = (array: Attraction[] | City[] | Country[
     return nameA > nameB ? 1 : -1;
   });
   return sortedArray;
+};
+
+export const getNumberOfLinesByRef = (elementRef: RefObject<HTMLDivElement>) => {
+  if (elementRef.current) {
+    const element = elementRef.current;
+    const lineHeight = parseFloat(getComputedStyle(element).lineHeight);
+    const lines = Math.round(element.clientHeight / lineHeight);
+    return lines;
+  }
+  return 0;
+};
+
+export const debounceAction = (fn: () => void, ms: number) => {
+  let timer: NodeJS.Timeout | null;
+  return () => {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn();
+    }, ms);
+  };
 };
