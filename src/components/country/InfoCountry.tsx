@@ -1,9 +1,9 @@
 'use client';
-import { Box, Button, createStyles, Group, Highlight, Image, Paper, SimpleGrid, Stack, Text, Title } from '@mantine/core';
+import { Box, Button, createStyles, Group, Highlight, Image, Paper, rem, SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import type { Country } from '../../../types/general';
 import { useEffect, useRef, useState } from 'react';
 import { IconMap } from '@tabler/icons-react';
-import { getNumberOfLinesByRef } from '@/helpers/processInfo';
+import { debounceAction, getNumberOfLinesByRef } from '@/helpers/processInfo';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -28,10 +28,12 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     color: theme.colorScheme === 'dark' ? theme.colors.cyan[5] : theme.colors.cyan[7],
-    fontSize: '2rem',
     paddingBottom: theme.spacing.xs,
-    [theme.fn.smallerThan('xs')]: {
-      fontSize: '1.5rem',
+    fontSize: rem(30),
+    fontWeight: 900,
+
+    [theme.fn.smallerThan('sm')]: {
+      fontSize: rem(18),
     },
   },
 
@@ -62,15 +64,37 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
 
   const toggleShowMore = () => {
     setShowMore((prevState) => !prevState);
+    showMore ? setLineClamp(0) : setLineClamp(10);
   };
 
   const elementRef = useRef<HTMLDivElement>(null);
-  const [numberOfLinesInAbout, setNumberOfLinesInAbout] = useState(0);
+  const [disabled, setDisabled] = useState(true);
+  const [lineClamp, setLineClamp] = useState(10);
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
 
   useEffect(() => {
+    setDisabled(false);
+    setShowMore(true);
     const lines = getNumberOfLinesByRef(elementRef);
-    setNumberOfLinesInAbout(lines);
-  }, [country?.about]);
+    if (lines < 10) {
+      setDisabled(true);
+      setShowMore(false);
+    }
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    }
+    const debouncedHandleResize = debounceAction(handleResize, 1000);
+
+    window.addEventListener('resize', debouncedHandleResize);
+
+    return () => window.removeEventListener('resize', debouncedHandleResize);
+  }, [dimensions]);
 
   const prepareLanguages = (languages?: string[]) => {
     if (!languages) return 'Unknown';
@@ -120,8 +144,8 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
       <Box>
         <Group position='apart' spacing='xs'>
           <Title className={classes.title}>About</Title>
-          <Button size='xs' color='lime' onClick={toggleShowMore} disabled={!country?.about || numberOfLinesInAbout <= 10}>
-            {showMore ? 'Show Less' : 'Show More'}
+          <Button size='xs' color='lime' onClick={toggleShowMore} disabled={!country?.about || disabled} miw={93}>
+            {showMore ? 'Show More' : disabled ? 'Show More' : 'Show Less'}
           </Button>
         </Group>
         <Paper withBorder sx={(theme) => ({ padding: theme.spacing.sm })}>
@@ -130,7 +154,8 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
             id={`about-${country?.id}`}
             highlight={country?.name || ''}
             className={classes.description}
-            lineClamp={showMore ? 0 : 10}
+            ff='inherit'
+            lineClamp={lineClamp}
             highlightStyles={(theme) => ({
               backgroundImage: theme.fn.linearGradient(45, theme.colors.cyan[5], theme.colors.indigo[5]),
               fontWeight: 700,
