@@ -3,13 +3,13 @@ import { dateToYYYYMMDD } from '@/helpers/processInfo';
 import { WeatherResponse } from '../../types/general';
 
 const getRealtimeWeatherByDecimalDegreeAPI = (latitude: number, longitude: number) => {
-  const params = new URLSearchParams({ latitude: String(latitude), longitude: String(longitude) });
+  const params = new URLSearchParams({ q: `${String(latitude)},${String(longitude)}` });
   const API = `${HOSTNAME}/api/weather?${params}`;
   return API;
 };
 
 const getForecastWeatherByDecimalDegreeAPI = (latitude: number, longitude: number) => {
-  const params = new URLSearchParams({ latitude: String(latitude), longitude: String(longitude) });
+  const params = new URLSearchParams({ q: `${String(latitude)},${String(longitude)}` });
   const API = `${HOSTNAME}/api/weather/forecast?${params}`;
   return API;
 };

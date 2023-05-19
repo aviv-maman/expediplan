@@ -1,33 +1,32 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button, Group } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
-import { IconInfoSquare } from '@tabler/icons-react';
+import { IconCloud, IconInfoSquare } from '@tabler/icons-react';
 import Link from 'next/link';
+import { getRealtimeWeatherByDecimalDegree } from '@/api/WeatherAPI';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    paddingTop: theme.spacing.sm,
+    paddingTop: theme.spacing.md,
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    flexDirection: 'column',
   },
 
   title: {
     color: theme.white,
     fontWeight: 900,
-    lineHeight: 1.05,
     maxWidth: rem(500),
     fontSize: rem(30),
 
     [theme.fn.smallerThan('md')]: {
       maxWidth: '100%',
       fontSize: rem(24),
-      lineHeight: 1.15,
     },
   },
 
@@ -40,6 +39,14 @@ const useStyles = createStyles((theme) => ({
       maxWidth: '100%',
     },
   },
+
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: '8.5rem',
+    alignItems: 'flex-end',
+    gap: '1rem',
+  },
 }));
 
 interface HeroBlockGuestProps {
@@ -51,6 +58,8 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
   const plan = useRecoilValue(planSelectorFamily(idFromLocalStorage));
 
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
+
+  const checkWeather = async () => await getRealtimeWeatherByDecimalDegree(Number(city.data?.latitude), Number(city.data?.longitude));
 
   if (city.error) return <div>Failed to load</div>;
   if (!city.data) return <Skeleton height={265} />;
@@ -76,12 +85,15 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
           {dayjs(plan?.startDate).format('YYYY-MM-DD')} - {dayjs(plan?.endDate).format('YYYY-MM-DD')}
         </Text>
 
-        <div style={{ alignSelf: 'flex-end', display: 'flex', flexDirection: 'row', height: '8.5rem' }}>
-          <Link href={{ pathname: `/cities/${city.data.id}` }} style={{ alignSelf: 'end' }}>
+        <div className={classes.buttons}>
+          <Link href={{ pathname: `/cities/${city.data.id}` }}>
             <Button variant='light' leftIcon={<IconInfoSquare />}>
               {city.data.name}
             </Button>
           </Link>
+          <Button variant='light' leftIcon={<IconCloud />} onClick={checkWeather}>
+            Check Weather
+          </Button>
         </div>
       </Container>
     </BackgroundImage>
