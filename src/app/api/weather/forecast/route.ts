@@ -1,6 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 /* Forecast Weather API
+Forecast weather API method returns upto next 3 day weather forecast and weather alert as json.
+It contains astronomy data, day weather forecast and hourly interval weather information for a given city.
+Subscription: 5, 7 or 14 days.
+
 q: string - REQUIRED
 Query parameter based on which data is sent back.
 'q' can be one of the following:

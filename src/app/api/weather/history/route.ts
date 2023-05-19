@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 /* History Weather API
+History weather API method returns historical weather for last 7 days as json.
+Subscription: Last 30 days or full history for a date on or after 1st Jan, 2010.
+
 q: string - REQUIRED
 Query parameter based on which data is sent back.
 'q' can be one of the following:

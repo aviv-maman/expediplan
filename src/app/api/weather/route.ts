@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 /* Realtime Weather API
+Current weather or realtime weather API method allows a user to get up to date current weather information in json and xml.
+The data is returned as a Current Object.
+
 q: string - REQUIRED
 Query parameter based on which data is sent back.
 'q' can be one of the following:
