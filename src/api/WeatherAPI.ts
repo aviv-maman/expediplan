@@ -1,6 +1,6 @@
 import { HOSTNAME } from '@/constants';
 import { dateToYYYYMMDD } from '@/helpers/processInfo';
-import { WeatherResponse } from '../../types/general';
+import type { WeatherResponse } from '../../types/general';
 
 const getRealtimeWeatherByDecimalDegreeAPI = (latitude: number, longitude: number) => {
   const params = new URLSearchParams({ q: `${String(latitude)},${String(longitude)}` });

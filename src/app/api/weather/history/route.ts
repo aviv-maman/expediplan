@@ -31,24 +31,13 @@ Restrict date output for History API method. Should be on or after 1st Jan, 2010
 */
 
 export async function GET(request: NextRequest) {
-  const { search } = new URL(request.url);
-  const searchParams = new URLSearchParams(search);
-  const searchValue = searchParams.get('q');
-  const q = searchValue?.split(',');
+  const q = request.nextUrl.searchParams.get('q')?.split(',');
   if (!q || q.length !== 2) return NextResponse.json({ message: 'values of latitude and longitude must be in length of 2!' });
-  const dateValue = searchParams.get('dt');
+  const dateValue = request.nextUrl.searchParams.get('dt');
   if (!dateValue) return NextResponse.json({ message: 'date value must be provided!' });
-  const hourValue = searchParams.get('hour');
-  const endDateValue = searchParams.get('end_dt');
-
-  // const params = new URLSearchParams({
-  //   q: `${q[0]},${q[1]}`,
-  //   dt: dateValue,
-  //   end_dt: String(endDateValue),
-  //   hour: String(hourValue),
-  // });
-
-  const url = `https://${process.env.RAPIDAPI_HOST}/history.json?q=${q[0]}%2C${q[1]}&dt=${dateValue}&hour=${hourValue}&end_dt=${endDateValue}`;
+  const hourValue = request.nextUrl.searchParams.get('hour');
+  const endDateValue = request.nextUrl.searchParams.get('end_dt');
+  const url = `https://${process.env.RAPIDAPI_HOST}/history.json?q=${q[0]},${q[1]}&dt=${dateValue}&hour=${hourValue}&end_dt=${endDateValue}`;
   const options = {
     method: 'GET',
     headers: {
@@ -59,7 +48,6 @@ export async function GET(request: NextRequest) {
   try {
     const response = await fetch(url, options);
     const result = await response.text();
-    console.log(result);
     return NextResponse.json(result);
   } catch (error) {
     console.error(error);

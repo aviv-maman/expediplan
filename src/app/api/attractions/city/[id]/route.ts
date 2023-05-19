@@ -5,11 +5,8 @@ import { CategoryName } from '@/constants';
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   const cityId = Number(params.id);
-  const { search } = new URL(request.url);
-  const searchParams = new URLSearchParams(search);
-  const searchValue = searchParams.get('category');
-  const limit = searchParams.get('limit');
-  const categories = searchValue?.split(',') as CategoryName[] | undefined;
+  const limit = request.nextUrl.searchParams.get('limit');
+  const categories = request.nextUrl.searchParams.get('category')?.split(',') as CategoryName[] | undefined;
 
   if (!categories || categories.length === 0) {
     const filteredAttractions = attractions.filter((attraction) => attraction.city === cityId) as Attraction[];

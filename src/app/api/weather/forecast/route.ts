@@ -29,14 +29,11 @@ If passing 'dt', it should be between today and next 10 day in yyyy-MM-dd format
 */
 
 export async function GET(request: NextRequest) {
-  const { search } = new URL(request.url);
-  const searchParams = new URLSearchParams(search);
-  const searchValue = searchParams.get('q');
-  const q = searchValue?.split(',');
+  const q = request.nextUrl.searchParams.get('q')?.split(',');
   if (!q || q.length !== 2) return NextResponse.json({ message: 'values of latitude and longitude must be in length of 2!' });
-  const daysValue = searchParams.get('days');
-  const dateValue = searchParams.get('dt');
-  const url = `https://${process.env.RAPIDAPI_HOST}/forecast.json?q=${q[0]}%2C${q[1]}&days=${daysValue}&dt=${dateValue}`;
+  const daysValue = request.nextUrl.searchParams.get('days');
+  const dateValue = request.nextUrl.searchParams.get('dt');
+  const url = `https://${process.env.RAPIDAPI_HOST}/forecast.json?q=${q[0]},${q[1]}&days=${daysValue}&dt=${dateValue}`;
   const options = {
     method: 'GET',
     headers: {
@@ -47,7 +44,6 @@ export async function GET(request: NextRequest) {
   try {
     const response = await fetch(url, options);
     const result = await response.text();
-    console.log(result);
     return NextResponse.json(result);
   } catch (error) {
     console.error(error);
