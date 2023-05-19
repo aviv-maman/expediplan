@@ -28,7 +28,6 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     color: theme.colorScheme === 'dark' ? theme.colors.cyan[5] : theme.colors.cyan[7],
-    paddingBottom: theme.spacing.xs,
     fontSize: rem(30),
     fontWeight: 900,
 
@@ -118,7 +117,9 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
     <Stack>
       <SimpleGrid cols={2} spacing={'md'} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <Box>
-          <Title className={classes.title}>Information</Title>
+          <Title className={classes.title} my='xs'>
+            Information
+          </Title>
           <Paper className={classes.info} withBorder>
             {PAPER_ITEMS.map((item, index) => (
               <Text key={index} className={classes.description} ff='inherit'>
@@ -128,7 +129,9 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
           </Paper>
         </Box>
         <Box>
-          <Title className={classes.title}>Map</Title>
+          <Title className={classes.title} my='xs'>
+            Map
+          </Title>
           <Paper className={classes.info} withBorder id='paper-map'>
             <Image
               id='map'
@@ -142,7 +145,7 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
         </Box>
       </SimpleGrid>
       <Box>
-        <Group position='apart' spacing='xs'>
+        <Group position='apart' spacing='xs' my='xs'>
           <Title className={classes.title}>About</Title>
           <Button size='xs' color='lime' onClick={toggleShowMore} disabled={!country?.about || disabled} miw={93}>
             {showMore ? 'Show More' : disabled ? 'Show More' : 'Show Less'}

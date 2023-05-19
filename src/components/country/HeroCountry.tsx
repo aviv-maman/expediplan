@@ -8,8 +8,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    marginLeft: 10,
-    marginTop: 10,
+    margin: 10,
   },
 
   title: {
