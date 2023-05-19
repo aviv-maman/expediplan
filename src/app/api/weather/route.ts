@@ -19,10 +19,11 @@ IP address (IPv4 and IPv6 supported) e.g: q=100.0.0.1
 */
 
 export async function GET(request: NextRequest) {
-  const { search } = new URL(request.url);
-  const searchParams = new URLSearchParams(search);
-  const searchValue = searchParams.get('q');
-  const q = searchValue?.split(',');
+  //   const { search } = new URL(request.url);
+  //   const searchParams = new URLSearchParams(search);
+  //   const searchValue = searchParams.get('q');
+  //   const q = searchValue?.split(',');
+  const q = request.nextUrl.searchParams.get('q');
   if (!q || q.length !== 2) return NextResponse.json({ message: 'values of latitude and longitude must be in length of 2!' });
   const url = `https://${process.env.RAPIDAPI_HOST}/current.json?q=${q[0]}%2C${q[1]}`;
   const options = {

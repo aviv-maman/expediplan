@@ -272,19 +272,6 @@
     "wikiDataId": "Q10686"
   },
   {
-    "id": 57256,
-    "name": "Galway City",
-    "state_id": 1087,
-    "state_code": "C",
-    "state_name": "Connacht",
-    "country_id": 105,
-    "country_code": "IE",
-    "country_name": "Ireland",
-    "latitude": "53.28770000",
-    "longitude": "-9.05004000",
-    "wikiDataId": "Q129610"
-  },
-  {
     "id": 57484,
     "name": "Jerusalem",
     "state_id": 1370,

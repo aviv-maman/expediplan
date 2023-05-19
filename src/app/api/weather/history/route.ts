@@ -40,6 +40,14 @@ export async function GET(request: NextRequest) {
   if (!dateValue) return NextResponse.json({ message: 'date value must be provided!' });
   const hourValue = searchParams.get('hour');
   const endDateValue = searchParams.get('end_dt');
+
+  // const params = new URLSearchParams({
+  //   q: `${q[0]},${q[1]}`,
+  //   dt: dateValue,
+  //   end_dt: String(endDateValue),
+  //   hour: String(hourValue),
+  // });
+
   const url = `https://${process.env.RAPIDAPI_HOST}/history.json?q=${q[0]}%2C${q[1]}&dt=${dateValue}&hour=${hourValue}&end_dt=${endDateValue}`;
   const options = {
     method: 'GET',
