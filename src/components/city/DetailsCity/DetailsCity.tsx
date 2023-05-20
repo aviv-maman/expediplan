@@ -135,7 +135,6 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
             lineClamp={lineClamp}
             highlightStyles={(theme) => ({
               backgroundImage: theme.fn.linearGradient(45, theme.colors.cyan[5], theme.colors.indigo[5]),
-              fontWeight: 700,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             })}>

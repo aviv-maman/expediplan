@@ -11,7 +11,7 @@ import HeroBlockGuest from '@/components/plans/hero/HeroBlockGuest';
 import PageLoader from '@/components/PageLoader';
 import HeroLoading from '@/components/plans/hero/loading';
 import { WeatherCard } from '@/components/plans/WeatherCard/WeatherCard';
-import WeatherLoading from '@/components/plans/WeatherCard/loading';
+import WeatherCardLoading from '@/components/plans/WeatherCard/loading';
 
 type Props = {
   params: { id: string };
@@ -57,7 +57,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
               <HeroBlockGuest idFromLocalStorage={params.id} />
             </Suspense>
             <CustomStack mx={{ xl: '25%', lg: '25%' }}>
-              <Suspense fallback={<WeatherLoading />}>
+              <Suspense fallback={<WeatherCardLoading />}>
                 <WeatherCard idFromLocalStorage={params.id} />
               </Suspense>
               <DayTimeline idFromLocalStorage={params.id} />

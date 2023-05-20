@@ -7,6 +7,8 @@ import LeadGrid from '@/components/city/LeadGrid';
 import HeroCity from '@/components/city/HeroCity';
 import DetailsCity from '@/components/city/DetailsCity/DetailsCity';
 import Loading from '@/components/city/DetailsCity/loading';
+import WeatherWidget from '@/components/city/Weather/WeatherWidget';
+import WeatherWidgetLoading from '@/components/city/Weather/loading';
 
 type Props = {
   params: { id: string };
@@ -28,6 +30,9 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
     <CustomStack mx={{ xl: '20%' }}>
       <Suspense>
         <HeroCity city={cityFromServer} />
+      </Suspense>
+      <Suspense fallback={<WeatherWidgetLoading />}>
+        <WeatherWidget city={cityFromServer} />
       </Suspense>
       <Suspense fallback={<Loading />}>
         <DetailsCity city={cityFromServer} />
