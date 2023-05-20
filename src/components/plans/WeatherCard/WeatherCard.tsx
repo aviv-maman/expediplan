@@ -50,7 +50,7 @@ export function WeatherCard({ idFromLocalStorage }: WeatherCardProps) {
 
   return (
     <Card withBorder p={0} radius='md'>
-      <BackgroundImage src={backgroundImageSrc} radius='md' mih={265}>
+      <BackgroundImage src={backgroundImageSrc} radius='md' h={mobile ? 350 : 305}>
         <Stack spacing={0} p='sm'>
           <Group position='center'>
             <Text fz='xl' className={classes.bold}>
