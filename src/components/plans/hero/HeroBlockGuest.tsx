@@ -1,13 +1,12 @@
 'use client';
 import { useRecoilValue } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button, Group } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
-import { IconCloud, IconInfoSquare } from '@tabler/icons-react';
+import { IconInfoSquare } from '@tabler/icons-react';
 import Link from 'next/link';
-import { getRealtimeWeatherByDecimalDegree } from '@/api/WeatherAPI';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -59,8 +58,6 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
 
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
 
-  const checkWeather = async () => await getRealtimeWeatherByDecimalDegree(Number(city.data?.latitude), Number(city.data?.longitude));
-
   if (city.error) return <div>Failed to load</div>;
   if (!city.data) return <Skeleton height={265} />;
 
@@ -91,9 +88,6 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
               {city.data.name}
             </Button>
           </Link>
-          <Button variant='light' leftIcon={<IconCloud />} onClick={checkWeather}>
-            Check Weather
-          </Button>
         </div>
       </Container>
     </BackgroundImage>

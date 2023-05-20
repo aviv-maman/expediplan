@@ -42,10 +42,10 @@ export async function GET(request: NextRequest) {
     },
   };
   try {
-    const response = await fetch(url, options);
-    const result = await response.text();
+    const response = await fetch(url, { ...options, next: { revalidate: 3600 } });
+    const result = await response.json();
     return NextResponse.json(result);
   } catch (error) {
-    console.error(error);
+    return NextResponse.json(error);
   }
 }

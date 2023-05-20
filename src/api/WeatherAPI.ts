@@ -4,7 +4,7 @@ import type { WeatherResponse } from '../../types/general';
 
 const getRealtimeWeatherByDecimalDegreeAPI = (latitude: number, longitude: number) => {
   const params = new URLSearchParams({ q: `${String(latitude)},${String(longitude)}` });
-  const API = `${HOSTNAME}/api/weather?${params}`;
+  const API = `${HOSTNAME}/api/weather/realtime?${params}`;
   return API;
 };
 
@@ -37,7 +37,7 @@ const getHistoryWeatherByDecimalDegreeAPI = (options: HistoryWeatherAPIParams) =
 
 export const getRealtimeWeatherByDecimalDegree = async (latitude: number, longitude: number) => {
   const API = getRealtimeWeatherByDecimalDegreeAPI(latitude, longitude);
-  const res = await fetch(API, { next: { revalidate: 86_400 } }); //3600
+  const res = await fetch(API);
   // This will activate the closest `error.tsx` Error Boundary
   // throw new Error('Failed to fetch data');
   if (!res.ok) return undefined;

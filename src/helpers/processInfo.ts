@@ -56,3 +56,12 @@ export const dateToYYYYMMDD = (date: Date) => {
   const day = date.getDate();
   return `${year}-${month}-${day}`;
 };
+
+export const dateToYYYYMMDDAndTime = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hours = date.getHours();
+  const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+};

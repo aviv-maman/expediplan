@@ -10,6 +10,8 @@ import { getServerSession } from 'next-auth';
 import HeroBlockGuest from '@/components/plans/hero/HeroBlockGuest';
 import PageLoader from '@/components/PageLoader';
 import HeroLoading from '@/components/plans/hero/loading';
+import { WeatherCard } from '@/components/plans/WeatherCard/WeatherCard';
+import WeatherLoading from '@/components/plans/WeatherCard/loading';
 
 type Props = {
   params: { id: string };
@@ -18,7 +20,7 @@ type Props = {
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   return {
-    title: `${process.env.NEXT_PUBLIC_WEBSITE_NAME ?? 'WebDev'} | Plan: ${params.id}`,
+    title: `${process.env.NEXT_PUBLIC_WEBSITE_NAME ?? ''} | Plan: ${params.id}`,
   };
 }
 
@@ -45,7 +47,7 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
                 duration={planFromServer?.duration}
               />
             </Suspense>
-            <CustomStack mx={{ xl: '30%', lg: '30%' }}>
+            <CustomStack mx={{ xl: '25%', lg: '25%' }}>
               <DayTimeline planFromServer={planFromServer} />
             </CustomStack>
           </>
@@ -54,7 +56,10 @@ export default async function PlanPage({ params, searchParams }: PlanPageProps) 
             <Suspense fallback={<HeroLoading />}>
               <HeroBlockGuest idFromLocalStorage={params.id} />
             </Suspense>
-            <CustomStack mx={{ xl: '30%', lg: '30%' }}>
+            <CustomStack mx={{ xl: '25%', lg: '25%' }}>
+              <Suspense fallback={<WeatherLoading />}>
+                <WeatherCard idFromLocalStorage={params.id} />
+              </Suspense>
               <DayTimeline idFromLocalStorage={params.id} />
             </CustomStack>
           </>
