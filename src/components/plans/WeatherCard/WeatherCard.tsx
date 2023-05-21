@@ -1,7 +1,7 @@
 'use client';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { dateToYYYYMMDDAndTime } from '@/helpers/processInfo';
-import { weatherSelectorFamily } from '@/recoil/city-weather_state';
+import { temperatureUnitAtom, weatherSelectorFamily } from '@/recoil/city-weather_state';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { BackgroundImage, Card, createStyles, Group, Image, Stack, Text } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -46,6 +46,8 @@ export function WeatherCard({ idFromLocalStorage }: WeatherCardProps) {
   const backgroundImageSrc = '/assets/background-weather.jpg' || 'https://cdn.weatherapi.com/weather-widget/img/weatherapi-backgrounds/4_widget3.png';
   const unavailable = 'Data unavailable. Please try again later.';
 
+  const temperatureUnit = useRecoilValue(temperatureUnitAtom);
+
   if (city.error) return <div>Failed to load</div>;
 
   return (
@@ -60,7 +62,7 @@ export function WeatherCard({ idFromLocalStorage }: WeatherCardProps) {
           </Group>
           <Group position='center'>
             <Text fz={36} className={classes.bold}>
-              {weather?.current?.temp_c}°C
+              {temperatureUnit === 'f' ? `${weather?.current?.temp_f}°F` : `${weather?.current?.temp_c}°C`}
             </Text>
             <Image src={weatherIconSrc} alt='weather icon' width={60} />
           </Group>
@@ -68,7 +70,7 @@ export function WeatherCard({ idFromLocalStorage }: WeatherCardProps) {
             {weather?.current?.condition?.text}
           </Text>
           <Text fz={18} className={classes.bold} align='center'>
-            Feels Like: {weather?.current?.feelslike_c}°C
+            Feels Like: {temperatureUnit === 'f' ? `${weather?.current?.feelslike_f}°F` : `${weather?.current?.feelslike_c}°C`}
           </Text>
           {!mobile ? (
             <>

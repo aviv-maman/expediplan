@@ -9,6 +9,7 @@ import DetailsCity from '@/components/city/DetailsCity/DetailsCity';
 import Loading from '@/components/city/DetailsCity/loading';
 import WeatherWidget from '@/components/city/Weather/WeatherWidget';
 import WeatherWidgetLoading from '@/components/city/Weather/loading';
+import { cookies } from 'next/headers';
 
 type Props = {
   params: { id: string };
@@ -25,6 +26,8 @@ type CityPageProps = { params: { id: string }; searchParams?: { [key: string]: s
 
 export default async function CityPage({ params, searchParams }: CityPageProps) {
   const cityFromServer = await getCityById(Number(params.id));
+  const cookieStore = cookies();
+  const temperatureUnit = cookieStore.get('temperature-unit')?.value === 'f' ? 'f' : 'c';
 
   return (
     <CustomStack mx={{ xl: '20%' }}>
@@ -32,7 +35,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         <HeroCity city={cityFromServer} />
       </Suspense>
       <Suspense fallback={<WeatherWidgetLoading />}>
-        <WeatherWidget city={cityFromServer} />
+        <WeatherWidget city={cityFromServer} temperatureUnit={temperatureUnit} />
       </Suspense>
       <Suspense fallback={<Loading />}>
         <DetailsCity city={cityFromServer} />
