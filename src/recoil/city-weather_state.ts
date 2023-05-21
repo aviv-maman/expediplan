@@ -1,5 +1,5 @@
 'use client';
-import { atom, selectorFamily } from 'recoil';
+import { selectorFamily } from 'recoil';
 import type { City } from '../../types/general';
 import { getRealtimeWeatherByDecimalDegree } from '@/api/WeatherAPI';
 import { getCityByIdAPI } from '@/api/CitiesAPI';
@@ -24,9 +24,4 @@ export const weatherSelectorFamily = selectorFamily({
       const weather = await getRealtimeWeatherByDecimalDegree(city.latitude, city.longitude);
       return weather;
     },
-});
-
-export const temperatureUnitAtom = atom<'c' | 'f'>({
-  key: 'temperatureUnit',
-  default: 'c',
 });

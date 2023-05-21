@@ -146,6 +146,7 @@ export type WeatherResponse = {
   };
 };
 
-export type SiteSettings = {
-  temp_unit: 'c' | 'f';
+export type WebsiteSettings = {
+  temp_unit?: 'c' | 'f';
+  theme?: 'light' | 'dark';
 };

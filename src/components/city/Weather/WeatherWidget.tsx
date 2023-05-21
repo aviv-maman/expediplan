@@ -1,8 +1,8 @@
-import type { City, SiteSettings } from '../../../../types/general';
+import type { City, WebsiteSettings } from '../../../../types/general';
 
 interface WeatherWidgetProps {
   city?: City;
-  temperatureUnit?: SiteSettings['temp_unit'];
+  temperatureUnit?: WebsiteSettings['temp_unit'];
 }
 
 const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city, temperatureUnit = 'c' }) => {

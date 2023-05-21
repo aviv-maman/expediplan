@@ -2,7 +2,7 @@
 import { createStyles, Card, Group, Switch, Text, rem } from '@mantine/core';
 import { ColorSchemeToggle } from './ColorSchemeToggle';
 import { useRecoilState } from 'recoil';
-import { temperatureUnitAtom } from '@/recoil/city-weather_state';
+import { temperatureUnitAtom } from '@/recoil/settings_state';
 import { updateWebsiteSettings } from '@/api/UpdateSettings';
 
 const useStyles = createStyles((theme) => ({

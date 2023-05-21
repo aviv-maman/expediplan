@@ -16,16 +16,16 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = cookies();
-  const colorScheme = cookieStore.get('color-scheme')?.value === 'dark' ? 'dark' : 'light';
-  const session = await getServerSession();
+  const colorSchemeCookie = cookieStore.get('color-scheme')?.value === 'dark' ? 'dark' : 'light';
   const temperatureUnitCookie = cookieStore.get('temperature-unit')?.value === 'f' ? 'f' : 'c';
+  const session = await getServerSession();
 
   return (
     <html lang='en'>
       <body className={inter.className}>
         <GlobalRecoilRoot>
           <GlobalSessionProvider session={session}>
-            <RootStyleRegistry themeColor={colorScheme}>
+            <RootStyleRegistry colorSchemeCookie={colorSchemeCookie}>
               <GlobalAppShell temperatureUnitCookie={temperatureUnitCookie}>{children}</GlobalAppShell>
             </RootStyleRegistry>
           </GlobalSessionProvider>

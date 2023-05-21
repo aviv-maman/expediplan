@@ -1,11 +1,13 @@
 'use client';
-import { Group, Switch, Text, useMantineColorScheme, useMantineTheme } from '@mantine/core';
+import { updateWebsiteSettings } from '@/api/UpdateSettings';
+import { colorSchemeAtom } from '@/recoil/settings_state';
+import { Group, Switch, Text } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 export function ColorSchemeToggle({ classes }: { classes?: { item: string; switch: string } }) {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const theme = useMantineTheme();
+  const [colorScheme, setColorScheme] = useRecoilState(colorSchemeAtom);
 
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
@@ -15,6 +17,11 @@ export function ColorSchemeToggle({ classes }: { classes?: { item: string; switc
     // Returns null on first render, so the client and server match
     return null;
   }
+
+  const handleColorSchemeChange = () => {
+    setColorScheme((currentValue) => (currentValue === 'dark' ? 'light' : 'dark'));
+    updateWebsiteSettings({ theme: colorScheme === 'dark' ? 'light' : 'dark' });
+  };
 
   return (
     <Group position='apart' className={classes?.item} noWrap spacing='xl'>
@@ -26,10 +33,10 @@ export function ColorSchemeToggle({ classes }: { classes?: { item: string; switc
       </div>
       <Switch
         checked={colorScheme === 'dark'}
-        onChange={() => toggleColorScheme()}
+        onChange={handleColorSchemeChange}
         size='lg'
-        onLabel={<IconSun color={theme.white} size='1.1rem' />}
-        offLabel={<IconMoonStars color={theme.colors.gray[6]} size='1.1rem' />}
+        onLabel={<IconSun color={'white'} size='1.1rem' />}
+        offLabel={<IconMoonStars color={'#868E96'} size='1.1rem' />}
         className={classes?.switch}
       />
     </Group>

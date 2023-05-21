@@ -2,12 +2,13 @@
 import { CacheProvider } from '@emotion/react';
 import { useEmotionCache, MantineProvider, ColorSchemeProvider, type ColorScheme } from '@mantine/core';
 import { useServerInsertedHTML } from 'next/navigation';
-import { setCookie } from 'cookies-next';
 import { Notifications } from '@mantine/notifications';
-import { useState } from 'react';
 import { useColorScheme } from '@mantine/hooks';
+import { useRecoilState } from 'recoil';
+import { colorSchemeAtom } from '@/recoil/settings_state';
+import { useEffect } from 'react';
 
-export default function RootStyleRegistry({ children, themeColor }: { children: React.ReactNode; themeColor: ColorScheme }) {
+export default function RootStyleRegistry({ children, colorSchemeCookie }: { children: React.ReactNode; colorSchemeCookie: ColorScheme }) {
   const cache = useEmotionCache();
   cache.compat = true;
 
@@ -21,12 +22,15 @@ export default function RootStyleRegistry({ children, themeColor }: { children: 
     />
   ));
 
-  const preferredColorScheme = useColorScheme(themeColor);
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(preferredColorScheme);
+  const preferredColorScheme = useColorScheme(colorSchemeCookie);
+  const [colorScheme, setColorScheme] = useRecoilState(colorSchemeAtom);
+
+  useEffect(() => {
+    setColorScheme(preferredColorScheme);
+  }, []);
 
   const toggleColorScheme = (value?: ColorScheme) => {
     const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');
-    setCookie('color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
     setColorScheme(nextColorScheme);
   };
 

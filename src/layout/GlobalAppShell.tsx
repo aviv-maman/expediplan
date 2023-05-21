@@ -7,7 +7,7 @@ import { FooterCentered } from './Footer/FooterCentered';
 import footerProps from './Footer/footerProps';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { temperatureUnitAtom } from '@/recoil/city-weather_state';
+import { temperatureUnitAtom } from '@/recoil/settings_state';
 
 const GlobalAppShell: React.FC<{ children: React.ReactNode; temperatureUnitCookie: 'c' | 'f' }> = ({ children, temperatureUnitCookie }) => {
   const setTemperatureUnit = useSetRecoilState(temperatureUnitAtom);

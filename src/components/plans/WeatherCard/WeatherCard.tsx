@@ -1,8 +1,9 @@
 'use client';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { dateToYYYYMMDDAndTime } from '@/helpers/processInfo';
-import { temperatureUnitAtom, weatherSelectorFamily } from '@/recoil/city-weather_state';
+import { weatherSelectorFamily } from '@/recoil/city-weather_state';
 import { planSelectorFamily } from '@/recoil/plan_state';
+import { temperatureUnitAtom } from '@/recoil/settings_state';
 import { BackgroundImage, Card, createStyles, Group, Image, Stack, Text } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconCloud } from '@tabler/icons-react';
