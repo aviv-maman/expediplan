@@ -4,15 +4,12 @@ import { useEmotionCache, MantineProvider, ColorSchemeProvider, type ColorScheme
 import { useServerInsertedHTML } from 'next/navigation';
 import { setCookie } from 'cookies-next';
 import { Notifications } from '@mantine/notifications';
-// import { GlobalActionKeys } from '@/core/context/action';
-// import { useGlobalContext } from '@/core/context/initialContextState';
 import { useState } from 'react';
 import { useColorScheme } from '@mantine/hooks';
 
 export default function RootStyleRegistry({ children, themeColor }: { children: React.ReactNode; themeColor: ColorScheme }) {
   const cache = useEmotionCache();
   cache.compat = true;
-  // const { dispatch } = useGlobalContext();
 
   useServerInsertedHTML(() => (
     <style
@@ -31,7 +28,6 @@ export default function RootStyleRegistry({ children, themeColor }: { children: 
     const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');
     setCookie('color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
     setColorScheme(nextColorScheme);
-    // dispatch({ type: GlobalActionKeys.UpdateTheme, payload: nextColorScheme }); // Update the theme in the global context - currently not in use
   };
 
   return (

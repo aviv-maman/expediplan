@@ -1,6 +1,9 @@
 'use client';
 import { createStyles, Card, Group, Switch, Text, rem } from '@mantine/core';
 import { ColorSchemeToggle } from './ColorSchemeToggle';
+import { useRecoilState } from 'recoil';
+import { temperatureUnitAtom } from '@/recoil/city-weather_state';
+import { updateWebsiteSettings } from '@/api/UpdateSettings';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -26,8 +29,16 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export const SettingsCard = () => {
+interface SettingsCardProps {}
+
+export const SettingsCard: React.FC<SettingsCardProps> = () => {
   const { classes } = useStyles();
+  const [temperatureUnit, setTemperatureUnit] = useRecoilState(temperatureUnitAtom);
+
+  const handleTemperatureUnitChange = () => {
+    setTemperatureUnit((currentValue) => (currentValue === 'c' ? 'f' : 'c'));
+    updateWebsiteSettings({ temp_unit: temperatureUnit === 'c' ? 'f' : 'c' });
+  };
 
   return (
     <Card withBorder radius='md' p='xl' className={classes.card}>
@@ -40,15 +51,22 @@ export const SettingsCard = () => {
       <ColorSchemeToggle classes={classes} />
 
       {/* Switch template */}
-      {/* <Group position='apart' className={classes.item} noWrap spacing='xl'>
+      <Group position='apart' className={classes.item} noWrap spacing='xl'>
         <div>
-          <Text>{'item.title'}</Text>
+          <Text>Temperature Unit</Text>
           <Text size='xs' color='dimmed'>
-            {'item.description'}
+            Display temperature in Celsius or Fahrenheit
           </Text>
         </div>
-        <Switch onLabel='ON' offLabel='OFF' className={classes.switch} size='lg' />
-      </Group> */}
+        <Switch
+          checked={temperatureUnit === 'c'}
+          onChange={handleTemperatureUnitChange}
+          onLabel='C'
+          offLabel='F'
+          className={classes.switch}
+          size='lg'
+        />
+      </Group>
     </Card>
   );
 };

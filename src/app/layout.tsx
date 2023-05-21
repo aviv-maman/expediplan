@@ -18,6 +18,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const cookieStore = cookies();
   const colorScheme = cookieStore.get('color-scheme')?.value === 'dark' ? 'dark' : 'light';
   const session = await getServerSession();
+  const temperatureUnitCookie = cookieStore.get('temperature-unit')?.value === 'f' ? 'f' : 'c';
 
   return (
     <html lang='en'>
@@ -25,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <GlobalRecoilRoot>
           <GlobalSessionProvider session={session}>
             <RootStyleRegistry themeColor={colorScheme}>
-              <GlobalAppShell>{children}</GlobalAppShell>
+              <GlobalAppShell temperatureUnitCookie={temperatureUnitCookie}>{children}</GlobalAppShell>
             </RootStyleRegistry>
           </GlobalSessionProvider>
         </GlobalRecoilRoot>

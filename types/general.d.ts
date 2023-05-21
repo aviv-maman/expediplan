@@ -145,3 +145,7 @@ export type WeatherResponse = {
     gust_kph: number; //Wind gust in kilometer per hour
   };
 };
+
+export type SiteSettings = {
+  temp_unit: 'c' | 'f';
+};
