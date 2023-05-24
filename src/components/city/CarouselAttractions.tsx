@@ -25,8 +25,8 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '2px',
     backgroundImage:
       theme.colorScheme === 'dark'
-        ? 'linear-gradient(180deg, rgba(66, 100, 97, 0.85) 90%, rgba(38, 207, 52, 0.85) 10%)'
-        : 'linear-gradient(180deg, rgba(98, 131, 129, 0.85) 90%, rgba(38, 207, 52, 0.85) 10%)',
+        ? 'linear-gradient(180deg, rgba(38, 41, 44, 0.85) 90%, rgba(66, 99, 235, 0.85) 10%)'
+        : 'linear-gradient(180deg, rgba(208, 235, 255, 0.85) 90%, rgba(66, 99, 235, 0.85) 10%)',
   },
 
   cover: {

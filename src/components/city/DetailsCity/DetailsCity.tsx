@@ -144,9 +144,11 @@ const DetailsCity: React.FC<DetailsCityProps> = ({ city }) => {
       </Stack>
 
       <Group position='center'>
-        <Button variant='light' size='sm'>
-          Create Plan in {city?.name}
-        </Button>
+        <Link href={{ pathname: `/create-new-plan`, search: `country=${city?.country_id}&city=${city?.id}` }}>
+          <Button variant='light' size='sm'>
+            Create Plan in {city?.name}
+          </Button>
+        </Link>
         <Link href={{ pathname: `/countries/${city?.country_id}` }}>
           <Button variant='light' size='sm'>
             Explore {city?.country_name}

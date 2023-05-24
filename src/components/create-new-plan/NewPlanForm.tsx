@@ -8,11 +8,11 @@ import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
 import { useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
 import { planListState } from '@/recoil/plan_state';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const ICON_SIZE = rem(60);
 
@@ -73,11 +73,24 @@ const NewPlanForm: React.FC = () => {
   });
 
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const countries = useSWR(getCountriesAPI(), countriesFetcher);
   const cities = useSWR(getCitiesByCountryIdAPI(form.getTransformedValues().country), citiesFetcher);
 
   const duration = dayjs(form.values.endDate).diff(dayjs(form.values.startDate), 'day') + 1;
+
+  //===[ Create new plan from search params ]===
+  const flag = countries.data?.find((item) => item.id === Number(form.values.country.id))?.flag;
+  useEffect(() => {
+    if (searchParams.get('country')) {
+      form.setFieldValue('country.id', searchParams.get('country') || '');
+    }
+    if (searchParams.get('city')) {
+      form.setFieldValue('city', searchParams.get('city') || '');
+    }
+  }, []);
+  //===========================================
 
   if (countries.error) return <div>Failed to load</div>;
   if (cities.error) return <div>Failed to load</div>;
@@ -91,7 +104,7 @@ const NewPlanForm: React.FC = () => {
         Create New Plan
       </Title>
       <Paper withBorder shadow='md' p={30} radius='md' className={classes.card} mt={`calc(${ICON_SIZE} / 3)`}>
-        <Avatar src={form.values.country.flag} alt='flag' className={classes.icon} size={ICON_SIZE} radius={ICON_SIZE} color='blue'>
+        <Avatar src={form.values.country.flag || flag} alt='flag' className={classes.icon} size={ICON_SIZE} radius={ICON_SIZE} color='blue'>
           <IconFlagFilled size='2rem' stroke={1.5} />
         </Avatar>
         <form

@@ -21,6 +21,7 @@ import {
 import type { Attraction } from '../../../../types/general';
 import { IconMail, IconMapPin, IconPhone, IconWorldWww } from '@tabler/icons-react';
 import Link from 'next/link';
+import ShareMenu from '../ShareMenu/ShareMenu';
 
 export const BASE_HEIGHT = 540;
 
@@ -88,11 +89,14 @@ export const Subgrid: React.FC<SubgridProps> = ({ attraction }) => {
       </Title>
       <SimpleGrid cols={4} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} mb='md'>
         <Container p={'xs'} className={classes.skeleton}>
-          <Group spacing={5}>
-            <Text className={classes.text}>
-              <b>Rating:</b>
-            </Text>
-            <Rating value={deserializedAttraction?.rating} fractions={2} color='lime' readOnly name='google-rating' pb={3} />
+          <Group position='apart'>
+            <Group spacing={5}>
+              <Text className={classes.text}>
+                <b>Rating:</b>
+              </Text>
+              <Rating value={deserializedAttraction?.rating} fractions={2} color='lime' readOnly name='google-rating' pb={3} />
+            </Group>
+            <ShareMenu name={deserializedAttraction?.name} type={deserializedAttraction?.type} />
           </Group>
           <Text className={classes.text}>
             <b>Category:</b> {deserializedAttraction?.category}
@@ -155,9 +159,6 @@ export const Subgrid: React.FC<SubgridProps> = ({ attraction }) => {
             <b>Opening Hours:</b> {openingHours}
           </Text>
           <Text className={classes.text}>
-            <b>Contact</b>
-          </Text>
-          <Text className={classes.text}>
             <b>Phone:</b> {deserializedAttraction?.contact?.phone}
           </Text>
           <Button.Group my={5}>
@@ -191,16 +192,23 @@ export const Subgrid: React.FC<SubgridProps> = ({ attraction }) => {
               )}
             </CopyButton>
           </Button.Group>
-          <Button.Group mt={10}>
-            <Link href={{ pathname: `${deserializedAttraction?.contact?.website}` }} target='_blank' rel='noopener noreferrer'>
-              <Button variant='default' leftIcon={<IconWorldWww size='1rem' />}>
-                Visit website
-              </Button>
-            </Link>
-            <Button variant='default' leftIcon={<IconMapPin size='1rem' />}>
-              Navigate
-            </Button>
-          </Button.Group>
+          <Group spacing={10} my={5}>
+            <Button.Group mt={5}>
+              <Link href={{ pathname: `${deserializedAttraction?.contact?.website}` }} target='_blank' rel='noopener noreferrer'>
+                <Button variant='default' leftIcon={<IconWorldWww size='1rem' />}>
+                  Visit website
+                </Button>
+              </Link>
+              <Link
+                href={{ pathname: `geo:${deserializedAttraction?.latitude},${deserializedAttraction?.longitude}` }}
+                target='_blank'
+                rel='noopener noreferrer'>
+                <Button variant='default' leftIcon={<IconMapPin size='1rem' />}>
+                  Navigate
+                </Button>
+              </Link>
+            </Button.Group>
+          </Group>
         </Container>
       </SimpleGrid>
       <Paper p={'xs'} mb={'md'} className={classes.skeleton}>
