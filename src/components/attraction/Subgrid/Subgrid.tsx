@@ -163,13 +163,13 @@ export const Subgrid: React.FC<SubgridProps> = ({ attraction }) => {
           </Text>
           <Button.Group my={5}>
             <Link href={{ pathname: `tel:${deserializedAttraction?.contact?.phone}` }} target='_blank' rel='noopener noreferrer'>
-              <Button variant='default' leftIcon={<IconPhone size='1rem' />}>
+              <Button variant='default' leftIcon={<IconPhone size='1rem' />} disabled={!deserializedAttraction?.contact?.phone}>
                 Call
               </Button>
             </Link>
             <CopyButton value={String(deserializedAttraction?.contact?.phone)}>
               {({ copied, copy }) => (
-                <Button variant='default' color={copied ? 'teal' : ''} onClick={copy}>
+                <Button variant='default' color={copied ? 'teal' : ''} onClick={copy} disabled={!deserializedAttraction?.contact?.phone}>
                   {copied ? 'Copied!' : 'Copy number'}
                 </Button>
               )}
@@ -180,13 +180,13 @@ export const Subgrid: React.FC<SubgridProps> = ({ attraction }) => {
           </Text>
           <Button.Group my={5}>
             <Link href={{ pathname: `mailto:${deserializedAttraction?.contact?.email}` }} target='_blank' rel='noopener noreferrer'>
-              <Button variant='default' leftIcon={<IconMail size='1rem' />}>
+              <Button variant='default' leftIcon={<IconMail size='1rem' />} disabled={!deserializedAttraction?.contact?.email}>
                 Email
               </Button>
             </Link>
             <CopyButton value={String(deserializedAttraction?.contact?.email)}>
               {({ copied, copy }) => (
-                <Button variant='default' color={copied ? 'teal' : ''} onClick={copy}>
+                <Button variant='default' color={copied ? 'teal' : ''} onClick={copy} disabled={!deserializedAttraction?.contact?.email}>
                   {copied ? 'Copied!' : 'Copy email'}
                 </Button>
               )}
@@ -195,7 +195,7 @@ export const Subgrid: React.FC<SubgridProps> = ({ attraction }) => {
           <Group spacing={10} my={5}>
             <Button.Group mt={5}>
               <Link href={{ pathname: `${deserializedAttraction?.contact?.website}` }} target='_blank' rel='noopener noreferrer'>
-                <Button variant='default' leftIcon={<IconWorldWww size='1rem' />}>
+                <Button variant='default' leftIcon={<IconWorldWww size='1rem' />} disabled={!deserializedAttraction?.contact?.website}>
                   Visit website
                 </Button>
               </Link>
@@ -203,7 +203,10 @@ export const Subgrid: React.FC<SubgridProps> = ({ attraction }) => {
                 href={{ pathname: `geo:${deserializedAttraction?.latitude},${deserializedAttraction?.longitude}` }}
                 target='_blank'
                 rel='noopener noreferrer'>
-                <Button variant='default' leftIcon={<IconMapPin size='1rem' />}>
+                <Button
+                  variant='default'
+                  leftIcon={<IconMapPin size='1rem' />}
+                  disabled={!deserializedAttraction?.latitude || !deserializedAttraction?.longitude}>
                   Navigate
                 </Button>
               </Link>

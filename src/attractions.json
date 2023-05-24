@@ -280,7 +280,7 @@
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/28/2f/62/caption.jpg?w=1100&h=-1&s=1",
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/44/ca/6f/caption.jpg?w=1200&h=-1&s=1"
     ],
-    "tags": ["food", "drinks", "restaurant"],
+    "tags": ["historic", "landmark", "square", "architecture"],
     "contact": {
       "website": "https://www.kremlin.ru",
       "phone": "",
@@ -452,5 +452,42 @@
       }
     ],
     "about": "Moscow is a country in Europe."
+  },
+  {
+    "id": 13,
+    "name": "Praca do Comercio (Terreiro do Paco)",
+    "country": 177,
+    "city": 143446,
+    "address": {
+      "street": "Praça do Comércio",
+      "city": "Lisbon",
+      "country": "Portugal"
+    },
+    "latitude": 52.5,
+    "longitude": 5.75,
+    "category": "Historical Sites",
+    "type": "Square",
+    "rating": 3.5,
+    "cover_image": "https://cdn.britannica.com/81/124581-050-A2114648/Commerce-Square-Lisbon.jpg",
+    "images": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/8c/e7/e2/vista-centrale.jpg?w=1200&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/c5/cd/73/20160616-132935-largejpg.jpg?w=1200&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/b1/68/f4/caption.jpg?w=1200&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/71/46/31/sunset-2.jpg?w=1200&h=-1&s=1"
+    ],
+    "tags": ["historic", "landmark", "square", "architecture"],
+    "contact": {
+      "website": "https://www.visitlisboa.com",
+      "phone": "tel:+351 21 099 8599",
+      "email": ""
+    },
+    "opening_hours": [
+      {
+        "day": 0,
+        "open_time": "09:00",
+        "close_time": "18:00"
+      }
+    ],
+    "about": "One of the biggest squares in Europe, this stylish area in downtown Lisbon often displays beautiful works of art and sculpture, and is a great place for a leisurely stroll."
   }
 ]
