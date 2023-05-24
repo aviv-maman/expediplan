@@ -264,31 +264,66 @@
     "country": 182,
     "city": 99972,
     "address": {
-      "street": "Babushka 215",
+      "street": "Moscow 109012",
       "city": "Moscow",
       "country": "Russia"
     },
     "latitude": 52.5,
     "longitude": 5.75,
     "category": "Historical Sites",
-    "type": "Other",
-    "rating": 3,
+    "type": "Square",
+    "rating": 4,
     "cover_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Red_square_Moscow_cityscape_%288309148721%29.jpg/1280px-Red_square_Moscow_cityscape_%288309148721%29.jpg",
-    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "images": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/da/f2/3e/roter-platz.jpg?w=1200&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/36/04/11/psx-20180222-230909-largejpg.jpg?w=1000&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/28/2f/62/caption.jpg?w=1100&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/44/ca/6f/caption.jpg?w=1200&h=-1&s=1"
+    ],
     "tags": ["food", "drinks", "restaurant"],
     "contact": {
-      "website": "https://www.moscow.com",
-      "phone": "1234567890",
-      "email": "a@a"
+      "website": "https://www.kremlin.ru",
+      "phone": "",
+      "email": ""
     },
     "opening_hours": [
       {
         "day": 0,
-        "open_time": "09:00",
-        "close_time": "18:00"
+        "open_time": "12:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 1,
+        "open_time": "12:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 2,
+        "open_time": "12:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 3,
+        "open_time": "12:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 4,
+        "open_time": "12:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 5,
+        "open_time": "12:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 6,
+        "open_time": "12:00",
+        "close_time": "23:59"
       }
     ],
-    "about": "Moscow is a country in Europe."
+    "about": "Red Square is a city square in Moscow, Russia. The buildings surrounding the Square are all significant: Nearby to the South is the elaborate brightly domed Saint Basil's Cathedral and the palaces and cathedrals of the Kremlin, Lenin's Mausoleum. On the Eastern side of the square is the GUM department store, and next to it the restored Kazan Cathedral."
   },
   {
     "id": 9,
