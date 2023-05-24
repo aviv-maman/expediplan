@@ -22,7 +22,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -54,7 +54,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -86,7 +86,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -118,7 +118,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -150,7 +150,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -174,22 +174,57 @@
     "category": "Historical Sites",
     "type": "Castle",
     "rating": 4,
-    "cover_image": "../../../assets/attractions/food-and-drinks/rome/0.jpg",
-    "images": ["../../../assets/attractions/food-and-drinks/rome/0.jpg"],
+    "cover_image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/9d/ef/8d/muiden-castle.jpg?w=1200&h=-1&s=1",
+    "images": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/f4/dd/31/muiderslot-kalesi.jpg?w=1200&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/48/83/96/muiderslot-muiden-castle.jpg?w=1200&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/b3/bc/1b/aussenansicht.jpg?w=1200&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/33/64/df/visual-big-2-largejpg.jpg?w=1200&h=-1&s=1"
+    ],
     "tags": ["castle", "historical", "ancient"],
     "contact": {
       "website": "https://www.muiderslot.nl",
-      "phone": "1234567890",
-      "email": "a@a"
+      "phone": "+31 294 256 262",
+      "email": "info@muiderslot.nl"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
-        "open_time": "09:00",
-        "close_time": "18:00"
+        "open_time": "10:00",
+        "close_time": "17:00"
+      },
+      {
+        "day": 1,
+        "open_time": "10:00",
+        "close_time": "17:00"
+      },
+      {
+        "day": 2,
+        "open_time": "10:00",
+        "close_time": "17:00"
+      },
+      {
+        "day": 3,
+        "open_time": "10:00",
+        "close_time": "17:00"
+      },
+      {
+        "day": 4,
+        "open_time": "10:00",
+        "close_time": "17:00"
+      },
+      {
+        "day": 5,
+        "open_time": "10:00",
+        "close_time": "17:00"
+      },
+      {
+        "day": 6,
+        "open_time": "10:00",
+        "close_time": "17:00"
       }
     ],
-    "about": "Baba Milia Restaurant is the best hamburger restaurant in Netherlands."
+    "about": "Amsterdam Castle Muiderslot is one of the oldest and best-preserved castles in the Netherlands! It was built in 1285 and has gathered many interesting stories over the (700!) years. Visit the castle and the beautiful garden and get to know more about Dutch history."
   },
   {
     "id": 7,
@@ -214,7 +249,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -246,7 +281,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -278,7 +313,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -310,7 +345,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -342,7 +377,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",
@@ -374,7 +409,7 @@
       "phone": "1234567890",
       "email": "a@a"
     },
-    "openingHoursPeriods": [
+    "opening_hours": [
       {
         "day": 0,
         "open_time": "09:00",

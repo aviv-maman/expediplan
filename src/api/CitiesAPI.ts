@@ -1,10 +1,8 @@
-import { fakeDelay } from '@/helpers/network';
 import type { City } from '../../types/general';
 import { HOSTNAME } from '@/constants';
 
 export const citiesFetcher = (url: string) =>
   fetch(url).then(async (res) => {
-    await fakeDelay(2);
     return res.json() as Promise<City[] | undefined>;
   });
 export const cityFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<City | undefined>);

@@ -84,7 +84,7 @@ export type Attraction = {
   images: string[];
   tags: string[];
   contact: { website: string; phone: string; email: string };
-  openingHoursPeriods: {
+  opening_hours: {
     day: number;
     open_time: string;
     close_time: string;

@@ -10,9 +10,9 @@ export async function POST(request: Request) {
   const cookieStore = cookies();
 
   // @ts-expect-error: remove this line when type is fixed
-  temperatureUnit && cookieStore.set('temperature-unit', temperatureUnit, { secure: true, httpOnly: true });
+  temperatureUnit && cookieStore.set({ name: 'temperature-unit', value: temperatureUnit, secure: true, httpOnly: true });
   // @ts-expect-error: remove this line when type is fixed
-  theme && cookieStore.set('color-scheme', theme, { secure: true, httpOnly: true });
+  theme && cookieStore.set({ name: 'color-scheme', value: temperatureUnit, secure: true, httpOnly: true });
   try {
     // const response = await fetch(url);
     // const result = await response.json();
