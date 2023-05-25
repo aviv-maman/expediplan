@@ -470,10 +470,10 @@
     "rating": 3.5,
     "cover_image": "https://cdn.britannica.com/81/124581-050-A2114648/Commerce-Square-Lisbon.jpg",
     "images": [
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/8c/e7/e2/vista-centrale.jpg?w=1200&h=-1&s=1",
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/c5/cd/73/20160616-132935-largejpg.jpg?w=1200&h=-1&s=1",
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/b1/68/f4/caption.jpg?w=1200&h=-1&s=1",
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/71/46/31/sunset-2.jpg?w=1200&h=-1&s=1"
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/8c/e7/e2/vista-centrale.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/c5/cd/73/20160616-132935-largejpg.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/b1/68/f4/caption.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/71/46/31/sunset-2.jpg?w=1200"
     ],
     "tags": ["historic", "landmark", "square", "architecture"],
     "contact": {
