@@ -489,5 +489,474 @@
       }
     ],
     "about": "One of the biggest squares in Europe, this stylish area in downtown Lisbon often displays beautiful works of art and sculpture, and is a great place for a leisurely stroll."
+  },
+  {
+    "id": 14,
+    "name": "Ponte de Dom Luís I",
+    "country": 177,
+    "city": 89425,
+    "address": {
+      "street": "",
+      "city": "Porto",
+      "country": "Portugal"
+    },
+    "latitude": 52.58,
+    "longitude": 5.75,
+    "category": "Historical Sites",
+    "type": "Bridge",
+    "rating": 3.5,
+    "cover_image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/e6/28/a3/caption.jpg?w=1200",
+    "images": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/d2/6d/e2/ponte-de-dom-luis-i.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/d2/6d/e1/ponte-de-dom-luis-i.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/c3/ad/18/caption.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/c3/ad/17/caption.jpg?w=1200"
+    ],
+    "tags": ["historic", "landmark", "bridge", "architecture"],
+    "contact": {
+      "website": "",
+      "phone": "tel:+351",
+      "email": ""
+    },
+    "opening_hours": [
+      {
+        "day": 0,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 1,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 2,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 3,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 4,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 5,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 6,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      }
+    ],
+    "about": "Completed in 1886 by a student of Gustave Eiffel, the bridge’s top deck is now reserved for pedestrians, as well as one of the city’s metro lines; the lower deck bears regular traffic, as well as narrow walkways for those on foot. The views of the river and old town are stunning, as are the daredevils who leap from the lower level. The bridge's construction was significant, as the area’s foot traffic once navigated a bridge made from old port boats lashed together. To make matters worse, the river was wild back then, with no upstream dams. When Napoleon invaded in 1809, scores were crushed and drowned in the rushing river as a panicked stampede proved too much for the makeshift bridge."
+  },
+  {
+    "id": 15,
+    "name": "Torre dos Clérigos",
+    "country": 177,
+    "city": 89425,
+    "address": {
+      "street": "",
+      "city": "Porto",
+      "country": "Portugal"
+    },
+    "latitude": 52.58,
+    "longitude": 5.75,
+    "category": "Historical Sites",
+    "type": "Tower",
+    "rating": 3.5,
+    "cover_image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/ae/18/17/torre-de-los-clerigos.jpg?w=1100",
+    "images": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/8c/e7/e2/vista-centrale.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/c5/cd/73/20160616-132935-largejpg.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/b1/68/f4/caption.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/71/46/31/sunset-2.jpg?w=1200"
+    ],
+    "tags": ["historic", "landmark", "tower", "architecture"],
+    "contact": {
+      "website": "",
+      "phone": "tel:+351",
+      "email": ""
+    },
+    "opening_hours": [
+      {
+        "day": 0,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 1,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 2,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 3,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 4,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 5,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      },
+      {
+        "day": 6,
+        "open_time": "00:00",
+        "close_time": "23:59"
+      }
+    ],
+    "about": "Clérigos Tower is the foremost undisputed landmark of Porto and a reference in the city's history. Clérigos Tower opened its doors in 1763, becoming the highest bell tower of Portugal, with over 75 metres. In 1753 the Italian architect Nicolau Nasoni was invited to design and build this magnificent Heritage, considered National Monument since 1910. The famous church was built in the eighteenth century, between 1732 and 1749 and this was the most emblematic work of the architect Nicolau Nasoni. Is one of the most beautiful temples of baroque feature, and a reference in the history of Porto. The Exhibitions allow to discover the history of the Brotherhood of Clérigos, admire pieces from the eighteenth to the nineteenth century, in painting, furniture, jewellery and vestment collections. Christus collection, on the 3 floor, is a trip through time and space where art and religion complement each other."
+  },
+  {
+    "id": 16,
+    "name": "Livraria Lello",
+    "country": 177,
+    "city": 89425,
+    "address": {
+      "street": "",
+      "city": "Porto",
+      "country": "Portugal"
+    },
+    "latitude": 52.58,
+    "longitude": 5.75,
+    "category": "Historical Sites",
+    "type": "Book Store",
+    "rating": 3.5,
+    "cover_image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/63/4a/b0/another-perspective-first.jpg?w=1200",
+    "images": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/fe/f6/4c/inside-livraria-lello.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/63/44/e3/view-first-floor.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/63/42/a4/street-view.jpg?w=1100",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/4c/17/1d/caption.jpg?w=1100"
+    ],
+    "tags": ["historic", "landmark", "book", "store", "gift", "shop"],
+    "contact": {
+      "website": "http://www.livrarialello.pt",
+      "phone": "tel:+351 911 865 390",
+      "email": "info@livrarialello.pt"
+    },
+    "opening_hours": [
+      {
+        "day": 0,
+        "open_time": "09:30",
+        "close_time": "19:00"
+      },
+      {
+        "day": 1,
+        "open_time": "09:30",
+        "close_time": "19:00"
+      },
+      {
+        "day": 2,
+        "open_time": "09:30",
+        "close_time": "19:00"
+      },
+      {
+        "day": 3,
+        "open_time": "09:30",
+        "close_time": "19:00"
+      },
+      {
+        "day": 4,
+        "open_time": "09:30",
+        "close_time": "19:00"
+      },
+      {
+        "day": 5,
+        "open_time": "09:30",
+        "close_time": "19:00"
+      },
+      {
+        "day": 6,
+        "open_time": "09:30",
+        "close_time": "19:00"
+      }
+    ],
+    "about": "Livraria Lello is one of the most beautiful bookstores in the world with its intricate neo-gothic and art nouveau design. Inaugurated in 1906, it is one of Portugal's oldest bookstores. It's most famous for its iconic central wooden staircase with its elegant curves and large stained glass windows. The bookstore is also said to have inspired the creation of Hogwarts in the Harry Potter series, attracting travelers from all over the world. You'll need a timed ticket to enter—the ticket fee is deducted if you purchase a book at the store. The bookstore is located near Praca de Lisboa."
+  },
+  {
+    "id": 17,
+    "name": "Pizzeria Bella Mia!",
+    "country": 177,
+    "city": 89425,
+    "address": {
+      "street": "",
+      "city": "Porto",
+      "country": "Portugal"
+    },
+    "latitude": 52.58,
+    "longitude": 5.75,
+    "category": "Food & Drinks",
+    "type": "Pizzeria",
+    "rating": 3.5,
+    "cover_image": "https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.6435-9/117597024_601365203879146_8762872106918896436_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9267fe&_nc_ohc=miVnR0eZ98kAX-Iv9d9&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfDbsOOxGGfJ6JGGrECVLW5jSpq1wkigzLr1qJNghBoq1w&oe=6499D9B7",
+    "images": [
+      "https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.6435-9/119567749_622272301788436_4930689308744142091_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=e3f864&_nc_ohc=FZ8Bp5HvXoUAX8p_m4Y&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfAzULXa5ngK9KgKHWBX9v79Pzqp03MhSQjcxDnfdblJrw&oe=6499C69D",
+      "https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.6435-9/119520207_622293675119632_2792939729882933127_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=1huzJVZ4YVQAX-fAgkW&_nc_oc=AQke_cyESPsrRMKOJg1mFdKZzm6dybBp81SGJ61Jdm6k7gFxDSr4GZTg2ArJmCNEEFs&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfBNlnB37QdXRLxgqSq6F0T7F5Fdu1TqRdBnfq99uc74Pw&oe=6499D6EB",
+      "https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.6435-9/117527718_598516637497336_2549932694435913827_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=9267fe&_nc_ohc=-MsCucbhZuIAX-PBUEe&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfDp5ZkW0TbFuhthDYThczbrIkJPDeU7rXdUypMO1uSWUA&oe=6499BA03",
+      "https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.6435-9/116832498_589502458398754_3978878959699279989_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=174925&_nc_ohc=HsUm7Yb18IcAX9pz1fu&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfCWxiv2uD-JJReK5NC1EaRqgHfy7WZIUFSW1Cv1OgCv0g&oe=6499A734"
+    ],
+    "tags": ["italian", "pizza", "neapolitan"],
+    "contact": {
+      "website": "https://www.facebook.com/bellamiaporto",
+      "phone": "tel:+351 934 895 680",
+      "email": "bellamiaporto@gmail.com"
+    },
+    "opening_hours": [
+      {
+        "day": 0,
+        "open_time": "Closed",
+        "close_time": "Closed"
+      },
+      {
+        "day": 1,
+        "open_time": "18:30",
+        "close_time": "23:00"
+      },
+      {
+        "day": 2,
+        "open_time": "18:30",
+        "close_time": "23:00"
+      },
+      {
+        "day": 3,
+        "open_time": "18:30",
+        "close_time": "23:00"
+      },
+      {
+        "day": 4,
+        "open_time": "18:30",
+        "close_time": "23:00"
+      },
+      {
+        "day": 5,
+        "open_time": "18:30",
+        "close_time": "23:00"
+      },
+      {
+        "day": 6,
+        "open_time": "18:30",
+        "close_time": "23:00"
+      }
+    ],
+    "about": "Uma pizza artesanal com massa levemente levedada, sem pressa, por pelo menos 24 horas! Venha provar a nossa pizza ligeira com um rebordo suave mas crocante, pincelada com o excelente molho de tomate San Marzano DOP."
+  },
+  {
+    "id": 18,
+    "name": "Dona Francesinha",
+    "country": 177,
+    "city": 89425,
+    "address": {
+      "street": "Rua Passos Manuel, n.º245, 4000-385",
+      "city": "Porto",
+      "country": "Portugal"
+    },
+    "latitude": 52.58,
+    "longitude": 5.75,
+    "category": "Food & Drinks",
+    "type": "Restaurant",
+    "rating": 3.5,
+    "cover_image": "https://scontent.ftlv5-1.fna.fbcdn.net/v/t39.30808-6/334693433_5672541969518810_7911493521935143429_n.png?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=3lOK_K2o5XEAX_QRLuG&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfD4dgNhq5nPQnm4Zyz3bncaOPcDmUVxZXJ_5hJo2nq9JA&oe=6476E749",
+    "images": [
+      "https://scontent.ftlv5-1.fna.fbcdn.net/v/t39.30808-6/337103658_177404885076477_6503065223622102748_n.png?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=oEwFeGEn27sAX_xpAJq&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfDfF99GZKBc2QLfCyBCxfa8GW-vk2EB7uQWQce4KQej1Q&oe=64778C38",
+      "https://scontent.ftlv5-1.fna.fbcdn.net/v/t39.30808-6/341730939_2366420726873109_8287453953207016976_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_ohc=_xvRGPpafHgAX9BvBWL&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfA_lCu40MnCHCkNjo3VXMADW5e_8SscgsP0AwwZdtwIiA&oe=647767CA",
+      "https://scontent.ftlv5-1.fna.fbcdn.net/v/t39.30808-6/314478125_195475176383450_2165427602568468464_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=BO3j2jWWy_oAX86j8ID&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfB1F9d8l3JQ6Je6inRDXS3XdnzaJvg8m6u8VCJkAzgBWA&oe=647778A3",
+      "https://scontent.ftlv5-1.fna.fbcdn.net/v/t39.30808-6/314416689_195482406382727_2346145170092695014_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=730e14&_nc_ohc=NdsNoATAxTcAX-sltu1&_nc_ht=scontent.ftlv5-1.fna&oh=00_AfBE3wh3ds2VwAuMmHr1ZgoEP6mQn8xqa10TB-tlMYzwfg&oe=6477D755"
+    ],
+    "tags": ["european", "portuguese"],
+    "contact": {
+      "website": "https://www.facebook.com/dona.francesinha.porto",
+      "phone": "tel:+351 968 247 527",
+      "email": "geral@donafrancesinha.pt"
+    },
+    "opening_hours": [
+      {
+        "day": 0,
+        "open_time": "19:00",
+        "close_time": "23:00"
+      },
+      {
+        "day": 1,
+        "open_time": "12:00",
+        "close_time": "23:00"
+      },
+      {
+        "day": 2,
+        "open_time": "12:00",
+        "close_time": "23:00"
+      },
+      {
+        "day": 3,
+        "open_time": "12:00",
+        "close_time": "23:00"
+      },
+      {
+        "day": 4,
+        "open_time": "12:00",
+        "close_time": "23:00"
+      },
+      {
+        "day": 5,
+        "open_time": "12:00",
+        "close_time": "23:00"
+      },
+      {
+        "day": 6,
+        "open_time": "12:00, 19:00",
+        "close_time": "16:00, 23:00"
+      }
+    ],
+    "about": "Restaurant in Porto, Portugal."
+  },
+  {
+    "id": 19,
+    "name": "Starbucks Mouzinho da Silveira 196",
+    "country": 177,
+    "city": 89425,
+    "address": {
+      "street": "Rua de Mouzinho da Silveira, 196",
+      "city": "Porto",
+      "country": "Portugal"
+    },
+    "latitude": 52.58,
+    "longitude": 5.75,
+    "category": "Food & Drinks",
+    "type": "Cafe",
+    "rating": 3.5,
+    "cover_image": "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/2d/99/0c/caption.jpg",
+    "images": [
+      "https://media-cdn.tripadvisor.com/media/photo-o/15/93/f6/28/img-20181113-082856-largejpg.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/16/88/3d/8d/photo1jpg.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/5c/8e/37/photo0jpg.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/13/a8/8e/55/love-the-decoration-simple.jpg"
+    ],
+    "tags": ["coffee", "tea", "breakfast"],
+    "contact": {
+      "website": "http://www.starbucks.pt",
+      "phone": "tel:+351 935 962 905",
+      "email": ""
+    },
+    "opening_hours": [
+      {
+        "day": 0,
+        "open_time": "08:30",
+        "close_time": "21:00"
+      },
+      {
+        "day": 1,
+        "open_time": "08:30",
+        "close_time": "21:00"
+      },
+      {
+        "day": 2,
+        "open_time": "08:30",
+        "close_time": "21:00"
+      },
+      {
+        "day": 3,
+        "open_time": "08:30",
+        "close_time": "21:00"
+      },
+      {
+        "day": 4,
+        "open_time": "08:30",
+        "close_time": "22:00"
+      },
+      {
+        "day": 5,
+        "open_time": "08:30",
+        "close_time": "22:00"
+      },
+      {
+        "day": 6,
+        "open_time": "08:30",
+        "close_time": "22:00"
+      }
+    ],
+    "about": "Starbucks Cafe in Porto, Portugal."
+  },
+  {
+    "id": 20,
+    "name": "Gelatopia",
+    "country": 177,
+    "city": 89425,
+    "address": {
+      "street": "Rua Ferreira Borges 68",
+      "city": "Porto",
+      "country": "Portugal"
+    },
+    "latitude": 52.58,
+    "longitude": 5.75,
+    "category": "Food & Drinks",
+    "type": "Ice Cream",
+    "rating": 3.5,
+    "cover_image": "https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/94/34/5e/gelatopia-by-night.jpg",
+    "images": [
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a2/c1/94/sorbetto-chocolate-vegan.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/19/a6/8c/b9/chocolate-planet.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/19/a6/8c/bd/brigadeiros-gourmet.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/de/9c/5e/photo2jpg.jpg"
+    ],
+    "tags": ["dessert", "cafe", "portuguese", "frozen", "ice", "cream"],
+    "contact": {
+      "website": "http://www.gelatopia.pt",
+      "phone": "tel:+351 961 476 765",
+      "email": ""
+    },
+    "opening_hours": [
+      {
+        "day": 0,
+        "open_time": "12:00",
+        "close_time": "20:00"
+      },
+      {
+        "day": 1,
+        "open_time": "12:00",
+        "close_time": "20:00"
+      },
+      {
+        "day": 2,
+        "open_time": "12:00",
+        "close_time": "20:00"
+      },
+      {
+        "day": 3,
+        "open_time": "12:00",
+        "close_time": "20:00"
+      },
+      {
+        "day": 4,
+        "open_time": "12:00",
+        "close_time": "21:00"
+      },
+      {
+        "day": 5,
+        "open_time": "12:00",
+        "close_time": "21:00"
+      },
+      {
+        "day": 6,
+        "open_time": "12:00",
+        "close_time": "21:00"
+      }
+    ],
+    "about": "GELATOPIA - Handmade Gelato and Sorbetto, prepared with the Soul and created with the Heart, with Quality, Imagination and Creativity, always with the freshest and most natural ingredients, that will become a new member of your Family. We have a Laboratory equipped with daily production of Gelato and Sorbetto, and its preparation is always made with the most natural ingredients, proven to be healthier when compared to the usual Ice Cream. Proudly our Recipes do not include dyes or preservatives. We were born in the heart of Porto in 2019 and headed to Lisbon in 2021, opening doors in the historic neighborhoods of Alvalade and Campo de Ourique – where we feel at Home! GELATOPIA, now at your doorstep."
   }
 ]

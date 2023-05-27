@@ -27,7 +27,34 @@
     "longitude": "-9.16666667",
     "wikiDataId": "Q597",
     "about": "Lisbon, Portuguese Lisboa, city, port, capital of Portugal, and the centre of the Lisbon metropolitan area. Located in western Portugal on the estuary of the Tagus (Tejo) River, it is the westernmost capital city in continental Europe and serves as the country’s chief port, largest city, and commercial, political, and tourist centre. The city’s name is a modification of the ancient Olisipo (Ulyssipo), and its founding has been attributed to the legacy of Ulysses (Odysseus), the hero of Homer’s Odyssey; to Elisha, purported to have been a grandson of the Hebrew patriarch Abraham; and, more credibly, to Phoenician colonists. Lisbon owes its historical prominence to its natural harbour, one of the most beautiful in the world. Area city, 33 square miles (85 square km). Pop. (2011) city, 547,733; metro. area, 2,821,876; (2021) city, 544,851; metro. area, 2,871,133.",
-    "cover_image": "https://cdn.britannica.com/94/92894-050-0A18B738/Dom-Pedro-IV-Square-Rossio-Port-Lisbon.jpg"
+    "cover_image": "https://cdn.britannica.com/94/92894-050-0A18B738/Dom-Pedro-IV-Square-Rossio-Port-Lisbon.jpg",
+    "images": [
+      "https://lp-cms-production.imgix.net/2019-06/54989636.jpg",
+      "https://cdn.britannica.com/88/124588-050-3E59FF15/Lisbon.jpg",
+      "https://static.businessinsider.com/image/5cf91e4c11e2053d9a537464.jpg",
+      "https://www.earthsattractions.com/wp-content/uploads/2017/09/lisbon.jpg"
+    ]
+  },
+  {
+    "id": 89425,
+    "name": "Porto",
+    "state_id": 2243,
+    "state_code": "13",
+    "state_name": "Porto",
+    "country_id": 177,
+    "country_code": "PT",
+    "country_name": "Portugal",
+    "latitude": "41.14961000",
+    "longitude": "-8.61099000",
+    "wikiDataId": "Q33707919",
+    "about": "Porto, Portuguese Oporto, city and port, northern Portugal. The city lies along the Douro River, 2 miles (3 km) from the river’s mouth on the Atlantic Ocean and 175 miles (280 km) north of Lisbon. World-famous for its port wine, Porto is Portugal’s second largest city and is the commercial and industrial centre for the zone north of the Mondego River. The historic centre of Porto was designated a UNESCO World Heritage site in 1996. Pop. (2001) city, 263,131; metro. area, 1,647,469; (2011) city, 237,591; metro. area, 1,672,670. Porto was called Portus Cale in Roman times and was earlier a flourishing settlement on the Douro’s south bank; the nomadic Alani tribe later founded the city of Castrum Novum on the north bank. The Visigoths took possession of the site about 540 CE but yielded in 716 to the Moors. In 997 Christian forces recaptured Porto, which for a time became the capital of the counts of Portucalense (northern Portugal) during Moorish rule in the southern part of the kingdom. The Moors again held the city briefly, but in 1092 it was brought finally under Christian domination. In the 14th century the city became an important port, and Prince Henry the Navigator was born there in 1394. During the Peninsular War, British forces under Arthur Wellesley (later the duke of Wellington) there crossed the Douro, routed the French, and captured the city on May 12, 1809. The present-day city lies chiefly on the Douro’s north (right) bank, sprawling outward from the older riverside district known as the Ribeira. The red-tiled warehouses of the town of Vila Nova de Gaia, where vast quantities of port wine are blended and stored, are on the south bank of the Douro; other suburbs include Matosinhos, Leça da Palmeira, and Aguas Santas to the north and Gondomar and Oliveira do Douro to the southeast. The region’s narrow coastal plain quickly rises eastward to an inland undulating plateau. A mild, moist climate and generally fertile soils have encouraged intensive farming in the region, including winter and summer cereals, vegetables, and tree crops (cork oak and olive). Timber and its associated industries and the production of vinho verde (an effervescent wine) are also important.",
+    "cover_image": "https://cdn.britannica.com/99/178099-050-87664A53/Dom-Luis-I-Bridge-Douro-River-Portugal.jpg",
+    "images": [
+      "https://cdn.britannica.com/98/178098-050-9E076C05/dwellings-district-Ribeira-Portugal-Porto.jpg",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/48/e8/4a/view-from-room.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/d3/b1/69/photo0jpg.jpg?w=1200",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/6b/29/20/quartier-ribeira.jpg?w=1200"
+    ]
   },
   {
     "id": 59582,
