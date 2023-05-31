@@ -1,5 +1,5 @@
 import type { Plan } from '../../types/general';
-import { HOSTNAME } from '@/constants';
+import { HOSTNAME } from '@/lib/constants';
 
 export const getPlanByIdFromServer = async (id: string): Promise<Plan | undefined> => {
   // const TOKEN = 'token';

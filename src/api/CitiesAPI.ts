@@ -1,5 +1,5 @@
 import type { City } from '../../types/general';
-import { HOSTNAME } from '@/constants';
+import { HOSTNAME } from '@/lib/constants';
 
 export const citiesFetcher = (url: string) =>
   fetch(url).then(async (res) => {

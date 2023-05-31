@@ -1,4 +1,4 @@
-import { CategoryName } from '@/constants';
+import { CategoryName } from '@/lib/constants';
 
 export type Country = {
   id: number;

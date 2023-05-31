@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import { Highlight, Paper, Stack, Title, createStyles, rem } from '@mantine/core';
 import { citiesFetcher, getCitiesAPI } from '@/api/CitiesAPI';
 import Link from 'next/link';
-import { sortArrayOfObjectsByName } from '@/helpers/processInfo';
+import { sortArrayOfObjectsByName } from '@/lib/utils/processInfo';
 import { City } from '../../../types/general';
 
 const useStyles = createStyles((theme) => ({

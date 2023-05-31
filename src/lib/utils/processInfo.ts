@@ -13,8 +13,8 @@
 // }, {});
 
 import { RefObject } from 'react';
-import type { Attraction, Category, City, Country } from '../../types/general';
-import { CategoryName } from '@/constants';
+import type { Attraction, Category, City, Country } from '../../../types/general';
+import { CategoryName } from '@/lib/constants';
 
 export const filterAttractionsByCategory = (attractions: Attraction[], category: CategoryName) => {
   const filteredArray = attractions.filter((attraction) => attraction.category === category);

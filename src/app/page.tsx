@@ -5,7 +5,7 @@ import Hero from '@/components/home/Hero';
 import CarouselCities from '@/components/home/CarouselCities';
 import { Suspense } from 'react';
 import Loading from '@/components/country/CarouselCountry/loading';
-import { POPULAR_DESTINATIONS } from '@/constants';
+import { POPULAR_DESTINATIONS } from '@/lib/constants';
 
 export default async function Home() {
   return (

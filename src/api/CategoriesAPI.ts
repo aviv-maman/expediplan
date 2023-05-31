@@ -1,5 +1,5 @@
 import type { Category } from '../../types/general';
-import { HOSTNAME } from '@/constants';
+import { HOSTNAME } from '@/lib/constants';
 
 export const categoriesFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Category[]>);
 export const categoryFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Category>);

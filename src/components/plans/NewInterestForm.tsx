@@ -7,7 +7,7 @@ import { IconBrowserPlus, IconBuildingSkyscraper, IconCategory, IconClock, IconI
 import { useParams } from 'next/navigation';
 import { Suspense, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { fakeDelay } from '@/helpers/network';
+import { fakeDelay } from '@/lib/utils/network';
 import { addInterestToDayInsidePlan, attractionsFetcher, getAttractionsAPI } from '@/api/AttractionsAPI';
 import useSWR from 'swr';
 import { categoriesFetcher, getCategoriesAPI } from '@/api/CategoriesAPI';

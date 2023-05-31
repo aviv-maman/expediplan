@@ -1,5 +1,5 @@
 import { WebsiteSettings } from '../../types/general';
-import { HOSTNAME } from '@/constants';
+import { HOSTNAME } from '@/lib/constants';
 
 export const updateWebsiteSettings = async (settings: WebsiteSettings) => {
   const API = `${HOSTNAME}/api/update-settings`;

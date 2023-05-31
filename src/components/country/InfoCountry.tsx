@@ -3,7 +3,7 @@ import { Box, Button, createStyles, Group, Highlight, Image, Paper, rem, SimpleG
 import type { Country } from '../../../types/general';
 import { useEffect, useRef, useState } from 'react';
 import { IconMap } from '@tabler/icons-react';
-import { debounceAction, getNumberOfLinesByRef } from '@/helpers/processInfo';
+import { debounceAction, getNumberOfLinesByRef } from '@/lib/utils/processInfo';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {

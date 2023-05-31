@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import attractions from '@/attractions.json';
 import type { Attraction } from '../../../../../../types/general';
-import { CategoryName } from '@/constants';
+import { CategoryName } from '@/lib/constants';
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   const cityId = Number(params.id);

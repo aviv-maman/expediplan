@@ -1,5 +1,5 @@
-import { HOSTNAME } from '@/constants';
-import { dateToYYYYMMDD } from '@/helpers/processInfo';
+import { HOSTNAME } from '@/lib/constants';
+import { dateToYYYYMMDD } from '@/lib/utils/processInfo';
 import type { WeatherResponse } from '../../types/general';
 
 const getRealtimeWeatherByDecimalDegreeAPI = (latitude: number, longitude: number) => {

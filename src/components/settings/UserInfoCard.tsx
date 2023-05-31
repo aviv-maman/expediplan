@@ -1,8 +1,9 @@
 'use client';
-import { Avatar, Text, Button, Paper, Skeleton } from '@mantine/core';
+import { Avatar, Text, Button, Paper, Skeleton, Stack } from '@mantine/core';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { fakeDelay } from '@/helpers/network';
+import { fakeDelay } from '@/lib/utils/network';
+import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
 
 export const UserInfoCard = () => {
   const { data: session, status } = useSession();
@@ -45,7 +46,9 @@ export const UserInfoCard = () => {
       withBorder
       p='lg'
       mb='xl'
-      sx={(theme) => ({ backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white })}>
+      sx={(theme) => ({
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+      })}>
       {status === 'loading' || loading ? (
         <>
           <Skeleton height={120} circle mb='lg' radius={120} mx='auto' />
@@ -62,9 +65,14 @@ export const UserInfoCard = () => {
           <Text ta='center' c='dimmed' fz='sm'>
             Email
           </Text>
-          <Button variant='default' fullWidth mt='md' onClick={() => signIn()}>
-            Sign in
-          </Button>
+          <Stack align='center' mt='md'>
+            <Button leftIcon={<IconBrandGoogle size='1rem' />} variant='default' radius='md' onClick={() => signIn('google')}>
+              Continue with Google
+            </Button>
+            <Button leftIcon={<IconBrandGithub size='1rem' />} variant='default' radius='md' onClick={() => signIn('github')}>
+              Continue with GitHub
+            </Button>
+          </Stack>
         </>
       )}
     </Paper>

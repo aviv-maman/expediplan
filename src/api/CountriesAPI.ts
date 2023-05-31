@@ -1,5 +1,5 @@
 import type { Country } from '../../types/general';
-import { HOSTNAME } from '@/constants';
+import { HOSTNAME } from '@/lib/constants';
 
 export const countriesFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Country[]>);
 export const countryFetcher = (url: string) => fetch(url).then((res) => res.json() as Promise<Country>);

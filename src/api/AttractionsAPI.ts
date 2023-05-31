@@ -1,6 +1,6 @@
 import { getPlanByIdFromLocalStorage } from './PlansAPI';
 import type { Attraction, Interest, Plan } from '../../types/general';
-import { CategoryName, HOSTNAME } from '@/constants';
+import { CategoryName, HOSTNAME } from '@/lib/constants';
 
 export const attractionsFetcher = (url: string) =>
   fetch(url).then(async (res) => {

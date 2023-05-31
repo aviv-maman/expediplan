@@ -1,6 +1,6 @@
 'use client';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
-import { dateToYYYYMMDDAndTime } from '@/helpers/processInfo';
+import { dateToYYYYMMDDAndTime } from '@/lib/utils/processInfo';
 import { weatherSelectorFamily } from '@/recoil/city-weather_state';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { temperatureUnitAtom } from '@/recoil/settings_state';
