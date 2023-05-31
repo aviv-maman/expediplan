@@ -18,6 +18,8 @@
     "@mantine/hooks": "^6.0.8",
     "@mantine/next": "^6.0.8",
     "@mantine/notifications": "^6.0.8",
+    "@next-auth/prisma-adapter": "^1.0.6",
+    "@prisma/client": "^4.15.0",
     "@tabler/icons-react": "^2.20.0",
     "dayjs": "^1.11.7",
     "next": "^13.4.4",
@@ -35,6 +37,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "eslint": "^8.41.0",
     "eslint-config-next": "^13.4.4",
+    "prisma": "^4.15.0",
     "server-only": "^0.0.1",
     "typescript": "^5.0.4"
   }
