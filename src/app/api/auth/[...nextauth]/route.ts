@@ -4,8 +4,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prisma from '@/lib/prisma';
 
-const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+export const authOptions: NextAuthOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -25,14 +24,15 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session, user }) {
       if (session.user) {
-        session.user.id = token.sub;
+        session.user.id = user.id;
       }
 
       return session;
     },
   },
+  adapter: PrismaAdapter(prisma),
 };
 
 const handler = NextAuth(authOptions);

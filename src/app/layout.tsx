@@ -6,6 +6,7 @@ import GlobalAppShell from '@/layout/GlobalAppShell';
 import GlobalRecoilRoot from '@/layout/GlobalRecoilRoot';
 import GlobalSessionProvider from '@/layout/GlobalSessionProvider';
 import { getServerSession } from 'next-auth/next';
+import { authOptions } from './api/auth/[...nextauth]/route';
 
 export const metadata = {
   title: 'ExpediPlan',
@@ -18,7 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const cookieStore = cookies();
   const colorSchemeCookie = cookieStore.get('color-scheme')?.value === 'dark' ? 'dark' : 'light';
   const temperatureUnitCookie = cookieStore.get('temperature-unit')?.value === 'f' ? 'f' : 'c';
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang='en'>
