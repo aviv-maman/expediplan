@@ -11,18 +11,23 @@ datasource db {
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
+  id                        String    @id @default(cuid())
+  userId                    String    @map("user_id")
+  type                      String
+  provider                  String
+  providerAccountId         String    @map("provider_account_id")
+  refresh_token             String?   @db.VarChar(500)
+  access_token              String?   @db.VarChar(500)
+  refresh_token_expires_in  Int?
+  expires_at                Int?
+  token_type                String?
+  scope                     String?
+  id_token                  String?
+  session_state             String?
+  oauth_token_secret        String?
+  oauth_token               String?
+  createdAt                 DateTime  @default(now()) @map(name: "created_at")
+  updatedAt                 DateTime  @default(now()) @map(name: "updated_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -32,8 +37,8 @@ model Account {
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -44,34 +49,40 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  emailVerified DateTime?
+  emailVerified DateTime? @map("email_verified")
   image         String?
+  role          String?   @default("user")
   accounts      Account[]
   sessions      Session[]
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
   Plan          Plan[]
 }
 
 model VerificationToken {
+  id         Int       @id @default(autoincrement())
   identifier String
-  token      String   @unique
+  token      String    @unique
   expires    DateTime
+  createdAt  DateTime  @default(now()) @map(name: "created_at")
+  updatedAt  DateTime  @default(now()) @map(name: "updated_at")
 
   @@unique([identifier, token])
 }
 
 model Plan {
   id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(255)
+  name        String   
   country     Int
   city        Int
-  startDate   DateTime
-  endDate     DateTime
-  countryName String
-  cityName    String
+  startDate   DateTime @map("start_date")
+  endDate     DateTime @map("end_date")
+  countryName String   @unique @map("country_name")
+  cityName    String   @map("city_name")
   days        Day[]
   duration    Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @default(now()) @map(name: "updated_at")
   published   Boolean  @default(false)
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
@@ -83,13 +94,13 @@ model Day {
   date      DateTime
   interests Interest[]
   Plan      Plan?      @relation(fields: [planId], references: [id])
-  planId    Int?
+  planId    Int?       @map("plan_id")
 }
 
 model Interest {
   id        Int      @id @default(autoincrement())
-  startTime DateTime
-  endTime   DateTime
+  startTime DateTime @map("start_time")
+  endTime   DateTime @map("end_time")
   Day       Day?     @relation(fields: [dayId], references: [id])
-  dayId     Int?
+  dayId     Int?     @map("day_id")
 }

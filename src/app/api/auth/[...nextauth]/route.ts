@@ -9,12 +9,14 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
-      // profile(profile) {
+      // profile(profile, tokens) {
       //   return {
       //     id: profile.id,
       //     name: profile.name,
       //     email: profile.email,
       //     image: profile.avatar_url,
+      //     accessToken: tokens.access_token,
+      //     refreshToken: tokens.refresh_token,
       //   };
       // },
     }),

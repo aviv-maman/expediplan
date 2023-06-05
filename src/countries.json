@@ -30,8 +30,8 @@
     "flag": "./assets/flags/flag-netherlands_1f1f3-1f1f1.png",
     "languages": ["Dutch", "Frisian", "Papiamento"],
     "cover_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Den_Haag_-_panoramio_-_Nikolai_Karaneschev.jpg/1280px-Den_Haag_-_panoramio_-_Nikolai_Karaneschev.jpg",
-    "map": "",
-    "about": ""
+    "map": "https://www.bing.com/maps?q=Netherlands&FORM=HDRSC6&cp=52.50000000~5.75000000&lvl=8.5",
+    "about": "Netherlands, country located in northwestern Europe, also known as Holland. “Netherlands” means low-lying country; the name Holland (from Houtland, or “Wooded Land”) was originally given to one of the medieval cores of what later became the modern state and is still used for 2 of its 12 provinces (Noord-Holland and Zuid-Holland). A parliamentary democracy under a constitutional monarch, the kingdom includes its former colonies in the Lesser Antilles: Aruba, Bonaire, Curaçao, Saba, Sint Eustatius, and Sint Maarten. The capital is Amsterdam and the seat of government The Hague. The country is indeed low-lying and remarkably flat, with large expanses of lakes, rivers, and canals. Some 2,500 square miles (6,500 square km) of the Netherlands consist of reclaimed land, the result of a process of careful water management dating back to medieval times. Along the coasts, land was reclaimed from the sea, and, in the interior, lakes and marshes were drained, especially alongside the many rivers. All this new land was turned into polders, usually surrounded by dikes. Initially, man power and horsepower were used to drain the land, but they were later replaced by windmills, such as the mill network at Kinderdijk-Elshout, now a UNESCO World Heritage site. The largest water-control schemes were carried out in the second half of the 19th century and in the 20th century, when steam pumps and, later, electric or diesel pumps came into use."
   },
   {
     "id": 177,
@@ -76,7 +76,7 @@
     "emoji": "🇵🇹",
     "emojiU": "U+1F1F5 U+1F1F9",
     "flag": "./assets/flags/flag-portugal_1f1f5-1f1f9.png",
-    "languages": ["Portuguese"],
+    "languages": ["Portuguese", "Mirandese"],
     "cover_image": "https://cdn.britannica.com/98/178098-050-9E076C05/dwellings-district-Ribeira-Portugal-Porto.jpg",
     "map": "",
     "about": ""
@@ -192,6 +192,9 @@
     "emoji": "🇪🇸",
     "emojiU": "U+1F1EA U+1F1F8",
     "flag": "./assets/flags/flag-spain_1f1ea-1f1f8.png",
+    "languages": ["Spanish"],
+    "cover_image": "",
+    "map": "",
     "about": ""
   },
   {
@@ -223,6 +226,9 @@
     "emoji": "🇬🇧",
     "emojiU": "U+1F1EC U+1F1E7",
     "flag": "./assets/flags/flag-united-kingdom_1f1ec-1f1e7.png",
+    "languages": ["English", "Welsh", "Scottish Gaelic", "Irish"],
+    "cover_image": "",
+    "map": "",
     "about": ""
   },
   {
@@ -429,6 +435,9 @@
     "emoji": "🇷🇺",
     "emojiU": "U+1F1F7 U+1F1FA",
     "flag": "./assets/flags/flag-russia_1f1f7-1f1fa.png",
+    "languages": ["Russian"],
+    "cover_image": "",
+    "map": "",
     "about": ""
   },
   {
@@ -467,7 +476,7 @@
     "emoji": "🇩🇪",
     "emojiU": "U+1F1E9 U+1F1EA",
     "flag": "./assets/flags/flag-germany_1f1e9-1f1ea.png",
-    "languages": [""],
+    "languages": ["German"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -501,7 +510,7 @@
     "emoji": "🇩🇰",
     "emojiU": "U+1F1E9 U+1F1F0",
     "flag": "./assets/flags/flag-denmark_1f1e9-1f1f0.png",
-    "languages": [""],
+    "languages": ["Danish", "German"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -535,7 +544,7 @@
     "emoji": "🇸🇪",
     "emojiU": "U+1F1F8 U+1F1EA",
     "flag": "./assets/flags/flag-sweden_1f1f8-1f1ea.png",
-    "languages": [""],
+    "languages": ["Swedish"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -569,7 +578,7 @@
     "emoji": "🇨🇭",
     "emojiU": "U+1F1E8 U+1F1ED",
     "flag": "./assets/flags/flag-switzerland_1f1e8-1f1ed.png",
-    "languages": [""],
+    "languages": ["German", "French", "Italian", "Romansh"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -603,7 +612,7 @@
     "emoji": "🇫🇮",
     "emojiU": "U+1F1EB U+1F1EE",
     "flag": "./assets/flags/flag-finland_1f1eb-1f1ee.png",
-    "languages": [""],
+    "languages": ["Finnish", "Swedish"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -637,7 +646,7 @@
     "emoji": "🇮🇪",
     "emojiU": "U+1F1EE U+1F1EA",
     "flag": "./assets/flags/flag-ireland_1f1ee-1f1ea.png",
-    "languages": [""],
+    "languages": ["English", "Irish"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -671,7 +680,7 @@
     "emoji": "🇮🇱",
     "emojiU": "U+1F1EE U+1F1F1",
     "flag": "./assets/flags/flag-israel_1f1ee-1f1f1.png",
-    "languages": [""],
+    "languages": ["Hebrew", "Arabic"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -789,7 +798,7 @@
     "emoji": "🇦🇺",
     "emojiU": "U+1F1E6 U+1F1FA",
     "flag": "./assets/flags/flag-australia_1f1e6-1f1fa.png",
-    "languages": [""],
+    "languages": ["English"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -823,7 +832,7 @@
     "emoji": "🇦🇹",
     "emojiU": "U+1F1E6 U+1F1F9",
     "flag": "./assets/flags/flag-austria_1f1e6-1f1f9.png",
-    "languages": [""],
+    "languages": ["German", "Hungarian", "Slovenian", "Croatian"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -857,7 +866,7 @@
     "emoji": "🇨🇿",
     "emojiU": "U+1F1E8 U+1F1FF",
     "flag": "./assets/flags/flag-czechia_1f1e8-1f1ff.png",
-    "languages": [""],
+    "languages": ["Czech"],
     "cover_image": "",
     "map": "",
     "about": ""
@@ -891,7 +900,7 @@
     "emoji": "🇵🇱",
     "emojiU": "U+1F1F5 U+1F1F1",
     "flag": "./assets/flags/flag-poland_1f1f5-1f1f1.png",
-    "languages": [""],
+    "languages": ["Polish"],
     "cover_image": "",
     "map": "",
     "about": ""

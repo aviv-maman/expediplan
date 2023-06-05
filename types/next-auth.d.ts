@@ -7,4 +7,7 @@ declare module 'next-auth' {
     } & DefaultSession['user'];
     expires: ISODateString;
   }
+  interface User {
+    email_verified: Date | null;
+  }
 }
