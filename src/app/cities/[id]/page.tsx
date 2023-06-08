@@ -10,6 +10,7 @@ import Loading from '@/components/city/DetailsCity/loading';
 import WeatherWidget from '@/components/city/Weather/WeatherWidget';
 import WeatherWidgetLoading from '@/components/city/Weather/loading';
 import { cookies } from 'next/headers';
+import LeafletMap from '@/components/map/LeafletMap';
 
 type Props = {
   params: { id: string };
@@ -34,6 +35,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
       <Suspense>
         <HeroCity city={cityFromServer} />
       </Suspense>
+      <LeafletMap latitude={Number(cityFromServer?.latitude)} longitude={Number(cityFromServer?.longitude)} />
       <Suspense fallback={<WeatherWidgetLoading />}>
         <WeatherWidget city={cityFromServer} temperatureUnit={temperatureUnit} />
       </Suspense>

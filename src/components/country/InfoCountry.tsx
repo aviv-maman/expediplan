@@ -1,9 +1,9 @@
 'use client';
-import { Box, Button, createStyles, Group, Highlight, Image, Paper, rem, SimpleGrid, Stack, Text, Title } from '@mantine/core';
+import { Box, Button, createStyles, Group, Highlight, Paper, rem, SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import type { Country } from '../../../types/general';
 import { useEffect, useRef, useState } from 'react';
-import { IconMap } from '@tabler/icons-react';
 import { debounceAction, getNumberOfLinesByRef } from '@/lib/utils/processInfo';
+import LeafletMap from '../map/LeafletMap';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -133,14 +133,7 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
             Map
           </Title>
           <Paper className={classes.info} withBorder id='paper-map'>
-            <Image
-              id='map'
-              src={country?.map || ''}
-              alt={country?.name || ''}
-              className={classes.placeholder}
-              withPlaceholder
-              placeholder={<IconMap />}
-            />
+            <LeafletMap latitude={Number(country?.latitude)} longitude={Number(country?.longitude)} />
           </Paper>
         </Box>
       </SimpleGrid>
