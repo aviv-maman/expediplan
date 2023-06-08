@@ -133,7 +133,7 @@ const InfoCountry: React.FC<InfoCountryProps> = ({ country }) => {
             Map
           </Title>
           <Paper className={classes.info} withBorder id='paper-map'>
-            <LeafletMap latitude={Number(country?.latitude)} longitude={Number(country?.longitude)} />
+            <LeafletMap latitude={Number(country?.latitude)} longitude={Number(country?.longitude)} type='country' />
           </Paper>
         </Box>
       </SimpleGrid>

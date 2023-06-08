@@ -35,7 +35,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
       <Suspense>
         <HeroCity city={cityFromServer} />
       </Suspense>
-      <LeafletMap latitude={Number(cityFromServer?.latitude)} longitude={Number(cityFromServer?.longitude)} />
+      <LeafletMap latitude={Number(cityFromServer?.latitude)} longitude={Number(cityFromServer?.longitude)} type='city' />
       <Suspense fallback={<WeatherWidgetLoading />}>
         <WeatherWidget city={cityFromServer} temperatureUnit={temperatureUnit} />
       </Suspense>

@@ -6,14 +6,17 @@ import 'leaflet/dist/leaflet.css';
 interface LeafletMapProps {
   latitude?: number;
   longitude?: number;
+  type?: 'country' | 'city';
 }
 
-const LeafletMap: React.FC<LeafletMapProps> = ({ latitude = 0, longitude = 0 }) => {
+const LeafletMap: React.FC<LeafletMapProps> = ({ latitude = 0, longitude = 0, type }) => {
+  const zoomLevel = type === 'country' ? 8 : 13;
+
   const mapRef = useRef(null);
 
   useEffect(() => {
     // Create the map instance
-    const map = L.map(mapRef.current || '').setView([latitude, longitude], 8);
+    const map = L.map(mapRef.current || '').setView([latitude, longitude], zoomLevel);
 
     // Add the tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
