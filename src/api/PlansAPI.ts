@@ -26,3 +26,20 @@ export const getPlanByIdFromLocalStorage = (id: string) => {
   const plan = plans.find((plan) => plan.id === id);
   return plan;
 };
+
+export const uploadPlanToServer = async (email: string, plan: Plan) => {
+  const API = `${HOSTNAME}/api/plans`;
+  const res = await fetch(API, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY || '',
+    },
+    body: JSON.stringify({ ...plan, userEmail: email }),
+  });
+  if (!res.ok) {
+    throw new Error('Failed to upload plan');
+  }
+  const data = await res.json();
+  return data;
+};

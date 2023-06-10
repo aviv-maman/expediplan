@@ -31,8 +31,6 @@ export type Country = {
   population: number;
   about: string;
   cover_image: string;
-  images: string[];
-  map: string;
 };
 
 export type City = {

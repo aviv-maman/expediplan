@@ -11,23 +11,23 @@ datasource db {
 }
 
 model Account {
-  id                        String    @id @default(cuid())
-  userId                    String    @map("user_id")
-  type                      String
-  provider                  String
-  providerAccountId         String    @map("provider_account_id")
-  refresh_token             String?   @db.VarChar(500)
-  access_token              String?   @db.VarChar(500)
-  refresh_token_expires_in  Int?
-  expires_at                Int?
-  token_type                String?
-  scope                     String?
-  id_token                  String?
-  session_state             String?
-  oauth_token_secret        String?
-  oauth_token               String?
-  createdAt                 DateTime  @default(now()) @map(name: "created_at")
-  updatedAt                 DateTime  @default(now()) @map(name: "updated_at")
+  id                       String   @id @default(cuid())
+  userId                   String   @map("user_id")
+  type                     String
+  provider                 String
+  providerAccountId        String   @map("provider_account_id")
+  refresh_token            String?  @db.VarChar(500)
+  access_token             String?  @db.VarChar(500)
+  refresh_token_expires_in Int?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  oauth_token_secret       String?
+  oauth_token              String?
+  createdAt                DateTime @default(now()) @map(name: "created_at")
+  updatedAt                DateTime @default(now()) @map(name: "updated_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -56,23 +56,23 @@ model User {
   sessions      Session[]
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
-  Plan          Plan[]
+  plans         Plan[]
 }
 
 model VerificationToken {
-  id         Int       @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   identifier String
-  token      String    @unique
+  token      String   @unique
   expires    DateTime
-  createdAt  DateTime  @default(now()) @map(name: "created_at")
-  updatedAt  DateTime  @default(now()) @map(name: "updated_at")
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  updatedAt  DateTime @default(now()) @map(name: "updated_at")
 
   @@unique([identifier, token])
 }
 
 model Plan {
   id          Int      @id @default(autoincrement())
-  name        String   
+  name        String
   country     Int
   city        Int
   startDate   DateTime @map("start_date")
@@ -80,10 +80,9 @@ model Plan {
   countryName String   @unique @map("country_name")
   cityName    String   @map("city_name")
   days        Day[]
-  duration    Int
+  duration    Int      @default(0)
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @default(now()) @map(name: "updated_at")
-  published   Boolean  @default(false)
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
 }
@@ -93,14 +92,138 @@ model Day {
   index     Int
   date      DateTime
   interests Interest[]
-  Plan      Plan?      @relation(fields: [planId], references: [id])
-  planId    Int?       @map("plan_id")
+  plan      Plan       @relation(fields: [planId], references: [id])
+  planId    Int        @map("plan_id")
 }
 
 model Interest {
-  id        Int      @id @default(autoincrement())
-  startTime DateTime @map("start_time")
-  endTime   DateTime @map("end_time")
-  Day       Day?     @relation(fields: [dayId], references: [id])
-  dayId     Int?     @map("day_id")
+  id           Int        @id @default(autoincrement())
+  attraction   Attraction @relation(fields: [attractionId], references: [id])
+  attractionId Int        @map("attraction_id")
+  startTime    DateTime
+  endTime      DateTime
+  day          Day        @relation(fields: [dayId], references: [id])
+  dayId        Int
+}
+
+model Timezone {
+  id            Int     @id @default(autoincrement())
+  zoneName      String
+  gmtOffset     Int
+  gmtOffsetName String
+  abbreviation  String
+  tzName        String
+  country       Country @relation(fields: [countryId], references: [id])
+  countryId     Int
+}
+
+model Country {
+  id             Int          @id @default(autoincrement())
+  name           String       @unique
+  iso3           String       @unique
+  iso2           String       @unique
+  numericCode    String       @map(name: "numeric_code")
+  phoneCode      String       @map(name: "phone_code")
+  capital        String       @unique
+  currency       String
+  currencyName   String       @map(name: "currency_name")
+  currencySymbol String       @map(name: "currency_symbol")
+  tld            String
+  native         String
+  region         String
+  subregion      String
+  timezones      Timezone[]
+  latitude       String
+  longitude      String
+  emoji          String
+  emojiU         String
+  flag           String
+  languages      String[]
+  population     Float
+  about          String
+  coverImage     String       @map(name: "cover_image")
+  createdAt      DateTime     @default(now()) @map(name: "created_at")
+  updatedAt      DateTime     @default(now()) @map(name: "updated_at")
+  City           City[]
+  attraction     Attraction[]
+
+  @@unique([id, name, iso2, capital])
+}
+
+model City {
+  id          Int          @id @default(autoincrement())
+  name        String
+  stateId     Int          @map("state_id")
+  stateCode   String       @map("state_code")
+  stateName   String       @map("state_name")
+  countryId   Int          @map("country_id")
+  countryCode String       @map("country_code")
+  countryName String       @map("country_name")
+  latitude    String
+  longitude   String
+  wikiDataId  String
+  about       String
+  cover_image String
+  createdAt   DateTime     @default(now()) @map(name: "created_at")
+  updatedAt   DateTime     @default(now()) @map(name: "updated_at")
+  country     Country      @relation(fields: [countryId, countryCode, countryName, name], references: [id, iso2, name, capital])
+  attraction  Attraction[]
+}
+
+model Address {
+  id         Int          @id @default(autoincrement())
+  street     String
+  city       String
+  country    String
+  attraction Attraction[]
+}
+
+model Category {
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  types      String[]
+  attraction Attraction[]
+}
+
+model Contact {
+  id         Int          @id @default(autoincrement())
+  website    String
+  phone      String
+  email      String
+  attraction Attraction[]
+}
+
+model OpeningHours {
+  id         Int          @id @default(autoincrement())
+  day        Int          @unique
+  open_time  String
+  close_time String
+  attraction Attraction[]
+}
+
+model Attraction {
+  id           Int            @id @default(autoincrement())
+  name         String
+  country      Country        @relation(fields: [countryId], references: [id])
+  countryId    Int
+  city         City           @relation(fields: [cityId], references: [id])
+  cityId       Int
+  address      Address        @relation(fields: [addressId], references: [id])
+  addressId    Int
+  latitude     Float
+  longitude    Float
+  category     Category       @relation(fields: [categoryId], references: [id])
+  categoryId   Int
+  type         String
+  rating       Float
+  cover_image  String
+  images       String[]
+  tags         String[]
+  contact      Contact        @relation(fields: [contactId], references: [id])
+  contactId    Int
+  openingHours OpeningHours[]
+  about        String
+  createdAt    DateTime       @default(now()) @map(name: "created_at")
+  updatedAt    DateTime       @default(now()) @map(name: "updated_at")
+  interests    Interest[]
 }

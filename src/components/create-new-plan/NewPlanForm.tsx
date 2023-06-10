@@ -13,6 +13,8 @@ import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
 import { planListState } from '@/recoil/plan_state';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { uploadPlanToServer } from '@/api/PlansAPI';
 
 const ICON_SIZE = rem(60);
 
@@ -92,6 +94,8 @@ const NewPlanForm: React.FC = () => {
   }, []);
   //===========================================
 
+  const { data: session, status } = useSession();
+
   if (countries.error) return <div>Failed to load</div>;
   if (cities.error) return <div>Failed to load</div>;
 
@@ -108,7 +112,7 @@ const NewPlanForm: React.FC = () => {
           <IconFlagFilled size='2rem' stroke={1.5} />
         </Avatar>
         <form
-          onSubmit={form.onSubmit((values) => {
+          onSubmit={form.onSubmit(async (values) => {
             insertItem({
               ...values,
               id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
@@ -118,6 +122,18 @@ const NewPlanForm: React.FC = () => {
               })),
               duration: duration,
             });
+
+            session?.user?.email &&
+              (await uploadPlanToServer(session?.user?.email, {
+                ...values,
+                id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                days: Array.from({ length: duration }).map((_, i) => ({
+                  index: i,
+                  date: new Date(dayjs(values.startDate).add(i, 'day').format('YYYY-MM-DD')),
+                })),
+                duration: duration,
+              }));
+
             router.push('/plans');
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' icon={<IconId size='1rem' />} {...form.getInputProps('name')} />
