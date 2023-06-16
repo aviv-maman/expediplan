@@ -270,7 +270,15 @@
     "country_name": "Finland",
     "latitude": "60.16952000",
     "longitude": "24.93545000",
-    "wikiDataId": "Q1757"
+    "wikiDataId": "Q1757",
+    "about": "Helsinki, Swedish Helsingfors, capital of Finland. It is the leading seaport and industrial city of the nation. Helsinki lies in the far south of the country, on a peninsula that is fringed by fine natural harbours and that protrudes into the Gulf of Finland. It is the most northerly of continental European capitals. It is often called the “white city of the north” because many of its buildings are constructed of a local light-coloured granite. Helsinki was founded in 1550 by King Gustav I Vasa of Sweden and was intended to compete with the city of Reval (now Tallinn, Estonia), which lies on the southern shore of the Gulf of Finland. Helsinki was originally located at the mouth of the Vantaa River, at a point about 3 mi (4.8 km) north of its present-day location, and was moved down to the latter site in 1640 in order to obtain more open access to the sea. The town was ravaged by a plague in 1710 and burned to the ground in 1713. Its redevelopment was hindered by Russian attacks later in the 18th century, but in 1748 the settlement became more secure when a fortress, called Sveaborg by the Swedes and Suomenlinna by the Finns, was constructed on a group of small islands outside the harbour.",
+    "cover_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Helsingin_ydinkeskustaa_ja_Mannerheimintien_alkup%C3%A4%C3%A4t%C3%A4_Erottajan_paloaseman_tornista_%28cropped%29.jpg/2560px-Helsingin_ydinkeskustaa_ja_Mannerheimintien_alkup%C3%A4%C3%A4t%C3%A4_Erottajan_paloaseman_tornista_%28cropped%29.jpg",
+    "images": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Helsinki_July_2013-27a.jpg/1920px-Helsinki_July_2013-27a.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/3/3e/Suomenlinna_%28cropped%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Helsingfors_%283%29.jpg/1920px-Helsingfors_%283%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Aurinkolahden_uimaranta_panoraama.jpg/2560px-Aurinkolahden_uimaranta_panoraama.jpg"
+    ]
   },
   {
     "id": 57223,

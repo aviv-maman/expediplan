@@ -1,7 +1,6 @@
 'use client';
 import { Timeline } from '@mantine/core';
 import { DayTimelineItemCard } from './DayTimelineItemCard';
-import type { Plan } from '../../../types/general';
 import { useRecoilValue } from 'recoil';
 import { planSelectorFamily } from '@/recoil/plan_state';
 import { useEffect, useState } from 'react';
@@ -10,21 +9,18 @@ import { attractionsFetcher, getAttractionsAPI, getAttractionsByPlanIdFromLocalS
 import useSWR from 'swr';
 
 interface DayTimelineProps {
-  idFromLocalStorage?: string;
-  planFromServer?: Plan;
+  planId: string;
 }
 
-const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromServer }) => {
-  const planFromLocalStorage = useRecoilValue(planSelectorFamily(String(idFromLocalStorage)));
-  const days = planFromLocalStorage?.days || planFromServer?.days;
+const DayTimeline: React.FC<DayTimelineProps> = ({ planId }) => {
+  const plan = useRecoilValue(planSelectorFamily(String(planId)));
+  const days = plan?.days;
   const [activeItem, setActiveItem] = useState(0);
 
   useEffect(() => {
     let startDate = new Date();
-    if (planFromLocalStorage?.startDate) {
-      startDate = new Date(planFromLocalStorage?.startDate);
-    } else if (planFromServer?.startDate) {
-      startDate = new Date(planFromServer?.startDate);
+    if (plan?.startDate) {
+      startDate = new Date(plan?.startDate);
     }
     const today = new Date();
     const diffTime = today.getTime() - today.getTimezoneOffset() * (1000 * 60) - startDate.getTime();
@@ -47,7 +43,7 @@ const DayTimeline: React.FC<DayTimelineProps> = ({ idFromLocalStorage, planFromS
     setActiveItem(index);
   }, [days]);
 
-  const attractionIds = getAttractionsByPlanIdFromLocalStorage(String(idFromLocalStorage));
+  const attractionIds = getAttractionsByPlanIdFromLocalStorage(String(planId));
   const attractions = useSWR(getAttractionsAPI(attractionIds), attractionsFetcher);
   const findAttractionById = (id: number) => {
     return attractions?.data?.find((attraction) => attraction.id === id);

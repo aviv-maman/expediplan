@@ -51,7 +51,7 @@ export type City = {
 };
 
 export type Plan = {
-  id: string;
+  id: string | number;
   name: string;
   country: number;
   city: number;

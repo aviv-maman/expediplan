@@ -31,12 +31,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface WeatherCardProps {
-  idFromLocalStorage: string;
+  planId: string;
 }
 
-export function WeatherCard({ idFromLocalStorage }: WeatherCardProps) {
+export function WeatherCard({ planId }: WeatherCardProps) {
   const { classes } = useStyles();
-  const plan = useRecoilValue(planSelectorFamily(idFromLocalStorage));
+  const plan = useRecoilValue(planSelectorFamily(String(planId)));
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
 
   const mobile = useMediaQuery('(max-width: 36em)');

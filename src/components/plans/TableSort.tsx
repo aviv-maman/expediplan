@@ -111,7 +111,7 @@ export function TableSort() {
       <TextInput placeholder='Search by any field' mb='md' icon={<IconSearch size='0.9rem' />} value={search} onChange={handleSearchChange} />
       <Table striped highlightOnHover withBorder withColumnBorders horizontalSpacing='xs' verticalSpacing='xs' sx={{ tableLayout: 'fixed' }}>
         <caption>
-          <Link href='/create-new-plan'>
+          <Link href={{ pathname: '/create-new-plan' }}>
             <Button leftIcon={<IconPlaneTilt size='1rem' />} color='teal'>
               Create Plan
             </Button>

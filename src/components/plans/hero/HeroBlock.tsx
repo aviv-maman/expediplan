@@ -48,14 +48,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface HeroBlockGuestProps {
-  idFromLocalStorage: string;
+interface HeroBlockProps {
+  planId: string;
 }
 
-const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) => {
+const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
   const { classes } = useStyles();
-  const plan = useRecoilValue(planSelectorFamily(idFromLocalStorage));
-
+  const plan = useRecoilValue(planSelectorFamily(String(planId)));
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
 
   if (city.error) return <div>Failed to load</div>;
@@ -94,4 +93,4 @@ const HeroBlockGuest: React.FC<HeroBlockGuestProps> = ({ idFromLocalStorage }) =
   );
 };
 
-export default HeroBlockGuest;
+export default HeroBlock;

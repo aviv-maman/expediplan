@@ -113,27 +113,26 @@ const NewPlanForm: React.FC = () => {
         </Avatar>
         <form
           onSubmit={form.onSubmit(async (values) => {
-            insertItem({
-              ...values,
-              id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-              days: Array.from({ length: duration }).map((_, i) => ({
-                index: i,
-                date: new Date(dayjs(values.startDate).add(i, 'day').format('YYYY-MM-DD')),
-              })),
-              duration: duration,
-            });
-
-            session?.user?.email &&
-              (await uploadPlanToServer(session?.user?.email, {
-                ...values,
-                id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-                days: Array.from({ length: duration }).map((_, i) => ({
-                  index: i,
-                  date: new Date(dayjs(values.startDate).add(i, 'day').format('YYYY-MM-DD')),
-                })),
-                duration: duration,
-              }));
-
+            const plan = session?.user?.email
+              ? await uploadPlanToServer({
+                  ...values,
+                  id: 'irrelevant',
+                  days: Array.from({ length: duration }).map((_, i) => ({
+                    index: i,
+                    date: new Date(dayjs(values.startDate).add(i, 'day').format('YYYY-MM-DD')),
+                  })),
+                  duration,
+                })
+              : ({
+                  ...values,
+                  id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                  days: Array.from({ length: duration }).map((_, i) => ({
+                    index: i,
+                    date: new Date(dayjs(values.startDate).add(i, 'day').format('YYYY-MM-DD')),
+                  })),
+                  duration,
+                } as Plan);
+            plan && insertItem(plan);
             router.push('/plans');
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' icon={<IconId size='1rem' />} {...form.getInputProps('name')} />

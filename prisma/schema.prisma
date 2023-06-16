@@ -77,7 +77,7 @@ model Plan {
   city        Int
   startDate   DateTime @map("start_date")
   endDate     DateTime @map("end_date")
-  countryName String   @unique @map("country_name")
+  countryName String   @map("country_name")
   cityName    String   @map("city_name")
   days        Day[]
   duration    Int      @default(0)
