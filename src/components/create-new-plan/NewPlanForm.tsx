@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import { Suspense, useEffect } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
-import { planListState } from '@/recoil/plan_state';
+import { localPlanListState } from '@/recoil/plan_state';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { uploadPlanToServer } from '@/api/PlansAPI';
@@ -40,7 +40,7 @@ const useStyles = createStyles((theme) => ({
 
 const NewPlanForm: React.FC = () => {
   const { classes } = useStyles();
-  const [items, setItems] = useRecoilState(planListState);
+  const [items, setItems] = useRecoilState(localPlanListState);
   const insertItem = (plan: Plan) => {
     if (!items) {
       setItems([plan]);
