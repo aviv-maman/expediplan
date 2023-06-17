@@ -44,7 +44,7 @@ export const uploadPlanToServer = async (plan: Plan) => {
   return data as Plan | undefined;
 };
 
-export const getPlansOfAuthenticatedUserFromServer = async () => {
+export const getPlansOfUserFromServer = async () => {
   const API = `${HOSTNAME}/api/plans`;
   const res = await fetch(API, {
     // headers: { Authorization: `token ${TOKEN}` },

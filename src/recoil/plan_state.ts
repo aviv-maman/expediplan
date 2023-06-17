@@ -1,11 +1,10 @@
 'use client';
-import { atom, DefaultValue, selector, selectorFamily } from 'recoil';
+import { atom, atomFamily, DefaultValue, selector, selectorFamily } from 'recoil';
 import type { Plan } from '../../types/general';
 import { getSession } from 'next-auth/react';
 import { planListAPI } from './recoilAPI';
-import { getPlansOfAuthenticatedUserFromServer } from '@/api/PlansAPI';
 
-export const localPlanListState = atom<Plan[] | undefined>({
+const localPlanListState = atom<Plan[] | undefined>({
   key: 'planList',
   default: [],
   effects: [
@@ -68,8 +67,7 @@ const authSelector = selector({
   key: 'auth',
   get: () => async () => {
     const session = await getSession();
-    if (!session?.user?.email) return false;
-    return true;
+    return session?.user?.email ? true : false;
   },
 });
 
@@ -77,6 +75,24 @@ export const remoteOrLocalPlanList = selector<Plan[] | undefined>({
   key: 'currentPlanList',
   get: async ({ get }) => {
     const auth = get(authSelector);
-    return (await auth()) ? await getPlansOfAuthenticatedUserFromServer() : get(localPlanListState);
+    return (await auth()) ? await planListAPI.getItems() : get(localPlanListState);
   },
+});
+
+export const deleteOrCreatePlanState = atomFamily<Plan | undefined, string>({
+  key: 'item',
+  default: undefined,
+  effects: (id) => [
+    ({ onSet, trigger }) => {
+      onSet((newValue, oldValue, isReset) => {
+        if (oldValue instanceof DefaultValue && trigger === 'get') return;
+        if (isReset) {
+          planListAPI.deleteItem(Number(id));
+        } else {
+          if (!newValue) return;
+          planListAPI.createItem(newValue);
+        }
+      });
+    },
+  ],
 });

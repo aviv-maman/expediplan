@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import countries from '../src/countries.json';
-
-const prisma = new PrismaClient();
 
 async function main() {
   for (const country of countries) {

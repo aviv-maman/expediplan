@@ -1,17 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type { Plan } from '../../../../types/general';
-import { PrismaClient, Prisma } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/route';
-
-const prisma = new PrismaClient();
+import prisma from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user || !session.user.email) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
-
+  const user = await prisma.user.findUnique({
+    where: { email: session?.user?.email || undefined },
+  });
+  if (!user) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
   const body = (await request.json()) as Plan;
   const result = await prisma.user.update({
     where: { email: session.user.email },
