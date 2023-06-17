@@ -54,7 +54,7 @@ interface HeroBlockProps {
 
 const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
   const { classes } = useStyles();
-  const plan = useRecoilValue(planSelectorFamily(String(planId)));
+  const plan = useRecoilValue(planSelectorFamily({ id: planId }));
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
 
   if (city.error) return <div>Failed to load</div>;

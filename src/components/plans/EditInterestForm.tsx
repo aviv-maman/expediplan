@@ -45,7 +45,7 @@ const EditInterestForm: React.FC<EditInterestFormProps> = ({ subtitle, dayIndex,
   const ref = useRef<HTMLInputElement>(null);
 
   const params = useParams();
-  const [plan, setPlan] = useRecoilState(planSelectorFamily(params.id));
+  const [plan, setPlan] = useRecoilState(planSelectorFamily({ id: params.id }));
   const categories = useSWR(getCategoriesAPI(), categoriesFetcher, { suspense: true });
 
   const currentAttraction = plan?.days[dayIndex]?.interests?.[attractionIndex];

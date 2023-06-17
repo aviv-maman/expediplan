@@ -18,7 +18,7 @@ interface AttractionTimelineProps {
 
 const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planFromServer, date }) => {
   const params = useParams();
-  const planFromLocalStorage = useRecoilValue(planSelectorFamily(params.id));
+  const planFromLocalStorage = useRecoilValue(planSelectorFamily({ id: params.id }));
   const interests = planFromLocalStorage?.days[dayIndex]?.interests || planFromServer?.days[dayIndex]?.interests;
 
   const attractionIds = getAttractionsByPlanIdFromLocalStorage(params.id);
@@ -62,7 +62,7 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
             time={item.startTime + ' - ' + item.endTime}
             image={item.details?.cover_image}
             dayIndex={dayIndex}
-            attractionId={params?.id}
+            planId={params?.id}
             attractionIndex={index}
           />
         </Timeline.Item>

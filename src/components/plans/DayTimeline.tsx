@@ -13,7 +13,7 @@ interface DayTimelineProps {
 }
 
 const DayTimeline: React.FC<DayTimelineProps> = ({ planId }) => {
-  const plan = useRecoilValue(planSelectorFamily(String(planId)));
+  const plan = useRecoilValue(planSelectorFamily({ id: planId }));
   const days = plan?.days;
   const [activeItem, setActiveItem] = useState(0);
 

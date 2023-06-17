@@ -35,13 +35,13 @@ interface AttractionTimelineItemCardProps {
   time?: string;
   image?: string;
   dayIndex: number;
-  attractionId: string;
+  planId: string;
   attractionIndex: number;
 }
 
-export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, attractionId, attractionIndex }: AttractionTimelineItemCardProps) => {
+export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, planId, attractionIndex }: AttractionTimelineItemCardProps) => {
   const { classes } = useStyles();
-  const [plan, setPlan] = useRecoilState(planSelectorFamily(attractionId));
+  const [plan, setPlan] = useRecoilState(planSelectorFamily({ id: planId }));
   const [openedEditInterest, editInterestModal] = useDisclosure(false);
 
   const handleDeleteInterest = () => {

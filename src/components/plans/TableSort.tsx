@@ -6,7 +6,7 @@ import { IconSelector, IconChevronDown, IconChevronUp, IconSearch, IconPlaneTilt
 import { useRecoilValue } from 'recoil';
 import type { Plan } from '../../../types/general';
 import { sortBy } from 'sort-by-typescript';
-import { remoteOrLocalPlanList } from '@/recoil/plan_state';
+import { planListState } from '@/recoil/plan_state';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
@@ -68,7 +68,7 @@ function filterData(data: Plan[], search: string) {
 }
 
 export function TableSort() {
-  const planList = useRecoilValue(remoteOrLocalPlanList);
+  const planList = useRecoilValue(planListState);
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState(planList);
   const [sortByKey, setSortByKey] = useState<keyof Plan | null>(null);

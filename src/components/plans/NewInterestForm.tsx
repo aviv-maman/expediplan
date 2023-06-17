@@ -62,7 +62,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
   });
 
   const params = useParams();
-  const [plan, setPlan] = useRecoilState(planSelectorFamily(params.id));
+  const [plan, setPlan] = useRecoilState(planSelectorFamily({ id: params.id }));
   const [isLoading, setIsLoading] = useState(false);
 
   const categories = useSWR(getCategoriesAPI(), categoriesFetcher);

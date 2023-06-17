@@ -36,7 +36,7 @@ interface WeatherCardProps {
 
 export function WeatherCard({ planId }: WeatherCardProps) {
   const { classes } = useStyles();
-  const plan = useRecoilValue(planSelectorFamily(String(planId)));
+  const plan = useRecoilValue(planSelectorFamily({ id: planId }));
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
 
   const mobile = useMediaQuery('(max-width: 36em)');

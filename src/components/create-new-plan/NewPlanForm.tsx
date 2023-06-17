@@ -6,12 +6,12 @@ import DropdownWithIcon from '../DropdownWithIcon';
 import type { Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 import { Suspense, useEffect } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
-import { deleteOrCreatePlanState } from '@/recoil/plan_state';
+import { planListState } from '@/recoil/plan_state';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { uploadPlanToServer } from '@/api/PlansAPI';
@@ -40,7 +40,14 @@ const useStyles = createStyles((theme) => ({
 
 const NewPlanForm: React.FC = () => {
   const { classes } = useStyles();
-  const setItem = useSetRecoilState(deleteOrCreatePlanState(''));
+  const [items, setItems] = useRecoilState(planListState);
+  const insertItem = (plan: Plan) => {
+    if (!items) {
+      setItems([plan]);
+    } else {
+      setItems([...items, plan]);
+    }
+  };
 
   const form = useForm({
     initialValues: {
@@ -125,7 +132,7 @@ const NewPlanForm: React.FC = () => {
                   })),
                   duration,
                 } as Plan);
-            plan && setItem(plan);
+            plan && insertItem(plan);
             router.push('/plans');
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' icon={<IconId size='1rem' />} {...form.getInputProps('name')} />
