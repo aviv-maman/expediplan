@@ -27,7 +27,7 @@ export const planListState = atom<Plan[] | undefined>({
   ],
 });
 
-type ActionType = 'create' | 'update' | 'delete';
+type ActionType = 'create' | 'edit' | 'delete';
 
 export const planSelectorFamily = selectorFamily<Plan | undefined, { id: string; action?: ActionType }>({
   key: 'plan',
@@ -52,8 +52,8 @@ export const planSelectorFamily = selectorFamily<Plan | undefined, { id: string;
         case 'create':
           planListAPI.createItem(newValue);
           break;
-        case 'update':
-          planListAPI.updateItem(Number(id), newValue);
+        case 'edit':
+          planListAPI.editItem(Number(id), newValue);
           break;
         case 'delete':
           planListAPI.deleteItem(Number(id));

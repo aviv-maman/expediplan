@@ -73,6 +73,12 @@ export async function GET(request: NextRequest) {
   if (!session || !session.user || !session.user.email) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
+  const user = await prisma.user.findUnique({
+    where: { email: session?.user?.email || undefined },
+  });
+  if (!user) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
   const plans = await prisma.plan.findMany({
     where: { author: { email: session.user.email } },
     orderBy: { createdAt: 'desc' },

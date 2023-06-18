@@ -56,3 +56,36 @@ export const getPlansOfUserFromServer = async () => {
   const data = await res.json();
   return data as Plan[] | undefined;
 };
+
+export const deletePlanFromServer = async (id: number) => {
+  const API = `${HOSTNAME}/api/plans/${id}`;
+  const res = await fetch(API, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY || '',
+    },
+  });
+  if (!res.ok) {
+    throw new Error('Failed to delete plan');
+  }
+  const data = await res.json();
+  return data as Plan | undefined;
+};
+
+export const editPlanOnServer = async (id: number, plan: Plan) => {
+  const API = `${HOSTNAME}/api/plans/${id}`;
+  const res = await fetch(API, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'API-Key': process.env.DATA_API_KEY || '',
+    },
+    body: JSON.stringify(plan),
+  });
+  if (!res.ok) {
+    throw new Error('Failed to edit plan');
+  }
+  const data = await res.json();
+  return data as Plan | undefined;
+};

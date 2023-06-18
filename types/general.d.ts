@@ -63,6 +63,12 @@ export type Plan = {
   duration: number;
 };
 
+export type PatchablePlan = {
+  name?: string;
+  startDate?: Date;
+  endDate?: Date;
+};
+
 export type Attraction = {
   id: number;
   name: string;

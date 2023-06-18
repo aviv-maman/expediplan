@@ -1,12 +1,14 @@
 'use client';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
-import { IconInfoSquare } from '@tabler/icons-react';
+import { IconInfoSquare, IconPencil, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -54,8 +56,19 @@ interface HeroBlockProps {
 
 const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
   const { classes } = useStyles();
-  const plan = useRecoilValue(planSelectorFamily({ id: planId }));
+  const [plan, setPlan] = useRecoilState(planSelectorFamily({ id: planId, action: 'edit' }));
+  const [deletePlan, setDeletePlan] = useRecoilState(planSelectorFamily({ id: planId, action: 'delete' }));
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
+  const router = useRouter();
+
+  const handleAction = (action: 'edit' | 'delete') => {
+    if (action === 'edit') {
+      setPlan(plan);
+    } else {
+      setDeletePlan(deletePlan);
+      router.push('/plans', { forceOptimisticNavigation: true });
+    }
+  };
 
   if (city.error) return <div>Failed to load</div>;
   if (!city.data) return <Skeleton height={265} />;
@@ -87,6 +100,12 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
               {city.data.name}
             </Button>
           </Link>
+          <Button variant='light' leftIcon={<IconPencil />} onClick={() => handleAction('edit')}>
+            Edit
+          </Button>
+          <Button variant='light' leftIcon={<IconTrash />} onClick={() => handleAction('delete')}>
+            Delete
+          </Button>
         </div>
       </Container>
     </BackgroundImage>

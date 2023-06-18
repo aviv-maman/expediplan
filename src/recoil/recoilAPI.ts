@@ -1,5 +1,5 @@
 'use client';
-import { getPlanByIdFromServer, getPlansOfUserFromServer, uploadPlanToServer } from '@/api/PlansAPI';
+import { deletePlanFromServer, getPlanByIdFromServer, getPlansOfUserFromServer, editPlanOnServer, uploadPlanToServer } from '@/api/PlansAPI';
 import type { Plan } from '../../types/general';
 import { getSession } from 'next-auth/react';
 
@@ -39,15 +39,19 @@ class PlanListAPI {
     return plan;
   }
 
-  async updateItem(id: number, item: Plan) {
+  async editItem(id: number, item: Plan) {
     const isAuthenticated = await this.isAuthenticated();
     if (!isAuthenticated) return;
+    const updatedPlan = await editPlanOnServer(id, item);
+    if (!updatedPlan) return;
     this.items = this.items.map((plan) => (plan.id === id ? item : plan));
   }
 
   async deleteItem(id: number) {
     const isAuthenticated = await this.isAuthenticated();
     if (!isAuthenticated) return;
+    const deletedPlan = await deletePlanFromServer(id);
+    if (!deletedPlan) return;
     this.items = this.items.filter((plan) => plan.id !== id);
   }
 }
