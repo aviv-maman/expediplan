@@ -1,14 +1,15 @@
 'use client';
 import { useRecoilState } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button, Dialog, Group, Alert } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
 import { planSelectorFamily } from '@/recoil/plan_state';
-import { IconInfoSquare, IconPencil, IconTrash } from '@tabler/icons-react';
+import { IconAlertCircle, IconInfoSquare, IconPencil, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useDisclosure } from '@mantine/hooks';
+import { Icon } from 'leaflet';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -60,6 +61,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
   const [deletePlan, setDeletePlan] = useRecoilState(planSelectorFamily({ id: planId, action: 'delete' }));
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
   const router = useRouter();
+  const [openDialog, setOpenDialog] = useDisclosure(false);
 
   const handleAction = (action: 'edit' | 'delete') => {
     if (action === 'edit') {
@@ -100,14 +102,31 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
               {city.data.name}
             </Button>
           </Link>
-          <Button variant='light' leftIcon={<IconPencil />} onClick={() => handleAction('edit')}>
+          <Button color='violet' variant='light' leftIcon={<IconPencil />} onClick={() => handleAction('edit')}>
             Edit
           </Button>
-          <Button variant='light' leftIcon={<IconTrash />} onClick={() => handleAction('delete')}>
+          <Button color='red' variant='light' leftIcon={<IconTrash />} onClick={setOpenDialog.toggle}>
             Delete
           </Button>
         </div>
       </Container>
+
+      <Dialog position={{ top: 20, right: 20 }} opened={openDialog} onClose={setOpenDialog.close} size='lg' radius='md'>
+        <Group align='flex-start' mb='xs'>
+          <IconAlertCircle size={24} color='red' />
+          <Text size='sm' weight={500}>
+            Are you sure you want to delete this plan?
+          </Text>
+        </Group>
+        <Group align='flex-end'>
+          <Button color='red' onClick={() => handleAction('delete')}>
+            Delete
+          </Button>
+          <Button color='gray' onClick={setOpenDialog.close}>
+            Cancel
+          </Button>
+        </Group>
+      </Dialog>
     </BackgroundImage>
   );
 };

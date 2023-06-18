@@ -8,10 +8,7 @@ export const planListState = atom<Plan[] | undefined>({
   default: selector({
     key: 'planList/initial',
     get: async () => {
-      const isAuthenticated = await planListAPI.isAuthenticated();
-      const savedValue = window.localStorage.getItem('planList');
-      const localList = savedValue ? (JSON.parse(savedValue) as Plan[]) : undefined;
-      return isAuthenticated ? await planListAPI.getItems() : localList;
+      return await planListAPI.getItems();
     },
   }),
   effects: [
@@ -21,27 +18,21 @@ export const planListState = atom<Plan[] | undefined>({
         setSelf(JSON.parse(savedValue));
       }
       onSet((newValue, _, isReset) => {
-        isReset ? window.localStorage.removeItem('planList') : window.localStorage.setItem('planList', JSON.stringify(newValue));
+        isReset && window.localStorage.removeItem('planList');
       });
     },
   ],
 });
 
-type ActionType = 'create' | 'edit' | 'delete';
+type ActionType = { id: undefined; action: 'create' } | { id: string; action: 'edit' | 'delete' };
 
-export const planSelectorFamily = selectorFamily<Plan | undefined, { id: string; action?: ActionType }>({
+export const planSelectorFamily = selectorFamily<Plan | undefined, ActionType>({
   key: 'plan',
   get:
     ({ id }) =>
     async ({ get }) => {
-      const isAuthenticated = await planListAPI.isAuthenticated();
-      if (isAuthenticated) {
-        const response = await planListAPI.getItem(Number(id));
-        if (!response?.id) throw new Error('Failed to fetch plan');
-        return response;
-      } else {
-        return get(planListState)?.find((plan) => plan.id === id);
-      }
+      if (!id) return;
+      return await planListAPI.getItem(id);
     },
   set:
     ({ id, action }) =>
@@ -53,10 +44,10 @@ export const planSelectorFamily = selectorFamily<Plan | undefined, { id: string;
           planListAPI.createItem(newValue);
           break;
         case 'edit':
-          planListAPI.editItem(Number(id), newValue);
+          planListAPI.editItem(id, newValue);
           break;
         case 'delete':
-          planListAPI.deleteItem(Number(id));
+          planListAPI.deleteItem(id);
           break;
         default:
           break;
@@ -64,6 +55,7 @@ export const planSelectorFamily = selectorFamily<Plan | undefined, { id: string;
 
       set(planListState, (prevState) => {
         if (prevState && newValue) {
+          if (action === 'create') return [...prevState, newValue];
           const index = prevState.findIndex((plan) => plan.id === id);
           if (index !== -1) {
             if (newValue instanceof DefaultValue) return;
