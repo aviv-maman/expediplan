@@ -1,12 +1,13 @@
 'use client';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
+import { getPlanByIdAPI, getPlanByIdFromLocalStorage, planFetcher } from '@/api/PlansAPI';
 import { dateToYYYYMMDDAndTime } from '@/lib/utils/processInfo';
 import { weatherSelectorFamily } from '@/recoil/city-weather_state';
-import { planSelectorFamily } from '@/recoil/plan_state';
 import { temperatureUnitAtom } from '@/recoil/settings_state';
 import { BackgroundImage, Card, createStyles, Group, Image, Stack, Text } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconCloud } from '@tabler/icons-react';
+import { useSession } from 'next-auth/react';
 import { useRecoilValue } from 'recoil';
 import useSWR from 'swr';
 
@@ -36,7 +37,9 @@ interface WeatherCardProps {
 
 export function WeatherCard({ planId }: WeatherCardProps) {
   const { classes } = useStyles();
-  const plan = useRecoilValue(planSelectorFamily({ id: planId }));
+  const session = useSession();
+  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(planId)) : null, planFetcher, { suspense: true });
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(planId);
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
 
   const mobile = useMediaQuery('(max-width: 36em)');

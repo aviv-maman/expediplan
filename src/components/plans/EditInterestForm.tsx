@@ -1,16 +1,16 @@
 'use client';
-import { planSelectorFamily } from '@/recoil/plan_state';
 import { ActionIcon, Button, Group, Paper, Select, Text, createStyles, rem } from '@mantine/core';
 import { TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconBrowserPlus, IconBuildingSkyscraper, IconCategory, IconClock, IconIdBadge } from '@tabler/icons-react';
 import { useParams } from 'next/navigation';
 import { Suspense, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import { fakeDelay } from '@/lib/utils/network';
 import { attractionsFetcher, editInterestInsidePlan, getAttractionsAPI } from '@/api/AttractionsAPI';
 import useSWR from 'swr';
 import { categoriesFetcher, getCategoriesAPI } from '@/api/CategoriesAPI';
+import { useSession } from 'next-auth/react';
+import { getPlanByIdAPI, getPlanByIdFromLocalStorage, planFetcher } from '@/api/PlansAPI';
 
 const ICON_SIZE = rem(60);
 
@@ -45,7 +45,9 @@ const EditInterestForm: React.FC<EditInterestFormProps> = ({ subtitle, dayIndex,
   const ref = useRef<HTMLInputElement>(null);
 
   const params = useParams();
-  const [plan, setPlan] = useRecoilState(planSelectorFamily({ id: params.id }));
+  const session = useSession();
+  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(params.id)) : null, planFetcher, { suspense: true });
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(params.id);
   const categories = useSWR(getCategoriesAPI(), categoriesFetcher, { suspense: true });
 
   const currentAttraction = plan?.days[dayIndex]?.interests?.[attractionIndex];
@@ -85,7 +87,7 @@ const EditInterestForm: React.FC<EditInterestFormProps> = ({ subtitle, dayIndex,
       setIsLoading(true);
       const res = await fakeDelay(1);
       const planWithEditedInterest = editInterestInsidePlan(interest, attractionIndex, dayIndex, plan);
-      setPlan(planWithEditedInterest);
+      // setPlan(planWithEditedInterest);
       setIsLoading(false);
       res && closeModal();
     });

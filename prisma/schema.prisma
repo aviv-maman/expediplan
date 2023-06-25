@@ -83,7 +83,7 @@ model Plan {
   duration    Int      @default(0)
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @default(now()) @map(name: "updated_at")
-  author      User     @relation(fields: [authorId], references: [id])
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    String
 }
 
@@ -92,17 +92,17 @@ model Day {
   index     Int
   date      DateTime
   interests Interest[]
-  plan      Plan       @relation(fields: [planId], references: [id])
-  planId    Int        @map("plan_id")
+  plan      Plan       @relation(fields: [planId], references: [id], onDelete: Cascade)
+  planId    Int
 }
 
 model Interest {
   id           Int        @id @default(autoincrement())
-  attraction   Attraction @relation(fields: [attractionId], references: [id])
+  attraction   Attraction @relation(fields: [attractionId], references: [id], onDelete: Cascade)
   attractionId Int        @map("attraction_id")
   startTime    DateTime
   endTime      DateTime
-  day          Day        @relation(fields: [dayId], references: [id])
+  day          Day        @relation(fields: [dayId], references: [id], onDelete: Cascade)
   dayId        Int
 }
 

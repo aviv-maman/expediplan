@@ -1,16 +1,16 @@
 'use client';
-import { planSelectorFamily } from '@/recoil/plan_state';
 import { ActionIcon, Button, Group, Paper, Select, Text, createStyles, rem } from '@mantine/core';
 import { TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconBrowserPlus, IconBuildingSkyscraper, IconCategory, IconClock, IconIdBadge } from '@tabler/icons-react';
 import { useParams } from 'next/navigation';
 import { Suspense, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import { fakeDelay } from '@/lib/utils/network';
 import { addInterestToDayInsidePlan, attractionsFetcher, getAttractionsAPI } from '@/api/AttractionsAPI';
 import useSWR from 'swr';
 import { categoriesFetcher, getCategoriesAPI } from '@/api/CategoriesAPI';
+import { useSession } from 'next-auth/react';
+import { getPlanByIdAPI, getPlanByIdFromLocalStorage, planFetcher } from '@/api/PlansAPI';
 
 const ICON_SIZE = rem(60);
 
@@ -62,7 +62,9 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
   });
 
   const params = useParams();
-  const [plan, setPlan] = useRecoilState(planSelectorFamily({ id: params.id }));
+  const session = useSession();
+  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(params.id)) : null, planFetcher, { suspense: true });
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(params.id);
   const [isLoading, setIsLoading] = useState(false);
 
   const categories = useSWR(getCategoriesAPI(), categoriesFetcher);
@@ -81,7 +83,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
             setIsLoading(true);
             const res = await fakeDelay(1);
             const planWithInterest = addInterestToDayInsidePlan(interest, dayIndex, plan);
-            setPlan(planWithInterest);
+            // setPlan(planWithInterest);
             setIsLoading(false);
             res && closeModal();
           })}>

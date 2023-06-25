@@ -4,6 +4,24 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/route';
 import prisma from '@/lib/prisma';
 
+export async function GET(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user || !session.user.email) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
+  const user = await prisma.user.findUnique({
+    where: { email: session?.user?.email || undefined },
+  });
+  if (!user) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
+  const plans = await prisma.plan.findMany({
+    where: { author: { email: session.user.email } },
+    orderBy: { createdAt: 'desc' },
+  });
+  return NextResponse.json(plans);
+}
+
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user || !session.user.email) {
@@ -63,25 +81,6 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  const addedPlan: Plan = result.plans[result.plans.length - 1];
+  const addedPlan: Plan = result.plans[0];
   return NextResponse.json(addedPlan);
-}
-
-export async function GET(request: NextRequest) {
-  // Get all plans from the authenticated user
-  const session = await getServerSession(authOptions);
-  if (!session || !session.user || !session.user.email) {
-    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
-  }
-  const user = await prisma.user.findUnique({
-    where: { email: session?.user?.email || undefined },
-  });
-  if (!user) {
-    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
-  }
-  const plans = await prisma.plan.findMany({
-    where: { author: { email: session.user.email } },
-    orderBy: { createdAt: 'desc' },
-  });
-  return NextResponse.json(plans);
 }

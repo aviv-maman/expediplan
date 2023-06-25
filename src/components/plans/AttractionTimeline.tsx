@@ -4,11 +4,10 @@ import { IconAB2 } from '@tabler/icons-react';
 import type { Plan } from '../../../types/general';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { planSelectorFamily } from '@/recoil/plan_state';
 import { AttractionTimelineItemCard } from './AttractionTimelineItemCard';
 import { attractionsFetcher, getAttractionsAPI, getAttractionsByPlanIdFromLocalStorage } from '@/api/AttractionsAPI';
 import useSWR from 'swr';
+import { getPlanByIdFromLocalStorage } from '@/api/PlansAPI';
 
 interface AttractionTimelineProps {
   dayIndex: number;
@@ -18,8 +17,8 @@ interface AttractionTimelineProps {
 
 const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planFromServer, date }) => {
   const params = useParams();
-  const planFromLocalStorage = useRecoilValue(planSelectorFamily({ id: params.id }));
-  const interests = planFromLocalStorage?.days[dayIndex]?.interests || planFromServer?.days[dayIndex]?.interests;
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(params.id);
+  const interests = plan?.days[dayIndex]?.interests || planFromServer?.days[dayIndex]?.interests;
 
   const attractionIds = getAttractionsByPlanIdFromLocalStorage(params.id);
   const attractions = useSWR(getAttractionsAPI(attractionIds), attractionsFetcher);

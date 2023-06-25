@@ -9,6 +9,9 @@ import { sortBy } from 'sort-by-typescript';
 import { planListState } from '@/recoil/plan_state';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { getPlansAPI, getPlansFromLocalStorage, plansFetcher } from '@/api/PlansAPI';
+import useSWR from 'swr';
 
 const useStyles = createStyles((theme) => ({
   th: {
@@ -68,9 +71,11 @@ function filterData(data: Plan[], search: string) {
 }
 
 export function TableSort() {
-  const planList = useRecoilValue(planListState);
+  const session = useSession();
+  const { data: plansFromServer } = useSWR(session.data?.user?.id ? getPlansAPI() : null, plansFetcher, { suspense: true });
+  const plans = plansFromServer ? plansFromServer : getPlansFromLocalStorage();
   const [search, setSearch] = useState('');
-  const [sortedData, setSortedData] = useState(planList);
+  const [sortedData, setSortedData] = useState(plans);
   const [sortByKey, setSortByKey] = useState<keyof Plan | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
@@ -82,7 +87,7 @@ export function TableSort() {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value);
-    const filteredData = filterData(planList || [], event.currentTarget.value);
+    const filteredData = filterData(plans || [], event.currentTarget.value);
     setSortedData(filteredData);
   };
 

@@ -6,15 +6,13 @@ import DropdownWithIcon from '../DropdownWithIcon';
 import type { Plan } from '../../../types/general';
 import useSWR from 'swr';
 import { DatePickerInput } from '@mantine/dates';
-import { useSetRecoilState } from 'recoil';
 import dayjs from 'dayjs';
 import { Suspense, useEffect } from 'react';
 import { countriesFetcher, getCountriesAPI } from '@/api/CountriesAPI';
 import { citiesFetcher, getCitiesByCountryIdAPI } from '@/api/CitiesAPI';
-import { planSelectorFamily } from '@/recoil/plan_state';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { uploadPlanToServer } from '@/api/PlansAPI';
+import { savePlanToLocalStorage, uploadPlanToServer } from '@/api/PlansAPI';
 
 const ICON_SIZE = rem(60);
 
@@ -40,7 +38,6 @@ const useStyles = createStyles((theme) => ({
 
 const NewPlanForm: React.FC = () => {
   const { classes } = useStyles();
-  const setNewPlan = useSetRecoilState(planSelectorFamily({ id: undefined, action: 'create' }));
 
   const form = useForm({
     initialValues: {
@@ -106,7 +103,7 @@ const NewPlanForm: React.FC = () => {
         </Avatar>
         <form
           onSubmit={form.onSubmit(async (values) => {
-            const plan = session?.user?.email
+            session?.user?.email
               ? await uploadPlanToServer({
                   ...values,
                   id: 'irrelevant',
@@ -116,7 +113,7 @@ const NewPlanForm: React.FC = () => {
                   })),
                   duration,
                 })
-              : ({
+              : savePlanToLocalStorage({
                   ...values,
                   id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
                   days: Array.from({ length: duration }).map((_, i) => ({
@@ -125,7 +122,6 @@ const NewPlanForm: React.FC = () => {
                   })),
                   duration,
                 } as Plan);
-            plan && setNewPlan(plan);
             router.push('/plans');
           })}>
           <TextInput required minLength={3} label='Name' placeholder='Name of plan' icon={<IconId size='1rem' />} {...form.getInputProps('name')} />

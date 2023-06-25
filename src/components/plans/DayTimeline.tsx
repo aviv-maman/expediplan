@@ -1,19 +1,21 @@
 'use client';
 import { Timeline } from '@mantine/core';
 import { DayTimelineItemCard } from './DayTimelineItemCard';
-import { useRecoilValue } from 'recoil';
-import { planSelectorFamily } from '@/recoil/plan_state';
 import { useEffect, useState } from 'react';
 import { Icon3dCubeSphere } from '@tabler/icons-react';
 import { attractionsFetcher, getAttractionsAPI, getAttractionsByPlanIdFromLocalStorage } from '@/api/AttractionsAPI';
 import useSWR from 'swr';
+import { useSession } from 'next-auth/react';
+import { getPlanByIdAPI, getPlanByIdFromLocalStorage, planFetcher } from '@/api/PlansAPI';
 
 interface DayTimelineProps {
   planId: string;
 }
 
 const DayTimeline: React.FC<DayTimelineProps> = ({ planId }) => {
-  const plan = useRecoilValue(planSelectorFamily({ id: planId }));
+  const session = useSession();
+  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(planId)) : null, planFetcher, { suspense: true });
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(planId);
   const days = plan?.days;
   const [activeItem, setActiveItem] = useState(0);
 

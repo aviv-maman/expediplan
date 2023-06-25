@@ -1,13 +1,14 @@
 'use client';
 import { removeInterestFromDayInsidePlan } from '@/api/AttractionsAPI';
-import { planSelectorFamily } from '@/recoil/plan_state';
 import { ActionIcon, Card, createStyles, Image, Group, Text, rem, Menu, Button, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconArrowGuide, IconDots, IconEdit, IconInfoSquareFilled, IconMessage2, IconTrash } from '@tabler/icons-react';
-import { useRecoilState } from 'recoil';
 import EditInterestForm from './EditInterestForm';
 import dayjs from 'dayjs';
 import { Suspense } from 'react';
+import { useSession } from 'next-auth/react';
+import useSWR from 'swr';
+import { getPlanByIdAPI, getPlanByIdFromLocalStorage, planFetcher } from '@/api/PlansAPI';
 
 const useStyles = createStyles((theme) => ({
   diff: {
@@ -41,13 +42,15 @@ interface AttractionTimelineItemCardProps {
 
 export const AttractionTimelineItemCard = ({ type, name, time, image, dayIndex, planId, attractionIndex }: AttractionTimelineItemCardProps) => {
   const { classes } = useStyles();
-  const [plan, setPlan] = useRecoilState(planSelectorFamily({ id: planId }));
+  const session = useSession();
+  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(planId)) : null, planFetcher, { suspense: true });
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(planId);
   const [openedEditInterest, editInterestModal] = useDisclosure(false);
 
   const handleDeleteInterest = () => {
     if (!plan) return;
     const planWithoutInterest = removeInterestFromDayInsidePlan(attractionIndex, dayIndex, plan);
-    setPlan(planWithoutInterest);
+    // setPlan(planWithoutInterest);
   };
 
   return (

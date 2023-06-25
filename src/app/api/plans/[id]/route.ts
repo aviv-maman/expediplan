@@ -1,13 +1,13 @@
-import prisma from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 import type { PatchablePlan } from '../../../../../types/general';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
+import prisma from '@/lib/prisma';
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user || !session.user.email) {
-    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ message: 'No user' }, { status: 401 });
   }
   const user = await prisma.user.findUnique({
     where: { email: session?.user?.email || undefined },

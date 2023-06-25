@@ -1,15 +1,14 @@
 'use client';
-import { useRecoilState } from 'recoil';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button, Dialog, Group, Alert } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button, Dialog, Group } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
-import { planSelectorFamily } from '@/recoil/plan_state';
 import { IconAlertCircle, IconInfoSquare, IconPencil, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useDisclosure } from '@mantine/hooks';
-import { Icon } from 'leaflet';
+import { useSession } from 'next-auth/react';
+import { getPlanByIdAPI, getPlanByIdFromLocalStorage, planFetcher } from '@/api/PlansAPI';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -57,17 +56,18 @@ interface HeroBlockProps {
 
 const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
   const { classes } = useStyles();
-  const [plan, setPlan] = useRecoilState(planSelectorFamily({ id: planId, action: 'edit' }));
-  const [deletePlan, setDeletePlan] = useRecoilState(planSelectorFamily({ id: planId, action: 'delete' }));
+  const session = useSession();
+  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(planId)) : null, planFetcher, { suspense: true });
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(planId);
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
   const router = useRouter();
   const [openDialog, setOpenDialog] = useDisclosure(false);
 
   const handleAction = (action: 'edit' | 'delete') => {
     if (action === 'edit') {
-      setPlan(plan);
+      console.log('edit');
     } else {
-      setDeletePlan(deletePlan);
+      // setDeletePlan(deletePlan);
       router.push('/plans', { forceOptimisticNavigation: true });
     }
   };
