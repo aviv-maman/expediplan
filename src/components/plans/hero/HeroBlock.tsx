@@ -137,7 +137,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
         </Group>
       </Dialog>
 
-      <Modal opened={openedEditPlan} onClose={editPlanModal.close} title={'Edit plan!'} centered id={`edit-plan-${planId}`}>
+      <Modal opened={openedEditPlan} onClose={editPlanModal.close} centered id={`edit-plan-${planId}`}>
         <EditPlanForm closeModal={editPlanModal.close} />
       </Modal>
     </BackgroundImage>
