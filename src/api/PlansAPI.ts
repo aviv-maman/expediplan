@@ -15,6 +15,7 @@ export const getPlanByIdAPI = (id: number) => {
   return API;
 };
 
+//For server side rendering
 export const getPlanByIdFromServer = async (id: number): Promise<Plan | undefined> => {
   // const TOKEN = 'token';
   const API = getPlanByIdAPI(id);
@@ -62,6 +63,13 @@ export const uploadPlanToServer = async (plan: Plan) => {
   return data as Plan | undefined;
 };
 
+export const savePlanToLocalStorage = (plan: Plan) => {
+  const savedValue = window.localStorage.getItem('planList');
+  const plans = savedValue ? (JSON.parse(savedValue) as Plan[]) : [];
+  const newValue = plans ? [...plans, plan] : [plan];
+  window.localStorage.setItem('planList', JSON.stringify(newValue));
+};
+
 export const getPlansOfUserFromServer = async () => {
   const API = `${HOSTNAME}/api/plans`;
   const res = await fetch(API, {
@@ -91,7 +99,16 @@ export const deletePlanFromServer = async (id: number) => {
   return data as Plan | undefined;
 };
 
-export const editPlanOnServer = async (id: number, plan: Plan) => {
+export const deletePlanFromLocalStorage = (id: string) => {
+  const savedValue = window.localStorage.getItem('planList');
+  const plans = savedValue ? (JSON.parse(savedValue) as Plan[]) : [];
+  const newValue = plans.filter((plan) => plan.id !== id);
+  window.localStorage.setItem('planList', JSON.stringify(newValue));
+};
+
+type PatchableKeys = { name: string };
+
+export const editPlanOnServer = async (id: number, patchObj: PatchableKeys) => {
   const API = `${HOSTNAME}/api/plans/${id}`;
   const res = await fetch(API, {
     method: 'PATCH',
@@ -99,7 +116,7 @@ export const editPlanOnServer = async (id: number, plan: Plan) => {
       'Content-Type': 'application/json',
       'API-Key': process.env.DATA_API_KEY || '',
     },
-    body: JSON.stringify(plan),
+    body: JSON.stringify(patchObj),
   });
   if (!res.ok) {
     throw new Error('Failed to edit plan');
@@ -108,9 +125,16 @@ export const editPlanOnServer = async (id: number, plan: Plan) => {
   return data as Plan | undefined;
 };
 
-export const savePlanToLocalStorage = (plan: Plan) => {
+const replaceItemAtIndex = (array: Plan[], index: number, newValue: Plan) => {
+  return [...array.slice(0, index), newValue, ...array.slice(index + 1)];
+};
+
+export const editPlanOnLocalStorage = (id: string, patchObj: PatchableKeys) => {
   const savedValue = window.localStorage.getItem('planList');
   const plans = savedValue ? (JSON.parse(savedValue) as Plan[]) : [];
-  const newValue = plans ? [...plans, plan] : [plan];
+  const index = plans.findIndex((plan) => plan.id === id);
+  const plan = plans[index];
+  const newPlan = { ...plan, ...patchObj };
+  const newValue = replaceItemAtIndex(plans, index, newPlan);
   window.localStorage.setItem('planList', JSON.stringify(newValue));
 };

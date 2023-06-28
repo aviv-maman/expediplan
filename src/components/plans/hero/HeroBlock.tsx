@@ -1,5 +1,5 @@
 'use client';
-import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button, Dialog, Group } from '@mantine/core';
+import { createStyles, Container, Title, Text, rem, BackgroundImage, Skeleton, Button, Dialog, Group, Modal } from '@mantine/core';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
 import { cityFetcher, getCityByIdAPI } from '@/api/CitiesAPI';
@@ -8,7 +8,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useDisclosure } from '@mantine/hooks';
 import { useSession } from 'next-auth/react';
-import { getPlanByIdAPI, getPlanByIdFromLocalStorage, planFetcher } from '@/api/PlansAPI';
+import {
+  deletePlanFromLocalStorage,
+  deletePlanFromServer,
+  editPlanOnServer,
+  getPlanByIdAPI,
+  getPlanByIdFromLocalStorage,
+  planFetcher,
+} from '@/api/PlansAPI';
+import EditPlanForm from '../EditPlanForm';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -56,20 +64,21 @@ interface HeroBlockProps {
 
 const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
   const { classes } = useStyles();
-  const session = useSession();
-  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(planId)) : null, planFetcher, { suspense: true });
+  const { data: session } = useSession();
+  const { data: planFromServer } = useSWR(session?.user?.id ? getPlanByIdAPI(Number(planId)) : null, planFetcher, { suspense: true });
   const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(planId);
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
   const router = useRouter();
   const [openDialog, setOpenDialog] = useDisclosure(false);
+  const [openedEditPlan, editPlanModal] = useDisclosure(false);
 
-  const handleAction = (action: 'edit' | 'delete') => {
-    if (action === 'edit') {
-      console.log('edit');
+  const handleDelete = async () => {
+    if (session?.user?.id) {
+      await deletePlanFromServer(Number(planId));
     } else {
-      // setDeletePlan(deletePlan);
-      router.push('/plans', { forceOptimisticNavigation: true });
+      deletePlanFromLocalStorage(planId);
     }
+    router.push('/plans', { forceOptimisticNavigation: true });
   };
 
   if (city.error) return <div>Failed to load</div>;
@@ -102,7 +111,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
               {city.data.name}
             </Button>
           </Link>
-          <Button color='violet' variant='light' leftIcon={<IconPencil />} onClick={() => handleAction('edit')}>
+          <Button color='violet' variant='light' leftIcon={<IconPencil />} onClick={editPlanModal.open}>
             Edit
           </Button>
           <Button color='red' variant='light' leftIcon={<IconTrash />} onClick={setOpenDialog.toggle}>
@@ -119,7 +128,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
           </Text>
         </Group>
         <Group align='flex-end'>
-          <Button color='red' onClick={() => handleAction('delete')}>
+          <Button color='red' onClick={handleDelete}>
             Delete
           </Button>
           <Button color='gray' onClick={setOpenDialog.close}>
@@ -127,6 +136,10 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
           </Button>
         </Group>
       </Dialog>
+
+      <Modal opened={openedEditPlan} onClose={editPlanModal.close} title={'Edit plan!'} centered id={`edit-plan-${planId}`}>
+        <EditPlanForm closeModal={editPlanModal.close} />
+      </Modal>
     </BackgroundImage>
   );
 };
