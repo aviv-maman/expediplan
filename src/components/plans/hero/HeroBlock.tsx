@@ -17,6 +17,7 @@ import {
   planFetcher,
 } from '@/api/PlansAPI';
 import EditPlanForm from '../EditPlanForm';
+import { useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -65,19 +66,24 @@ interface HeroBlockProps {
 const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
   const { classes } = useStyles();
   const { data: session } = useSession();
-  const { data: planFromServer } = useSWR(session?.user?.id ? getPlanByIdAPI(Number(planId)) : null, planFetcher, { suspense: true });
+  const { data: planFromServer, isLoading: isLoadingPlan } = useSWR(session?.user?.id ? getPlanByIdAPI(Number(planId)) : null, planFetcher, {
+    suspense: true,
+  });
   const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(planId);
   const city = useSWR(getCityByIdAPI(Number(plan?.city)), cityFetcher, { suspense: true });
   const router = useRouter();
   const [openDialog, setOpenDialog] = useDisclosure(false);
   const [openedEditPlan, editPlanModal] = useDisclosure(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async () => {
+    setIsLoading(true);
     if (session?.user?.id) {
       await deletePlanFromServer(Number(planId));
     } else {
       deletePlanFromLocalStorage(planId);
     }
+    setIsLoading(false);
     router.push('/plans', { forceOptimisticNavigation: true });
   };
 
@@ -114,7 +120,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
           <Button color='violet' variant='light' leftIcon={<IconPencil />} onClick={editPlanModal.open}>
             Edit
           </Button>
-          <Button color='red' variant='light' leftIcon={<IconTrash />} onClick={setOpenDialog.toggle}>
+          <Button color='red' variant='light' leftIcon={<IconTrash />} onClick={setOpenDialog.toggle} disabled={isLoadingPlan}>
             Delete
           </Button>
         </div>
@@ -128,7 +134,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
           </Text>
         </Group>
         <Group align='flex-end'>
-          <Button color='red' onClick={handleDelete}>
+          <Button color='red' onClick={handleDelete} loading={isLoading}>
             Delete
           </Button>
           <Button color='gray' onClick={setOpenDialog.close}>
