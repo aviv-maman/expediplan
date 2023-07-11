@@ -84,7 +84,7 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ planId }) => {
       deletePlanFromLocalStorage(planId);
     }
     setIsLoading(false);
-    router.push('/plans', { forceOptimisticNavigation: true });
+    router.push('/plans', { scroll: true });
   };
 
   if (city.error) return <div>Failed to load</div>;
