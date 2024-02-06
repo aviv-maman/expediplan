@@ -46,8 +46,8 @@ const EditInterestForm: React.FC<EditInterestFormProps> = ({ subtitle, dayIndex,
 
   const params = useParams();
   const session = useSession();
-  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(params.id)) : null, planFetcher, { suspense: true });
-  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(params.id);
+  const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(params?.id)) : null, planFetcher, { suspense: true });
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(String(params?.id));
   const categories = useSWR(getCategoriesAPI(), categoriesFetcher, { suspense: true });
 
   const currentAttraction = plan?.days[dayIndex]?.interests?.[attractionIndex];
