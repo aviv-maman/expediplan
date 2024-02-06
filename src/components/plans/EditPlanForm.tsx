@@ -40,10 +40,10 @@ const EditPlanForm: React.FC<EditPlanFormProps> = ({ closeModal }) => {
 
   const { data: session } = useSession();
   const params = useParams();
-  const { data: planFromServer, isLoading: isLoadingPlan } = useSWR(session?.user?.id ? getPlanByIdAPI(Number(params.id)) : null, planFetcher, {
+  const { data: planFromServer, isLoading: isLoadingPlan } = useSWR(session?.user?.id ? getPlanByIdAPI(Number(params?.id)) : null, planFetcher, {
     suspense: true,
   });
-  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(params.id);
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(String(params?.id));
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
@@ -73,8 +73,8 @@ const EditPlanForm: React.FC<EditPlanFormProps> = ({ closeModal }) => {
           onSubmit={form.onSubmit(async (values) => {
             setIsLoading(true);
             session?.user?.email
-              ? await editPlanOnServer(Number(params.id), { name: values.name })
-              : editPlanOnLocalStorage(params.id, { name: values.name });
+              ? await editPlanOnServer(Number(params?.id), { name: values.name })
+              : editPlanOnLocalStorage(String(params?.id), { name: values.name });
             setIsLoading(false);
             closeModal();
           })}>

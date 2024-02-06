@@ -64,7 +64,7 @@ const NewInterestForm: React.FC<NewInterestFormProps> = ({ subtitle, dayIndex, c
   const params = useParams();
   const session = useSession();
   const { data: planFromServer } = useSWR(session.data?.user?.id ? getPlanByIdAPI(Number(params.id)) : null, planFetcher, { suspense: true });
-  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(params.id);
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(String(params?.id));
   const [isLoading, setIsLoading] = useState(false);
 
   const categories = useSWR(getCategoriesAPI(), categoriesFetcher);
