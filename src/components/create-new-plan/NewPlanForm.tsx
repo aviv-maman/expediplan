@@ -180,7 +180,6 @@ const NewPlanForm: React.FC = () => {
           <DatePickerInput
             required
             label='Start Date'
-            placeholder='Choose start date'
             icon={<IconCalendar size='1rem' />}
             mx='auto'
             maw={400}
@@ -191,7 +190,6 @@ const NewPlanForm: React.FC = () => {
           <DatePickerInput
             required
             label='End Date'
-            placeholder='Choose end date'
             icon={<IconCalendar size='1rem' />}
             mx='auto'
             maw={400}
