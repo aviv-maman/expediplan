@@ -17,10 +17,10 @@ interface AttractionTimelineProps {
 
 const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planFromServer, date }) => {
   const params = useParams();
-  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(params.id);
+  const plan = planFromServer ? planFromServer : getPlanByIdFromLocalStorage(String(params?.id));
   const interests = plan?.days[dayIndex]?.interests || planFromServer?.days[dayIndex]?.interests;
 
-  const attractionIds = getAttractionsByPlanIdFromLocalStorage(params.id);
+  const attractionIds = getAttractionsByPlanIdFromLocalStorage(String(params?.id));
   const attractions = useSWR(getAttractionsAPI(attractionIds), attractionsFetcher);
 
   const interestsWithAttractions = interests?.map((interest) => {
@@ -61,7 +61,7 @@ const AttractionTimeline: React.FC<AttractionTimelineProps> = ({ dayIndex, planF
             time={item.startTime + ' - ' + item.endTime}
             image={item.details?.cover_image}
             dayIndex={dayIndex}
-            planId={params?.id}
+            planId={String(params?.id)}
             attractionIndex={index}
           />
         </Timeline.Item>
